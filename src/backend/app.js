@@ -1,26 +1,28 @@
-import sequelize  from 'sequelize';
+import sequelize from 'sequelize';
 import express from 'express';
+
+import dbConnect from './db/connection.js';
+import { createUsersModel } from './models/users.js';
+import { createPlantsModel } from './models/plants.js';
+import { createPlantsListsModel } from './models/plantsLists.js';
 
 const app = express();
 
-
 const runApp = async () => {
-    const databaseConnection = new sequelize.Sequelize('water_me', 'admin', '123456', {
-        host: 'localhost',
-        dialect: 'mysql'
-      });
+    const dbConnection = await dbConnect();
+    
+    const userModel = createUsersModel(dbConnection);
+    const plantModel = createPlantsModel(dbConnection);
+    const plantListModel = createPlantsListsModel(dbConnection);
 
-    try {
-    await databaseConnection.authenticate();
+    await dbConnection.sync({ force: true });
 
-    console.log(`Connected to ${databaseConnection.config.database}`);
+    console.log(userModel === dbConnection.models.User);
+    console.log(plantModel === dbConnection.models.Plant);
+    console.log(plantListModel === dbConnection.models.PlantList);
 
-    } catch {
-        console.log('Error');
-    }
-
-    app.listen(3000, () => 
-    console.log(`Listening on port 3000`));
+    app.listen(3000, () =>
+        console.log(`Listening on port 3000`));
 
 };
 

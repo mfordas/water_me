@@ -2,12 +2,11 @@ import sequelize from 'sequelize';
 
 const dbConnect = async () => {
 try {
-    const databaseConnection = new sequelize.Sequelize('water_me', 'admin', '123456', {
-        host: 'localhost',
-        dialect: 'mysql'
+    const databaseConnection = new sequelize.Sequelize(process.env.DB_NAME_DEV, process.env.DB_USER_DEV, process.env.DB_PASS_DEV, {
+        host: process.env.DB_HOST_DEV,
+        dialect: process.env.DB_PROT_DEV
     });
-
-    // await databaseConnection.query("CREATE DATABASE `water_me`;");
+    
     await databaseConnection.authenticate();
 
     console.log(`Connected to ${databaseConnection.config.database}`);

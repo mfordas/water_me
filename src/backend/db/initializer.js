@@ -44,7 +44,6 @@ export const createTables = async (dbConnection) => {
     const plantListModel = createPlantsListsModel(dbConnection);
 
     await dbConnection.sync({
-        force: true
     });
 
     console.log(userModel === dbConnection.models.User);

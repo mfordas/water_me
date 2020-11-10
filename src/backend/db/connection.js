@@ -13,8 +13,8 @@ try {
     
     return databaseConnection;
 
-} catch {
-    console.log('Error');
+} catch (err) {
+    return console.log(`Error ${err}`);
 }
 
 };

@@ -5,6 +5,10 @@ import {
     createDatabase,
     createTables
 } from './db/initializer.js';
+import users from './routes/users.js';
+import mainPage from './routes/mainPage.js';
+import plants from './routes/plants.js';
+import plantsLists from './routes/plantsLists.js';
 
 const app = express();
 
@@ -27,11 +31,10 @@ const runApp = async () => {
 
     register(app, dbConnection, models);
         
-    app.get('/', (req, res ) => res.send('Main page'))
-    app.get('/users', async (req, res) => {
-        console.log(res.locals.models);
-        res.send(await res.locals.models.User.findAll());
-    })
+    app.use('/', mainPage);
+    app.use('/users', users);
+    app.use('/plants', plants);
+    app.use('/plantsLists', plantsLists);
     
     app.listen(3000, () =>
         console.log(`Listening on port 3000`));

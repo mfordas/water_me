@@ -1,22 +1,17 @@
 import sequelize from 'sequelize';
-import bcrypt from "bcrypt";
 import dotenv from 'dotenv';
 
 import {
-    createUsersModel
-} from '../models/users.js';
+    User
+} from '../models/User.js';
 import {
-    createPlantsModel
-} from '../models/plants.js';
+    Plant
+} from '../models/Plant.js';
 import {
-    createPlantsListsModel
-} from '../models/plantsLists.js';
+    PlantList
+} from '../models/PlantsList.js';
 
 dotenv.config();
-
-const hashPassword = async password =>
-    await bcrypt.hash(password, await bcrypt.genSalt(10));
-
 
 export const createDatabase = async () => {
     try {
@@ -39,12 +34,11 @@ export const createDatabase = async () => {
 };
 
 export const createTables = async (dbConnection) => {
-    const userModel = createUsersModel(dbConnection);
-    const plantModel = createPlantsModel(dbConnection);
-    const plantListModel = createPlantsListsModel(dbConnection);
+    const userModel = User;
+    const plantModel = Plant;
+    const plantListModel = PlantList;
 
     await dbConnection.sync({
-        force: true
     });
 
     console.log(userModel === dbConnection.models.User);

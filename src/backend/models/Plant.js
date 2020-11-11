@@ -1,8 +1,7 @@
 import sequelize from 'sequelize';
+import dbConnection from '../db/connection.js';
 
-export const createPlantsModel = (dataBaseConnectionInstance) => {
-
-const Plant = dataBaseConnectionInstance.define('Plant', {
+const Plant = dbConnection.define('Plant', {
 
     id: {
         type: sequelize.DataTypes.INTEGER,
@@ -30,6 +29,4 @@ const Plant = dataBaseConnectionInstance.define('Plant', {
 {
 });
 
-return Plant;
-
-};
+export { Plant };

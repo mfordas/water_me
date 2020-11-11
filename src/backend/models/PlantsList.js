@@ -1,20 +1,24 @@
 import sequelize from 'sequelize';
+import dbConnection from '../db/connection.js';
 
-export const createUsersModel = (dataBaseConnectionInstance) => {
+const PlantList = dbConnection.define('PlantList', {
 
-const User = dataBaseConnectionInstance.define('User', {
-    id:{
+    id: {
         type: sequelize.DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
         autoincrement: true,
     },
-    email: {
+    userId: {
+        type: sequelize.DataTypes.INTEGER,
+        allowNull: false,
+    },
+    name: {
         type: sequelize.DataTypes.STRING,
         allowNull: false,
     },
-    password: {
-        type: sequelize.DataTypes.STRING,
+    numberOfPlants: {
+        type: sequelize.DataTypes.INTEGER,
         allowNull: false,
     },
     plantsTable: {
@@ -24,5 +28,4 @@ const User = dataBaseConnectionInstance.define('User', {
 {
 });
 
-return User;
-};
+export { PlantList };

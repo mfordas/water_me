@@ -1,6 +1,6 @@
 import express from 'express';
 
-import dbConnect from './db/connection.js';
+import { dbConnection, register, models } from './db/index.js';
 import {
     createDatabase,
     createTables
@@ -8,26 +8,30 @@ import {
 
 const app = express();
 
-const runApp = async () => {
+const connectToDB = async () => {
+    await dbConnection.authenticate();
 
-    let dbConnection;
+    console.log(`Connected to ${dbConnection.config.database}`);
+
+    return dbConnection;
+}
+
+const runApp = async () => {
+    const activeDbConnection = await connectToDB();
 
     if (process.env.NODE_ENV === 'test') {
+        activeDbConnection.drop();
         await createDatabase();
-
-        dbConnection = await dbConnect();
-
         await createTables(dbConnection);
+    };
 
+    register(app, dbConnection, models);
         
-    } else {
-        
-        dbConnection = await dbConnect();
-        
-        await createTables(dbConnection);
-        
-    }
-    console.log(dbConnection.models);
+    app.get('/', (req, res ) => res.send('Main page'))
+    app.get('/users', async (req, res) => {
+        console.log(res.locals.models);
+        res.send(await res.locals.models.User.findAll());
+    })
     
     app.listen(3000, () =>
         console.log(`Listening on port 3000`));

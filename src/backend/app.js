@@ -21,6 +21,13 @@ const connectToDB = async () => {
 }
 
 const runApp = async () => {
+    app.use(express.json());
+  app.use(
+    express.urlencoded({
+      extended: true
+    })
+  );
+  
     const activeDbConnection = await connectToDB();
 
     if (process.env.NODE_ENV === 'test') {
@@ -32,9 +39,9 @@ const runApp = async () => {
     register(app, dbConnection, models);
         
     app.use('/', mainPage);
-    app.use('/users', users);
-    app.use('/plants', plants);
-    app.use('/plantsLists', plantsLists);
+    app.use('/api/users', users);
+    app.use('/api/plants', plants);
+    app.use('/api/plantsLists', plantsLists);
     
     app.listen(3000, () =>
         console.log(`Listening on port 3000`));

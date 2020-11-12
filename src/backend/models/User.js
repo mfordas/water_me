@@ -5,7 +5,6 @@ const User = dbConnection.define('User', {
     id:{
         type: sequelize.DataTypes.INTEGER,
         primaryKey: true,
-        allowNull: false,
         autoincrement: true,
     },
     email: {

@@ -17,28 +17,30 @@ html,
 a,
 link {
   text-decoration: none;
-  color: black;
+  color: inherit;
 }
 
 * {
   box-sizing: inherit;
 }
 
-.container {
+.contentContainer {
   max-width: 100vw;
   max-height: 100vh;
-  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  flex: 1;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
-.contentContainer {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  };
+
+@media (max-width: 1024px),
+(max-height: 420px) {
+
+  .contentContainer {
+    width: 100vw;
+  }
+
+}
 

@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
-import HomePage from "./frontend/Views/HomePage";
+import LogoComponent from "./frontend/Components/Logo"
+import FooterComponent from "./frontend/Components/Footer";
 
 
 import './frontend/scss/main_styling.scss';
@@ -12,8 +13,12 @@ const App = () => {
   return (
     <BrowserRouter>
     <div className="contentContainer">
-      <Route exact path="/" component={HomePage} />
+      <LogoComponent />
+      <Switch>
+      {/* <Route exact path="/" component={HomePage} /> */}
       <Route render={() => <Redirect to="/" />} />
+      </Switch>
+      <FooterComponent />
       </div>
       </BrowserRouter>
   );

@@ -2,16 +2,11 @@ import sequelize from 'sequelize';
 import dbConnection from '../db/connection.js';
 
 const User = dbConnection.define('User', {
-    id:{
-        type: sequelize.DataTypes.INTEGER,
-        primaryKey: true,
-        autoincrement: true,
-    },
-    email: {
+    googleId:{
         type: sequelize.DataTypes.STRING,
         allowNull: false,
     },
-    password: {
+    name: {
         type: sequelize.DataTypes.STRING,
         allowNull: false,
     },

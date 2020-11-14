@@ -1,9 +1,9 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
-const generateAuthToken = function () {
+const generateAuthToken =  (user) => {
     const token = jwt.sign({
-        _id: this._id,
-        isAdmin: this.isAdmin
+        id: user.id,
+        isAdmin: user.isAdmin
       },
       process.env.JWTPRIVATEKEY
     );

@@ -9,10 +9,13 @@ const GoogleRegister = () => {
 
     const [authObject, setAuthObject] = useState(null);
 
-    const postGoogleUser = async (authObject) =>{ const res = await axios({
+    const postGoogleUser = async (authObject) =>{ 
+        console.log(authObject);
+        
+        const res = await axios({
         method: 'post',
         url: '/api/users/googleUser',
-        data: {token: await generateAuthTokenForExternalUser(authObject)},
+        data: { token: await generateAuthTokenForExternalUser(authObject) },
     });
 
     console.log(res);

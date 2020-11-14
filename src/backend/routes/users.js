@@ -1,6 +1,7 @@
 import express from 'express';
 
 import verify from '../Utils/googleAuth.js';
+import generateAuthToken from '../Utils/generateAuthToken.js';
 
 const router = express.Router();
 
@@ -42,27 +43,25 @@ const registerNewGoogleUser = async (req, res) => {
 
     const verificationResult = await verify(req.body);
 
-    console.log(verificationResult);
-  
     if (verificationResult instanceof Error) return res.status(401).send(console.error(verificationResult));
   
     let user = await res.locals.models.User.findOne( { where: {
-      email: verificationResult.email
+      googleId: verificationResult.sub
     }});
-  
-    if (user) return res.status(400).send('User already registered');
+
+    if (user) return res.status(400).send(new Error('User already registered'));
   
     const newUser = {
-        name: verificationResult.name,
-        email: verificationResult.email,
-        external_id: verificationResult.sub,
+        googleId: verificationResult.sub,
+        name: verificationResult.given_name,
+        plantsTable: null
       };
-      
-      if (newUser) return res.status(400).send("errorrrrr");
+
+      if (!newUser) return res.status(400).send(new Error("Wrong user's data"));
       
       user = await User.create(newUser);
-  
-      const token = user.generateAuthToken();
+
+      const token = generateAuthToken(user);
   
       return res
         .header("x-auth-token", token)

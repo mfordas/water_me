@@ -1,0 +1,28 @@
+.googleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    margin: 1vh 1vw;
+    border-radius: 4px;
+    width: 200px;
+  
+    .googleButtonText {
+      font-family: 'Roboto';
+      margin: 0 8px 0 0;
+      font-size: 14px;
+    }
+  
+    .googleButtonLogo {
+      box-sizing: border-box;
+      margin: 11px 24px 11px 8px;
+      box-shadow: none;
+      width: 18px;
+      height: 18px;
+    }
+  }
+  
+  .googleButton:hover {
+    box-shadow: 2px 2px 15px grey;
+  }

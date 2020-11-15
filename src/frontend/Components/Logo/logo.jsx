@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './scss/logo.scss';
 
 import { ReactComponent as LogoPic } from '../../img/logo.svg';
@@ -9,7 +10,7 @@ import { ReactComponent as LogoPic } from '../../img/logo.svg';
 const Logo = () => {
         return (
                 <div className="logo-container">
-                    <LogoPic />
+                    <Link to="/"><LogoPic /></Link>
                 </div>
         );
 }

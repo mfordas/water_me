@@ -1,17 +1,14 @@
 import React from 'react';
-import Register from './register';
-import { Route, Switch } from 'react-router-dom';
-import Verification from './verificate';
+import Register from './googleRegister';
 
-class RegisterContent extends React.Component {
-    render() {
-        return (
-                <Switch>
-                    <Route exact path="/register" component={Register} />
-                    <Route path="/register/verification/:token" component={Verification} />
-                </Switch>
-        );
-    }
+const RegisterComponent = () => {
+    return (
+        <div className="viewContainer">
+            <div className="registerCard">
+                <Register />
+            </div>
+        </div>
+    );
 }
 
-export default RegisterContent;
+export default RegisterComponent;

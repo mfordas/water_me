@@ -4,7 +4,8 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 import LogoComponent from "./frontend/Components/Logo"
 import FooterComponent from "./frontend/Components/Footer";
-import GoogleRegister from './frontend/Components/Register/googleRegister';
+import RegisterComponent from './frontend/Components/Register';
+import HomePage from './frontend/Views/HomePage';
 
 
 import './frontend/scss/main_styling.scss';
@@ -15,9 +16,9 @@ const App = () => {
     <BrowserRouter>
     <div className="contentContainer">
       <LogoComponent />
-      <GoogleRegister />
       <Switch>
-      {/* <Route exact path="/" component={HomePage} /> */}
+      <Route exact path="/" component={HomePage} />
+      <Route exact path="/register" component={RegisterComponent} />
       <Route render={() => <Redirect to="/" />} />
       </Switch>
       <FooterComponent />

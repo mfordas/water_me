@@ -4,10 +4,12 @@ import axios from 'axios';
 import './scss/google.scss';
 import googlelogo from '../../img/g-logo.png';
 import generateAuthTokenForExternalUser from '../../Utils/generateAuthTokenForExternalUser';
+import ConfirmGoogle from './confirmGoogle';
 
 const GoogleRegister = () => {
 
     const [authObject, setAuthObject] = useState(null);
+    const [registrationSucces, setRegistrationStatus] = useState(false);
 
     const postGoogleUser = async (authObject) =>{ 
         console.log(authObject);
@@ -38,16 +40,17 @@ const GoogleRegister = () => {
         try{
         await authObject.signIn();
         await postGoogleUser(authObject);
+        setRegistrationStatus(true);
     } catch (err) {
         console.log(err);
     }
     }
 
     return (
-        <div className="googleButton" onClick={() => makeAuth()}>
+        !registrationSucces ? <div className="googleButton" onClick={() => makeAuth()}>
             <img className="googleButtonLogo" src={googlelogo} alt='google logo' />
             <div className="googleButtonText">Zarejestruj przez Google</div>
-        </div>
+        </div> : <ConfirmGoogle />
 
     )
 };

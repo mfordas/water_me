@@ -9,6 +9,7 @@ import users from './routes/users.js';
 import mainPage from './routes/mainPage.js';
 import plants from './routes/plants.js';
 import plantsLists from './routes/plantsLists.js';
+import authExternal from './routes/authExternal.js';
 
 const app = express();
 
@@ -42,6 +43,7 @@ const runApp = async () => {
     app.use('/api/users', users);
     app.use('/api/plants', plants);
     app.use('/api/plantsLists', plantsLists);
+    app.use("/api/authexternal", authExternal);
 
     const port = process.env.PORT || 8080;
     

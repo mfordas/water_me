@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import _ from "lodash";
 import express from "express";
 
-import verify from '../../frontend/utils/googleAuth.js'
+import verify from '../Utils/googleAuth.js'
 
 const router = express.Router();
 
@@ -11,20 +11,22 @@ const verifyExternalUser = async (req) => {
 };
 
 const checkIfUserIsInDatabase = async (res, user) => {
-  const checkedUser = await res.locals.models.user.findOne({
-    email: user.email
+  const checkedUser = await res.locals.models.User.findOne({
+    where: {
+      googleId: user.sub
+    }
   });
   return checkedUser;
 };
 
 const createToken = (user) => {
   return jwt.sign({
-    _id: user._id,
-    name: user.name,
-    isAdmin: user.isAdmin
-  },
-  process.env.JWTPRIVATEKEY
-);
+      _id: user._id,
+      googleId: user.googleId,
+      name: user.name,
+    },
+    process.env.JWTPRIVATEKEY
+  );
 }
 
 const authorizeExternalUser = async (req, res) => {
@@ -44,7 +46,7 @@ const authorizeExternalUser = async (req, res) => {
 
     return res
       .header("x-auth-token", token)
-      .send(_.pick(user, ["_id", "name", "email"]));
+      .send(user);
   } else {
     res.status(401).send("Stop doing that you dumbass")
   }

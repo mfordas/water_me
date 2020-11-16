@@ -3,11 +3,9 @@ import Register from './googleRegister';
 
 const RegisterComponent = () => {
     return (
-        <div className="viewContainer">
             <div className="registerCard">
                 <Register />
             </div>
-        </div>
     );
 }
 

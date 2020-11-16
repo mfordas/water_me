@@ -2,6 +2,7 @@ import express from 'express';
 
 import verify from '../Utils/googleAuth.js';
 import generateAuthToken from '../Utils/generateAuthToken.js';
+import auth from '../middleware/authorization.js';
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ const getAllUsersFromDB = async (req, res) => {
     }
 };
 
-router.get('/', getAllUsersFromDB);
+router.get('/', auth, getAllUsersFromDB);
 
 const addUserToDB = async (req, res) => {
     const User = await res.locals.models.User;

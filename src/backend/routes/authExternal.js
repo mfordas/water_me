@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import _ from "lodash";
 import express from "express";
 
 import verify from '../Utils/googleAuth.js'
@@ -20,10 +19,15 @@ const checkIfUserIsInDatabase = async (res, user) => {
 };
 
 const createToken = (user) => {
+  const {
+    id,
+    googleId,
+    name
+  } = user.dataValues;
   return jwt.sign({
-      _id: user._id,
-      googleId: user.googleId,
-      name: user.name,
+      id: id,
+      googleId: googleId,
+      name: name,
     },
     process.env.JWTPRIVATEKEY
   );

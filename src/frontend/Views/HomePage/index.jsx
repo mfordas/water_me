@@ -1,6 +1,7 @@
 import React from 'react';
 
 import RegisterComponent from '../../Components/Register';
+import LoginComponent from '../../Components/Login';
 
 
 const HomePage = () => {
@@ -11,7 +12,7 @@ const HomePage = () => {
           i innych miejsc. Ustawiaj harmonogramy podlewania a rośliny same dadzą Ci znać, że potrzebują wody. Jeśli zapomnisz o podlewaniu będziesz otrzymywał
            kolejne przypomnienia, które uratują Twoje rośliny. </p>
         <RegisterComponent />
-        <div>Login component</div>
+        <LoginComponent />
       </div>
   );
 };

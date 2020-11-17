@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 import LogoComponent from "./frontend/Components/Logo"
 import FooterComponent from "./frontend/Components/Footer";
+import FlowerComponent from "./frontend/Components/Flower";
 
 import HomePage from './frontend/Views/HomePage';
 
@@ -18,8 +19,9 @@ const App = () => {
       <LogoComponent />
       <Switch>
       <Route exact path="/" component={HomePage} />
-      <Route render={() => <Redirect to="/" />} />
+      <Route render={() => <Redirect to="/" />} /> 
       </Switch>
+      {localStorage.getItem('id') ? <FlowerComponent /> : null}
       <FooterComponent />
       </div>
       </BrowserRouter>

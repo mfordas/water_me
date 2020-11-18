@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import { Provider } from 'react-redux';
 
 import LogoComponent from "./frontend/Components/Logo"
 import FooterComponent from "./frontend/Components/Footer";
 import FlowerComponent from "./frontend/Components/Flower";
+import { store } from './frontend/redux_store/reduxStore'
 
 import HomePage from './frontend/Views/HomePage';
 
@@ -29,6 +31,8 @@ const App = () => {
 };
 
 ReactDOM.render(
-    <App />,
+  <Provider store={store}>
+    <App />
+    </Provider>,
   document.querySelector("#root")
 );

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import jwt from 'jwt-decode';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import '../Register/scss/google.scss';
 import googlelogo from '../../img/g-logo.png';
-import generateAuthTokenForExternalUser from '../../Utils/generateAuthTokenForExternalUser';
-import handleLogout from './handleLogout';
+import { loginExternal, logout } from '../../redux_actions/loginActions';
 
-const GoogleAuth = () => {
+const GoogleAuth = ({ loginExternal, logout }) => {
 
     const [authObject, setAuthObject] = useState(null);
     const [token, setToken] = useState(null);
@@ -30,34 +29,10 @@ const GoogleAuth = () => {
         }
     }, []);
 
-    const loginExternal = async (authObject) => {
-        try {
-            const res = await axios({
-                method: 'post',
-                url: '/api/authexternal',
-                data: { token: await generateAuthTokenForExternalUser(authObject) },
-            });
-
-            if (res.status === 200) {
-                const token = res.headers["x-auth-token"];
-                localStorage.setItem('token', token);
-                localStorage.setItem('id', jwt(token).id);
-                localStorage.setItem('name', res.data.name )
-                console.log('Logged!')
-            } else if (res.status === 202) {
-                console.log('Something wrong..')
-            }
-
-        } catch (error) {
-            console.error('Error Login:', error);
-        }
-    };
-
     const makeAuth = async () => {
         try {
             await authObject.signIn();
             await loginExternal(authObject);
-            setToken(localStorage.getItem('token'));
         } catch (err) {
             console.log(err);
         }
@@ -68,10 +43,17 @@ const GoogleAuth = () => {
             <div className="googleButton" onClick={() => makeAuth()}>
                 <img className="googleButtonLogo" src={googlelogo} alt='google logo' />
                 <div className="googleButtonText">Zaloguj przez Google</div>
-            </div> : <button onClick={() => handleLogout()}>Logout</button>
+            </div> : <button onClick={logout}>Logout</button>
 
     )
 };
 
-export default GoogleAuth;
-
+const mapStateToProps = (state) => ({
+    loginData: state.loginData,
+  });
+  
+  GoogleAuth.propTypes = {
+    loginData: PropTypes.object
+  }
+  
+  export default connect(mapStateToProps, { loginExternal, logout })(GoogleAuth);

@@ -45,30 +45,33 @@ const registerNewGoogleUser = async (req, res) => {
     const verificationResult = await verify(req.body);
 
     if (verificationResult instanceof Error) return res.status(401).send(console.error(verificationResult));
-  
-    let user = await res.locals.models.User.findOne( { where: {
-      googleId: verificationResult.sub
-    }});
+
+    let user = await res.locals.models.User.findOne({
+        where: {
+            googleId: verificationResult.sub
+        }
+    });
 
     if (user) return res.status(400).send(new Error('User already registered'));
-  
+
     const newUser = {
         googleId: verificationResult.sub,
         name: verificationResult.given_name,
         plantsTable: null
-      };
+    };
 
-      if (!newUser) return res.status(400).send(new Error("Wrong user's data"));
-      
-      user = await User.create(newUser);
+    if (!newUser) return res.status(400).send(new Error("Wrong user's data"));
 
-      const token = generateAuthToken(user);
-  
-      return res
+    user = await User.create(newUser);
+
+    const token = generateAuthToken(user);
+
+    return res
+        .status(200)
         .header("x-auth-token", token)
         .send(user);
-  };
-  
-  router.post("/googleUser", registerNewGoogleUser);
+};
+
+router.post("/googleUser", registerNewGoogleUser);
 
 export default router;

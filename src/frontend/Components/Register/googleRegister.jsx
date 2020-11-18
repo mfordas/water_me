@@ -1,27 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './scss/google.scss';
 import googlelogo from '../../img/g-logo.png';
-import generateAuthTokenForExternalUser from '../../Utils/generateAuthTokenForExternalUser';
 import ConfirmGoogle from './confirmGoogle';
+import { postGoogleUser } from '../../redux_actions/registerActions';
 
-const GoogleRegister = () => {
+const GoogleRegister = ({ postGoogleUser, registerData }) => {
 
     const [authObject, setAuthObject] = useState(null);
-    const [registrationSucces, setRegistrationStatus] = useState(false);
-
-    const postGoogleUser = async (authObject) => {
-        console.log(authObject);
-
-        const res = await axios({
-            method: 'post',
-            url: '/api/users/googleUser',
-            data: { token: await generateAuthTokenForExternalUser(authObject) },
-        });
-
-        console.log(res);
-    };
 
     useEffect(() => {
         try {
@@ -45,14 +33,13 @@ const GoogleRegister = () => {
         try {
             await authObject.signIn();
             await postGoogleUser(authObject);
-            setRegistrationStatus(true);
         } catch (err) {
             console.log(err);
         }
     }
 
     return (
-        !registrationSucces ? <div className="googleButton" onClick={() => makeAuth()}>
+        !registerData.confirm ? <div className="googleButton" onClick={() => makeAuth()}>
             <img className="googleButtonLogo" src={googlelogo} alt='google logo' />
             <div className="googleButtonText">Zarejestruj przez Google</div>
         </div> : <ConfirmGoogle />
@@ -60,5 +47,12 @@ const GoogleRegister = () => {
     )
 };
 
-export default GoogleRegister;
-
+const mapStateToProps = (state) => ({
+    registerData: state.registerData,
+  });
+  
+  GoogleRegister.propTypes = {
+    registerData: PropTypes.object
+  }
+  
+  export default connect(mapStateToProps, { postGoogleUser })(GoogleRegister);

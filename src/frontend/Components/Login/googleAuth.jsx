@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -6,13 +7,14 @@ import '../Register/scss/google.scss';
 import googlelogo from '../../img/g-logo.png';
 import { loginExternal, logout } from '../../redux_actions/loginActions';
 
-const GoogleAuth = ({ loginExternal, logout }) => {
+const GoogleAuth = ({ loginExternal, logout, loginData }) => {
 
     const [authObject, setAuthObject] = useState(null);
     const [token, setToken] = useState(null);
 
     useEffect(() => {
         try {
+            console.log(loginData);
             setToken(localStorage.getItem('token'));
 
             window.gapi.load('client:auth2', () => {
@@ -39,11 +41,11 @@ const GoogleAuth = ({ loginExternal, logout }) => {
     };
 
     return (
-        !token ?
+        !loginData.isLogged ?
             <div className="googleButton" onClick={() => makeAuth()}>
                 <img className="googleButtonLogo" src={googlelogo} alt='google logo' />
                 <div className="googleButtonText">Zaloguj przez Google</div>
-            </div> : <button onClick={logout}>Logout</button>
+            </div> : <Redirect to="/plants" />
 
     )
 };

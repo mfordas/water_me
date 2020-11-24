@@ -23,6 +23,7 @@ export const loginExternal = (authObject) => async (dispatch) => {
       localStorage.setItem('token', token);
       localStorage.setItem('id', jwt(token).id);
       localStorage.setItem('name', res.data.name);
+      window.location.reload();
       dispatch({
         type: TYPES.loginExternal,
         isLogged: true

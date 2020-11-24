@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import LogoComponent from "./frontend/Components/Logo"
 import FooterComponent from "./frontend/Components/Footer";
 import FlowerComponent from "./frontend/Components/Flower";
+import PublicRoute from './frontend/Components/PublicRoute';
+import PrivateRoute from './frontend/Components/PrivateRoute';
 import { store } from './frontend/redux_store/reduxStore'
 
 import HomePage from './frontend/Views/HomePage';
@@ -20,12 +22,12 @@ const App = () => {
     <div className="contentContainer">
       <LogoComponent />
       <Switch>
-      <Route exact path="/" component={HomePage} />
+      <PublicRoute exact path="/" component={HomePage} />
+      <PrivateRoute exact path="/" component={FlowerComponent} />
       <Route render={() => <Redirect to="/" />} /> 
       </Switch>
-      {localStorage.getItem('id') ? <FlowerComponent /> : null}
-      <FooterComponent />
       </div>
+      <FooterComponent />
       </BrowserRouter>
   );
 };

@@ -11,7 +11,7 @@ const ConfirmGoogle = ({ resetRegisterState }) => {
         <>
             <p>Konto założone!</p>
             <p> Możesz teraz się zalogować.</p>
-            <Link className="button" to="/home" onClick={resetRegisterState} >Strona główna</Link>
+            <Link className="button" to="/home" onClick={resetRegisterState} >Strona główna</Link> 
         </>
     );
 }

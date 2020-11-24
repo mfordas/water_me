@@ -16,8 +16,6 @@ export const loginExternal = (authObject) => async (dispatch) => {
       },
     });
 
-    console.log(res);
-
     if (res.status === 200) {
       const token = res.headers["x-auth-token"];
       localStorage.setItem('token', token);

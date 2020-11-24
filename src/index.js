@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import LogoComponent from "./frontend/Components/Logo"
 import FooterComponent from "./frontend/Components/Footer";
 import FlowerComponent from "./frontend/Components/Flower";
+import Menu from './frontend/Components/Menu';
 import PublicRoute from './frontend/Components/PublicRoute';
 import PrivateRoute from './frontend/Components/PrivateRoute';
 import { store } from './frontend/redux_store/reduxStore'
@@ -21,9 +22,10 @@ const App = () => {
     <BrowserRouter>
     <div className="contentContainer">
       <LogoComponent />
+      <Menu />
       <Switch>
       <PublicRoute exact path="/" component={HomePage} />
-      <PrivateRoute exact path="/" component={FlowerComponent} />
+      <PrivateRoute exact path="/plants" component={FlowerComponent} />
       <Route render={() => <Redirect to="/" />} /> 
       </Switch>
       </div>

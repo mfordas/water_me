@@ -10,13 +10,9 @@ import { loginExternal, logout } from '../../redux_actions/loginActions';
 const GoogleAuth = ({ loginExternal, logout, loginData }) => {
 
     const [authObject, setAuthObject] = useState(null);
-    const [token, setToken] = useState(null);
 
     useEffect(() => {
         try {
-            console.log(loginData);
-            setToken(localStorage.getItem('token'));
-
             window.gapi.load('client:auth2', () => {
                 window.gapi.client.init({
                     clientId: process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID,

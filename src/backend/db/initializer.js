@@ -8,7 +8,7 @@ import {
     Plant
 } from '../models/Plant.js';
 import {
-    PlantList
+    PlantsList
 } from '../models/PlantsList.js';
 
 dotenv.config();
@@ -36,13 +36,13 @@ export const createDatabase = async () => {
 export const createTables = async (dbConnection) => {
     const userModel = User;
     const plantModel = Plant;
-    const plantListModel = PlantList;
+    const plantListModel = PlantsList;
 
     await dbConnection.sync({
     });
 
     console.log(userModel === dbConnection.models.User);
     console.log(plantModel === dbConnection.models.Plant);
-    console.log(plantListModel === dbConnection.models.PlantList);
+    console.log(plantListModel === dbConnection.models.PlantsList);
 
 };

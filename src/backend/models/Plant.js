@@ -2,14 +2,7 @@ import sequelize from 'sequelize';
 import dbConnection from '../db/connection.js';
 
 const Plant = dbConnection.define('Plant', {
-
-    id: {
-        type: sequelize.DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        autoincrement: true,
-    },
-    plantListId: {
+    plantsListId: {
         type: sequelize.DataTypes.INTEGER,
         allowNull: false,
     },

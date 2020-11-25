@@ -10,9 +10,6 @@ const User = dbConnection.define('User', {
         type: sequelize.DataTypes.STRING,
         allowNull: false,
     },
-    plantsTable: {
-        type: sequelize.DataTypes.INTEGER,
-    }
 },
 {
 });

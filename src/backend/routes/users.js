@@ -21,8 +21,6 @@ router.get('/', auth, getAllUsersFromDB);
 const addUserToDB = async (req, res) => {
     const User = await res.locals.models.User;
 
-    console.log(req.body);
-
     const userData = req.body;
 
     try {

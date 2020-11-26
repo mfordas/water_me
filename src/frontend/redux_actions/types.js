@@ -3,4 +3,6 @@ export const TYPES = {
     logout: 'logout',
     registerExternal: 'registerExternal',
     resetRegisterState: 'resetRegisterState',
+    addPlantsList: 'addPlantsList',
+    getPlantsLists: 'getPlantsLists',
 }

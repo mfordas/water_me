@@ -26,7 +26,7 @@ export const getPlantsLists = () => async (dispatch) => {
     }
 
   } catch (error) {
-    console.error('Error Login:', error.response.data);
+    console.error('Error:', error.response.data);
     dispatch({
       type: TYPES.getPlantsLists,
       plantsLists: []
@@ -54,10 +54,39 @@ export const addPlantsList = (plantsListName) => async (dispatch) => {
     }
 
   } catch (error) {
-    console.error('Error Login:', error.response.data);
+    console.error('Error:', error.response.data);
     dispatch({
       type: TYPES.addPlantsList,
       plantsListName: ''
+    });
+  }
+};
+
+export const getPlantsListsForUser = (userId) => async (dispatch) => {
+  try {
+    const res = await axios({
+      method: 'get',
+      url: `/api/plantsLists/${userId}`,
+      headers: setHeaders(),
+    });
+
+    if (res.status === 200) {
+      dispatch({
+        type: TYPES.getPlantsLists,
+        plantsLists: res.data
+      });
+    } else if (res.status === 404) {
+      dispatch({
+        type: TYPES.loginExternal,
+        plantsLists: [],
+      });
+    }
+
+  } catch (error) {
+    console.error('Error:', error.response.data);
+    dispatch({
+      type: TYPES.getPlantsLists,
+      plantsLists: []
     });
   }
 };

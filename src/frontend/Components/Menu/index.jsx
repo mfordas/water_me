@@ -19,7 +19,7 @@ const Menu = ({loginData, logout}) => {
     {loginData.isLogged &&
     (
         <>
-        <NavLink className="buttonMenu" to="/plants">Moje rośliny</NavLink>
+        <NavLink className="buttonMenu" to="/plantsLists">Moje listy rośliny</NavLink>
         <button className="buttonMenu" onClick={() => logout()}>Wyloguj</button>
         </>
     )}

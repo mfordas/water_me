@@ -34,4 +34,24 @@ const addPlantsListToDB = async (req, res) => {
 
 router.post('/', auth, addPlantsListToDB);
 
+const getPlantsListsForUser = async (req, res) => {
+    const PlantsList = await res.locals.models.PlantsList;
+
+    try {
+
+        const plantsLists = await PlantsList.findAll({
+            where: {
+              userId: req.params.userId
+            }
+          });
+
+          plantsLists.length > 0 ? res.status(200).send(plantsLists) : res.status(404).send('Plants lists not found');
+
+    } catch (err) {
+        console.log(new Error(err));
+    }
+};
+
+router.get('/:userId',auth, getPlantsListsForUser);
+
 export default router;

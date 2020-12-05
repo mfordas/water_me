@@ -1,4 +1,5 @@
 import express from 'express';
+import auth from '../middleware/authorization.js';
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ const getAllPlantsFromDB = async (req, res) => {
     }
 }
 
-router.get('/', getAllPlantsFromDB);
+router.get('/', auth, getAllPlantsFromDB);
 
 const addPlantToDB = async (req, res) => {
     const Plant = await res.locals.models.Plant;
@@ -31,6 +32,31 @@ const addPlantToDB = async (req, res) => {
     }
 };
 
-router.post('/', addPlantToDB);
+router.post('/', auth, addPlantToDB);
+
+const findAllPlantsFromPlantsList = async (req, res) => {
+    const Plant = await res.locals.models.Plant;
+
+    if (req.params.userId === req.body.userId) {
+
+        try {
+            const plants = await Plant.findAll({
+                where: {
+                    plantsListId: req.params.plantsListId,
+                }
+            });
+
+            res.status(200).send(plants);
+
+        } catch (err) {
+            console.log(new Error(err));
+            
+        };
+    } else {
+        res.status(401).send('You are not allowed to do that');
+    }
+}
+
+router.get('/:userId/:plantsListId', auth, findAllPlantsFromPlantsList);
 
 export default router;

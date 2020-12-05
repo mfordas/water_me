@@ -5,9 +5,9 @@ const router = express.Router();
 
 const getAllPlantsListsFromDB = async (req, res) => {
     try {
-    const plantsLists = await res.locals.models.PlantsList.findAll();
-    
-    res.send(plantsLists);
+        const plantsLists = await res.locals.models.PlantsList.findAll();
+
+        res.send(plantsLists);
     } catch (err) {
         console.log(err);
     }
@@ -41,17 +41,43 @@ const getPlantsListsForUser = async (req, res) => {
 
         const plantsLists = await PlantsList.findAll({
             where: {
-              userId: req.params.userId
+                userId: req.params.userId
             }
-          });
+        });
 
-          plantsLists.length > 0 ? res.status(200).send(plantsLists) : res.status(404).send('Plants lists not found');
+        plantsLists.length > 0 ? res.status(200).send(plantsLists) : res.status(404).send('Plants lists not found');
 
     } catch (err) {
         console.log(new Error(err));
     }
 };
 
-router.get('/:userId',auth, getPlantsListsForUser);
+router.get('/:userId', auth, getPlantsListsForUser);
+
+const deletePlantsList = async (req, res) => {
+    const PlantsList = await res.locals.models.PlantsList;
+
+    if (req.params.userId === req.body.userId) {
+
+        try {
+            await PlantsList.destroy({
+                where: {
+                    id: req.params.plantsListId,
+                    userId: req.params.userId,
+                }
+            });
+
+            res.status(200).send('Plants list deleted');
+
+        } catch (err) {
+            console.log(new Error(err));
+            
+        };
+    } else {
+        res.status(401).send('You are not allowed to do that');
+    }
+}
+
+router.delete('/:userId/:plantsListId', auth, deletePlantsList);
 
 export default router;

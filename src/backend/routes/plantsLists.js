@@ -80,4 +80,30 @@ const deletePlantsList = async (req, res) => {
 
 router.delete('/:userId/:plantsListId', auth, deletePlantsList);
 
+const showPlantsList = async (req, res) => {
+    const PlantsList = await res.locals.models.PlantsList;
+
+    if (req.params.userId === req.body.userId) {
+
+        try {
+            const plantsList = await PlantsList.findOne({
+                where: {
+                    id: req.params.plantsListId,
+                    userId: req.params.userId,
+                }
+            });
+
+            plantsList ? res.status(200).send(plantsList) : res.status(404).send('List not found');
+
+        } catch (err) {
+            console.log(new Error(err));
+            
+        };
+    } else {
+        res.status(401).send('You are not allowed to do that');
+    }
+}
+
+router.get('/:userId/:plantsListId', auth, showPlantsList);
+
 export default router;

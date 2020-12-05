@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { getPlantsLists, getPlantsListsForUser } from '../../redux_actions/plantsListsActions';
+import DeletePlantsList from './deletePlantsList';
 import './scss/plantsLists.scss';
 
 const ShowPlantsLists = ({ getPlantsListsForUser, plantsListsData }) => {
@@ -23,6 +24,7 @@ const ShowPlantsLists = ({ getPlantsListsForUser, plantsListsData }) => {
                     return <div className="plantsListContainer" key={plantsList.id}>
                         <div>{plantsList.name}</div>
                         <Link to={plantsList.name}>Przejdź</Link>
+                        <DeletePlantsList plantsListId={plantsList.id} />
                     </div>
                 })}
             </div>

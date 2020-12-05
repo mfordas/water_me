@@ -5,4 +5,5 @@ export const TYPES = {
     resetRegisterState: 'resetRegisterState',
     addPlantsList: 'addPlantsList',
     getPlantsLists: 'getPlantsLists',
+    deletePlantsList: 'deletePlantsList',
 }

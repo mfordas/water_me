@@ -6,6 +6,7 @@ const initialState = {
     plantsListName: '',
     plantsLists: [],
     userId: localStorage.getItem('id'),
+    plantsListDeleted: false,
 };
 
 export default function (state = initialState, action) {
@@ -19,6 +20,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 plantsLists: action.plantsLists,
+            };
+            case TYPES.deletePlantsList: 
+            return {
+                ...state,
+                plantsListDeleted: action.plantsListDeleted
             }
             default:
                 return state;

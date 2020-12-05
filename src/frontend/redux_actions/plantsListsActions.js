@@ -90,3 +90,36 @@ export const getPlantsListsForUser = (userId) => async (dispatch) => {
     });
   }
 };
+
+export const deletePlantsList = (userId, plantsListId) => async (dispatch) => {
+
+  try {
+    const res = await axios({
+      method: 'delete',
+      url: `/api/plantsLists/${userId}/${plantsListId}`,
+      headers: setHeaders(),
+      data: {
+        userId: userId
+      }
+    });
+
+    if (res.status === 200) {
+      dispatch({
+        type: TYPES.deletePlantsList,
+        plantsListDeleted: true
+      });
+    } else if (res.status === 404) {
+      dispatch({
+        type: TYPES.deletePlantsList,
+        plantsListDeleted: false
+      });
+    }
+
+  } catch (error) {
+    console.error('Error:', error.response.data);
+    dispatch({
+      type: TYPES.deletePlantsList,
+      plantsListDeleted: false
+    });
+  }
+};

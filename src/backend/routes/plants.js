@@ -37,7 +37,7 @@ router.post('/', auth, addPlantToDB);
 const findAllPlantsFromPlantsList = async (req, res) => {
     const Plant = await res.locals.models.Plant;
 
-    if (req.params.userId === req.body.userId) {
+    if (req.params.userId === req.user.id.toString()) {
 
         try {
             const plants = await Plant.findAll({

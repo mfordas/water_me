@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 const PrivateRoute = ({ component: Component, loginData, ...rest}) => {
-  return <Route {...rest} render={props => (loginData.isLogged ? <Component {...props} /> : <Redirect to="/" />)} />;
+  return <Route {...rest} render={props => (loginData.isLogged ? <Component {...props} {...rest}/> : <Redirect to="/" />)} />;
 };
 
 const mapStateToProps = (state) => ({

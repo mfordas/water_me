@@ -9,6 +9,7 @@ const initialState = {
     plantsListDeleted: false,
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
     switch (action.type) {
         case TYPES.addPlantsList:
@@ -21,12 +22,17 @@ export default function (state = initialState, action) {
                 ...state,
                 plantsLists: action.plantsLists,
             };
-            case TYPES.deletePlantsList: 
+        case TYPES.deletePlantsList:
             return {
                 ...state,
                 plantsListDeleted: action.plantsListDeleted
+            };
+        case TYPES.showPlantsList:
+            return {
+                ...state,
+                plants: action.plants
             }
-            default:
-                return state;
+        default:
+            return state;
     }
 }

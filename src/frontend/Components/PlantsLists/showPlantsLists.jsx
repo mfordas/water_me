@@ -23,7 +23,7 @@ const ShowPlantsLists = ({ getPlantsListsForUser, plantsListsData }) => {
                 {plantsListsArray.map(plantsList => {
                     return <div className="plantsListContainer" key={plantsList.id}>
                         <div>{plantsList.name}</div>
-                        <Link to={plantsList.name}>Przejdź</Link>
+                        <Link to={`/plantsList/${plantsList.name}`}>Przejdź</Link>
                         <DeletePlantsList plantsListId={plantsList.id} />
                     </div>
                 })}

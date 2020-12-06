@@ -11,6 +11,7 @@ import PrivateRoute from './frontend/Components/PrivateRoute';
 import { store } from './frontend/redux_store/reduxStore';
 
 import HomePage from './frontend/Views/HomePage';
+import PlantsLists from './frontend/Views/PlantsLists';
 import PlantsList from './frontend/Views/PlantsList';
 
 
@@ -25,7 +26,8 @@ const App = () => {
       <Menu />
       <Switch>
       <PublicRoute exact path="/" component={HomePage} />
-      <PrivateRoute exact path="/plantsLists" component={PlantsList} />
+      <PrivateRoute exact path="/plantsLists" component={PlantsLists} />
+      <PrivateRoute path="/plantsList" component={PlantsList} />
       <Route render={() => <Redirect to="/" />} /> 
       </Switch>
       </div>

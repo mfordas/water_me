@@ -123,3 +123,34 @@ export const deletePlantsList = (userId, plantsListId) => async (dispatch) => {
     });
   }
 };
+
+export const showPlantsList = (userId, plantsListId) => async (dispatch) => {
+
+  try {
+
+    const res = await axios({
+      method: 'get',
+      url: `/api/plants/${userId}/${plantsListId}`,
+      headers: setHeaders(),
+    });
+
+    if (res.status === 200) {
+      dispatch({
+        type: TYPES.showPlantsList,
+        plants: res.data
+      });
+    } else if (res.status === 404) {
+      dispatch({
+        type: TYPES.showPlantsList,
+        plants: {}
+      });
+    }
+
+  } catch (error) {
+    console.error('Error:', error.response.data);
+    dispatch({
+      type: TYPES.showPlantsList,
+      plants: {}
+    });
+  }
+};

@@ -18,7 +18,10 @@ router.get('/', auth, getAllPlantsFromDB);
 const addPlantToDB = async (req, res) => {
     const Plant = await res.locals.models.Plant;
 
-    const plantData = req.body;
+    const plantData = {
+        ...req.body,
+        plantsListId: req.params.plantsListId
+    };
 
     try {
 
@@ -32,7 +35,7 @@ const addPlantToDB = async (req, res) => {
     }
 };
 
-router.post('/', auth, addPlantToDB);
+router.post('/:plantsListId', auth, addPlantToDB);
 
 const findAllPlantsFromPlantsList = async (req, res) => {
     const Plant = await res.locals.models.Plant;

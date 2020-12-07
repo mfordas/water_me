@@ -1,6 +1,34 @@
-.plantContainer {
+.plantsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .plantsContainerHeader {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      padding: 1vh 0.5vh;
+      border-bottom: 2px solid black;
+
+      div {
+          display: flex;
+          justify-content: center;
+          flex: 1 1 0;
+      }
+  }
+
+  .plantContainer {
     display: flex;
     width: 100%;
     justify-content: space-around;
+    align-items: center;
     padding: 1vh;
+
+    div {
+        display: flex;
+        justify-content: center;
+        flex: 1 1 0;
+    }
+  }
 }

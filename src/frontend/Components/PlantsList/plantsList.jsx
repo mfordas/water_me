@@ -28,8 +28,9 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
             const plantsList = plantsArray.map((plant, index) => {
                 return (
                     <div key={index} className='plantContainer'>
-                        <div>{plant.id}</div>
                         <div>{plant.pictureUrl}</div>
+                        <div>{plant.wateringCycle}</div>
+                        <div>{plant.wateringCycle}</div>
                         <div>{plant.wateringCycle}</div>
                     </div>
                 )
@@ -44,7 +45,15 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
 
     return (
         <>
+        <div className='plantsContainer'>
+            <div className='plantsContainerHeader'>
+                <div>Nazwa</div>
+                <div>Zdjęcie</div>
+                <div>Podlewanie co:</div>
+                <div>Status</div>
+            </div>
             {generatePlantsList(plants)}
+            </div>
         </>
     )
 };

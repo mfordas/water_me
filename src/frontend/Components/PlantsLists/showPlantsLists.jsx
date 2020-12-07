@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { getPlantsLists, getPlantsListsForUser } from '../../redux_actions/plantsListsActions';
+import { getPlantsListsForUser } from '../../redux_actions/plantsListsActions';
 import DeletePlantsList from './deletePlantsList';
 import './scss/plantsLists.scss';
 

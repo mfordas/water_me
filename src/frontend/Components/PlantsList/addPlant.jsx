@@ -13,11 +13,11 @@ const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
   
   const setCurrentDate = () => {
       const currentDate = new Date();
-      
+
       const year = currentDate.getUTCFullYear();
       const month = currentDate.getUTCMonth()+1;
-      const day = currentDate.getUTCDay() <10 ? `0${currentDate.getUTCDay()}` : currentDate.getUTCDay();
-      
+      const day = currentDate.getUTCDate() <10 ? `0${currentDate.getUTCDate()}` : currentDate.getUTCDate();
+
       return `${year}-${month}-${day}`;
     }
 
@@ -36,7 +36,7 @@ const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
     event.preventDefault();
 
     const plantData = {
-      plantName: name,
+      name: name,
       wateringCycle: wateringCycle,
       pictureUrl: picture,
       wateringCycleBeginingData: startDate,

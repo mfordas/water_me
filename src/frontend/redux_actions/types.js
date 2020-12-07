@@ -7,4 +7,5 @@ export const TYPES = {
     getPlantsLists: 'getPlantsLists',
     deletePlantsList: 'deletePlantsList',
     showPlantsList: 'showPlantsList',
+    addPlant: 'addPlant',
 }

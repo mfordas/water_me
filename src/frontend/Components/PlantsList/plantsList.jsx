@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
+import AddPlant from './addPlant';
 import './scss/plantsList.scss';
 
 const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
@@ -45,6 +46,7 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
 
     return (
         <>
+        <AddPlant listId={plantsListsData.plantsLists[listIndex].id} />
         <div className='plantsContainer'>
             <div className='plantsContainerHeader'>
                 <div>Nazwa</div>

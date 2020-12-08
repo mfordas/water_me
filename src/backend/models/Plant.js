@@ -21,7 +21,11 @@ const Plant = dbConnection.define('Plant', {
     wateringCycleBeginingData: {
         type: sequelize.DataTypes.DATE,
         allowNull: false,
-    }
+    },
+    lastTimeWatered: {
+        type: sequelize.DataTypes.DATE,
+        allowNull: false,
+    },
 },
 {
 });

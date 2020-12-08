@@ -29,13 +29,13 @@ const runApp = async () => {
     })
   );
   
-    // const activeDbConnection = await connectToDB();
+    const activeDbConnection = await connectToDB();
     
-    // if (process.env.NODE_ENV === 'test') {
-      // activeDbConnection.drop();
+    if (process.env.NODE_ENV === 'test') {
+      activeDbConnection.drop();
       await createDatabase();
       await createTables(dbConnection);
-    // };
+    };
 
     register(app, dbConnection, models);
         

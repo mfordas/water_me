@@ -4,47 +4,76 @@ import PropTypes from "prop-types";
 
 import { addPlantToList } from "../../redux_actions/plantsActions";
 import { showPlantsList } from "../../redux_actions/plantsListsActions";
+import ErrorMessage from "../ErrorMessage/errorMessage";
 import "./scss/plantsList.scss";
 
 const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
   const [name, setName] = useState("");
   const [wateringCycle, setWateringCycle] = useState(0);
   const [picture, setPicture] = useState("");
-  
+  const [formSubmited, setFormSubmitted] = useState(false);
+
   const setCurrentDate = () => {
-      const currentDate = new Date();
+    const currentDate = new Date();
 
-      const year = currentDate.getUTCFullYear();
-      const month = currentDate.getUTCMonth()+1;
-      const day = currentDate.getUTCDate() <10 ? `0${currentDate.getUTCDate()}` : currentDate.getUTCDate();
+    const year = currentDate.getUTCFullYear();
+    const month = currentDate.getUTCMonth() + 1;
+    const day =
+      currentDate.getUTCDate() < 10
+        ? `0${currentDate.getUTCDate()}`
+        : currentDate.getUTCDate();
 
-      return `${year}-${month}-${day}`;
-    }
+    return `${year}-${month}-${day}`;
+  };
 
-    const [startDate, setStartDate] = useState(setCurrentDate());
+  const [startDate, setStartDate] = useState(setCurrentDate());
 
-    useEffect(() => {
-        const updatePlantsList = async () => {
-            await showPlantsList(localStorage.getItem('id'), listId)
-        };
+  useEffect(() => {
+    const updatePlantsList = async () => {
+      await showPlantsList(localStorage.getItem("id"), listId);
+    };
 
-        updatePlantsList();
-
-    }, [plantsData])
+    updatePlantsList();
+  }, [plantsData]);
 
   const handleAddingPlantToList = async (event) => {
     event.preventDefault();
+    setFormSubmitted(true);
 
-    const plantData = {
-      name: name,
-      wateringCycle: wateringCycle,
-      pictureUrl: picture,
-      wateringCycleBeginingData: startDate,
-    };
+    if (name && wateringCycle && picture && startDate && formSubmited) {
+      const plantData = {
+        name: name,
+        wateringCycle: wateringCycle,
+        pictureUrl: picture,
+        wateringCycleBeginingData: startDate,
+      };
 
-    await addPlantToList(plantData, listId);
+      await addPlantToList(plantData, listId);
 
-    console.log(plantsData);
+      console.log('works');
+
+      setFormSubmitted(false);
+    }
+  };
+
+  const validateName = () => {
+    if (formSubmited && !name) {
+      return <ErrorMessage errorText="Wpisz imię" />;
+    } else if (formSubmited && name.length <= 3) {
+      return <ErrorMessage errorText="Imię powinno być dłuższe niż 3 znaki" />;
+    }
+  };
+
+  const validateWateringCycle = () => {
+    if (formSubmited && wateringCycle === 0) {
+      return <ErrorMessage errorText="Wpisz czestotliwość podlewania" />;
+    }
+  };
+
+  const validatePicture = () => {
+    if (formSubmited && !picture) {
+      return <ErrorMessage errorText="Dodaj zdjęcie" />;
+    }
   };
 
   return (
@@ -60,6 +89,7 @@ const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
             }}
           />
         </label>
+        {validateName()}
         <label>
           Podlewanie co:
           <input
@@ -69,9 +99,10 @@ const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
             onChange={(e) => {
               setWateringCycle(e.target.value);
             }}
-            />
-            { wateringCycle == 1 ? `dzień` : 'dni'} 
+          />
+          {wateringCycle == 1 ? `dzień` : "dni"}
         </label>
+        {validateWateringCycle()}
         <label>
           Data startu:
           <input
@@ -92,6 +123,7 @@ const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
             }}
           />
         </label>
+        {validatePicture()}
         <button onClick={handleAddingPlantToList}>Dodaj</button>
       </form>
     </div>
@@ -108,4 +140,6 @@ AddPlant.propTypes = {
   plantsData: PropTypes.object,
 };
 
-export default connect(mapStateToProps, { addPlantToList, showPlantsList })(AddPlant);
+export default connect(mapStateToProps, { addPlantToList, showPlantsList })(
+  AddPlant
+);

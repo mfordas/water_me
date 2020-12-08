@@ -46,6 +46,7 @@ const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
         wateringCycle: wateringCycle,
         pictureUrl: picture,
         wateringCycleBeginingData: startDate,
+        lastTimeWatered: startDate,
       };
 
       await addPlantToList(plantData, listId);

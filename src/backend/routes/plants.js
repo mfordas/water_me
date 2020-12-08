@@ -62,4 +62,68 @@ const findAllPlantsFromPlantsList = async (req, res) => {
 
 router.get('/:userId/:plantsListId', auth, findAllPlantsFromPlantsList);
 
+const deletePlant = async (req, res) => {
+    const Plant = await res.locals.models.Plant;
+
+    if (req.params.userId === req.user.id.toString()) {
+
+        try {
+            const plant = await Plant.findOne({
+                where: {
+                    id: req.params.plantId,
+                }
+            });
+
+            await Plant.destroy({
+                where: {
+                    id: req.params.plantId,
+                }
+            });
+
+            res.status(200).send(`${plant.name} deleted`);
+
+        } catch (err) {
+            console.log(new Error(err));
+            
+        };
+    } else {
+        res.status(401).send('You are not allowed to do that');
+    }
+}
+
+router.delete('/:userId/:plantId', auth, deletePlant);
+
+const updateLastWateringDate = async (req, res) => {
+    const Plant = await res.locals.models.Plant;
+
+    if (req.params.userId === req.user.id.toString()) {
+
+        try {
+            await Plant.update({ lastTimeWatered: req.body.lastTimeWatered }, {
+                where: {
+                    id: req.params.plantId,
+                }
+            });
+
+            const plant = await Plant.findOne({
+                where: {
+                    id: req.params.plantId,
+                }
+            });
+
+            res.status(200).send(plant);
+
+        } catch (err) {
+            console.log(new Error(err));
+            
+        };
+    } else {
+        res.status(401).send('You are not allowed to do that');
+    }
+}
+
+router.patch('/:userId/:plantId', auth, updateLastWateringDate);
+
+
+
 export default router;

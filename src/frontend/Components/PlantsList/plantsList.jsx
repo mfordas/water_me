@@ -29,8 +29,8 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
             const plantsList = plantsArray.map((plant, index) => {
                 return (
                     <div key={index} className='plantContainer'>
+                        <div>{plant.name}</div>
                         <div>{plant.pictureUrl}</div>
-                        <div>{plant.wateringCycle}</div>
                         <div>{plant.wateringCycle}</div>
                         <div>{plant.wateringCycle}</div>
                     </div>

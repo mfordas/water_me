@@ -28,4 +28,28 @@ export const addPlantToList = (plantDataFromUser, plantsListId) => async (dispat
           plantData: {}
         });
       }
+};
+
+export const deletePlant = (userId, plantId) => async (dispatch) => {
+  try {
+      const res = await axios({
+        method: 'delete',
+        url: `/api/plants/${userId}/${plantId}`,
+        headers: setHeaders(),
+      });
+  
+      if (res.status === 200) {
+        dispatch({
+          type: TYPES.deletePlant,
+          plantDeleted: true,
+        });
+      }
+  
+    } catch (error) {
+      console.error('Error:', error.response.data);
+      dispatch({
+        type: TYPES.deletePlant,
+        plantDeleted: false,
+      });
+    }
 }

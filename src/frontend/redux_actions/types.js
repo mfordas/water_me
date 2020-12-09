@@ -8,4 +8,5 @@ export const TYPES = {
     deletePlantsList: 'deletePlantsList',
     showPlantsList: 'showPlantsList',
     addPlant: 'addPlant',
+    deletePlant: 'deletePlant',
 }

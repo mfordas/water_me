@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { addPlantToList } from "../../redux_actions/plantsActions";
 import { showPlantsList } from "../../redux_actions/plantsListsActions";
 import ErrorMessage from "../ErrorMessage/errorMessage";
+import setCurrentDate from './setCurrentDate';
 import "./scss/plantsList.scss";
 
 const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
@@ -12,19 +13,6 @@ const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
   const [wateringCycle, setWateringCycle] = useState(0);
   const [picture, setPicture] = useState("");
   const [formSubmited, setFormSubmitted] = useState(false);
-
-  const setCurrentDate = () => {
-    const currentDate = new Date();
-
-    const year = currentDate.getUTCFullYear();
-    const month = currentDate.getUTCMonth() + 1;
-    const day =
-      currentDate.getUTCDate() < 10
-        ? `0${currentDate.getUTCDate()}`
-        : currentDate.getUTCDate();
-
-    return `${year}-${month}-${day}`;
-  };
 
   const [startDate, setStartDate] = useState(setCurrentDate());
 

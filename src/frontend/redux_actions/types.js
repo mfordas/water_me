@@ -9,4 +9,5 @@ export const TYPES = {
     showPlantsList: 'showPlantsList',
     addPlant: 'addPlant',
     deletePlant: 'deletePlant',
+    updateLastWateringDate: 'updateLastWateringDate',
 }

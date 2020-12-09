@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
 import AddPlant from './addPlant';
+import DeletePlant from './deletePlant';
 import './scss/plantsList.scss';
 
 const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
@@ -33,6 +34,7 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
                         <div>{plant.pictureUrl}</div>
                         <div>{plant.wateringCycle}</div>
                         <div>{plant.wateringCycle}</div>
+                        <DeletePlant plantId={plant.id} listId={plantsListsData.plantsLists[listIndex].id}/>
                     </div>
                 )
             });

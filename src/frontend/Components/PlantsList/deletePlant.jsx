@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -9,8 +9,10 @@ import './scss/plantsList.scss';
 const DeletePlant = ({ deletePlant, showPlantsList, plantsData, plantId, listId }) => {
 
     const handleDeletePlant = async () => {
-        await deletePlant(localStorage.getItem("id"), plantId);
-        await showPlantsList(localStorage.getItem("id"), listId);
+        const userId = localStorage.getItem("id");
+
+        await deletePlant(userId, plantId);
+        await showPlantsList(userId, listId);
     }
 
     return (

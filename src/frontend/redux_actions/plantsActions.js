@@ -52,4 +52,31 @@ export const deletePlant = (userId, plantId) => async (dispatch) => {
         plantDeleted: false,
       });
     }
-}
+};
+
+export const updateLastWateringDate = (userId, plantId, lastWateringDate) => async (dispatch) => {
+  try {
+      const res = await axios({
+        method: 'patch',
+        url: `/api/plants/${userId}/${plantId}`,
+        headers: setHeaders(),
+        data: {
+          lastTimeWatered: lastWateringDate,
+        }
+      });
+  
+      if (res.status === 200) {
+        dispatch({
+          type: TYPES.updateLastWateringDate,
+          plantDeleted: true,
+        });
+      }
+  
+    } catch (error) {
+      console.error('Error:', error.response.data);
+      dispatch({
+        type: TYPES.updateLastWateringDate,
+        plantDeleted: false,
+      });
+    }
+};

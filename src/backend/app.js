@@ -39,6 +39,7 @@ const runApp = async () => {
 
     register(app, dbConnection, models);
         
+    app.use(express.static('public'));
     app.use('/', mainPage);
     app.use('/api/users', users);
     app.use('/api/plants', plants);

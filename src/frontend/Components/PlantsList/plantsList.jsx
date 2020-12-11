@@ -34,7 +34,6 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
                         <div>{plant.name}</div>
                         <div>{plant.pictureUrl}</div>
                         <div>{plant.wateringCycle}</div>
-                        <div>{plant.wateringCycle}</div>
                         <Watering lastWateringDate={plant.lastTimeWatered} plantId={plant.id} wateringCycle={plant.wateringCycle} />
                         <DeletePlant plantId={plant.id} listId={plantsListsData.plantsLists[listIndex].id}/>
                     </div>
@@ -57,6 +56,7 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
                 <div>Zdjęcie</div>
                 <div>Podlewanie co:</div>
                 <div>Status</div>
+                <div></div>
             </div>
             {generatePlantsList(plants)}
             </div>

@@ -30,19 +30,22 @@ const Watering = ({
       (new Date(currentDate).getTime() - new Date(lastWateringDate).getTime()) /
       oneDayInMiliseconds;
 
+    const nextWateringIn = wateringCycle - countDaysSinceLastWatering;
+
     if (countDaysSinceLastWatering < wateringCycle) {
       return (
         <div className="wateringStatusContainer">
-          <div className="daysTillNextWatering">
-            {wateringCycle - countDaysSinceLastWatering}
+          <div className="statusOk">U mnie w porządku!</div>
+          <div>
+            Kolejne podlewanie za: {nextWateringIn}
+            {nextWateringIn === 1 ? " dzień" : " dni"}
           </div>
-          <div className="status">U mnie w porządku!</div>
         </div>
       );
     } else {
       return (
         <div className="wateringStatusContainer">
-          <div className="status">Potrzebuję wody!</div>
+          <div className="statusNok">Potrzebuję wody!</div>
           <button onClick={handleUpdateLastWateringDate}>Podlej</button>
         </div>
       );

@@ -10,4 +10,5 @@ export const TYPES = {
     addPlant: 'addPlant',
     deletePlant: 'deletePlant',
     updateLastWateringDate: 'updateLastWateringDate',
+    uploadImage: 'uploadImage',
 }

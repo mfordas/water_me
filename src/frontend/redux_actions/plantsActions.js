@@ -80,3 +80,30 @@ export const updateLastWateringDate = (userId, plantId, lastWateringDate) => asy
       });
     }
 };
+
+export const uploadPlantImage = (fileObject) => async (dispatch) => {
+  try {
+      const res = await axios({
+        method: 'post',
+        url: `/api/plants/image`,
+        headers: setHeaders(),
+        data: fileObject
+      });
+
+      console.log(res);
+
+      if (res.status === 200) {
+        dispatch({
+          type: TYPES.uploadImage,
+          imageName: res.data
+        });
+      }
+  
+    } catch (error) {
+      console.error('Error:', error.response.data);
+      dispatch({
+        type: TYPES.uploadImage,
+        imageName: ''
+      });
+    }
+};

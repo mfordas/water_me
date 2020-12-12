@@ -2,16 +2,25 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { addPlantToList } from "../../redux_actions/plantsActions";
+import {
+  addPlantToList,
+  uploadPlantImage,
+} from "../../redux_actions/plantsActions";
 import { showPlantsList } from "../../redux_actions/plantsListsActions";
 import ErrorMessage from "../ErrorMessage/errorMessage";
-import setCurrentDate from './setCurrentDate';
+import setCurrentDate from "./setCurrentDate";
 import "./scss/plantsList.scss";
 
-const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
+const AddPlant = ({
+  listId,
+  addPlantToList,
+  uploadPlantImage,
+  plantsData,
+  showPlantsList,
+}) => {
   const [name, setName] = useState("");
   const [wateringCycle, setWateringCycle] = useState(0);
-  const [picture, setPicture] = useState("");
+  const [picture, setPicture] = useState([]);
   const [formSubmited, setFormSubmitted] = useState(false);
 
   const [startDate, setStartDate] = useState(setCurrentDate());
@@ -24,8 +33,23 @@ const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
     updatePlantsList();
   }, [plantsData]);
 
+  const handleUploadingFile = async (event) => {
+    event.preventDefault();
+
+    const photoData = new FormData();
+
+    photoData.append("image", event.target.files[0]);
+
+    await uploadPlantImage(photoData);
+
+    console.log(plantsData.imageName)
+
+    // setPicture(plantsData.imageName);
+  };
+
   const handleAddingPlantToList = async (event) => {
     event.preventDefault();
+
     setFormSubmitted(true);
 
     if (name && wateringCycle && picture && startDate && formSubmited) {
@@ -38,8 +62,6 @@ const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
       };
 
       await addPlantToList(plantData, listId);
-
-      console.log('works');
 
       setFormSubmitted(false);
     }
@@ -67,7 +89,7 @@ const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
 
   return (
     <div className="addPlantContainer">
-      <form>
+      <form encType="multipart/form-data">
         <label>
           Nazwa
           <input
@@ -106,9 +128,13 @@ const AddPlant = ({ listId, addPlantToList, plantsData, showPlantsList }) => {
           Zdjęcie
           <input
             type="file"
-            value={picture}
-            onChange={(e) => {
-              setPicture(e.target.value);
+            onChange={async (event) => {
+              const photoData = new FormData();
+
+    photoData.append("image", event.target.files[0]);
+
+    await uploadPlantImage(photoData);
+              // await handleUploadingFile(e);
             }}
           />
         </label>
@@ -129,6 +155,8 @@ AddPlant.propTypes = {
   plantsData: PropTypes.object,
 };
 
-export default connect(mapStateToProps, { addPlantToList, showPlantsList })(
-  AddPlant
-);
+export default connect(mapStateToProps, {
+  addPlantToList,
+  showPlantsList,
+  uploadPlantImage,
+})(AddPlant);

@@ -1,5 +1,13 @@
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import auth from '../middleware/authorization.js';
+import fileUpload from '../middleware/fileUpload.js';
+import resizeImage from '../Utils/resizeImage.js';
+
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const router = express.Router();
 
@@ -124,6 +132,16 @@ const updateLastWateringDate = async (req, res) => {
 
 router.patch('/:userId/:plantId', auth, updateLastWateringDate);
 
+const plantImageUpload = async (req, res) => {
+    const imagePath = path.join(__dirname, '/public/images');
+    if (!req.file) {
+      res.status(401).json({error: 'Please provide an image'});
+    }
+    const filename = await resizeImage(req.file.buffer, imagePath);
+    return res.status(200).json({ name: filename });
+};
+
+router.post('/image/:plantId', auth, fileUpload.single('image'), plantImageUpload)
 
 
 export default router;

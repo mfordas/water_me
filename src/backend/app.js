@@ -1,4 +1,5 @@
 import express from "express";
+import path from 'path';
 
 import { dbConnection, register, models } from "./db/index.js";
 import { createDatabase, createTables } from "./db/initializer.js";
@@ -34,9 +35,12 @@ const runApp = async () => {
     await createTables(dbConnection);
   }
 
+  const dirname = path.resolve();
+
   register(app, dbConnection, models);
 
-  app.use(express.static("public"));
+  app.use(express.static(path.join(dirname, "./public/")));
+  app.use(express.static(path.join(dirname, "./build/")));
   app.use("/", mainPage);
   app.use("/api/users", users);
   app.use("/api/plants", plants);

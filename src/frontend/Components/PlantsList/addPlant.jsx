@@ -20,8 +20,8 @@ const AddPlant = ({
 }) => {
   const [name, setName] = useState("");
   const [wateringCycle, setWateringCycle] = useState(0);
-  const [picture, setPicture] = useState([]);
-  const [formSubmited, setFormSubmitted] = useState(false);
+  const [picture, setPicture] = useState('');
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [startDate, setStartDate] = useState(setCurrentDate());
 
@@ -40,11 +40,9 @@ const AddPlant = ({
 
     photoData.append("image", event.target.files[0]);
 
-    await uploadPlantImage(photoData);
+    const imageName = await uploadPlantImage(photoData);
 
-    console.log(plantsData.imageName)
-
-    // setPicture(plantsData.imageName);
+    setPicture(imageName);
   };
 
   const handleAddingPlantToList = async (event) => {
@@ -52,7 +50,7 @@ const AddPlant = ({
 
     setFormSubmitted(true);
 
-    if (name && wateringCycle && picture && startDate && formSubmited) {
+    if (name && wateringCycle && picture && startDate) {
       const plantData = {
         name: name,
         wateringCycle: wateringCycle,
@@ -68,21 +66,21 @@ const AddPlant = ({
   };
 
   const validateName = () => {
-    if (formSubmited && !name) {
+    if (formSubmitted && !name) {
       return <ErrorMessage errorText="Wpisz imię" />;
-    } else if (formSubmited && name.length <= 3) {
+    } else if (formSubmitted && name.length <= 3) {
       return <ErrorMessage errorText="Imię powinno być dłuższe niż 3 znaki" />;
     }
   };
 
   const validateWateringCycle = () => {
-    if (formSubmited && wateringCycle === 0) {
+    if (formSubmitted && wateringCycle === 0) {
       return <ErrorMessage errorText="Wpisz czestotliwość podlewania" />;
     }
   };
 
   const validatePicture = () => {
-    if (formSubmited && !picture) {
+    if (formSubmitted && !picture) {
       return <ErrorMessage errorText="Dodaj zdjęcie" />;
     }
   };
@@ -91,7 +89,7 @@ const AddPlant = ({
     <div className="addPlantContainer">
       <form encType="multipart/form-data">
         <label>
-          Nazwa
+          Imię
           <input
             type="text"
             value={name}
@@ -128,13 +126,9 @@ const AddPlant = ({
           Zdjęcie
           <input
             type="file"
+            name="image"
             onChange={async (event) => {
-              const photoData = new FormData();
-
-    photoData.append("image", event.target.files[0]);
-
-    await uploadPlantImage(photoData);
-              // await handleUploadingFile(e);
+              await handleUploadingFile(event);
             }}
           />
         </label>

@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import { env } from 'process';
 import { fileURLToPath } from 'url';
 
 import auth from '../middleware/authorization.js';
@@ -7,7 +8,7 @@ import fileUpload from '../middleware/fileUpload.js';
 import resizeImage from '../Utils/resizeImage.js';
 
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.resolve();
 
 const router = express.Router();
 
@@ -25,13 +26,18 @@ router.get('/', auth, getAllPlantsFromDB);
 
 const plantImageUpload = async (req, res) => {
 
-    const imagePath = path.join(__dirname, '../../../', '/public/images');
+    console.log(path.join(__dirname, process.env.IMAGES_UPLOAD_PATH_DEV));
+
+    const uploadFolder = process.env.NODE_ENV === 'prod' ? process.env.IMAGES_UPLOAD_PATH_PROD : process.env.IMAGES_UPLOAD_PATH_DEV;
+
+    const imagePath = path.join(__dirname, uploadFolder);
 
     if (!req.file) {
       return res.status(401).json({error: 'Please provide an image'});
     }
     
     const fileName = await resizeImage(req.file.buffer, imagePath);
+
     return res.status(200).send(fileName);
 };
 

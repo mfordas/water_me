@@ -90,13 +90,13 @@ export const uploadPlantImage = (fileObject) => async (dispatch) => {
         data: fileObject
       });
 
-      console.log(res);
-
       if (res.status === 200) {
         dispatch({
           type: TYPES.uploadImage,
           imageName: res.data
         });
+
+        return res.data;
       }
   
     } catch (error) {

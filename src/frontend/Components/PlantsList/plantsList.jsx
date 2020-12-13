@@ -32,7 +32,7 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
                 return (
                     <div key={index} className='plantContainer'>
                         <div>{plant.name}</div>
-                        <div>{plant.pictureUrl}</div>
+                        <img src={`../../images/${plant.pictureUrl}.png`} alt="Plant"/>
                         <div>{plant.wateringCycle}</div>
                         <Watering lastWateringDate={plant.lastTimeWatered} plantId={plant.id} wateringCycle={plant.wateringCycle} />
                         <DeletePlant plantId={plant.id} listId={plantsListsData.plantsLists[listIndex].id}/>

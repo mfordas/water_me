@@ -4,6 +4,7 @@ const initialState = {
   plantData: {},
   plantDeleted: false,
   wateringDateUpdated: false,
+  imageName: "",
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -12,17 +13,22 @@ export default function (state = initialState, action) {
     case TYPES.addPlant:
       return {
         ...state,
-        plantData: action.plantData
+        plantData: action.plantData,
       };
     case TYPES.deletePlant:
       return {
         ...state,
-        plantDeleted: action.plantDeleted
+        plantDeleted: action.plantDeleted,
       };
     case TYPES.updateLastWateringDate:
       return {
         ...state,
-        wateringDateUpdated: action.wateringDateUpdated
+        wateringDateUpdated: action.wateringDateUpdated,
+      };
+    case TYPES.uploadImage:
+      return {
+        ...state,
+        imageName: action.imageName,
       };
     default:
       return state;

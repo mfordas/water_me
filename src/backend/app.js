@@ -1,5 +1,6 @@
 import express from "express";
 import path from 'path';
+import helmet from 'helmet';
 
 import { dbConnection, register, models } from "./db/index.js";
 import { createDatabase, createTables } from "./db/initializer.js";
@@ -39,6 +40,7 @@ const runApp = async () => {
 
   register(app, dbConnection, models);
 
+  app.use(helmet());
   app.use(express.static(path.join(dirname, "./public/")));
   app.use(express.static(path.join(dirname, "./build/")));
   app.use("/", mainPage);
@@ -46,6 +48,10 @@ const runApp = async () => {
   app.use("/api/plants", plants);
   app.use("/api/plantsLists", plantsLists);
   app.use("/api/authexternal", authExternal);
+
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(dirname + "/./build", "index.html"));
+  });
 
   const port = process.env.PORT || 8080;
 

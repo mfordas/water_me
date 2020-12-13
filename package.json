@@ -31,12 +31,13 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "startReact": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "mon": "nodemon --experimental-modules ./src/backend/app.js",
-    "dev": "concurrently -n react,express -k \"npm run start\" \"npm run mon\"",
+    "start": "node --experimental-modules ./src/backend/app.js",
+    "dev": "concurrently -n react,express -k \"npm run startReact\" \"npm run mon\"",
     "heroku-postbuild": "npm install && npm run build"
   },
   "eslintConfig": {
@@ -56,6 +57,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": "^12.16.0"
   },
   "type": "module",
   "proxy": "http://localhost:8080/",

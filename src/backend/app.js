@@ -40,7 +40,9 @@ const runApp = async () => {
 
   register(app, dbConnection, models);
 
-  app.use(helmet());
+  app.use(helmet({
+    contentSecurityPolicy: false
+  }));
   app.use(express.static(path.join(dirname, "./public/")));
   app.use(express.static(path.join(dirname, "./build/")));
   app.use("/", mainPage);

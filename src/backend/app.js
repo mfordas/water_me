@@ -41,8 +41,10 @@ const runApp = async () => {
 
   const dirname = path.resolve();
 
+  console.log(dirname)
+
   if (!fs.existsSync(path.join(dirname, "/./build/images"))){
-    fs.mkdirSync(path.join(dirname, "/./build/images"));
+    fs.mkdir(path.join(dirname, "/./build/images"));
 }
 
   register(app, dbConnection, models);

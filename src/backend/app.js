@@ -41,10 +41,10 @@ const runApp = async () => {
 
   const dirname = path.resolve();
 
-  console.log(dirname)
-
   if (!fs.existsSync(path.join(dirname, "/./build/images"))){
-    fs.mkdir(path.join(dirname, "/./build/images"));
+    fs.mkdir(path.join(dirname, "/./build/images"), () => {
+      console.log('Images folder created')
+    });
 }
 
   register(app, dbConnection, models);

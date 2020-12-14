@@ -1,7 +1,5 @@
 import express from 'express';
 import path from 'path';
-import { env } from 'process';
-import { fileURLToPath } from 'url';
 
 import auth from '../middleware/authorization.js';
 import fileUpload from '../middleware/fileUpload.js';

@@ -1,6 +1,7 @@
 import express from "express";
 import path from 'path';
 import helmet from 'helmet';
+import fs from 'fs';
 
 import { dbConnection, register, models } from "./db/index.js";
 import { createDatabase, createTables } from "./db/initializer.js";
@@ -21,6 +22,8 @@ const connectToDB = async () => {
 };
 
 const runApp = async () => {
+ 
+
   app.use(express.json());
   app.use(
     express.urlencoded({
@@ -38,13 +41,18 @@ const runApp = async () => {
 
   const dirname = path.resolve();
 
+  if (!fs.existsSync(path.join(dirname, "/./build/images"))){
+    fs.mkdir(path.join(dirname, "/./build/images"), () => {
+      console.log('Images folder created')
+    });
+}
+
   register(app, dbConnection, models);
 
   app.use(helmet({
     contentSecurityPolicy: false
   }));
-  app.use(express.static(path.join(dirname, "./public/")));
-  app.use(express.static(path.join(dirname, "./build/")));
+  app.use(express.static(path.join(dirname, "/./build/")));
   app.use("/", mainPage);
   app.use("/api/users", users);
   app.use("/api/plants", plants);

@@ -26,9 +26,7 @@ router.get('/', auth, getAllPlantsFromDB);
 
 const plantImageUpload = async (req, res) => {
 
-    console.log(path.join(__dirname, process.env.IMAGES_UPLOAD_PATH_DEV));
-
-    const uploadFolder = process.env.NODE_ENV === 'prod' ? process.env.IMAGES_UPLOAD_PATH_PROD : process.env.IMAGES_UPLOAD_PATH_DEV;
+    const uploadFolder = process.env.NODE_ENV === 'production' ? process.env.IMAGES_UPLOAD_PATH_PROD : process.env.IMAGES_UPLOAD_PATH_DEV;
 
     const imagePath = path.join(__dirname, uploadFolder);
 

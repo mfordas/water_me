@@ -43,8 +43,7 @@ const runApp = async () => {
   app.use(helmet({
     contentSecurityPolicy: false
   }));
-  app.use(express.static(path.join(dirname, "./public/")));
-  app.use(express.static(path.join(dirname, "./build/")));
+  app.use(express.static(path.join(dirname, "/./build/")));
   app.use("/", mainPage);
   app.use("/api/users", users);
   app.use("/api/plants", plants);

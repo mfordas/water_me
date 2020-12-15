@@ -75,7 +75,7 @@ const AddPlant = ({
 
   const validateWateringCycle = () => {
     if (formSubmitted && wateringCycle === 0) {
-      return <ErrorMessage errorText="Wpisz czestotliwość podlewania" />;
+      return <ErrorMessage errorText="Wpisz częstotliwość podlewania" />;
     }
   };
 

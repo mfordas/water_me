@@ -9,8 +9,8 @@ import { ReactComponent as LogoPic } from '../../img/logo.svg';
 
 const Logo = () => {
         return (
-                <div className="logo-container">
-                    <Link to="/"><LogoPic /></Link>
+                <div className="logo-container" data-test="logoComponent">
+                    <Link to="/"><LogoPic data-test='logoSVG'/></Link>
                 </div>
         );
 }

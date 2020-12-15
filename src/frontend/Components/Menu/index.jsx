@@ -7,7 +7,7 @@ import { logout } from '../../redux_actions/loginActions';
 
 import './scss/menu.scss';
 
-const Menu = ({loginData, logout}) => {
+export const Menu = ({loginData, logout}) => {
 
     return ( <div className="containerMenu">
     {!loginData.isLogged &&
@@ -32,7 +32,15 @@ const mapStateToProps = (state) => ({
   });
   
   Menu.propTypes = {
-    loginData: PropTypes.object
+    loginData: PropTypes.shape({
+        loginData: PropTypes.shape({
+            name: PropTypes.string,
+            googleId: PropTypes.string,
+            invalidData: PropTypes.bool
+        }),
+        isLogged: PropTypes.bool,
+    }),
+    logout: PropTypes.func
   }
   
   export default connect(mapStateToProps, { logout })(Menu);

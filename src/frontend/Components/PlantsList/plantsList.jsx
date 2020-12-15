@@ -10,6 +10,7 @@ import './scss/plantsList.scss';
 
 const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
     const [plants, setPlants] = useState([]);
+    const [showAddPlantForm, setShowAddPlantForm] = useState(false);
 
     useEffect(() => {
         const getPlantsFromList = async () => {
@@ -33,7 +34,7 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
                     <div key={index} className='plantContainer'>
                         <div>{plant.name}</div>
                         <img src={`../../images/${plant.pictureUrl}.png`} alt="Plant"/>
-                        <div>{plant.wateringCycle}</div>
+                        <div>Podlewanie co: {plant.wateringCycle}</div>
                         <Watering lastWateringDate={plant.lastTimeWatered} plantId={plant.id} wateringCycle={plant.wateringCycle} />
                         <DeletePlant plantId={plant.id} listId={plantsListsData.plantsLists[listIndex].id}/>
                     </div>
@@ -49,15 +50,9 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
 
     return (
         <>
-        <AddPlant listId={plantsListsData.plantsLists[listIndex].id} />
+        <button className="addPlantButton" onClick={() => setShowAddPlantForm(!showAddPlantForm)}>Dodaj roślinę</button>
+        {showAddPlantForm ? <AddPlant listId={plantsListsData.plantsLists[listIndex].id} /> : null }
         <div className='plantsContainer'>
-            <div className='plantsContainerHeader'>
-                <div>Nazwa</div>
-                <div>Zdjęcie</div>
-                <div>Podlewanie co:</div>
-                <div>Status</div>
-                <div></div>
-            </div>
             {generatePlantsList(plants)}
             </div>
         </>

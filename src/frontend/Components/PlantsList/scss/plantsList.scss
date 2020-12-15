@@ -29,6 +29,11 @@
       display: flex;
       justify-content: center;
       flex: 1 1 0;
+      margin: .5em;
+    }
+
+    img {
+      margin: 0.5em;
     }
   }
 }
@@ -63,7 +68,12 @@ button {
   border-radius: 10px;
   font-size: 1em;
   padding: 0.2rem 2rem;
-}
+
+};
+
+.addPlantButton {
+  background-color: #f5d453;
+};
 
 .deleteButton {
   background-color: #f24949;
@@ -78,6 +88,7 @@ button {
 
   div {
     padding: 0.3em;
+    margin: 0.3em 0.3em;
     text-align: center;
     border-radius: 10px;
     border: 2px solid black;
@@ -93,5 +104,20 @@ button {
 
   button {
     background-color: skyblue;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .plantContainer {
+    flex-direction: column;
+    border-bottom: 2px solid black;
+    padding: 3em 0;
+    margin: 1em 0;
+
+  };
+
+  .addPlantContainer {
+    width: 100%;
+    margin: 1em;
   }
 }

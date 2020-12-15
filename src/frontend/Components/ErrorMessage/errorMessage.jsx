@@ -1,13 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import './scss/errorMessage.scss';
+import "./scss/errorMessage.scss";
 
 const ErrorMessage = ({ errorText }) => {
-    return (
-        <div className='errorMessageContainer'>
-            {errorText}
-        </div>
-    )
+  return errorText ? (
+    <div className="errorMessageContainer" data-test="errorMessageComponent">{errorText}</div>
+  ) : null;
 };
 
 export default ErrorMessage;

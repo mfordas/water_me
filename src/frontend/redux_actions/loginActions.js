@@ -1,30 +1,33 @@
-import axios from 'axios';
-import jwt from 'jwt-decode';
+import axios from "axios";
+import jwt from "jwt-decode";
 
-import {
-  TYPES
-} from '../redux_actions/types';
-import generateAuthTokenForExternalUser from '../Utils/generateAuthTokenForExternalUser';
+import { TYPES } from "../redux_actions/types";
+import generateAuthTokenForExternalUser from "../Utils/generateAuthTokenForExternalUser";
 
 export const loginExternal = (authObject) => async (dispatch) => {
   try {
     const res = await axios({
-      method: 'post',
-      url: '/api/authexternal',
+      method: "post",
+      url: "/api/authexternal",
       data: {
-        token: await generateAuthTokenForExternalUser(authObject)
+        token: await generateAuthTokenForExternalUser(authObject),
       },
     });
 
     if (res.status === 200) {
       const token = res.headers["x-auth-token"];
-      localStorage.setItem('token', token);
-      localStorage.setItem('id', jwt(token).id);
-      localStorage.setItem('name', res.data.name);
+      localStorage.setItem("token", token);
+      localStorage.setItem("id", jwt(token).id);
+      localStorage.setItem("name", res.data.name);
       window.location.reload();
       dispatch({
         type: TYPES.loginExternal,
-        isLogged: true
+        loginData: {
+          name: res.data.name,
+          googleId: res.data.googleId,
+          invalidData: false,
+        },
+        isLogged: true,
       });
     } else if (res.status === 202) {
       dispatch({
@@ -32,9 +35,8 @@ export const loginExternal = (authObject) => async (dispatch) => {
         isLogged: false,
       });
     }
-
   } catch (error) {
-    console.error('Error Login:', error.response.data);
+    console.error("Error Login:", error.response.data);
     dispatch({
       type: TYPES.loginExternal,
       loginData: {
@@ -45,17 +47,17 @@ export const loginExternal = (authObject) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('id');
-  localStorage.removeItem('name');
+  localStorage.removeItem("token");
+  localStorage.removeItem("id");
+  localStorage.removeItem("name");
   window.location.reload();
 
   dispatch({
     type: TYPES.logout,
     loginData: {
-      name: '',
-      googleId: '',
-      invalidData: false
+      name: "",
+      googleId: "",
+      invalidData: false,
     },
     isLogged: false,
   });

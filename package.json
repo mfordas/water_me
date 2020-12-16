@@ -69,6 +69,7 @@
     "concurrently": "^5.3.0",
     "enzyme": "^3.11.0",
     "jest": "^26.6.3",
-    "jest-enzyme": "^7.1.2"
+    "jest-enzyme": "^7.1.2",
+    "nock": "^13.0.5"
   }
 }

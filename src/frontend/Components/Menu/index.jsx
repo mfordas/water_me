@@ -9,19 +9,19 @@ import './scss/menu.scss';
 
 export const Menu = ({loginData, logout}) => {
 
-    return ( <div className="containerMenu">
+    return ( <div className="containerMenu" data-test="menuComponent">
     {!loginData.isLogged &&
         (
-            <>
-            </>
+            <div data-test="noElementsInMenuComponent">
+            </div>
         )
         }
     {loginData.isLogged &&
     (
-        <>
+        <div data-test="menuComponentVisible">
         <NavLink className="buttonMenu" to="/plantsLists">Moje listy rośliny</NavLink>
         <button className="buttonMenu" onClick={() => logout()}>Wyloguj</button>
-        </>
+        </div>
     )}
         </div>
     )

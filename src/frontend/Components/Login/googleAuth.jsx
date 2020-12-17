@@ -38,7 +38,7 @@ const GoogleAuth = ({ loginExternal, logout, loginData }) => {
 
     return (
         !loginData.isLogged ?
-            <div className="googleButton" onClick={() => makeAuth()}>
+            <div className="googleButton" data-test="googleAuthComponent" onClick={() => makeAuth()}>
                 <img className="googleButtonLogo" src={googlelogo} alt='google logo' />
                 <div className="googleButtonText">Zaloguj przez Google</div>
             </div> : <Redirect to="/plants" />

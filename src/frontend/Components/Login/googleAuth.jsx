@@ -7,7 +7,7 @@ import "../Register/scss/google.scss";
 import googlelogo from "../../img/g-logo.png";
 import { loginExternal } from "../../redux_actions/loginActions";
 
-const GoogleAuth = ({ loginExternal, loginData }) => {
+export const GoogleAuth = ({ loginExternal, loginData }) => {
   const [authObject, setAuthObject] = useState(null);
 
   useEffect(() => {

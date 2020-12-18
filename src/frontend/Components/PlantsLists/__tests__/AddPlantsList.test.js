@@ -1,9 +1,8 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import { findByDataTestAtrr } from "../../../Utils/findByDataTestAtrr";
 import { testStore } from "../../../Utils/actionCreatorsUtils";
 import { AddPlantsList } from "../addPlantsList";
-import { act } from "react-dom/test-utils";
 
 const mockFunc = jest.fn();
 

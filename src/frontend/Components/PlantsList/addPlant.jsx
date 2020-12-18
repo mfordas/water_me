@@ -11,7 +11,7 @@ import ErrorMessage from "../ErrorMessage/errorMessage";
 import setCurrentDate from "./setCurrentDate";
 import "./scss/plantsList.scss";
 
-const AddPlant = ({
+export const AddPlant = ({
   listId,
   addPlantToList,
   uploadPlantImage,
@@ -86,7 +86,7 @@ const AddPlant = ({
   };
 
   return (
-    <div className="addPlantContainer">
+    <div className="addPlantContainer" data-test="addPlantComponent">
       <form encType="multipart/form-data">
         <label>
           Imię

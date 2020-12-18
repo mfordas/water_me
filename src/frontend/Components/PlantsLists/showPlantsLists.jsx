@@ -7,7 +7,7 @@ import { getPlantsListsForUser } from '../../redux_actions/plantsListsActions';
 import DeletePlantsList from './deletePlantsList';
 import './scss/plantsLists.scss';
 
-const ShowPlantsLists = ({ getPlantsListsForUser, plantsListsData }) => {
+export const ShowPlantsLists = ({ getPlantsListsForUser, plantsListsData }) => {
 
     useEffect(() => {
         const getPlantsLists = async () => {
@@ -19,9 +19,9 @@ const ShowPlantsLists = ({ getPlantsListsForUser, plantsListsData }) => {
 
     const generatePlantsLists = (plantsListsArray) => {
         return (
-            <div className="plantsListsContainer">
+            <div className="plantsListsContainer" data-test="showPlantsListsComponent">
                 {plantsListsArray.map(plantsList => {
-                    return <div className="plantsListContainer" key={plantsList.id}>
+                    return <div className="plantsListContainer" key={plantsList.id} data-test="plantsListContainer">
                         <div>{plantsList.name}</div>
                         <Link to={`/plantsList/${plantsList.name}`}>Przejdź</Link>
                         <DeletePlantsList plantsListId={plantsList.id} />

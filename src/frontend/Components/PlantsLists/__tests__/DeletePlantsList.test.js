@@ -1,7 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { findByDataTestAtrr } from "../../../Utils/findByDataTestAtrr";
-import { testStore } from "../../../Utils/actionCreatorsUtils";
 import { DeletePlantsList } from "../deletePlantsList";
 
 const mockFunc = jest.fn();

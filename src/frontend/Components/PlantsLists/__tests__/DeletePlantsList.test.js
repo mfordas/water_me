@@ -1,25 +1,24 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import { findByDataTestAtrr } from "../../../Utils/findByDataTestAtrr";
 import { testStore } from "../../../Utils/actionCreatorsUtils";
-import { AddPlantsList } from "../addPlantsList";
-import { act } from "react-dom/test-utils";
+import { DeletePlantsList } from "../deletePlantsList";
 
 const mockFunc = jest.fn();
 
 const setUp = (initialState = {}) => {
-  const store = testStore(initialState);
-  const wrapper = mount(
-    <AddPlantsList
-      store={store}
-      addPlantsList={mockFunc}
+  const wrapper = shallow(
+    <DeletePlantsList
+      plantsListsData={initialState}
       getPlantsListsForUser={mockFunc}
+      deletePlantsList= {mockFunc}
+      plantsListId={1}
     />
   );
   return wrapper;
 };
 
-describe("Add plants list component", () => {
+describe("Delete plants list component", () => {
   let wrapper;
 
   beforeEach(() => {
@@ -35,20 +34,19 @@ describe("Add plants list component", () => {
   });
 
   it("Should render without error", () => {
-    const component = findByDataTestAtrr(wrapper, "addPlantListComponent");
+    const component = findByDataTestAtrr(wrapper, "deletePlantListComponent");
     expect(component.length).toBe(1);
   });
 
   it("Should emit callback on click event", async () => {
-    const component = findByDataTestAtrr(wrapper, "addPlantsListButton");
-    const input = findByDataTestAtrr(wrapper, "inputAddPlantsList");
+    const component = findByDataTestAtrr(wrapper, "deletePlantListComponent");
 
     const event = {
-      target: { value: "listname" },
-    };
-    input.simulate("change", event);
+        preventDefault() {},
+        target: { value: 'the-value' }
+      };
 
-    await component.simulate("click");
+    await component.simulate("click", event);
     const callback = mockFunc.mock.calls.length;
     expect(callback).toBe(2);
   });

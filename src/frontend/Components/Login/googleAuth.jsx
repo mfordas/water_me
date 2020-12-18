@@ -12,16 +12,16 @@ const GoogleAuth = ({ loginExternal, loginData }) => {
 
   useEffect(() => {
     try {
-        window.gapi.load("client:auth2", () => {
-          window.gapi.client
-            .init({
-              clientId: process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID,
-              scope: "email",
-            })
-            .then(async () => {
-              setAuthObject(await window.gapi.auth2.getAuthInstance());
-            });
-        });
+      window.gapi.load("client:auth2", () => {
+        window.gapi.client
+          .init({
+            clientId: process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID,
+            scope: "email",
+          })
+          .then(async () => {
+            setAuthObject(await window.gapi.auth2.getAuthInstance());
+          });
+      });
     } catch (err) {
       console.log(err);
     }

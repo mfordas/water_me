@@ -11,8 +11,8 @@ describe('Menu Component', () => {
             loginData: {
                 isLogged: false
             }
+        };
 
-        }
         const wrapper = shallow(<Menu {...props}/>);
         
         const menu = findByDataTestAtrr(wrapper, 'menuComponent');

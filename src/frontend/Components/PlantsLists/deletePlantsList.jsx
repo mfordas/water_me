@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { deletePlantsList, getPlantsListsForUser } from '../../redux_actions/plantsListsActions';
 import './scss/plantsLists.scss';
 
-const DeletePlantsList = ({ deletePlantsList, getPlantsListsForUser, plantsListsData, plantsListId }) => {
+export const DeletePlantsList = ({ deletePlantsList, getPlantsListsForUser, plantsListsData, plantsListId }) => {
 
     const handlerDeletePlantsList = async (e) => {
         e.preventDefault();
@@ -15,7 +15,7 @@ const DeletePlantsList = ({ deletePlantsList, getPlantsListsForUser, plantsLists
 
 
     return (
-        <button className='deleteButton' onClick={(e) => handlerDeletePlantsList(e)}>
+        <button className='deleteButton' onClick={(e) => handlerDeletePlantsList(e)} data-test="deletePlantListComponent">
            Usuń
         </button>
         )

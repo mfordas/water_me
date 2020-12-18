@@ -7,21 +7,21 @@ import "../Register/scss/google.scss";
 import googlelogo from "../../img/g-logo.png";
 import { loginExternal } from "../../redux_actions/loginActions";
 
-const GoogleAuth = ({ loginExternal, loginData }) => {
+export const GoogleAuth = ({ loginExternal, loginData }) => {
   const [authObject, setAuthObject] = useState(null);
 
   useEffect(() => {
     try {
-        window.gapi.load("client:auth2", () => {
-          window.gapi.client
-            .init({
-              clientId: process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID,
-              scope: "email",
-            })
-            .then(async () => {
-              setAuthObject(await window.gapi.auth2.getAuthInstance());
-            });
-        });
+      window.gapi.load("client:auth2", () => {
+        window.gapi.client
+          .init({
+            clientId: process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID,
+            scope: "email",
+          })
+          .then(async () => {
+            setAuthObject(await window.gapi.auth2.getAuthInstance());
+          });
+      });
     } catch (err) {
       console.log(err);
     }

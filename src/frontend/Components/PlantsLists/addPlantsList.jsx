@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import { addPlantsList, getPlantsListsForUser } from '../../redux_actions/plantsListsActions';
 import './scss/plantsLists.scss';
 
-const AddPlantsList = ({ addPlantsList, getPlantsListsForUser }) => {
+export const AddPlantsList = ({ addPlantsList, getPlantsListsForUser }) => {
     const [plantsListName, setPlantsListName] = useState('');
     const [submitPlantsList, setSubmitPlantsList] = useState(false);
 
     const verifyPlantsListName = () => !plantsListName && submitPlantsList ? 'Najpierw wpisz nazwę listy!' : null;
 
     const addNewPlantsList = async (e) => {
-        e.preventDefault();
+        if(e) { e.preventDefault() };
         setSubmitPlantsList(true);
         if (plantsListName) {
             await addPlantsList(plantsListName);
@@ -22,10 +22,10 @@ const AddPlantsList = ({ addPlantsList, getPlantsListsForUser }) => {
     }
 
     return (
-        <div className="addPlantsListContainer">
+        <div className="addPlantsListContainer" data-test="addPlantListComponent">
             <form className="addPlantsListForm">
-                <input onChange={e => setPlantsListName(e.target.value)}></input>
-                <button onClick={e => addNewPlantsList(e)}>Dodaj listę roślin</button>
+                <input data-test="inputAddPlantsList" onChange={e => setPlantsListName(e.target.value)}></input>
+                <button data-test="addPlantsListButton" onClick={e => addNewPlantsList(e)}>Dodaj listę roślin</button>
             </form>
             <div>{verifyPlantsListName()}</div>
         </div>

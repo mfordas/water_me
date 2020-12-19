@@ -38,7 +38,6 @@ describe("Add plants list component", () => {
     };
     wrapper = setUp(initialState);
 
-    console.log(wrapper.debug());
   });
 
   it("Should render without error", () => {

@@ -15,7 +15,7 @@ describe("Login Reducer", () => {
     });
   });
 
-  it("Should return new state if receiving type", () => {
+  it("Should return new state if receiving type login external", () => {
     const newLoginData = {
       loginData: {
         name: "Andrzej",
@@ -27,6 +27,25 @@ describe("Login Reducer", () => {
 
     const newState = loginReducer(undefined, {
         type: TYPES.loginExternal,
+        loginData: newLoginData.loginData,
+        isLogged: newLoginData.isLogged,
+    });
+
+    expect(newLoginData).toEqual(newState);
+  });
+
+  it("Should return new state if receiving type logout", () => {
+    const newLoginData = {
+      loginData: {
+        name: "LoggedOut",
+        googleId: "None",
+        invalidData: false,
+    },
+      isLogged: false,
+    };
+
+    const newState = loginReducer(undefined, {
+        type: TYPES.logout,
         loginData: newLoginData.loginData,
         isLogged: newLoginData.isLogged,
     });

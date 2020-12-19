@@ -17,6 +17,7 @@ export const postGoogleUser = (authObject) => async (dispatch) => {
         if (res.status === 200) {
             dispatch({
                 type: TYPES.registerExternal,
+                invalidData: false,
                 confirm: true,
                 googleUser: true,
             });

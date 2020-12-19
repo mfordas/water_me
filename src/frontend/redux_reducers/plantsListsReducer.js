@@ -7,6 +7,7 @@ const initialState = {
     plantsLists: [],
     userId: localStorage.getItem('id'),
     plantsListDeleted: false,
+    plants: [],
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export

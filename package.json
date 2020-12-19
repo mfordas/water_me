@@ -35,6 +35,7 @@
     "startReact": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test-coverage": "set CI=true && react-scripts test --coverage",
     "eject": "react-scripts eject",
     "mon": "nodemon --experimental-modules ./src/backend/app.js",
     "start": "node --experimental-modules ./src/backend/app.js",
@@ -71,5 +72,18 @@
     "jest": "^26.6.3",
     "jest-enzyme": "^7.1.2",
     "nock": "^13.0.5"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/src/frontend/Utils/generateAuthTokenForExternalUser.js",
+      "!<rootDir>/src/backend/**"
+    ],
+    "coverageReporters": [
+      "json",
+      "html",
+      "text"
+    ]
   }
 }

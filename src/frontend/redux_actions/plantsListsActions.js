@@ -142,7 +142,7 @@ export const showPlantsList = (userId, plantsListId) => async (dispatch) => {
     } else if (res.status === 404) {
       dispatch({
         type: TYPES.showPlantsList,
-        plants: {}
+        plants: []
       });
     }
 
@@ -150,7 +150,7 @@ export const showPlantsList = (userId, plantsListId) => async (dispatch) => {
     console.error('Error:', error.response.data);
     dispatch({
       type: TYPES.showPlantsList,
-      plants: {}
+      plants: []
     });
   }
 };

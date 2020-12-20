@@ -68,7 +68,7 @@ export const updateLastWateringDate = (userId, plantId, lastWateringDate) => asy
       if (res.status === 200) {
         dispatch({
           type: TYPES.updateLastWateringDate,
-          plantDeleted: true,
+          wateringDateUpdated: true,
         });
       }
   
@@ -76,7 +76,7 @@ export const updateLastWateringDate = (userId, plantId, lastWateringDate) => asy
       console.error('Error:', error.response.data);
       dispatch({
         type: TYPES.updateLastWateringDate,
-        plantDeleted: false,
+        wateringDateUpdated: false,
       });
     }
 };

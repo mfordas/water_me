@@ -1,11 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { updateLastWateringDate } from "../../redux_actions/plantsActions";
-import { showPlantsList } from "../../redux_actions/plantsListsActions";
-import setCurrentDate from "./setCurrentDate";
-import "./scss/plantsList.scss";
+import { updateLastWateringDate } from '../../redux_actions/plantsActions';
+import { showPlantsList } from '../../redux_actions/plantsListsActions';
+import setCurrentDate from './setCurrentDate';
+import './scss/plantsList.scss';
 
 const Watering = ({
   updateLastWateringDate,
@@ -19,7 +19,7 @@ const Watering = ({
   const oneDayInMiliseconds = 86400000;
 
   const handleUpdateLastWateringDate = async () => {
-    const userId = localStorage.getItem("id");
+    const userId = localStorage.getItem('id');
 
     await updateLastWateringDate(userId, plantId, currentDate);
     await showPlantsList(userId, listId);
@@ -34,25 +34,25 @@ const Watering = ({
 
     if (countDaysSinceLastWatering < wateringCycle) {
       return (
-        <div className="wateringStatusContainer">
-          <div className="statusOk">U mnie w porządku!</div>
+        <div className='wateringStatusContainer'>
+          <div className='statusOk'>U mnie w porządku!</div>
           <div>
             Kolejne podlewanie za: {nextWateringIn}
-            {nextWateringIn === 1 ? " dzień" : " dni"}
+            {nextWateringIn === 1 ? ' dzień' : ' dni'}
           </div>
         </div>
       );
     } else {
       return (
-        <div className="wateringStatusContainer">
-          <div className="statusNok">Potrzebuję wody!</div>
+        <div className='wateringStatusContainer'>
+          <div className='statusNok'>Potrzebuję wody!</div>
           <button onClick={handleUpdateLastWateringDate}>Podlej</button>
         </div>
       );
     }
   };
 
-  return <div className="wateringContainer">{countWatering()}</div>;
+  return <div className='wateringContainer'>{countWatering()}</div>;
 };
 
 const mapStateToProps = (state) => ({

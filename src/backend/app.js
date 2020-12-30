@@ -59,7 +59,7 @@ const runApp = async () => {
   app.use('/api/plantsLists', plantsLists);
   app.use('/api/authexternal', authExternal);
 
-  app.get('*', function (req, res) {
+  app.get('/*', function (req, res) {
     res.sendFile(path.join(dirname + '/./build', 'index.html'));
   });
 

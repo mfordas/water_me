@@ -30,7 +30,7 @@ export const ShowPlantsLists = ({ getPlantsListsForUser, plantsListsData }) => {
               data-test='plantsListContainer'
             >
               <div>{plantsList.name}</div>
-              <Link to={`/plantsLists/${plantsList.name}`}>Przejdź</Link>
+              <Link to={`/plantsList/${plantsList.name}`}>Przejdź</Link>
               <DeletePlantsList plantsListId={plantsList.id} />
             </div>
           );

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { showPlantsList } from '../../redux_actions/plantsListsActions';
+import {
+  showPlantsList,
+  getPlantsListsForUser,
+} from '../../redux_actions/plantsListsActions';
 import AddPlant from './addPlant';
 import DeletePlant from './deletePlant';
 import Watering from './watering';
@@ -14,6 +17,8 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
 
   useEffect(() => {
     const getPlantsFromList = async () => {
+      await getPlantsListsForUser(localStorage.getItem('id'));
+      console.log(plantsListsData);
       await showPlantsList(
         plantsListsData.userId,
         plantsListsData.plantsLists[listIndex].id
@@ -81,4 +86,7 @@ PlantsList.propTypes = {
   plantsListsData: PropTypes.object,
 };
 
-export default connect(mapStateToProps, { showPlantsList })(PlantsList);
+export default connect(mapStateToProps, {
+  showPlantsList,
+  getPlantsListsForUser,
+})(PlantsList);

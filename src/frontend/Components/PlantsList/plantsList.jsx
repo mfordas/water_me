@@ -17,8 +17,6 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
 
   useEffect(() => {
     const getPlantsFromList = async () => {
-      await getPlantsListsForUser(localStorage.getItem('id'));
-      console.log(plantsListsData);
       await showPlantsList(
         plantsListsData.userId,
         plantsListsData.plantsLists[listIndex].id

@@ -63,9 +63,6 @@ const runApp = async () => {
     res.sendFile(path.join(dirname + '/./build', 'index.html'));
   });
 
-  console.log(path.join(dirname + '/./build', 'index.html'));
-  console.log(path.join(dirname, '/./build/'));
-
   const port = process.env.PORT || 8080;
 
   app.listen(port, () => console.log(`Listening on port ${port}`));

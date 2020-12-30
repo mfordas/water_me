@@ -17,7 +17,7 @@ const PlantsListComponent = ({ getPlantsListsForUser, plantsListsData }) => {
   }, []);
 
   return (
-    <Switch>
+    <>
       {plantsListsData.plantsLists.map((list, index) => (
         <PrivateRoute
           key={index}
@@ -27,7 +27,7 @@ const PlantsListComponent = ({ getPlantsListsForUser, plantsListsData }) => {
           listIndex={index}
         />
       ))}
-    </Switch>
+    </>
   );
 };
 

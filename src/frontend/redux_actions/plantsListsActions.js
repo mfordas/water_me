@@ -67,7 +67,6 @@ export const getPlantsListsForUser = (userId) => async (dispatch) => {
     });
 
     if (res.status === 200) {
-      console.log(res.data);
       dispatch({
         type: TYPES.getPlantsLists,
         plantsLists: res.data,

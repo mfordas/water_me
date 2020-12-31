@@ -26,7 +26,7 @@ const PlantsListComponent = ({
         <PrivateRoute
           key={index}
           exact
-          path={`/plantsList/${list.name}`}
+          path={`/plantsLists/${list.name}`}
           component={PlantsList}
           listIndex={index}
         />

@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-import {
-  TYPES
-} from './types';
+import { TYPES } from './types';
 import setHeaders from '../Utils/setHeaders';
 
 export const getPlantsLists = () => async (dispatch) => {
@@ -16,7 +14,7 @@ export const getPlantsLists = () => async (dispatch) => {
     if (res.status === 200) {
       dispatch({
         type: TYPES.getPlantsLists,
-        plantsLists: res.data
+        plantsLists: res.data,
       });
     } else if (res.status === 404) {
       dispatch({
@@ -24,12 +22,11 @@ export const getPlantsLists = () => async (dispatch) => {
         plantsLists: [],
       });
     }
-
   } catch (error) {
     console.error('Error:', error.response.data);
     dispatch({
       type: TYPES.getPlantsLists,
-      plantsLists: []
+      plantsLists: [],
     });
   }
 };
@@ -42,22 +39,21 @@ export const addPlantsList = (plantsListName) => async (dispatch) => {
       headers: setHeaders(),
       data: {
         userId: localStorage.getItem('id'),
-        name: plantsListName
-      }
+        name: plantsListName,
+      },
     });
 
     if (res.status === 200) {
       dispatch({
         type: TYPES.addPlantsList,
-        plantsListName: res.data.name
+        plantsListName: res.data.name,
       });
     }
-
   } catch (error) {
     console.error('Error:', error.response.data);
     dispatch({
       type: TYPES.addPlantsList,
-      plantsListName: ''
+      plantsListName: '',
     });
   }
 };
@@ -73,7 +69,7 @@ export const getPlantsListsForUser = (userId) => async (dispatch) => {
     if (res.status === 200) {
       dispatch({
         type: TYPES.getPlantsLists,
-        plantsLists: res.data
+        plantsLists: res.data,
       });
     } else if (res.status === 404) {
       dispatch({
@@ -81,53 +77,48 @@ export const getPlantsListsForUser = (userId) => async (dispatch) => {
         plantsLists: [],
       });
     }
-
   } catch (error) {
     console.error('Error:', error.response.data);
     dispatch({
       type: TYPES.getPlantsLists,
-      plantsLists: []
+      plantsLists: [],
     });
   }
 };
 
 export const deletePlantsList = (userId, plantsListId) => async (dispatch) => {
-
   try {
     const res = await axios({
       method: 'delete',
       url: `/api/plantsLists/${userId}/${plantsListId}`,
       headers: setHeaders(),
       data: {
-        userId: userId
-      }
+        userId: userId,
+      },
     });
 
     if (res.status === 200) {
       dispatch({
         type: TYPES.deletePlantsList,
-        plantsListDeleted: true
+        plantsListDeleted: true,
       });
     } else if (res.status === 404) {
       dispatch({
         type: TYPES.deletePlantsList,
-        plantsListDeleted: false
+        plantsListDeleted: false,
       });
     }
-
   } catch (error) {
     console.error('Error:', error.response.data);
     dispatch({
       type: TYPES.deletePlantsList,
-      plantsListDeleted: false
+      plantsListDeleted: false,
     });
   }
 };
 
 export const showPlantsList = (userId, plantsListId) => async (dispatch) => {
-
   try {
-
     const res = await axios({
       method: 'get',
       url: `/api/plants/${userId}/${plantsListId}`,
@@ -137,20 +128,19 @@ export const showPlantsList = (userId, plantsListId) => async (dispatch) => {
     if (res.status === 200) {
       dispatch({
         type: TYPES.showPlantsList,
-        plants: res.data
+        plants: res.data,
       });
     } else if (res.status === 404) {
       dispatch({
         type: TYPES.showPlantsList,
-        plants: []
+        plants: [],
       });
     }
-
   } catch (error) {
     console.error('Error:', error.response.data);
     dispatch({
       type: TYPES.showPlantsList,
-      plants: []
+      plants: [],
     });
   }
 };

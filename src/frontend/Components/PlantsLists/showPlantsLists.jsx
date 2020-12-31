@@ -8,42 +8,48 @@ import DeletePlantsList from './deletePlantsList';
 import './scss/plantsLists.scss';
 
 export const ShowPlantsLists = ({ getPlantsListsForUser, plantsListsData }) => {
+  useEffect(() => {
+    const getPlantsLists = async () => {
+      await getPlantsListsForUser(localStorage.getItem('id'));
+    };
 
-    useEffect(() => {
-        const getPlantsLists = async () => {
-            await getPlantsListsForUser(localStorage.getItem('id'));
-        };
+    getPlantsLists();
+  }, []);
 
-        getPlantsLists();
-    }, []);
-
-    const generatePlantsLists = (plantsListsArray) => {
-        return (
-            <div className="plantsListsContainer" data-test="showPlantsListsComponent">
-                {plantsListsArray.map(plantsList => {
-                    return <div className="plantsListContainer" key={plantsList.id} data-test="plantsListContainer">
-                        <div>{plantsList.name}</div>
-                        <Link to={`/plantsList/${plantsList.name}`}>Przejdź</Link>
-                        <DeletePlantsList plantsListId={plantsList.id} />
-                    </div>
-                })}
-            </div>
-        )
-    }
-
+  const generatePlantsLists = (plantsListsArray) => {
     return (
-        <>
-            {generatePlantsLists(plantsListsData.plantsLists)}
-        </>
-    )
+      <div
+        className='plantsListsContainer'
+        data-test='showPlantsListsComponent'
+      >
+        {plantsListsArray.map((plantsList) => {
+          return (
+            <div
+              className='plantsListContainer'
+              key={plantsList.id}
+              data-test='plantsListContainer'
+            >
+              <div>{plantsList.name}</div>
+              <Link to={`/plantsLists/${plantsList.name}`}>Przejdź</Link>
+              <DeletePlantsList plantsListId={plantsList.id} />
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  return <>{generatePlantsLists(plantsListsData.plantsLists)}</>;
 };
 
 const mapStateToProps = (state) => ({
-    plantsListsData: state.plantsListsData,
+  plantsListsData: state.plantsListsData,
 });
 
 ShowPlantsLists.propTypes = {
-    plantsListsData: PropTypes.object
-}
+  plantsListsData: PropTypes.object,
+};
 
-export default connect(mapStateToProps, { getPlantsListsForUser })(ShowPlantsLists);
+export default connect(mapStateToProps, { getPlantsListsForUser })(
+  ShowPlantsLists
+);

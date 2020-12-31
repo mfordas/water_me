@@ -52,18 +52,18 @@ const runApp = async () => {
       contentSecurityPolicy: false,
     })
   );
-  app.use(express.static(path.join(dirname, '/./build/')));
+  app.use(express.static(path.join(dirname, '/build/')));
   app.use('/', mainPage);
   app.use('/api/users', users);
   app.use('/api/plants', plants);
   app.use('/api/plantsLists', plantsLists);
   app.use('/api/authexternal', authExternal);
 
-  app.get('/*', function (req, res) {
-    res.sendFile(path.join(dirname + '/./build', 'index.html'));
+  app.get('*', function (req, res) {
+    res.sendFile(path.join(dirname + '/build/', 'index.html'));
   });
 
-  console.log(path.join(path.resolve() + '/./build', 'index.html'));
+  console.log(path.join(path.resolve() + '/build/', 'index.html'));
 
   const port = process.env.PORT || 8080;
 

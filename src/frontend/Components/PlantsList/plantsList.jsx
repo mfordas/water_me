@@ -11,12 +11,13 @@ import DeletePlant from './deletePlant';
 import Watering from './watering';
 import './scss/plantsList.scss';
 
-const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
+const PlantsList = ({ showPlantsList, plantsListsData, listIndex, match }) => {
   const [plants, setPlants] = useState([]);
   const [showAddPlantForm, setShowAddPlantForm] = useState(false);
 
   useEffect(() => {
     const getPlantsFromList = async () => {
+      console.log(match);
       await showPlantsList(
         plantsListsData.userId,
         plantsListsData.plantsLists[listIndex].id

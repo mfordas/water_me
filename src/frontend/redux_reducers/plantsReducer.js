@@ -1,14 +1,13 @@
-import { TYPES } from "../redux_actions/types";
+import { TYPES } from '../redux_actions/types';
 
 const initialState = {
   plantData: {},
   plantDeleted: false,
   wateringDateUpdated: false,
-  imageName: "",
+  imageName: '',
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default function (state = initialState, action) {
+const plantsReducer = function (state = initialState, action) {
   switch (action.type) {
     case TYPES.addPlant:
       return {
@@ -33,4 +32,6 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default plantsReducer;

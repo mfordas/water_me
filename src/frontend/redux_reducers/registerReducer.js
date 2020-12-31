@@ -1,4 +1,4 @@
-import { TYPES } from "../redux_actions/types";
+import { TYPES } from '../redux_actions/types';
 
 const initialState = {
   invalidData: false,
@@ -6,7 +6,7 @@ const initialState = {
   googleUser: false,
 };
 
-export default function (state = initialState, action) {
+const registerReducer = function (state = initialState, action) {
   switch (action.type) {
     case TYPES.registerExternal:
       return {
@@ -25,4 +25,6 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default registerReducer;

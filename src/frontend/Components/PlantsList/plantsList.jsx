@@ -17,7 +17,6 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
 
   useEffect(() => {
     const getPlantsFromList = async () => {
-      console.log(listIndex);
       await showPlantsList(
         plantsListsData.userId,
         plantsListsData.plantsLists[listIndex].id

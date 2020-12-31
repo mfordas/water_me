@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {
   addPlantToList,
   uploadPlantImage,
-} from "../../redux_actions/plantsActions";
-import { showPlantsList } from "../../redux_actions/plantsListsActions";
-import ErrorMessage from "../ErrorMessage/errorMessage";
-import setCurrentDate from "./setCurrentDate";
-import "./scss/plantsList.scss";
+} from '../../redux_actions/plantsActions';
+import { showPlantsList } from '../../redux_actions/plantsListsActions';
+import ErrorMessage from '../ErrorMessage/errorMessage';
+import setCurrentDate from './setCurrentDate';
+import './scss/plantsList.scss';
 
 export const AddPlant = ({
   listId,
@@ -18,7 +18,7 @@ export const AddPlant = ({
   plantsData,
   showPlantsList,
 }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [wateringCycle, setWateringCycle] = useState(0);
   const [picture, setPicture] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -27,18 +27,18 @@ export const AddPlant = ({
 
   useEffect(() => {
     const updatePlantsList = async () => {
-      await showPlantsList(localStorage.getItem("id"), listId);
+      await showPlantsList(localStorage.getItem('id'), listId);
     };
 
     updatePlantsList();
-  }, [plantsData]);
+  }, [plantsData, listId, showPlantsList]);
 
   const handleUploadingFile = async (event) => {
     event.preventDefault();
 
     const photoData = new FormData();
 
-    photoData.append("image", event.target.files[0]);
+    photoData.append('image', event.target.files[0]);
 
     const imageName = await uploadPlantImage(photoData);
 
@@ -67,31 +67,31 @@ export const AddPlant = ({
 
   const validateName = () => {
     if (formSubmitted && !name) {
-      return <ErrorMessage errorText="Wpisz imię" />;
+      return <ErrorMessage errorText='Wpisz imię' />;
     } else if (formSubmitted && name.length <= 3) {
-      return <ErrorMessage errorText="Imię powinno być dłuższe niż 3 znaki" />;
+      return <ErrorMessage errorText='Imię powinno być dłuższe niż 3 znaki' />;
     }
   };
 
   const validateWateringCycle = () => {
     if (formSubmitted && wateringCycle === 0) {
-      return <ErrorMessage errorText="Wpisz częstotliwość podlewania" />;
+      return <ErrorMessage errorText='Wpisz częstotliwość podlewania' />;
     }
   };
 
   const validatePicture = () => {
     if (formSubmitted && !picture) {
-      return <ErrorMessage errorText="Dodaj zdjęcie" />;
+      return <ErrorMessage errorText='Dodaj zdjęcie' />;
     }
   };
 
   return (
-    <div className="addPlantContainer" data-test="addPlantComponent">
-      <form encType="multipart/form-data">
+    <div className='addPlantContainer' data-test='addPlantComponent'>
+      <form encType='multipart/form-data'>
         <label>
           Imię
           <input
-            type="text"
+            type='text'
             value={name}
             onChange={(e) => {
               setName(e.target.value);
@@ -102,20 +102,20 @@ export const AddPlant = ({
         <label>
           Podlewanie co:
           <input
-            type="number"
+            type='number'
             min={0}
             value={wateringCycle}
             onChange={(e) => {
               setWateringCycle(e.target.value);
             }}
           />
-          {wateringCycle == 1 ? `dzień` : "dni"}
+          {wateringCycle === '1' ? `dzień` : 'dni'}
         </label>
         {validateWateringCycle()}
         <label>
           Data startu:
           <input
-            type="date"
+            type='date'
             value={startDate}
             onChange={(e) => {
               setStartDate(e.target.value);
@@ -125,8 +125,8 @@ export const AddPlant = ({
         <label>
           Zdjęcie
           <input
-            type="file"
-            name="image"
+            type='file'
+            name='image'
             onChange={async (event) => {
               await handleUploadingFile(event);
             }}

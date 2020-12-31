@@ -25,7 +25,7 @@ const App = () => {
         <Switch>
           <PublicRoute exact path='/' component={HomePage} />
           <PrivateRoute exact path='/plantsLists' component={PlantsLists} />
-          <PrivateRoute path='/plantsList' component={PlantsList} />
+          <PrivateRoute path='/plantsList/:listName' component={PlantsList} />
           <Route render={() => <Redirect to='/' />} />
         </Switch>
       </div>

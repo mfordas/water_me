@@ -11,3 +11,12 @@ RUN add-apt-repository \
 RUN apt-get update && apt-get install -y docker-ce-cli
 USER jenkins
 RUN jenkins-plugin-cli --plugins blueocean:1.24.3
+
+
+# docker run --name jenkins-blueocean --rm --detach ^
+#   --network jenkins --env DOCKER_HOST=tcp://docker:2376 ^
+#   --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 ^
+#   --volume jenkins-data:/var/jenkins_home ^
+#   --volume jenkins-docker-certs:/certs/client:ro ^
+#   --publish 8080:8080 --publish 50000:50000 myjenkins-blueocean:1.1
+

@@ -17,7 +17,7 @@ pipeline {
             }
         }
         stage('Test') {
-            when { allOf { branch =~ '^((?!fontend).)*$' }
+            when { '^((?!fontend).)*$' }
             } 
             steps {
                 sh 'npm run test-coverage' 

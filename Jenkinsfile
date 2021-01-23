@@ -17,14 +17,10 @@ pipeline {
             }
         }
         stage('Test') {
+            when { '^((?!fontend).)*$' }
+            } 
             steps {
                 sh 'npm run test-coverage' 
             }
-            } 
-            if ((env.BRANCH_NAME =~ '^((?!develop|master|release).)*$').matches()) {
-    stage("Deploy"){
-        echo 'Deployed release to QA'
-    }
-}
         }
     }

@@ -17,7 +17,7 @@ pipeline {
             }
         }
         stage('Test') {
-            when { '^((?!fontend).)*$' }
+            when {branch '^((?!fontend).)*$' }
             } 
             steps {
                 sh 'npm run test-coverage' 

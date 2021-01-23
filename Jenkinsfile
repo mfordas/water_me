@@ -17,7 +17,7 @@ pipeline {
             }
         }
         stage('Test') {
-            when { allOf {branch =~ frontend }
+            when { allOf { branch =~ ^frontend.$* }
             } 
             steps {
                 sh 'npm run test-coverage' 

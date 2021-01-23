@@ -17,7 +17,14 @@ pipeline {
             }
         }
         stage('Test') {
-            when {branch '^((?!fontend).)*$' }
+            when {
+                beforeAgent true
+                expression{
+                isFrontend = (env.BRANCH_NAME ==~ /frontend_*([a-z0-9]*)/)
+                echo "${isFrontend}"
+                return isFrontend
+                }
+            }
             steps {
                 sh 'npm run test-coverage' 
             }

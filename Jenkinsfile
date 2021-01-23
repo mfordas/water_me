@@ -5,15 +5,22 @@ pipeline {
             args '-p 3000:3000' 
         }
     }
+
+    environment {
+         SKIP_PREFLIGHT_CHECK = true
+         CI = true
+    }
     stages {
         stage('Build') { 
             steps {
                 sh 'npm install' 
             }
         }
-        stage('Test') { 
+        stage('Test') {
+            when { allOf {branch =~ frontend }
+            } 
             steps {
-                sh 'npm test SKIP_PREFLIGHT_CHECK=true' 
+                sh 'npm run test-coverage' 
             }
         }
     }

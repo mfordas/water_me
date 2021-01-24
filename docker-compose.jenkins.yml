@@ -19,11 +19,12 @@ services:
     volumes:
       - jenkins-data:/var/jenkins_home
       - jenkins-docker-certs:/certs/client:ro
-      # - $HOME:/home
+      - ../water_me:/var/project/water_me
     environment:
       - DOCKER_HOST=tcp://docker:2376
       - DOCKER_CERT_PATH=/certs/client
       - DOCKER_TLS_VERIFY=1
+    container_name: jenkins
 
   dind:
     image: docker:dind
@@ -39,6 +40,7 @@ services:
     volumes:
       - jenkins-data:/var/jenkins_home
       - jenkins-docker-certs:/certs/client
-      # - $HOME:/home
+      - ../water_me:/var/project/water_me
     environment:
       - DOCKER_TLS_CERTDIR=/certs
+    container_name: jenkins_dind

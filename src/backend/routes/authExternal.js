@@ -43,7 +43,7 @@ const authorizeExternalUser = async (req, res) => {
   }
 
   const iss =
-    verificationResult.iss === 'https//accounts.google.com'
+    verificationResult.iss === 'https://accounts.google.com'
       ? verificationResult.iss.split('//')[1]
       : verificationResult.iss;
 

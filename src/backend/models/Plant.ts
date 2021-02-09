@@ -1,0 +1,46 @@
+import sequelize from 'sequelize';
+import dbConnection from '../db/connection.js';
+
+export type TypePlant = {
+  name: string;
+  plantsListId: number;
+  wateringCycle: number;
+  pictureUrl: string;
+  wateringCycleBeginingData: Date;
+  lastTimeWatered: Date;
+};
+
+const Plant: sequelize.ModelCtor<
+  sequelize.Model<TypePlant>
+> = dbConnection.define(
+  'Plant',
+  {
+    name: {
+      type: sequelize.DataTypes.STRING,
+      allowNull: false,
+    },
+    plantsListId: {
+      type: sequelize.DataTypes.INTEGER,
+      allowNull: false,
+    },
+    wateringCycle: {
+      type: sequelize.DataTypes.INTEGER,
+      allowNull: false,
+    },
+    pictureUrl: {
+      type: sequelize.DataTypes.STRING,
+      allowNull: false,
+    },
+    wateringCycleBeginingData: {
+      type: sequelize.DataTypes.DATE,
+      allowNull: false,
+    },
+    lastTimeWatered: {
+      type: sequelize.DataTypes.DATE,
+      allowNull: false,
+    },
+  },
+  {}
+);
+
+export { Plant };

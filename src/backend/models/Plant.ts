@@ -1,20 +1,29 @@
-import sequelize from 'sequelize';
+import sequelize, { Optional, Model } from 'sequelize';
 import dbConnection from '../db/connection.js';
 
-export type TypePlant = {
+export interface TypePlant {
+  id: number;
   name: string;
   plantsListId: number;
   wateringCycle: number;
   pictureUrl: string;
   wateringCycleBeginingData: Date;
   lastTimeWatered: Date;
-};
+}
 
-const Plant: sequelize.ModelCtor<
-  sequelize.Model<TypePlant>
-> = dbConnection.define(
+interface TypePlantCreationAttributes extends Optional<TypePlant, 'id'> {}
+
+export interface PlantInstance
+  extends Model<TypePlant, TypePlantCreationAttributes>,
+    TypePlant {}
+
+const Plant = dbConnection.define<PlantInstance>(
   'Plant',
   {
+    id: {
+      primaryKey: true,
+      type: sequelize.DataTypes.INTEGER.UNSIGNED,
+    },
     name: {
       type: sequelize.DataTypes.STRING,
       allowNull: false,

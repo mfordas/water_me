@@ -1,36 +1,54 @@
 import jwt from 'jsonwebtoken';
-import express from 'express';
-
+import express, { Response, Request } from 'express';
 import verify from '../Utils/googleAuth.js';
+import { TokenPayload } from 'google-auth-library';
+import { TypeUser, User } from '../models/User.js';
+
+type GooglePayload = {
+  dataValues: TypeUser;
+};
 
 const router = express.Router();
 
-const verifyExternalUser = async (req) => {
+const verifyExternalUser = async (
+  req: Request
+): Promise<TokenPayload | Error> => {
   return await verify(req.body);
 };
 
-const checkIfUserIsInDatabase = async (res, user) => {
-  const checkedUser = await res.locals.models.User.findOne({
+const checkIfUserIsInDatabase = async (
+  res: Response,
+  user: TokenPayload
+): Promise<TypeUser | undefined> => {
+  const checkedUser = await User.findOne({
     where: {
       googleId: user.sub,
     },
   });
-  return checkedUser;
+
+  if (checkedUser) return checkedUser;
 };
 
-const createToken = (user) => {
-  const { id, googleId, name } = user.dataValues;
-  return jwt.sign(
-    {
-      id: id,
-      googleId: googleId,
-      name: name,
-    },
-    process.env.JWTPRIVATEKEY
-  );
+const createToken = (user: TypeUser): string => {
+  const { id, googleId, name } = user;
+  if (process.env.JWTPRIVATEKEY) {
+    return jwt.sign(
+      {
+        id: id,
+        googleId: googleId,
+        name: name,
+      },
+      process.env.JWTPRIVATEKEY
+    );
+  } else {
+    return 'Error during JWT obtain';
+  }
 };
 
-const authorizeExternalUser = async (req, res) => {
+const authorizeExternalUser = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   const verificationResult = await verifyExternalUser(req);
 
   if (verificationResult instanceof Error)
@@ -55,7 +73,7 @@ const authorizeExternalUser = async (req, res) => {
     const token = createToken(user);
     return res.header('x-auth-token', token).send(user);
   } else {
-    res.status(401).send('Stop doing that you dumbass');
+    return res.status(401).send('Stop doing that you dumbass');
   }
 };
 

@@ -6,14 +6,17 @@ interface IBodyRequestForGoogleAuth extends Request {
 }
 
 export default async function verify(
-  req: IBodyRequestForGoogleAuth
-): Promise<GoogleAuth.TokenPayload | string> {
+  req: Request
+): Promise<GoogleAuth.TokenPayload | Error> {
   const client = new GoogleAuth.OAuth2Client(
     process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID
   );
+
+  const requestWithType = req as IBodyRequestForGoogleAuth;
+
   try {
     const ticket = await client.verifyIdToken({
-      idToken: `${req.token}`,
+      idToken: `${requestWithType.token}`,
       audience: `${process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID}`,
     });
 
@@ -22,7 +25,7 @@ export default async function verify(
     if (payload) {
       return payload;
     } else {
-      return 'Error during getting Payload';
+      return new Error('Error during getting Payload');
     }
   } catch (error) {
     return error;

@@ -1,13 +1,13 @@
 import express from 'express';
 import sequelize from 'sequelize';
-import { TypePlant } from '../models/Plant';
-import { TypePlantsList } from '../models/PlantsList';
-import { TypeUser } from '../models/User';
+import { PlantInstance } from '../models/Plant';
+import { PlantsListInstance } from '../models/PlantsList';
+import { UserInstance } from '../models/User';
 
 type Models = {
-  User: sequelize.ModelCtor<sequelize.Model<TypeUser>>;
-  Plant: sequelize.ModelCtor<sequelize.Model<TypePlant>>;
-  PlantsList: sequelize.ModelCtor<sequelize.Model<TypePlantsList>>;
+  User: sequelize.ModelCtor<sequelize.Model<UserInstance>>;
+  Plant: sequelize.ModelCtor<sequelize.Model<PlantInstance>>;
+  PlantsList: sequelize.ModelCtor<sequelize.Model<PlantsListInstance>>;
 };
 
 const register = (

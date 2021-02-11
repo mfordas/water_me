@@ -6,7 +6,6 @@ const generateAuthToken = (user: TypeUser): void | string => {
     const token = jwt.sign(
       {
         id: user.id,
-        isAdmin: user.isAdmin,
       },
       process.env.JWTPRIVATEKEY
     );

@@ -5,9 +5,9 @@ import { TypePlantsList } from '../models/PlantsList';
 import { TypeUser } from '../models/User';
 
 type Models = {
-  User: TypeUser;
-  Plant: TypePlant;
-  PlantsList: TypePlantsList;
+  User: sequelize.ModelCtor<sequelize.Model<TypeUser>>;
+  Plant: sequelize.ModelCtor<sequelize.Model<TypePlant>>;
+  PlantsList: sequelize.ModelCtor<sequelize.Model<TypePlantsList>>;
 };
 
 const register = (

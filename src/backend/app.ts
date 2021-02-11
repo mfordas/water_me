@@ -3,8 +3,8 @@ import path from 'path';
 import helmet from 'helmet';
 import fs from 'fs';
 
-import { dbConnection, register, models } from './db/index.ts';
-import { createDatabase, createTables } from './db/initializer.ts';
+import { dbConnection, register, models } from './db/index.js';
+import { createDatabase, createTables } from './db/initializer.js';
 import users from './routes/users.js';
 import mainPage from './routes/mainPage.js';
 import plants from './routes/plants.js';

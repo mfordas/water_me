@@ -2,8 +2,10 @@ import sequelize from 'sequelize';
 import dbConnection from '../db/connection.js';
 
 export type TypeUser = {
+  id: number;
   googleId: string;
   name: string;
+  isAdmin: boolean;
 };
 
 const User: sequelize.ModelCtor<

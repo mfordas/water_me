@@ -1,6 +1,13 @@
 import GoogleAuth from 'google-auth-library';
+import { Request } from 'express';
 
-export default async function verify(req) {
+interface IBodyRequestForGoogleAuth extends Request {
+  token: string;
+}
+
+export default async function verify(
+  req: IBodyRequestForGoogleAuth
+): Promise<GoogleAuth.TokenPayload | string> {
   const client = new GoogleAuth.OAuth2Client(
     process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID
   );
@@ -12,7 +19,11 @@ export default async function verify(req) {
 
     const payload = ticket.getPayload();
 
-    return payload;
+    if (payload) {
+      return payload;
+    } else {
+      return 'Error during getting Payload';
+    }
   } catch (error) {
     return error;
   }

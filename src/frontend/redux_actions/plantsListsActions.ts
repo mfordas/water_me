@@ -1,9 +1,15 @@
 import axios from 'axios';
 
-import { TYPES } from './types';
+import {
+  addPlantsListType,
+  getPlantsListsType,
+  deletePlantsListType,
+  showPlantsListType,
+} from './plantsListsTypes';
+import { AppThunk } from '../redux_store/reduxStore';
 import setHeaders from '../Utils/setHeaders';
 
-export const getPlantsLists = () => async (dispatch) => {
+export const getPlantsLists = (): AppThunk => async (dispatch) => {
   try {
     const res = await axios({
       method: 'get',
@@ -13,25 +19,27 @@ export const getPlantsLists = () => async (dispatch) => {
 
     if (res.status === 200) {
       dispatch({
-        type: TYPES.getPlantsLists,
+        type: getPlantsListsType,
         plantsLists: res.data,
       });
     } else if (res.status === 404) {
       dispatch({
-        type: TYPES.loginExternal,
+        type: getPlantsListsType,
         plantsLists: [],
       });
     }
   } catch (error) {
     console.error('Error:', error.response.data);
     dispatch({
-      type: TYPES.getPlantsLists,
+      type: getPlantsListsType,
       plantsLists: [],
     });
   }
 };
 
-export const addPlantsList = (plantsListName) => async (dispatch) => {
+export const addPlantsList = (plantsListName: string): AppThunk => async (
+  dispatch
+) => {
   try {
     const res = await axios({
       method: 'post',
@@ -45,20 +53,22 @@ export const addPlantsList = (plantsListName) => async (dispatch) => {
 
     if (res.status === 200) {
       dispatch({
-        type: TYPES.addPlantsList,
+        type: addPlantsListType,
         plantsListName: res.data.name,
       });
     }
   } catch (error) {
     console.error('Error:', error.response.data);
     dispatch({
-      type: TYPES.addPlantsList,
+      type: addPlantsListType,
       plantsListName: '',
     });
   }
 };
 
-export const getPlantsListsForUser = (userId) => async (dispatch) => {
+export const getPlantsListsForUser = (userId: string): AppThunk => async (
+  dispatch
+) => {
   try {
     const res = await axios({
       method: 'get',
@@ -68,25 +78,28 @@ export const getPlantsListsForUser = (userId) => async (dispatch) => {
 
     if (res.status === 200) {
       dispatch({
-        type: TYPES.getPlantsLists,
+        type: getPlantsListsType,
         plantsLists: res.data,
       });
     } else if (res.status === 404) {
       dispatch({
-        type: TYPES.loginExternal,
+        type: getPlantsListsType,
         plantsLists: [],
       });
     }
   } catch (error) {
     console.error('Error:', error.response.data);
     dispatch({
-      type: TYPES.getPlantsLists,
+      type: getPlantsListsType,
       plantsLists: [],
     });
   }
 };
 
-export const deletePlantsList = (userId, plantsListId) => async (dispatch) => {
+export const deletePlantsList = (
+  userId: string,
+  plantsListId: number
+): AppThunk => async (dispatch) => {
   try {
     const res = await axios({
       method: 'delete',
@@ -99,25 +112,28 @@ export const deletePlantsList = (userId, plantsListId) => async (dispatch) => {
 
     if (res.status === 200) {
       dispatch({
-        type: TYPES.deletePlantsList,
+        type: deletePlantsListType,
         plantsListDeleted: true,
       });
     } else if (res.status === 404) {
       dispatch({
-        type: TYPES.deletePlantsList,
+        type: deletePlantsListType,
         plantsListDeleted: false,
       });
     }
   } catch (error) {
     console.error('Error:', error.response.data);
     dispatch({
-      type: TYPES.deletePlantsList,
+      type: deletePlantsListType,
       plantsListDeleted: false,
     });
   }
 };
 
-export const showPlantsList = (userId, plantsListId) => async (dispatch) => {
+export const showPlantsList = (
+  userId: string,
+  plantsListId: number
+): AppThunk => async (dispatch) => {
   try {
     const res = await axios({
       method: 'get',
@@ -127,19 +143,19 @@ export const showPlantsList = (userId, plantsListId) => async (dispatch) => {
 
     if (res.status === 200) {
       dispatch({
-        type: TYPES.showPlantsList,
+        type: showPlantsListType,
         plants: res.data,
       });
     } else if (res.status === 404) {
       dispatch({
-        type: TYPES.showPlantsList,
+        type: showPlantsListType,
         plants: [],
       });
     }
   } catch (error) {
     console.error('Error:', error.response.data);
     dispatch({
-      type: TYPES.showPlantsList,
+      type: showPlantsListType,
       plants: [],
     });
   }

@@ -1,4 +1,9 @@
-import { TYPES } from '../redux_actions/types';
+import {
+  loginExternalType,
+  logoutType,
+  LoginActionsType,
+  LoginState,
+} from '../redux_actions/loginTypes';
 
 const initialState = {
   loginData: {
@@ -9,15 +14,18 @@ const initialState = {
   isLogged: localStorage.getItem('token') ? true : false,
 };
 
-const loginReducer = function (state = initialState, action) {
+const loginReducer = function (
+  state = initialState,
+  action: LoginActionsType
+): LoginState {
   switch (action.type) {
-    case TYPES.loginExternal:
+    case loginExternalType:
       return {
         ...state,
         loginData: action.loginData,
         isLogged: action.isLogged,
       };
-    case TYPES.logout:
+    case logoutType:
       return {
         ...state,
         loginData: action.loginData,

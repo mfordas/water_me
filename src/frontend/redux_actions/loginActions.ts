@@ -1,10 +1,15 @@
 import axios from 'axios';
 import jwt from 'jwt-decode';
 
-import { TYPES } from '../redux_actions/types';
-import generateAuthTokenForExternalUser from '../Utils/generateAuthTokenForExternalUser';
+import { loginExternalType, logoutType } from './loginTypes';
+import generateAuthTokenForExternalUser, {
+  AuthObject,
+} from '../Utils/generateAuthTokenForExternalUser';
+import { AppThunk } from '../redux_store/reduxStore';
 
-export const loginExternal = (authObject) => async (dispatch) => {
+export const loginExternal = (authObject: AuthObject): AppThunk => async (
+  dispatch
+) => {
   try {
     const res = await axios({
       method: 'post',
@@ -14,16 +19,15 @@ export const loginExternal = (authObject) => async (dispatch) => {
       },
     });
 
-    console.log(res);
-
     if (res.status === 200) {
-      const token = res.headers['x-auth-token'];
+      const token: string = res.headers['x-auth-token'];
+      const id: string = jwt<{ id: string }>(token).id;
       localStorage.setItem('token', token);
-      localStorage.setItem('id', jwt(token).id);
+      localStorage.setItem('id', id);
       localStorage.setItem('name', res.data.name);
       window.location.reload();
       dispatch({
-        type: TYPES.loginExternal,
+        type: loginExternalType,
         loginData: {
           name: res.data.name,
           googleId: res.data.googleId,
@@ -33,14 +37,14 @@ export const loginExternal = (authObject) => async (dispatch) => {
       });
     } else if (res.status === 202) {
       dispatch({
-        type: TYPES.loginExternal,
+        type: loginExternalType,
         isLogged: false,
       });
     }
   } catch (error) {
     console.error('Error Login:', error.response.data);
     dispatch({
-      type: TYPES.loginExternal,
+      type: loginExternalType,
       loginData: {
         invalidData: true,
       },
@@ -48,14 +52,14 @@ export const loginExternal = (authObject) => async (dispatch) => {
   }
 };
 
-export const logout = () => async (dispatch) => {
+export const logout = (): AppThunk => async (dispatch) => {
   localStorage.removeItem('token');
   localStorage.removeItem('id');
   localStorage.removeItem('name');
   window.location.reload();
 
   dispatch({
-    type: TYPES.logout,
+    type: logoutType,
     loginData: {
       name: '',
       googleId: '',

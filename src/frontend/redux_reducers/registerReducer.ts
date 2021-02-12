@@ -2,6 +2,7 @@ import {
   registerExternal,
   resetRegState,
   RegisterActionsType,
+  RegisterState,
 } from '../redux_actions/registerTypes';
 
 const initialState = {
@@ -13,7 +14,7 @@ const initialState = {
 const registerReducer = function (
   state = initialState,
   action: RegisterActionsType
-) {
+): RegisterState {
   switch (action.type) {
     case registerExternal:
       return {

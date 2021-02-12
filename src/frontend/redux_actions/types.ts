@@ -1,6 +1,4 @@
 export const TYPES = {
-  loginExternal: 'loginExternal',
-  logout: 'logout',
   addPlantsList: 'addPlantsList',
   getPlantsLists: 'getPlantsLists',
   deletePlantsList: 'deletePlantsList',

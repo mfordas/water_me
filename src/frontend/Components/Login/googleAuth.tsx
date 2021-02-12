@@ -8,7 +8,7 @@ import { loginExternal } from '../../redux_actions/loginActions';
 import { RootState } from '../../redux_reducers/';
 import { AuthObject } from '../../Utils/generateAuthTokenForExternalUser';
 
-interface GoogleApi extends AuthObject {
+export interface GoogleApi extends AuthObject {
   signIn: () => Promise<void>;
 }
 

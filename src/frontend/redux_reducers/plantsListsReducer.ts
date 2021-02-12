@@ -3,11 +3,11 @@ import {
   getPlantsListsType,
   deletePlantsListType,
   showPlantsListType,
-  PlantsState,
+  PlantsListsState,
   PlantsListsActionType,
 } from '../redux_actions/plantsListsTypes';
 
-const initialState = {
+const initialState: PlantsListsState = {
   plantsListName: '',
   plantsLists: [],
   userId: localStorage.getItem('id'),
@@ -18,7 +18,7 @@ const initialState = {
 const plantsListReducer = function (
   state = initialState,
   action: PlantsListsActionType
-): PlantsState {
+): PlantsListsState {
   switch (action.type) {
     case addPlantsListType:
       return {

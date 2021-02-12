@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { connect, ConnectedProps } from 'react-redux';
 
 import './scss/google.scss';
 import googlelogo from '../../img/g-logo.png';
 import ConfirmGoogle from './confirmGoogle';
 import { postGoogleUser } from '../../redux_actions/registerActions';
+import { RootState } from '../../redux_reducers/';
+import { GoogleApi } from '../Login/googleAuth';
 
-const GoogleRegister = ({ postGoogleUser, registerData }) => {
-  const [authObject, setAuthObject] = useState(null);
+declare const gapi: any;
+
+const GoogleRegister = ({ postGoogleUser, registerData }: PropsFromRedux) => {
+  const [authObject, setAuthObject] = useState<GoogleApi | null>(null);
 
   useEffect(() => {
     try {
-      window.gapi.load('client:auth2', () => {
-        window.gapi.client
+      gapi.load('client:auth2', () => {
+        gapi.client
           .init({
             clientId: process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID,
             scope: 'email',
           })
           .then(() => {
-            setAuthObject(window.gapi.auth2.getAuthInstance());
+            setAuthObject(gapi.auth2.getAuthInstance());
           });
       });
     } catch (err) {
@@ -28,11 +31,13 @@ const GoogleRegister = ({ postGoogleUser, registerData }) => {
   }, []);
 
   const makeAuth = async () => {
-    try {
-      await authObject.signIn();
-      await postGoogleUser(authObject);
-    } catch (err) {
-      console.log(err);
+    if (authObject) {
+      try {
+        await authObject.signIn();
+        await postGoogleUser(authObject);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -46,12 +51,16 @@ const GoogleRegister = ({ postGoogleUser, registerData }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   registerData: state.registerData,
 });
 
-GoogleRegister.propTypes = {
-  registerData: PropTypes.object,
+const mapDispatch = {
+  postGoogleUser: postGoogleUser,
 };
 
-export default connect(mapStateToProps, { postGoogleUser })(GoogleRegister);
+const connector = connect(mapStateToProps, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(GoogleRegister);

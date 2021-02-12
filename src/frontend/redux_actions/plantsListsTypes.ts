@@ -11,7 +11,7 @@ export type PlantsList = {
   name: string;
 };
 
-export interface PlantsState {
+export interface PlantsListsState {
   plantsListName: string;
   plantsLists: PlantsList[] | [];
   userId: string | null;
@@ -19,16 +19,16 @@ export interface PlantsState {
   plants: Plant[] | [];
 }
 
-interface AddPlantsListAction extends PlantsState {
+interface AddPlantsListAction extends PlantsListsState {
   type: typeof addPlantsListType;
 }
-interface GetPlantsListAction extends PlantsState {
+interface GetPlantsListAction extends PlantsListsState {
   type: typeof getPlantsListsType;
 }
-interface DeletePlantsListAction extends PlantsState {
+interface DeletePlantsListAction extends PlantsListsState {
   type: typeof deletePlantsListType;
 }
-interface ShowPlantsListAction extends PlantsState {
+interface ShowPlantsListAction extends PlantsListsState {
   type: typeof showPlantsListType;
 }
 

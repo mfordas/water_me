@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore } from 'redux';
-import rootReducer from '../redux_reducers';
+import { rootReducer } from '../redux_reducers';
 import { middleware } from '../redux_store/reduxStore';
 
 type InitialState = {};

@@ -5,7 +5,7 @@ import {
   LoginState,
 } from '../redux_actions/loginTypes';
 
-const initialState = {
+const initialState: LoginState = {
   loginData: {
     name: '',
     googleId: '',

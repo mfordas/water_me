@@ -7,7 +7,7 @@ import {
   PlantsActionsType,
 } from '../redux_actions/plantsTypes';
 
-const initialState = {
+const initialState: PlantsState = {
   plantData: {},
   plantDeleted: false,
   wateringDateUpdated: false,

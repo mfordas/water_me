@@ -9,7 +9,6 @@ import generateAuthTokenForExternalUser, {
 export const postGoogleUser = (authObject: AuthObject): AppThunk => async (
   dispatch
 ) => {
-  console.log(authObject);
   try {
     const res = await axios({
       method: 'post',

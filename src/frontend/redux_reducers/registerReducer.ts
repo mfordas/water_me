@@ -1,4 +1,8 @@
-import { TYPES } from '../redux_actions/types';
+import {
+  registerExternal,
+  resetRegState,
+  RegisterActionsType,
+} from '../redux_actions/registerTypes';
 
 const initialState = {
   invalidData: false,
@@ -6,16 +10,19 @@ const initialState = {
   googleUser: false,
 };
 
-const registerReducer = function (state = initialState, action) {
+const registerReducer = function (
+  state = initialState,
+  action: RegisterActionsType
+) {
   switch (action.type) {
-    case TYPES.registerExternal:
+    case registerExternal:
       return {
         ...state,
         confirm: action.confirm,
         invalidData: action.invalidData,
         googleUser: action.googleUser,
       };
-    case TYPES.resetRegisterState:
+    case resetRegState:
       return {
         ...state,
         confirm: action.confirm,

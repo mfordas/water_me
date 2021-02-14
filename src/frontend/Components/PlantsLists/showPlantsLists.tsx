@@ -1,22 +1,31 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { getPlantsListsForUser } from '../../redux_actions/plantsListsActions';
 import DeletePlantsList from './deletePlantsList';
+import { RootState } from '../../redux_reducers/';
+import { PlantsList } from '../../redux_actions/plantsListsTypes';
 import './scss/plantsLists.scss';
 
-export const ShowPlantsLists = ({ getPlantsListsForUser, plantsListsData }) => {
+export const ShowPlantsLists = ({
+  getPlantsListsForUser,
+  plantsListsData,
+}: PropsFromRedux) => {
   useEffect(() => {
     const getPlantsLists = async () => {
-      await getPlantsListsForUser(localStorage.getItem('id'));
+      const id = localStorage.getItem('id');
+      if (id) {
+        await getPlantsListsForUser(id);
+      } else {
+        console.error('User id not found');
+      }
     };
 
     getPlantsLists();
   }, [getPlantsListsForUser]);
 
-  const generatePlantsLists = (plantsListsArray) => {
+  const generatePlantsLists = (plantsListsArray: PlantsList[]) => {
     return (
       <div
         className='plantsListsContainer'
@@ -42,14 +51,16 @@ export const ShowPlantsLists = ({ getPlantsListsForUser, plantsListsData }) => {
   return <>{generatePlantsLists(plantsListsData.plantsLists)}</>;
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   plantsListsData: state.plantsListsData,
 });
 
-ShowPlantsLists.propTypes = {
-  plantsListsData: PropTypes.object,
+const mapDispatch = {
+  getPlantsListsForUser: getPlantsListsForUser,
 };
 
-export default connect(mapStateToProps, { getPlantsListsForUser })(
-  ShowPlantsLists
-);
+const connector = connect(mapStateToProps, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(ShowPlantsLists);

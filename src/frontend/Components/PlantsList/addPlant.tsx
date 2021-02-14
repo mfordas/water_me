@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, ChangeEvent } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 
 import {
   addPlantToList,
@@ -9,6 +8,7 @@ import {
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
 import ErrorMessage from '../ErrorMessage/errorMessage';
 import setCurrentDate from './setCurrentDate';
+import { RootState } from '../../redux_reducers/';
 import './scss/plantsList.scss';
 
 export const AddPlant = ({
@@ -17,7 +17,7 @@ export const AddPlant = ({
   uploadPlantImage,
   plantsData,
   showPlantsList,
-}) => {
+}: PropsFromRedux) => {
   const [name, setName] = useState('');
   const [wateringCycle, setWateringCycle] = useState(0);
   const [picture, setPicture] = useState('');
@@ -27,27 +27,38 @@ export const AddPlant = ({
 
   useEffect(() => {
     const updatePlantsList = async () => {
-      await showPlantsList(localStorage.getItem('id'), listId);
+      const id = localStorage.getItem('id');
+      if (id) {
+        await showPlantsList(id, listId);
+      } else {
+        console.error('User id not found');
+      }
     };
 
     updatePlantsList();
   }, [plantsData, listId, showPlantsList]);
 
-  const handleUploadingFile = async (event) => {
+  const handleUploadingFile = async (event: ChangeEvent) => {
     event.preventDefault();
 
     const photoData = new FormData();
 
-    photoData.append('image', event.target.files[0]);
+    const target = event.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+
+    if (file) {
+      photoData.append('image', file);
+    }
 
     const imageName = await uploadPlantImage(photoData);
 
     setPicture(imageName);
   };
 
-  const handleAddingPlantToList = async (event) => {
+  const handleAddingPlantToList = async (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     event.preventDefault();
-
     setFormSubmitted(true);
 
     if (name && wateringCycle && picture && startDate) {
@@ -106,10 +117,10 @@ export const AddPlant = ({
             min={0}
             value={wateringCycle}
             onChange={(e) => {
-              setWateringCycle(e.target.value);
+              setWateringCycle(e.target.valueAsNumber);
             }}
           />
-          {wateringCycle === '1' ? `dzień` : 'dni'}
+          {wateringCycle === 1 ? `dzień` : 'dni'}
         </label>
         {validateWateringCycle()}
         <label>
@@ -133,24 +144,28 @@ export const AddPlant = ({
           />
         </label>
         {validatePicture()}
-        <button onClick={handleAddingPlantToList}>Dodaj</button>
+        <button onClick={(event) => handleAddingPlantToList(event)}>
+          Dodaj
+        </button>
       </form>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState, ownProps: { listId: number }) => ({
   plantsListsData: state.plantsListsData,
   plantsData: state.plantsData,
+  listId: ownProps.listId,
 });
 
-AddPlant.propTypes = {
-  plantsListsData: PropTypes.object,
-  plantsData: PropTypes.object,
+const mapDispatch = {
+  uploadPlantImage: uploadPlantImage,
+  showPlantsList: showPlantsList,
+  addPlantToList: addPlantToList,
 };
 
-export default connect(mapStateToProps, {
-  addPlantToList,
-  showPlantsList,
-  uploadPlantImage,
-})(AddPlant);
+const connector = connect(mapStateToProps, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(AddPlant);

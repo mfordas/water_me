@@ -1,10 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { connect, ConnectedProps } from 'react-redux';
 
 import { updateLastWateringDate } from '../../redux_actions/plantsActions';
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
 import setCurrentDate from './setCurrentDate';
+import { WateringProps } from './plantsList';
+import { RootState } from '../../redux_reducers/';
 import './scss/plantsList.scss';
 
 const Watering = ({
@@ -14,15 +14,18 @@ const Watering = ({
   plantId,
   wateringCycle,
   listId,
-}) => {
+}: PropsFromRedux) => {
   const currentDate = setCurrentDate();
   const oneDayInMiliseconds = 86400000;
 
   const handleUpdateLastWateringDate = async () => {
     const userId = localStorage.getItem('id');
-
-    await updateLastWateringDate(userId, plantId, currentDate);
-    await showPlantsList(userId, listId);
+    if (userId) {
+      await updateLastWateringDate(userId, plantId, currentDate);
+      await showPlantsList(userId, listId);
+    } else {
+      console.error('User id not found');
+    }
   };
 
   const countWatering = () => {
@@ -55,17 +58,22 @@ const Watering = ({
   return <div className='wateringContainer'>{countWatering()}</div>;
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState, ownProps: WateringProps) => ({
   plantsListsData: state.plantsListsData,
   plantsData: state.plantsData,
+  lastWateringDate: ownProps.lastWateringDate,
+  plantId: ownProps.plantId,
+  wateringCycle: ownProps.wateringCycle,
+  listId: ownProps.listId,
 });
 
-Watering.propTypes = {
-  plantsListsData: PropTypes.object,
-  plantsData: PropTypes.object,
+const mapDispatch = {
+  updateLastWateringDate: updateLastWateringDate,
+  showPlantsList: showPlantsList,
 };
 
-export default connect(mapStateToProps, {
-  updateLastWateringDate,
-  showPlantsList,
-})(Watering);
+const connector = connect(mapStateToProps, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(Watering);

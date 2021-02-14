@@ -6,15 +6,15 @@ import {
   updateLastWateringDateType,
   uploadImageType,
 } from '../redux_actions/plantsTypes';
-import { AppThunk } from '../redux_store/reduxStore';
+import { AppThunk, AppThunkWithReturn } from '../redux_store/reduxStore';
 import setHeaders from '../Utils/setHeaders';
 
 export type PlantData = {
   name: string;
   wateringCycle: number;
   pictureUrl: string;
-  wateringCycleBeginingData: Date;
-  lastTimeWatered: Date;
+  wateringCycleBeginingData: string;
+  lastTimeWatered: string;
 };
 
 export const addPlantToList = (
@@ -73,7 +73,7 @@ export const deletePlant = (
 export const updateLastWateringDate = (
   userId: string,
   plantId: number,
-  lastWateringDate: Date
+  lastWateringDate: string
 ): AppThunk => async (dispatch) => {
   try {
     const res = await axios({
@@ -100,9 +100,9 @@ export const updateLastWateringDate = (
   }
 };
 
-export const uploadPlantImage = (fileObject: FormData): AppThunk => async (
-  dispatch
-) => {
+export const uploadPlantImage = (
+  fileObject: FormData
+): AppThunkWithReturn => async (dispatch) => {
   try {
     const res = await axios({
       method: 'post',

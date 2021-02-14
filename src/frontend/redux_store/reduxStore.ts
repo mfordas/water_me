@@ -10,6 +10,13 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >;
 
+export type AppThunkWithReturn<ReturnType = Promise<string>> = ThunkAction<
+  ReturnType,
+  typeof rootReducer,
+  unknown,
+  Action<string>
+>;
+
 const initialState = {};
 
 export const middleware = [thunk];

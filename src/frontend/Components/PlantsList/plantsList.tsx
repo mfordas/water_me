@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { connect, ConnectedProps } from 'react-redux';
 
 import {
   showPlantsList,
@@ -9,30 +8,53 @@ import {
 import AddPlant from './addPlant';
 import DeletePlant from './deletePlant';
 import Watering from './watering';
+import { RootState } from '../../redux_reducers/';
+import { Plant } from '../../redux_actions/plantsTypes';
 import './scss/plantsList.scss';
 
-const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
-  const [plants, setPlants] = useState([]);
+export type DeletePlantProps = {
+  plantId: number;
+  listId: number;
+};
+
+export type WateringProps = {
+  lastWateringDate: Date;
+  plantId: number;
+  wateringCycle: number;
+  listId: number;
+};
+
+const PlantsList = ({
+  showPlantsList,
+  plantsListsData,
+  listIndex,
+}: PropsFromRedux) => {
+  const [plants, setPlants] = useState<Plant[]>([]);
   const [showAddPlantForm, setShowAddPlantForm] = useState(false);
 
   useEffect(() => {
     const getPlantsFromList = async () => {
-      await showPlantsList(
-        plantsListsData.userId,
-        plantsListsData.plantsLists[listIndex].id
-      );
+      if (plantsListsData.userId) {
+        await showPlantsList(
+          plantsListsData.userId,
+          plantsListsData.plantsLists[listIndex].id
+        );
+
+        setPlants(plantsListsData.plants);
+      } else {
+        console.error('User id not found');
+      }
     };
 
     getPlantsFromList();
-
-    setPlants(plantsListsData.plants);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     setPlants(plantsListsData.plants);
   }, [plantsListsData.plants]);
 
-  const generatePlantsList = (plantsArray) => {
+  const generatePlantsList = (plantsArray: Plant[]) => {
     if (plantsArray) {
       const plantsList = plantsArray.map((plant, index) => {
         return (
@@ -76,15 +98,21 @@ const PlantsList = ({ showPlantsList, plantsListsData, listIndex }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (
+  state: RootState,
+  ownProps: { listIndex: number }
+) => ({
   plantsListsData: state.plantsListsData,
+  listIndex: ownProps.listIndex,
 });
 
-PlantsList.propTypes = {
-  plantsListsData: PropTypes.object,
+const mapDispatch = {
+  getPlantsListsForUser: getPlantsListsForUser,
+  showPlantsList: showPlantsList,
 };
 
-export default connect(mapStateToProps, {
-  showPlantsList,
-  getPlantsListsForUser,
-})(PlantsList);
+const connector = connect(mapStateToProps, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(PlantsList);

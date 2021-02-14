@@ -13,10 +13,10 @@ export type PlantsList = {
 
 export interface PlantsListsState {
   plantsListName: string;
-  plantsLists: PlantsList[] | [];
+  plantsLists: PlantsList[];
   userId: string | null;
   plantsListDeleted: boolean;
-  plants: Plant[] | [];
+  plants: Plant[];
 }
 
 interface AddPlantsListAction extends PlantsListsState {

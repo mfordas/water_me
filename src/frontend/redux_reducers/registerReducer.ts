@@ -5,7 +5,7 @@ import {
   RegisterState,
 } from '../redux_actions/registerTypes';
 
-const initialState: RegisterState = {
+export const initialState: RegisterState = {
   invalidData: false,
   confirm: false,
   googleUser: false,

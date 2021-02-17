@@ -7,7 +7,7 @@ import {
   PlantsListsActionType,
 } from '../redux_actions/plantsListsTypes';
 
-const initialState: PlantsListsState = {
+export const initialState: PlantsListsState = {
   plantsListName: '',
   plantsLists: [],
   userId: localStorage.getItem('id'),

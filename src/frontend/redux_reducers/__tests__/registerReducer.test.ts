@@ -1,9 +1,15 @@
-import { TYPES } from "../../redux_actions/types";
-import registerReducer from "../registerReducer";
+import {
+  registerExternal,
+  resetRegState,
+} from '../../redux_actions/registerTypes';
+import registerReducer, { initialState } from '../registerReducer';
 
-describe("Register Reducer", () => {
-  it("Should return default state", () => {
-    const newState = registerReducer(undefined, {});
+describe('Register Reducer', () => {
+  it('Should return default state', () => {
+    const newState = registerReducer(undefined, {
+      type: registerExternal,
+      ...initialState,
+    });
 
     expect(newState).toEqual({
       invalidData: false,
@@ -12,7 +18,7 @@ describe("Register Reducer", () => {
     });
   });
 
-  it("Should return new state if receiving type", () => {
+  it('Should return new state if receiving type', () => {
     const newRegisterData = {
       invalidData: true,
       confirm: true,
@@ -20,7 +26,7 @@ describe("Register Reducer", () => {
     };
 
     const newState = registerReducer(undefined, {
-      type: TYPES.registerExternal,
+      type: registerExternal,
       invalidData: newRegisterData.invalidData,
       confirm: newRegisterData.confirm,
       googleUser: newRegisterData.googleUser,
@@ -29,7 +35,7 @@ describe("Register Reducer", () => {
     expect(newRegisterData).toEqual(newState);
   });
 
-  it("Should return new state if receiving type reset register state", () => {
+  it('Should return new state if receiving type reset register state', () => {
     const newRegisterData = {
       invalidData: false,
       confirm: true,
@@ -37,7 +43,7 @@ describe("Register Reducer", () => {
     };
 
     const newState = registerReducer(undefined, {
-      type: TYPES.resetRegisterState,
+      type: resetRegState,
       invalidData: newRegisterData.invalidData,
       confirm: newRegisterData.confirm,
       googleUser: newRegisterData.googleUser,

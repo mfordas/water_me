@@ -6,7 +6,7 @@ import googlelogo from '../../img/g-logo.png';
 import ConfirmGoogle from './confirmGoogle';
 import { postGoogleUser } from '../../redux_actions/registerActions';
 import { RootState } from '../../redux_reducers/';
-import { GoogleApi } from '../Login/googleAuth';
+import { GoogleApi } from '../Login/hooks';
 
 declare const gapi: any;
 

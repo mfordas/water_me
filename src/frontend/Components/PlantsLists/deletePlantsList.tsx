@@ -11,20 +11,15 @@ import './scss/plantsLists.scss';
 export const DeletePlantsList = ({
   deletePlantsList,
   getPlantsListsForUser,
-  plantsListsData,
   plantsListId,
 }: PropsFromRedux) => {
   const handlerDeletePlantsList = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    const id = localStorage.getItem('id');
-    if (id) {
-      await deletePlantsList(id, plantsListId);
-      await getPlantsListsForUser(id);
-    } else {
-      console.error('User id not found');
-    }
+
+    await deletePlantsList(plantsListId);
+    await getPlantsListsForUser();
   };
 
   return (
@@ -43,7 +38,6 @@ const mapStateToProps = (
   ownProps: { plantsListId: number }
 ) => ({
   plantsListsData: state.plantsListsData,
-  plantsData: state.plantsData,
   plantsListId: ownProps.plantsListId,
 });
 

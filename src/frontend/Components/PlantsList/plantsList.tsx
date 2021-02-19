@@ -35,10 +35,7 @@ const PlantsList = ({
   useEffect(() => {
     const getPlantsFromList = async () => {
       if (plantsListsData.userId) {
-        await showPlantsList(
-          plantsListsData.userId,
-          plantsListsData.plantsLists[listIndex].id
-        );
+        await showPlantsList(plantsListsData.plantsLists[listIndex].id);
 
         setPlants(plantsListsData.plants);
       } else {

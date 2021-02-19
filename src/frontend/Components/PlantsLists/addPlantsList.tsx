@@ -28,10 +28,7 @@ export const AddPlantsList = ({
     if (plantsListName) {
       await addPlantsList(plantsListName);
       setSubmitPlantsList(false);
-      const id = localStorage.getItem('id');
-      if (id) {
-        await getPlantsListsForUser(id);
-      }
+      await getPlantsListsForUser();
     } else return;
   };
 

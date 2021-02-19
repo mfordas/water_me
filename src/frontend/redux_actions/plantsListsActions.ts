@@ -66,13 +66,14 @@ export const addPlantsList = (plantsListName: string): AppThunk => async (
   }
 };
 
-export const getPlantsListsForUser = (userId: string): AppThunk => async (
+export const getPlantsListsForUser = (): AppThunk => async (
   dispatch
-) => {
+): Promise<void> => {
+  const id = localStorage.getItem('id');
   try {
     const res = await axios({
       method: 'get',
-      url: `/api/plantsLists/${userId}`,
+      url: `/api/plantsLists/${id}`,
       headers: setHeaders(),
     });
 
@@ -96,17 +97,17 @@ export const getPlantsListsForUser = (userId: string): AppThunk => async (
   }
 };
 
-export const deletePlantsList = (
-  userId: string,
-  plantsListId: number
-): AppThunk => async (dispatch) => {
+export const deletePlantsList = (plantsListId: number): AppThunk => async (
+  dispatch
+) => {
+  const id = localStorage.getItem('id');
   try {
     const res = await axios({
       method: 'delete',
-      url: `/api/plantsLists/${userId}/${plantsListId}`,
+      url: `/api/plantsLists/${id}/${plantsListId}`,
       headers: setHeaders(),
       data: {
-        userId: userId,
+        userId: id,
       },
     });
 
@@ -130,14 +131,14 @@ export const deletePlantsList = (
   }
 };
 
-export const showPlantsList = (
-  userId: string,
-  plantsListId: number
-): AppThunk => async (dispatch) => {
+export const showPlantsList = (plantsListId: number): AppThunk => async (
+  dispatch
+) => {
+  const id = localStorage.getItem('id');
   try {
     const res = await axios({
       method: 'get',
-      url: `/api/plants/${userId}/${plantsListId}`,
+      url: `/api/plants/${id}/${plantsListId}`,
       headers: setHeaders(),
     });
 

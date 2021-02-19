@@ -44,10 +44,8 @@ export const addPlantToList = (
   }
 };
 
-export const deletePlant = (
-  userId: string,
-  plantId: number
-): AppThunk => async (dispatch) => {
+export const deletePlant = (plantId: number): AppThunk => async (dispatch) => {
+  const userId = localStorage.getItem('id');
   try {
     const res = await axios({
       method: 'delete',
@@ -71,10 +69,10 @@ export const deletePlant = (
 };
 
 export const updateLastWateringDate = (
-  userId: string,
   plantId: number,
   lastWateringDate: string
 ): AppThunk => async (dispatch) => {
+  const userId = localStorage.getItem('id');
   try {
     const res = await axios({
       method: 'patch',

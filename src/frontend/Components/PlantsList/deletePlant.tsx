@@ -14,13 +14,8 @@ const DeletePlant = ({
   listId,
 }: PropsFromRedux) => {
   const handleDeletePlant = async () => {
-    const userId = localStorage.getItem('id');
-    if (userId) {
-      await deletePlant(userId, plantId);
-      await showPlantsList(userId, listId);
-    } else {
-      console.error('User id not found');
-    }
+    await deletePlant(plantId);
+    await showPlantsList(listId);
   };
 
   return (

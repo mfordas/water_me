@@ -19,13 +19,8 @@ const Watering = ({
   const oneDayInMiliseconds = 86400000;
 
   const handleUpdateLastWateringDate = async () => {
-    const userId = localStorage.getItem('id');
-    if (userId) {
-      await updateLastWateringDate(userId, plantId, currentDate);
-      await showPlantsList(userId, listId);
-    } else {
-      console.error('User id not found');
-    }
+    await updateLastWateringDate(plantId, currentDate);
+    await showPlantsList(listId);
   };
 
   const countWatering = () => {

@@ -1,15 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import ErrorMessage from '../errorMessage';
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 
-const setUp = (props = {}) => {
+const setUp = (props: { errorText: string } = { errorText: '' }) => {
   const component = shallow(<ErrorMessage {...props} />);
   return component;
 };
 
 describe('Footer component', () => {
-  let component;
+  let component: ShallowWrapper;
 
   const props = {
     errorText: 'Error',

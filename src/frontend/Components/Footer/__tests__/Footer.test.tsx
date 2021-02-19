@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import Footer from '../footer';
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 
@@ -9,7 +9,7 @@ const setUp = (props = {}) => {
 };
 
 describe('Footer component', () => {
-  let component;
+  let component: ShallowWrapper;
   beforeEach(() => {
     component = setUp();
   });

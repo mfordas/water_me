@@ -27,12 +27,7 @@ export const AddPlant = ({
 
   useEffect(() => {
     const updatePlantsList = async () => {
-      const id = localStorage.getItem('id');
-      if (id) {
-        await showPlantsList(id, listId);
-      } else {
-        console.error('User id not found');
-      }
+      await showPlantsList(listId);
     };
 
     updatePlantsList();
@@ -153,7 +148,6 @@ export const AddPlant = ({
 };
 
 const mapStateToProps = (state: RootState, ownProps: { listId: number }) => ({
-  plantsListsData: state.plantsListsData,
   plantsData: state.plantsData,
   listId: ownProps.listId,
 });

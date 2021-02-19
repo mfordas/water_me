@@ -14,12 +14,7 @@ export const ShowPlantsLists = ({
 }: PropsFromRedux) => {
   useEffect(() => {
     const getPlantsLists = async () => {
-      const id = localStorage.getItem('id');
-      if (id) {
-        await getPlantsListsForUser(id);
-      } else {
-        console.error('User id not found');
-      }
+      await getPlantsListsForUser();
     };
 
     getPlantsLists();

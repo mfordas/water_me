@@ -1,8 +1,11 @@
 import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { mount, ReactWrapper, shallow, ShallowWrapper } from 'enzyme';
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { ShowPlantsLists } from '../showPlantsLists';
 import { PlantsListsState } from '../../../redux_actions/plantsListsTypes';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../../../redux_store/reduxStore';
 
 const mockFunc = jest.fn();
 
@@ -16,7 +19,23 @@ const setUp = (initialState: PlantsListsState) => {
   return wrapper;
 };
 
-describe('Delete plants list component', () => {
+const mockFuncMount = jest.fn();
+
+const setUpMount = (initialState: PlantsListsState) => {
+  const wrapper = mount(
+    <Provider store={store}>
+      <BrowserRouter>
+        <ShowPlantsLists
+          plantsListsData={initialState}
+          getPlantsListsForUser={mockFuncMount}
+        />
+      </BrowserRouter>
+    </Provider>
+  );
+  return wrapper;
+};
+
+describe('ShowPlants list component', () => {
   let wrapper: ShallowWrapper;
 
   beforeEach(() => {
@@ -56,5 +75,41 @@ describe('Delete plants list component', () => {
 
     expect(component.length).toBe(1);
     expect(plantsListContainers.length).toBe(3);
+  });
+});
+
+describe('ShowPlants list component mounted', () => {
+  let wrapper: ReactWrapper;
+
+  beforeEach(() => {
+    const initialState = {
+      plantsListName: '',
+      plantsLists: [
+        {
+          id: 1,
+          name: 'list1',
+          userId: 1,
+        },
+        {
+          id: 2,
+          name: 'list2',
+          userId: 1,
+        },
+        {
+          id: 3,
+          name: 'list3',
+          userId: 1,
+        },
+      ],
+      userId: '123456789',
+      plantsListDeleted: false,
+      plants: [],
+    };
+
+    wrapper = setUpMount(initialState);
+  });
+
+  it('Should trigger loading plants lists for user', () => {
+    expect(mockFuncMount).toHaveBeenCalledTimes(1);
   });
 });

@@ -53,4 +53,21 @@ describe('Add plants list component', () => {
     const callback = mockFunc.mock.calls.length;
     expect(callback).toBe(2);
   });
+
+  it('Should not emit callback on click event', async () => {
+    const component = findByDataTestAtrr(wrapper, 'addPlantsListButton');
+    const input = findByDataTestAtrr(wrapper, 'inputAddPlantsList');
+
+    const event = {
+      target: { value: '' },
+    };
+    input.simulate('change', event);
+
+    await act(async () => {
+      component.simulate('click');
+    });
+
+    const callback = mockFunc.mock.calls.length;
+    expect(callback).toBe(0);
+  });
 });

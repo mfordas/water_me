@@ -1,7 +1,7 @@
 import React from 'react';
 
-import RegisterComponent from '../../Components/Register/';
-import LoginComponent from '../../Components/Login';
+import Register from '../../Components/Register/googleRegister';
+import GoogleAuth from '../../Components/Login/googleAuth';
 
 const HomePage = () => {
   return (
@@ -13,8 +13,8 @@ const HomePage = () => {
         znać, że potrzebują wody. Jeśli zapomnisz o podlewaniu będziesz
         otrzymywał kolejne przypomnienia, które uratują Twoje rośliny.{' '}
       </p>
-      <RegisterComponent />
-      <LoginComponent />
+      <Register />
+      <GoogleAuth />
     </div>
   );
 };

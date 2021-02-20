@@ -41,13 +41,22 @@ const GoogleRegister = ({ postGoogleUser, registerData }: PropsFromRedux) => {
     }
   };
 
-  return !registerData.confirm ? (
-    <div className='googleButton' onClick={() => makeAuth()}>
-      <img className='googleButtonLogo' src={googlelogo} alt='google logo' />
-      <div className='googleButtonText'>Zarejestruj przez Google</div>
+  return (
+    <div className='registerCard'>
+      {' '}
+      {!registerData.confirm ? (
+        <div className='googleButton' onClick={() => makeAuth()}>
+          <img
+            className='googleButtonLogo'
+            src={googlelogo}
+            alt='google logo'
+          />
+          <div className='googleButtonText'>Zarejestruj przez Google</div>
+        </div>
+      ) : (
+        <ConfirmGoogle />
+      )}
     </div>
-  ) : (
-    <ConfirmGoogle />
   );
 };
 

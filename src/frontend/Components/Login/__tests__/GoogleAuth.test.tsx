@@ -4,7 +4,7 @@ import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { GoogleAuth } from '../googleAuth';
 import { initialState } from '../../../redux_reducers/loginReducer';
 import { LoginState } from '../../../redux_actions/loginTypes';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Redirect } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { makeAuth } from '../helpers';
 
@@ -78,5 +78,23 @@ describe('Should handle submit Google login button', () => {
     });
 
     expect(makeAuth).toHaveBeenCalled();
+  });
+});
+
+describe('When logged in', () => {
+  it('Should redirect to plants lists', () => {
+    const initialState = {
+      loginData: {
+        name: '',
+        googleId: '',
+        invalidData: false,
+      },
+      isLogged: true,
+    };
+
+    const wrapper = setUp(initialState);
+
+    expect(wrapper.find(Redirect).length).toBe(1);
+    expect(wrapper.debug()).toContain('/plants');
   });
 });

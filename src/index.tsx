@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import LogoComponent from './frontend/Components/Logo';
+import Logo from './frontend/Components/Logo/logo';
 import FooterComponent from './frontend/Components/Footer';
 import Menu from './frontend/Components/Menu';
 import PublicRoute from './frontend/Components/PublicRoute';
@@ -20,7 +20,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className='contentContainer'>
-        <LogoComponent />
+        <Logo />
         <Menu />
         <Switch>
           <PublicRoute exact path='/' component={HomePage} />

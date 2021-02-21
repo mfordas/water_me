@@ -3,7 +3,7 @@ import React from 'react';
 import AddPlantsList from './addPlantsList';
 import ShowPlantsLists from './showPlantsLists';
 
-const PlantsListComponent = () => {
+const PlantsListsComponent = () => {
   return (
     <>
       <AddPlantsList />
@@ -12,4 +12,4 @@ const PlantsListComponent = () => {
   );
 };
 
-export default PlantsListComponent;
+export default PlantsListsComponent;

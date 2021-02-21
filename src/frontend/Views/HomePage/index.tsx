@@ -5,7 +5,7 @@ import GoogleAuth from '../../Components/Login/googleAuth';
 
 const HomePage = () => {
   return (
-    <div className='viewContainer'>
+    <div className='viewContainer' data-test='homePage'>
       <p>
         Cześć! Witamy w programie WaterMe! Dzięki niemu już nigdy nie zapomnisz
         o podlewaniu swoich roślin. Twórz listy roślin z domu, ogrodu, pracy i

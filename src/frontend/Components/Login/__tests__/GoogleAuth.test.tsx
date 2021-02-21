@@ -22,7 +22,7 @@ jest.mock('../hooks', () => {
 
   return {
     ...hooks,
-    useHandleLogin: jest.fn(),
+    useHandleGoogleApi: jest.fn(),
   };
 });
 

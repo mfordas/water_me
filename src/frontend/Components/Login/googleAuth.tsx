@@ -6,14 +6,14 @@ import '../Register/scss/google.scss';
 import googlelogo from '../../img/g-logo.png';
 import { loginExternal } from '../../redux_actions/loginActions';
 import { RootState } from '../../redux_reducers/';
-import { useHandleLogin } from './hooks';
+import { useHandleGoogleApi } from './hooks';
 import { makeAuth } from './helpers';
 
 export const GoogleAuth = ({
   loginExternal,
   loginData,
 }: PropsFromRedux): JSX.Element => {
-  const authObject = useHandleLogin();
+  const authObject = useHandleGoogleApi();
 
   return !loginData.isLogged ? (
     <div

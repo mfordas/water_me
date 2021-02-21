@@ -6,11 +6,11 @@ import './scss/google.scss';
 import { resetRegisterState } from '../../redux_actions/registerActions';
 import { RootState } from '../../redux_reducers/';
 
-const ConfirmGoogle = ({ resetRegisterState }: PropsFromRedux) => {
+export const ConfirmGoogle = ({ resetRegisterState }: PropsFromRedux) => {
   return (
     <>
       <p>Konto założone!</p>
-      <p> Możesz teraz się zalogować.</p>
+      <p>Możesz teraz się zalogować.</p>
       <Link className='button' to='/home' onClick={resetRegisterState}>
         Strona główna
       </Link>

@@ -3,11 +3,11 @@ import { shallow, ShallowWrapper } from 'enzyme';
 
 import AddPlantsList from '../addPlantsList';
 import ShowPlantsLists from '../showPlantsLists';
-import PlantsListComponent from '../index';
+import PlantsListsComponent from '../index';
 
 describe('PlantsLists Component', () => {
   it('Should render without error', () => {
-    const component: ShallowWrapper = shallow(<PlantsListComponent />);
+    const component: ShallowWrapper = shallow(<PlantsListsComponent />);
 
     console.log(component.debug());
 

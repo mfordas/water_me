@@ -7,7 +7,7 @@ export interface GoogleApi extends AuthObject {
 
 declare const gapi: any;
 
-export const useHandleLogin = () => {
+export const useHandleGoogleApi = () => {
   const [authObject, setAuthObject] = useState<GoogleApi | null>(null);
 
   useEffect(() => {

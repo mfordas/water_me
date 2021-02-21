@@ -9,6 +9,8 @@ import { showPlantsList } from '../../redux_actions/plantsListsActions';
 import ErrorMessage from '../ErrorMessage/errorMessage';
 import setCurrentDate from './setCurrentDate';
 import { RootState } from '../../redux_reducers/';
+import NameInput from './nameInput';
+import WateringInput from './wateringInput';
 import './scss/plantsList.scss';
 
 export const AddPlant = ({
@@ -79,12 +81,6 @@ export const AddPlant = ({
     }
   };
 
-  const validateWateringCycle = () => {
-    if (formSubmitted && wateringCycle === 0) {
-      return <ErrorMessage errorText='Wpisz częstotliwość podlewania' />;
-    }
-  };
-
   const validatePicture = () => {
     if (formSubmitted && !picture) {
       return <ErrorMessage errorText='Dodaj zdjęcie' />;
@@ -94,30 +90,16 @@ export const AddPlant = ({
   return (
     <div className='addPlantContainer' data-test='addPlantComponent'>
       <form encType='multipart/form-data'>
-        <label>
-          Imię
-          <input
-            type='text'
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-        </label>
-        {validateName()}
-        <label>
-          Podlewanie co:
-          <input
-            type='number'
-            min={0}
-            value={wateringCycle}
-            onChange={(e) => {
-              setWateringCycle(e.target.valueAsNumber);
-            }}
-          />
-          {wateringCycle === 1 ? `dzień` : 'dni'}
-        </label>
-        {validateWateringCycle()}
+        <NameInput
+          formSubmitted={formSubmitted}
+          name={name}
+          setName={setName}
+        />
+        <WateringInput
+          formSubmitted={formSubmitted}
+          wateringCycle={wateringCycle}
+          setWateringCycle={setWateringCycle}
+        />
         <label>
           Data startu:
           <input

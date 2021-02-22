@@ -1,20 +1,27 @@
 import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
+import { BrowserRouter } from 'react-router-dom';
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { AddPlant } from '../addPlant';
 import { PlantsState } from '../../../redux_actions/plantsTypes';
+import { Provider } from 'react-redux';
+import { store } from '../../../redux_store/reduxStore';
 
 const mockFunc = jest.fn();
 
 const setUp = (initialState: PlantsState) => {
   const wrapper = mount(
-    <AddPlant
-      listId={1}
-      addPlantToList={mockFunc}
-      uploadPlantImage={mockFunc}
-      plantsData={initialState}
-      showPlantsList={mockFunc}
-    />
+    <Provider store={store}>
+      <BrowserRouter>
+        <AddPlant
+          listId={1}
+          addPlantToList={mockFunc}
+          uploadPlantImage={mockFunc}
+          plantsData={initialState}
+          showPlantsList={mockFunc}
+        />
+      </BrowserRouter>
+    </Provider>
   );
   return wrapper;
 };

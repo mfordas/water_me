@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import {
@@ -6,17 +6,17 @@ import {
   uploadPlantImage,
 } from '../../redux_actions/plantsActions';
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
-import ErrorMessage from '../ErrorMessage/errorMessage';
 import setCurrentDate from './setCurrentDate';
 import { RootState } from '../../redux_reducers/';
 import NameInput from './nameInput';
 import WateringInput from './wateringInput';
+import ImageInput from './imageInput';
+import DateInput from './dateInput';
 import './scss/plantsList.scss';
 
 export const AddPlant = ({
   listId,
   addPlantToList,
-  uploadPlantImage,
   plantsData,
   showPlantsList,
 }: PropsFromRedux) => {
@@ -34,23 +34,6 @@ export const AddPlant = ({
 
     updatePlantsList();
   }, [plantsData, listId, showPlantsList]);
-
-  const handleUploadingFile = async (event: ChangeEvent) => {
-    event.preventDefault();
-
-    const photoData = new FormData();
-
-    const target = event.target as HTMLInputElement;
-    const file: File = (target.files as FileList)[0];
-
-    if (file) {
-      photoData.append('image', file);
-    }
-
-    const imageName = await uploadPlantImage(photoData);
-
-    setPicture(imageName);
-  };
 
   const handleAddingPlantToList = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -73,20 +56,6 @@ export const AddPlant = ({
     }
   };
 
-  const validateName = () => {
-    if (formSubmitted && !name) {
-      return <ErrorMessage errorText='Wpisz imię' />;
-    } else if (formSubmitted && name.length <= 3) {
-      return <ErrorMessage errorText='Imię powinno być dłuższe niż 3 znaki' />;
-    }
-  };
-
-  const validatePicture = () => {
-    if (formSubmitted && !picture) {
-      return <ErrorMessage errorText='Dodaj zdjęcie' />;
-    }
-  };
-
   return (
     <div className='addPlantContainer' data-test='addPlantComponent'>
       <form encType='multipart/form-data'>
@@ -100,27 +69,12 @@ export const AddPlant = ({
           wateringCycle={wateringCycle}
           setWateringCycle={setWateringCycle}
         />
-        <label>
-          Data startu:
-          <input
-            type='date'
-            value={startDate}
-            onChange={(e) => {
-              setStartDate(e.target.value);
-            }}
-          />
-        </label>
-        <label>
-          Zdjęcie
-          <input
-            type='file'
-            name='image'
-            onChange={async (event) => {
-              await handleUploadingFile(event);
-            }}
-          />
-        </label>
-        {validatePicture()}
+        <DateInput startDate={startDate} setStartDate={setStartDate} />
+        <ImageInput
+          formSubmitted={formSubmitted}
+          picture={picture}
+          setPicture={setPicture}
+        />
         <button onClick={(event) => handleAddingPlantToList(event)}>
           Dodaj
         </button>

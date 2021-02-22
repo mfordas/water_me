@@ -93,21 +93,3 @@ describe('Should handle submit Google login button', () => {
     expect(mockShowPlantsListFunc).toHaveBeenCalledTimes(1);
   });
 });
-
-// describe('When logged in', () => {
-//   it('Should redirect to plants lists', () => {
-//     const initialState = {
-//       loginData: {
-//         name: '',
-//         googleId: '',
-//         invalidData: false,
-//       },
-//       isLogged: true,
-//     };
-
-//     const wrapper = setUp(initialState);
-
-//     expect(wrapper.find(Redirect).length).toBe(1);
-//     expect(wrapper.debug()).toContain('/plants');
-//   });
-// });

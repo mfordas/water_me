@@ -9,7 +9,7 @@ type Input = {
 export const DateInput = ({ startDate, setStartDate }: Input) => {
   return (
     <>
-      <label>
+      <label data-test='DateInput'>
         Data startu:
         <input
           type='date'

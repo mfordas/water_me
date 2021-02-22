@@ -9,8 +9,6 @@ describe('PlantsLists Component', () => {
   it('Should render without error', () => {
     const component: ShallowWrapper = shallow(<PlantsListsComponent />);
 
-    console.log(component.debug());
-
     expect(component.find(AddPlantsList).length).toBe(1);
     expect(component.find(ShowPlantsLists).length).toBe(1);
   });

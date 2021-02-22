@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, ReactWrapper, shallow, ShallowWrapper } from 'enzyme';
+import { mount, shallow, ShallowWrapper } from 'enzyme';
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { ShowPlantsLists } from '../showPlantsLists';
 import { PlantsListsState } from '../../../redux_actions/plantsListsTypes';
@@ -79,8 +79,6 @@ describe('ShowPlants list component', () => {
 });
 
 describe('ShowPlants list component mounted', () => {
-  let wrapper: ReactWrapper;
-
   beforeEach(() => {
     const initialState = {
       plantsListName: '',
@@ -106,7 +104,7 @@ describe('ShowPlants list component mounted', () => {
       plants: [],
     };
 
-    wrapper = setUpMount(initialState);
+    setUpMount(initialState);
   });
 
   it('Should trigger loading plants lists for user', () => {

@@ -7,7 +7,7 @@ import { RootState } from '../../redux_reducers/';
 import './scss/plantsList.scss';
 import { DeletePlantProps } from './plantsList';
 
-const DeletePlant = ({
+export const DeletePlant = ({
   deletePlant,
   showPlantsList,
   plantId,
@@ -19,11 +19,13 @@ const DeletePlant = ({
   };
 
   return (
-    <div>
-      <button className='deleteButton' onClick={handleDeletePlant}>
-        Usuń
-      </button>
-    </div>
+    <button
+      className='deleteButton'
+      data-test='deletePlantButton'
+      onClick={handleDeletePlant}
+    >
+      Usuń
+    </button>
   );
 };
 

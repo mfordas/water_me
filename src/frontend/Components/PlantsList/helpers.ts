@@ -1,7 +1,16 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
+
+type Event = {
+  target: Target;
+  preventDefault: () => void;
+};
+
+type Target = {
+  files: FileList | null;
+};
 
 export const handleUploadingFile = async (
-  event: ChangeEvent,
+  event: Event,
   uploadPlantImage: (photoData: FormData) => Promise<string>,
   setPicture: React.Dispatch<React.SetStateAction<string>>
 ) => {
@@ -9,14 +18,14 @@ export const handleUploadingFile = async (
 
   const photoData = new FormData();
 
-  const target = event.target as HTMLInputElement;
+  const target = event.target as Target;
   const file: File = (target.files as FileList)[0];
 
   if (file) {
     photoData.append('image', file);
+    const imageName = await uploadPlantImage(photoData);
+    setPicture(imageName);
+  } else {
+    console.error('Image upload error');
   }
-
-  const imageName = await uploadPlantImage(photoData);
-
-  setPicture(imageName);
 };

@@ -49,6 +49,7 @@ describe('Add plants list component', () => {
 
   it('Should render without error', () => {
     const component = findByDataTestAtrr(wrapper, 'addPlantComponent');
+
     expect(component.length).toBe(1);
   });
 });

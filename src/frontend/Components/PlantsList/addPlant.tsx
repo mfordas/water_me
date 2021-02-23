@@ -25,7 +25,7 @@ export const AddPlant = ({
   const [picture, setPicture] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const [startDate, setStartDate] = useState(setCurrentDate());
+  const [startDate, setStartDate] = useState(setCurrentDate(new Date()));
 
   useEffect(() => {
     const updatePlantsList = async () => {

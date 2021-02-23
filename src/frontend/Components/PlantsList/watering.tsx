@@ -15,7 +15,7 @@ const Watering = ({
   wateringCycle,
   listId,
 }: PropsFromRedux) => {
-  const currentDate = setCurrentDate();
+  const currentDate = setCurrentDate(new Date());
   const oneDayInMiliseconds = 86400000;
 
   const handleUpdateLastWateringDate = async () => {

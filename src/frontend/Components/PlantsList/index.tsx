@@ -7,7 +7,7 @@ import { Switch } from 'react-router-dom';
 import PrivateRoute from '../PrivateRoute';
 import { RootState } from '../../redux_reducers/';
 
-const PlantsListComponent = ({
+export const PlantsListComponent = ({
   getPlantsListsForUser,
   plantsListsData,
 }: PropsFromRedux) => {

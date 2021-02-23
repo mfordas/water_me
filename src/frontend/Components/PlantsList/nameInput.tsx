@@ -20,7 +20,7 @@ export const NameInput = ({ formSubmitted, name, setName }: Input) => {
 
   return (
     <>
-      <label>
+      <label data-test='nameInput'>
         Imię
         <input
           type='text'

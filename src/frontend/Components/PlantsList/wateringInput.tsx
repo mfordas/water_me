@@ -22,7 +22,7 @@ export const WateringInput = ({
 
   return (
     <>
-      <label>
+      <label data-test='WateringInput'>
         Podlewanie co:
         <input
           type='number'

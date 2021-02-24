@@ -1,13 +1,12 @@
 import { connect, ConnectedProps } from 'react-redux';
-
 import { updateLastWateringDate } from '../../redux_actions/plantsActions';
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
-import setCurrentDate from './setCurrentDate';
+import { useCountWatering } from './hooks';
 import { WateringProps } from './plantsList';
 import { RootState } from '../../redux_reducers/';
 import './scss/plantsList.scss';
 
-const Watering = ({
+export const Watering = ({
   updateLastWateringDate,
   showPlantsList,
   lastWateringDate,
@@ -15,26 +14,22 @@ const Watering = ({
   wateringCycle,
   listId,
 }: PropsFromRedux) => {
-  const currentDate = setCurrentDate(new Date());
-  const oneDayInMiliseconds = 86400000;
+  const { nextWateringIn, currentDate } = useCountWatering(
+    lastWateringDate,
+    wateringCycle
+  );
 
   const handleUpdateLastWateringDate = async () => {
     await updateLastWateringDate(plantId, currentDate);
     await showPlantsList(listId);
   };
 
-  const countWatering = () => {
-    const countDaysSinceLastWatering =
-      (new Date(currentDate).getTime() - new Date(lastWateringDate).getTime()) /
-      oneDayInMiliseconds;
-
-    const nextWateringIn = wateringCycle - countDaysSinceLastWatering;
-
-    if (countDaysSinceLastWatering < wateringCycle) {
+  const renderWateringStatus = () => {
+    if (nextWateringIn > 0) {
       return (
         <div className='wateringStatusContainer'>
           <div className='statusOk'>U mnie w porządku!</div>
-          <div>
+          <div className='nextWateringContainer'>
             Kolejne podlewanie za: {nextWateringIn}
             {nextWateringIn === 1 ? ' dzień' : ' dni'}
           </div>
@@ -50,12 +45,14 @@ const Watering = ({
     }
   };
 
-  return <div className='wateringContainer'>{countWatering()}</div>;
+  return (
+    <div className='wateringContainer' data-test='WateringComponent'>
+      {renderWateringStatus()}
+    </div>
+  );
 };
 
 const mapStateToProps = (state: RootState, ownProps: WateringProps) => ({
-  plantsListsData: state.plantsListsData,
-  plantsData: state.plantsData,
   lastWateringDate: ownProps.lastWateringDate,
   plantId: ownProps.plantId,
   wateringCycle: ownProps.wateringCycle,

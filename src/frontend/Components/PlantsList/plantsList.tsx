@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import {
-  showPlantsList,
-  getPlantsListsForUser,
-} from '../../redux_actions/plantsListsActions';
+import { showPlantsList } from '../../redux_actions/plantsListsActions';
 import AddPlant from './addPlant';
 import DeletePlant from './deletePlant';
 import Watering from './watering';
 import { RootState } from '../../redux_reducers/';
 import { Plant } from '../../redux_actions/plantsTypes';
+import { useCreatePlantsList } from './hooks';
 import './scss/plantsList.scss';
 
 export type DeletePlantProps = {
@@ -24,35 +22,20 @@ export type WateringProps = {
   listId: number;
 };
 
-const PlantsList = ({
+export const PlantsList = ({
   showPlantsList,
   plantsListsData,
   listIndex,
 }: PropsFromRedux) => {
-  const [plants, setPlants] = useState<Plant[]>([]);
   const [showAddPlantForm, setShowAddPlantForm] = useState(false);
-
-  useEffect(() => {
-    const getPlantsFromList = async () => {
-      if (plantsListsData.userId) {
-        await showPlantsList(plantsListsData.plantsLists[listIndex].id);
-
-        setPlants(plantsListsData.plants);
-      } else {
-        console.error('User id not found');
-      }
-    };
-
-    getPlantsFromList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    setPlants(plantsListsData.plants);
-  }, [plantsListsData.plants]);
+  const plants = useCreatePlantsList(
+    plantsListsData,
+    showPlantsList,
+    listIndex
+  );
 
   const generatePlantsList = (plantsArray: Plant[]) => {
-    if (plantsArray) {
+    if (plantsArray.length > 0) {
       const plantsList = plantsArray.map((plant, index) => {
         return (
           <div key={index} className='plantContainer'>
@@ -104,7 +87,6 @@ const mapStateToProps = (
 });
 
 const mapDispatch = {
-  getPlantsListsForUser: getPlantsListsForUser,
   showPlantsList: showPlantsList,
 };
 

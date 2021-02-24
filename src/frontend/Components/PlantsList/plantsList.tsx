@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import {
-  showPlantsList,
-  getPlantsListsForUser,
-} from '../../redux_actions/plantsListsActions';
+import { showPlantsList } from '../../redux_actions/plantsListsActions';
 import AddPlant from './addPlant';
 import DeletePlant from './deletePlant';
 import Watering from './watering';
@@ -25,7 +22,7 @@ export type WateringProps = {
   listId: number;
 };
 
-const PlantsList = ({
+export const PlantsList = ({
   showPlantsList,
   plantsListsData,
   listIndex,
@@ -38,7 +35,7 @@ const PlantsList = ({
   );
 
   const generatePlantsList = (plantsArray: Plant[]) => {
-    if (plantsArray) {
+    if (plantsArray.length > 0) {
       const plantsList = plantsArray.map((plant, index) => {
         return (
           <div key={index} className='plantContainer'>
@@ -90,7 +87,6 @@ const mapStateToProps = (
 });
 
 const mapDispatch = {
-  getPlantsListsForUser: getPlantsListsForUser,
   showPlantsList: showPlantsList,
 };
 

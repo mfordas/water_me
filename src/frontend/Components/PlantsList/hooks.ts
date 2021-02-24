@@ -5,10 +5,10 @@ export const useCountWatering = (
   lastWateringDate: Date,
   wateringCycle: number
 ) => {
-  const [currentDate, setDate] = useState(setCurrentDate(new Date()));
-  const [nextWateringIn, setNextWatering] = useState(0);
-
+  const currentDate = setCurrentDate(new Date());
   const oneDayInMiliseconds = 86400000;
+
+  const [nextWateringIn, setNextWatering] = useState(0);
 
   useEffect(() => {
     const countDaysSinceLastWatering =

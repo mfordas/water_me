@@ -6,7 +6,7 @@ import { WateringProps } from './plantsList';
 import { RootState } from '../../redux_reducers/';
 import './scss/plantsList.scss';
 
-const Watering = ({
+export const Watering = ({
   updateLastWateringDate,
   showPlantsList,
   lastWateringDate,
@@ -29,7 +29,7 @@ const Watering = ({
       return (
         <div className='wateringStatusContainer'>
           <div className='statusOk'>U mnie w porządku!</div>
-          <div>
+          <div className='nextWateringContainer'>
             Kolejne podlewanie za: {nextWateringIn}
             {nextWateringIn === 1 ? ' dzień' : ' dni'}
           </div>
@@ -45,12 +45,14 @@ const Watering = ({
     }
   };
 
-  return <div className='wateringContainer'>{renderWateringStatus()}</div>;
+  return (
+    <div className='wateringContainer' data-test='WateringComponent'>
+      {renderWateringStatus()}
+    </div>
+  );
 };
 
 const mapStateToProps = (state: RootState, ownProps: WateringProps) => ({
-  plantsListsData: state.plantsListsData,
-  plantsData: state.plantsData,
   lastWateringDate: ownProps.lastWateringDate,
   plantId: ownProps.plantId,
   wateringCycle: ownProps.wateringCycle,

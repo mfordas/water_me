@@ -43,7 +43,7 @@ export const postGoogleUser = (authObject: AuthObject): AppThunk => async (
 };
 
 export const resetRegisterState = (): AppThunk => async (dispatch) => {
-  return dispatch({
+  dispatch({
     type: resetRegState,
     invalidData: false,
     confirm: false,

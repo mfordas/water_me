@@ -78,6 +78,7 @@
     "@types/multer": "^1.4.5",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
+    "@types/redux-mock-store": "^1.0.2",
     "@types/sharp": "^0.27.1",
     "@types/uuid": "^8.3.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.3.2",
@@ -87,6 +88,7 @@
     "jest-enzyme": "^7.1.2",
     "nock": "^13.0.5",
     "nodemon": "^2.0.7",
+    "redux-mock-store": "^1.5.4",
     "ts-node": "^9.1.1"
   },
   "jest": {

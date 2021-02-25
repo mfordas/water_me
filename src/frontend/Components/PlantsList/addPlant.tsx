@@ -89,7 +89,6 @@ const mapStateToProps = (state: RootState, ownProps: { listId: number }) => ({
 });
 
 const mapDispatch = {
-  uploadPlantImage: uploadPlantImage,
   showPlantsList: showPlantsList,
   addPlantToList: addPlantToList,
 };

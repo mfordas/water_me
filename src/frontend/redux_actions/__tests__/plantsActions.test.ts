@@ -14,7 +14,6 @@ import {
   uploadImageType,
   PlantsState,
 } from '../plantsTypes';
-import { AuthObject } from '../../Utils/generateAuthTokenForExternalUser';
 
 const middlewares = [thunk];
 const mockStore = configureStore<
@@ -197,7 +196,6 @@ describe('Update watering action', () => {
 
 describe('Upload image action', () => {
   const testUserId = '1';
-  const testPlantId = 1;
   const testImageName = 'TestImage';
   localStorage.setItem('token', 'testToken');
   localStorage.setItem('id', testUserId);

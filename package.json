@@ -42,7 +42,7 @@
     "startReact": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-coverage": "set CI=true && react-scripts test --coverage",
+    "test-coverage": "set CI=true && react-scripts test --coverage --silent",
     "eject": "react-scripts eject",
     "start": "node --loader ts-node/esm ./src/backend/app.ts",
     "mon": "nodemon -e ts --exec \"npm run start\"",

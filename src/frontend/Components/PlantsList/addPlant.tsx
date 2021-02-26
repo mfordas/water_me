@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import {
-  addPlantToList,
-  uploadPlantImage,
-} from '../../redux_actions/plantsActions';
+import { addPlantToList } from '../../redux_actions/plantsActions';
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
 import setCurrentDate from './setCurrentDate';
 import { RootState } from '../../redux_reducers/';
@@ -89,7 +86,6 @@ const mapStateToProps = (state: RootState, ownProps: { listId: number }) => ({
 });
 
 const mapDispatch = {
-  uploadPlantImage: uploadPlantImage,
   showPlantsList: showPlantsList,
   addPlantToList: addPlantToList,
 };

@@ -10,11 +10,11 @@ export interface LoginState {
   isLogged: boolean;
 }
 
-interface LoginExternalAction extends LoginState {
+export interface LoginExternalAction extends LoginState {
   type: typeof loginExternalType;
 }
 
-interface LogoutAction extends LoginState {
+export interface LogoutAction extends LoginState {
   type: typeof logoutType;
 }
 

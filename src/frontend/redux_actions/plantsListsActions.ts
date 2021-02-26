@@ -9,34 +9,6 @@ import {
 import { AppThunk } from '../redux_store/reduxStore';
 import setHeaders from '../Utils/setHeaders';
 
-export const getPlantsLists = (): AppThunk => async (dispatch) => {
-  try {
-    const res = await axios({
-      method: 'get',
-      url: '/api/plantsLists',
-      headers: setHeaders(),
-    });
-
-    if (res.status === 200) {
-      dispatch({
-        type: getPlantsListsType,
-        plantsLists: res.data,
-      });
-    } else if (res.status === 404) {
-      dispatch({
-        type: getPlantsListsType,
-        plantsLists: [],
-      });
-    }
-  } catch (error) {
-    console.error('Error:', error.response.data);
-    dispatch({
-      type: getPlantsListsType,
-      plantsLists: [],
-    });
-  }
-};
-
 export const addPlantsList = (plantsListName: string): AppThunk => async (
   dispatch
 ) => {
@@ -82,11 +54,6 @@ export const getPlantsListsForUser = (): AppThunk => async (
         type: getPlantsListsType,
         plantsLists: res.data,
       });
-    } else if (res.status === 404) {
-      dispatch({
-        type: getPlantsListsType,
-        plantsLists: [],
-      });
     }
   } catch (error) {
     console.error('Error:', error.response.data);
@@ -116,11 +83,6 @@ export const deletePlantsList = (plantsListId: number): AppThunk => async (
         type: deletePlantsListType,
         plantsListDeleted: true,
       });
-    } else if (res.status === 404) {
-      dispatch({
-        type: deletePlantsListType,
-        plantsListDeleted: false,
-      });
     }
   } catch (error) {
     console.error('Error:', error.response.data);
@@ -146,11 +108,6 @@ export const showPlantsList = (plantsListId: number): AppThunk => async (
       dispatch({
         type: showPlantsListType,
         plants: res.data,
-      });
-    } else if (res.status === 404) {
-      dispatch({
-        type: showPlantsListType,
-        plants: [],
       });
     }
   } catch (error) {

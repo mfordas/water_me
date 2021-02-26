@@ -3,7 +3,7 @@ import { AuthObject } from '../../Utils/generateAuthTokenForExternalUser';
 
 export const makeAuth = async (
   authObject: GoogleApi | null,
-  googleAction: (authObject: AuthObject) => void
+  googleAction: (authObject: AuthObject) => Promise<void>
 ): Promise<void | string | Error> => {
   if (authObject) {
     try {

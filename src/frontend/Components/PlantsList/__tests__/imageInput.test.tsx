@@ -4,7 +4,7 @@ import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { act } from 'react-dom/test-utils';
 import { ImageInput } from '../imageInput';
 import { initialState } from '../../../redux_reducers/plantsReducer';
-import { handleUploadingFile } from '../helpers';
+import { createFileToUpload } from '../helpers';
 import ErrorMessage from '../../ErrorMessage/errorMessage';
 
 jest.mock('../helpers', () => {
@@ -12,33 +12,30 @@ jest.mock('../helpers', () => {
 
   return {
     ...helpers,
-    handleUploadingFile: jest.fn(),
+    createFileToUpload: jest.fn(),
   };
 });
 
-const mockSetPicture = jest.fn(() => console.log('Changing picture...'));
-const mockUploadPlantImage = jest.fn(() => Promise.resolve('Uploading image'));
+const mockSetPictureFile = jest.fn();
 
-const setUp = (formSubmitted: boolean, picture: string) => {
+const setUp = (formSubmitted: boolean, pictureFile: File) => {
   const wrapper = shallow(
     <ImageInput
       formSubmitted={formSubmitted}
-      picture={picture}
-      setPicture={mockSetPicture}
-      uploadPlantImage={mockUploadPlantImage}
+      pictureFile={pictureFile}
+      setPictureFile={mockSetPictureFile}
       plantsData={initialState}
     />
   );
   return wrapper;
 };
 
-const setUpMount = (formSubmitted: boolean, picture: string): ReactWrapper => {
+const setUpMount = (formSubmitted: boolean, picture: File): ReactWrapper => {
   const wrapper = mount(
     <ImageInput
       formSubmitted={formSubmitted}
-      picture={picture}
-      setPicture={mockSetPicture}
-      uploadPlantImage={mockUploadPlantImage}
+      pictureFile={picture}
+      setPictureFile={mockSetPictureFile}
       plantsData={initialState}
     />
   );
@@ -66,15 +63,11 @@ describe('Should handle input change', () => {
   const component = setUpMount(true, 'testImagePath');
 
   it('Should emit callback on change event', async () => {
-    (handleUploadingFile as jest.Mock).mockImplementation(() => {
-      mockSetPicture();
-      mockUploadPlantImage();
-    });
+    (createFileToUpload as jest.Mock).mockImplementation(() => {});
     const inputElement = component.find('input').at(0);
 
     await act(async () => inputElement.prop('onChange')(undefined));
 
-    expect(mockUploadPlantImage).toHaveBeenCalledTimes(1);
-    expect(mockSetPicture).toHaveBeenCalledTimes(1);
+    expect(createFileToUpload).toHaveBeenCalledTimes(1);
   });
 });

@@ -13,8 +13,18 @@ import { WateringInput } from '../wateringInput';
 import { act } from 'react-dom/test-utils';
 import setCurrentDate from '../setCurrentDate';
 
+jest.mock('../helpers', () => {
+  const helpers = jest.requireActual('../helpers');
+
+  return {
+    ...helpers,
+    handleUploadingFile: () => Promise.resolve('TestPlantName'),
+  };
+});
+
 const mockShowPlantsList = jest.fn();
 const mockAddPlantToList = jest.fn();
+const mockUploadPlantImage = jest.fn();
 
 const setUp = (initialState: PlantsState) => {
   const wrapper = mount(
@@ -25,6 +35,7 @@ const setUp = (initialState: PlantsState) => {
           addPlantToList={mockAddPlantToList}
           plantsData={initialState}
           showPlantsList={mockShowPlantsList}
+          uploadPlantImage={mockUploadPlantImage}
         />
       </BrowserRouter>
     </Provider>
@@ -63,15 +74,15 @@ describe('Add plants list component', () => {
     expect(component.find(NameInput).length).toBe(1);
   });
 
-  it('Should change state and send request to add a plant if all values are filled', () => {
+  it('Should change state and send request to add a plant if all values are filled', async () => {
     const testName = 'TestName';
     const testWatering = 3;
-    const testPicture = 'TestPicture';
+    const testPicture = new File([''], 'test');
 
     act(() => {
       wrapper.find(NameInput).prop('setName')(testName);
       wrapper.find(WateringInput).prop('setWateringCycle')(testWatering);
-      wrapper.find(ImageInput).prop('setPicture')(testPicture);
+      wrapper.find(ImageInput).prop('setPictureFile')(testPicture);
     });
 
     wrapper.update();
@@ -83,15 +94,14 @@ describe('Add plants list component', () => {
     expect(wrapper.find(WateringInput).prop('wateringCycle')).toBe(
       testWatering
     );
-    expect(wrapper.find(ImageInput).prop('picture')).toBe(testPicture);
+    expect(wrapper.find(ImageInput).prop('pictureFile')).toBe(testPicture);
 
-    act(() => {
+    await act(async () => {
       wrapper.find('button').at(0).simulate('click');
+      wrapper.update();
     });
 
-    wrapper.update();
-
-    expect(wrapper.find(NameInput).prop('formSubmitted')).toBe(true);
+    expect(wrapper.find(NameInput).prop('formSubmitted')).toBe(false);
     expect(mockAddPlantToList).toBeCalledTimes(1);
     expect(mockShowPlantsList).toBeCalledTimes(1);
   });

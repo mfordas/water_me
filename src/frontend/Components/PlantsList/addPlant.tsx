@@ -3,6 +3,8 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { addPlantToList } from '../../redux_actions/plantsActions';
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
+import { uploadPlantImage } from '../../redux_actions/plantsActions';
+import { handleUploadingFile } from './helpers';
 import setCurrentDate from './setCurrentDate';
 import { RootState } from '../../redux_reducers/';
 import NameInput from './nameInput';
@@ -16,10 +18,11 @@ export const AddPlant = ({
   addPlantToList,
   plantsData,
   showPlantsList,
+  uploadPlantImage,
 }: PropsFromRedux) => {
   const [name, setName] = useState('');
   const [wateringCycle, setWateringCycle] = useState(0);
-  const [picture, setPicture] = useState('');
+  const [pictureFile, setPictureFile] = useState<File | null>(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [startDate, setStartDate] = useState(setCurrentDate(new Date()));
@@ -38,18 +41,24 @@ export const AddPlant = ({
     event.preventDefault();
     setFormSubmitted(true);
 
-    if (name && wateringCycle && picture && startDate) {
-      const plantData = {
-        name: name,
-        wateringCycle: wateringCycle,
-        pictureUrl: picture,
-        wateringCycleBeginingData: startDate,
-        lastTimeWatered: startDate,
-      };
+    if (name && wateringCycle && pictureFile && startDate) {
+      const pictureName = await handleUploadingFile(
+        pictureFile,
+        uploadPlantImage
+      );
+      if (pictureName) {
+        const plantData = {
+          name: name,
+          wateringCycle: wateringCycle,
+          pictureUrl: pictureName,
+          wateringCycleBeginingData: startDate,
+          lastTimeWatered: startDate,
+        };
 
-      await addPlantToList(plantData, listId);
+        await addPlantToList(plantData, listId);
 
-      setFormSubmitted(false);
+        setFormSubmitted(false);
+      }
     }
   };
 
@@ -69,8 +78,8 @@ export const AddPlant = ({
         <DateInput startDate={startDate} setStartDate={setStartDate} />
         <ImageInput
           formSubmitted={formSubmitted}
-          picture={picture}
-          setPicture={setPicture}
+          pictureFile={pictureFile}
+          setPictureFile={setPictureFile}
         />
         <button onClick={(event) => handleAddingPlantToList(event)}>
           Dodaj
@@ -88,6 +97,7 @@ const mapStateToProps = (state: RootState, ownProps: { listId: number }) => ({
 const mapDispatch = {
   showPlantsList: showPlantsList,
   addPlantToList: addPlantToList,
+  uploadPlantImage: uploadPlantImage,
 };
 
 const connector = connect(mapStateToProps, mapDispatch);

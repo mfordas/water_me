@@ -1,20 +1,18 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import { uploadPlantImage } from '../../redux_actions/plantsActions';
 import ErrorMessage from '../ErrorMessage/errorMessage';
 import { RootState } from '../../redux_reducers/';
-import { handleUploadingFile } from './helpers';
+import { createFileToUpload } from './helpers';
 import './scss/plantsList.scss';
 
 export const ImageInput = ({
   formSubmitted,
-  picture,
-  setPicture,
-  uploadPlantImage,
+  pictureFile,
+  setPictureFile,
 }: PropsFromRedux) => {
   const validatePicture = () => {
-    if (formSubmitted && !picture) {
+    if (formSubmitted && !pictureFile) {
       return <ErrorMessage errorText='Dodaj zdjęcie' />;
     }
   };
@@ -27,7 +25,8 @@ export const ImageInput = ({
           type='file'
           name='image'
           onChange={async (event) => {
-            await handleUploadingFile(event, uploadPlantImage, setPicture);
+            const file = createFileToUpload(event);
+            setPictureFile(file);
           }}
         />
       </label>
@@ -40,21 +39,17 @@ const mapStateToProps = (
   state: RootState,
   ownProps: {
     formSubmitted: boolean;
-    picture: string;
-    setPicture: React.Dispatch<React.SetStateAction<string>>;
+    pictureFile: File | null;
+    setPictureFile: React.Dispatch<React.SetStateAction<File | null>>;
   }
 ) => ({
   plantsData: state.plantsData,
   formSubmitted: ownProps.formSubmitted,
-  picture: ownProps.picture,
-  setPicture: ownProps.setPicture,
+  pictureFile: ownProps.pictureFile,
+  setPictureFile: ownProps.setPictureFile,
 });
 
-const mapDispatch = {
-  uploadPlantImage: uploadPlantImage,
-};
-
-const connector = connect(mapStateToProps, mapDispatch);
+const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 

@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
+import fs from 'fs';
 
 import auth from '../middleware/authorization.js';
 import fileUpload from '../middleware/fileUpload.js';
@@ -15,6 +16,11 @@ interface IUserBodyForPlantsRoutes extends Request {
 const __dirname = path.resolve();
 
 const router = express.Router();
+
+const uploadFolder =
+  process.env.NODE_ENV === 'production'
+    ? process.env.IMAGES_UPLOAD_PATH_PROD
+    : process.env.IMAGES_UPLOAD_PATH_DEV;
 
 const getAllPlantsFromDB = async (
   req: Request,
@@ -35,11 +41,6 @@ const plantImageUpload = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const uploadFolder =
-    process.env.NODE_ENV === 'production'
-      ? process.env.IMAGES_UPLOAD_PATH_PROD
-      : process.env.IMAGES_UPLOAD_PATH_DEV;
-
   if (!uploadFolder) return res.status(404).send('Picture folder not found');
 
   const imagePath = path.join(__dirname, uploadFolder);
@@ -113,13 +114,19 @@ const deletePlant = async (
         },
       });
 
-      await Plant.destroy({
-        where: {
-          id: req.params.plantId,
-        },
-      });
+      if (plant) {
+        await Plant.destroy({
+          where: {
+            id: req.params.plantId,
+          },
+        });
 
-      if (plant) return res.status(200).send(`${plant.name} deleted`);
+        fs.rm(`${uploadFolder}/${plant.pictureUrl}.png`, () =>
+          console.log(`File ${plant.pictureUrl}.png removed`)
+        );
+
+        return res.status(200).send(`${plant.name} deleted`);
+      }
 
       if (!plant) return res.status(404).send('Plant not found');
     } catch (err) {

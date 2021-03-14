@@ -1,5 +1,5 @@
 import sequelize, { Optional, Model } from 'sequelize';
-import dbConnection from '../db/connection.js';
+import { mainSeqelizeInstation } from '../db/connection.js';
 
 export type TypePlantsList = {
   id: number;
@@ -14,12 +14,13 @@ export interface PlantsListInstance
   extends Model<TypePlantsList, TypePlantsListCreationAttributes>,
     TypePlantsList {}
 
-const PlantsList = dbConnection.define<PlantsListInstance>(
+const PlantsList = mainSeqelizeInstation.define<PlantsListInstance>(
   'PlantsList',
   {
     id: {
-      primaryKey: true,
       type: sequelize.DataTypes.INTEGER.UNSIGNED,
+      primaryKey: true,
+      autoIncrement: true,
     },
     userId: {
       type: sequelize.DataTypes.INTEGER,

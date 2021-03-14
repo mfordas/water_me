@@ -3,35 +3,63 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const dbHost =
-  process.env.NODE_ENV === 'production'
-    ? process.env.DB_HOST
-    : process.env.DB_HOST_DEV;
-const dbUser =
-  process.env.NODE_ENV === 'production'
-    ? process.env.DB_USER
-    : process.env.DB_USER_DEV;
-const dbPassword =
-  process.env.NODE_ENV === 'production'
-    ? process.env.DB_PASS
-    : process.env.DB_PASS_DEV;
-const dbName =
-  process.env.NODE_ENV === 'production'
-    ? process.env.DB_NAME
-    : process.env.DB_NAME_DEV;
+export const getByMode = (
+  prod: string | undefined,
+  dev: string | undefined,
+  test: string | undefined
+): string => {
+  if (process.env.NODE_ENV === 'production' && prod) {
+    return prod;
+  } else if (process.env.NODE_ENV === 'development' && dev) {
+    return dev;
+  } else if (process.env.NODE_ENV === 'test' && test) {
+    return test;
+  } else {
+    return 'defaultValue';
+  }
+};
 
-let connection: sequelize.Sequelize;
+export const config = {
+  dbHost: getByMode(
+    process.env.DB_HOST,
+    process.env.DB_HOST_DEV,
+    process.env.DB_HOST_TEST
+  ),
+  dbUser: getByMode(
+    process.env.DB_USER,
+    process.env.DB_USER_DEV,
+    process.env.DB_USER_TEST
+  ),
+  dbPassword: getByMode(
+    process.env.DB_PASS,
+    process.env.DB_PASS_DEV,
+    process.env.DB_PASS_TEST
+  ),
+  dbName: getByMode(
+    process.env.DB_NAME,
+    process.env.DB_NAME_DEV,
+    process.env.DB_NAME_TEST
+  ),
+};
 
-if (dbHost && dbUser && dbPassword && dbName) {
-  connection = new sequelize.Sequelize(dbName, dbUser, dbPassword, {
-    host: dbHost,
+export const mainSeqelizeInstation = new sequelize.Sequelize(
+  config.dbName,
+  config.dbUser,
+  config.dbPassword,
+  {
+    host: config.dbHost,
     dialect: 'mysql',
-  });
-} else {
-  connection = new sequelize.Sequelize('Testdb', 'Testuser', 'Testpassword', {
-    host: 'localhost',
-    dialect: 'mysql',
-  });
-}
+  }
+);
 
-export default connection;
+export const connectToDB = async (sequelizeInstation: Sequelize) => {
+  try {
+    await sequelizeInstation.authenticate();
+    console.log(`Connected to ${sequelizeInstation.config.database}`);
+    return sequelizeInstation;
+  } catch {
+    return new Error(
+      `Can not connect to ${sequelizeInstation.config.database}`
+    );
+  }
+};

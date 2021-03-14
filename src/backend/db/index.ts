@@ -1,5 +1,5 @@
-import dbConnection from "./connection.js";
-import register from "./register.js";
+import { connectToDB, mainSeqelizeInstation } from './connection.js';
+import register from './register.js';
 import models from './models.js';
 
-export { dbConnection, register, models };
+export { connectToDB, mainSeqelizeInstation, register, models };

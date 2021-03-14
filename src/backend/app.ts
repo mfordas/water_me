@@ -3,22 +3,38 @@ import path from 'path';
 import helmet from 'helmet';
 import fs from 'fs';
 
-import { dbConnection, register, models } from './db/index.js';
+import {
+  connectToDB,
+  mainSeqelizeInstation,
+  register,
+  models,
+} from './db/index.js';
 import { createDatabase, createTables } from './db/initializer.js';
 import users from './routes/users.js';
 import mainPage from './routes/mainPage.js';
 import plants from './routes/plants.js';
 import plantsLists from './routes/plantsLists.js';
 import authExternal from './routes/authExternal.js';
+import { Sequelize } from 'sequelize';
 
 const app = express();
 
-const connectToDB = async () => {
-  await dbConnection.authenticate();
+const dbInitialization = async (app: express.Express, models: any) => {
+  if (mainSeqelizeInstation instanceof Sequelize) {
+    let activeDbConnection: Sequelize | Error;
 
-  console.log(`Connected to ${dbConnection.config.database}`);
+    activeDbConnection = await connectToDB(mainSeqelizeInstation);
 
-  return dbConnection;
+    if (activeDbConnection instanceof Sequelize) {
+      register(app, activeDbConnection, models);
+    } else if (activeDbConnection instanceof Error) {
+      await createDatabase();
+      await createTables(mainSeqelizeInstation);
+      register(app, mainSeqelizeInstation, models);
+    }
+  }
+
+  return mainSeqelizeInstation;
 };
 
 const runApp = async () => {
@@ -29,13 +45,15 @@ const runApp = async () => {
     })
   );
 
-  const activeDbConnection = await connectToDB();
+  // const activeDbConnection = await connectToDB();
 
-  if (process.env.NODE_ENV === 'test') {
-    activeDbConnection.drop();
-    await createDatabase();
-    await createTables(dbConnection);
-  }
+  // if (process.env.NODE_ENV === 'test') {
+  //   activeDbConnection.drop();
+  //   await createDatabase();
+  //   await createTables(dbConnection);
+  // }
+
+  await dbInitialization(app, models);
 
   const dirname = path.resolve();
 
@@ -44,8 +62,6 @@ const runApp = async () => {
       console.log('Images folder created');
     });
   }
-
-  register(app, dbConnection, models);
 
   app.use(
     helmet({

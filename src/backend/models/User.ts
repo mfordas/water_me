@@ -1,5 +1,5 @@
 import sequelize, { Optional, Model } from 'sequelize';
-import dbConnection from '../db/connection.js';
+import { mainSeqelizeInstation } from '../db/connection.js';
 
 export type TypeUser = {
   id: number;
@@ -13,12 +13,13 @@ export interface UserInstance
   extends Model<TypeUser, TypeUserCreationAttributes>,
     TypeUser {}
 
-const User = dbConnection.define<UserInstance>(
+const User = mainSeqelizeInstation.define<UserInstance>(
   'User',
   {
     id: {
-      primaryKey: true,
       type: sequelize.DataTypes.INTEGER.UNSIGNED,
+      primaryKey: true,
+      autoIncrement: true,
     },
     googleId: {
       type: sequelize.DataTypes.STRING,

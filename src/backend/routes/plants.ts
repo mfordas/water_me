@@ -1,11 +1,11 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
-import fs from 'fs';
 
 import auth from '../middleware/authorization.js';
 import fileUpload from '../middleware/fileUpload.js';
 import resizeImage from '../Utils/resizeImage.js';
 import { Plant } from '../models/Plant.js';
+import { deletePlantPicture } from './utils/deleteAccountUtils.js';
 
 interface IUserBodyForPlantsRoutes extends Request {
   user: {
@@ -17,7 +17,7 @@ const __dirname = path.resolve();
 
 const router = express.Router();
 
-const uploadFolder =
+export const uploadFolder =
   process.env.NODE_ENV === 'production'
     ? process.env.IMAGES_UPLOAD_PATH_PROD
     : process.env.IMAGES_UPLOAD_PATH_DEV;
@@ -121,9 +121,7 @@ const deletePlant = async (
           },
         });
 
-        fs.rm(`${uploadFolder}/${plant.pictureUrl}.png`, () =>
-          console.log(`File ${plant.pictureUrl}.png removed`)
-        );
+        deletePlantPicture(plant);
 
         return res.status(200).send(`${plant.name} deleted`);
       }

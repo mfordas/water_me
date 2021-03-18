@@ -4,8 +4,13 @@ import verify from '../Utils/googleAuth.js';
 import generateAuthToken from '../Utils/generateAuthToken.js';
 import auth from '../middleware/authorization.js';
 import { User } from '../models/User.js';
-import { PlantsList } from '../models/PlantsList.js';
-import { Plant } from '../models/Plant.js';
+import {
+  findPlants,
+  findPlantsLists,
+  deletePlants,
+  deletePlantsLists,
+  deletePlantPicture,
+} from './utils/deleteAccountUtils.js';
 
 const router = express.Router();
 
@@ -86,40 +91,29 @@ const deleteAccount = async (
 
   if (!user) return res.status(404).send(new Error('User not found'));
 
-  if (user) {
-    const plantsLists = await PlantsList.findAll({
-      where: {
-        userId: req.body.userId,
-      },
-    });
+  const plantsLists = await findPlantsLists(user.id);
 
-    const deletedPlantRows = plantsLists.map(async (plantsList) => {
-      const plants = await Plant.findAll({
-        where: {
-          plantsListId: plantsList.id,
-        },
-      });
+  const deletedPlantsRows = await Promise.all(
+    plantsLists.map(async (plantsList) => {
+      const plants = await findPlants(plantsList.id);
+      plants.map((plant) => deletePlantPicture(plant));
+      return await deletePlants(plants);
+    })
+  );
 
-      const deletedPlantRows = await Plant.destroy({
-        where: { id: [...plants.map((plant) => plant.id)] },
-      });
-      return deletedPlantRows;
-    });
+  const deletedPlantsListsRows = await deletePlantsLists(plantsLists);
 
-    if (deletedPlantRows.length > 0) {
-      const deletedPlantsListsRows = await PlantsList.destroy({
-        where: {
-          id: [...plantsLists.map((plantsList) => plantsList.id)],
-        },
-      });
+  const deletedUsers = await User.destroy({
+    where: { googleId: user.googleId },
+  });
 
-      if (deletedPlantsListsRows >= 0) {
-        await User.destroy({ where: { googleId: user.googleId } });
+  console.info(
+    `Deleted: ${deletedPlantsRows.reduce(
+      (prevValue, currentValue) => prevValue + currentValue
+    )} plants, ${deletedPlantsListsRows} plants lists, ${deletedUsers} user`
+  );
 
-        return res.status(200).send('Account deleted');
-      }
-    }
-  }
+  return res.status(200).send('Account deleted');
 };
 
 router.delete('/deleteAccount', deleteAccount);

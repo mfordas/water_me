@@ -87,7 +87,7 @@ const deleteAccount = async (
   req: Request,
   res: Response
 ): Promise<Response | undefined> => {
-  const user = await User.findOne(req.body.id);
+  const user = await User.findOne({ where: { id: req.body.id } });
 
   if (!user) return res.status(404).send(new Error('User not found'));
 

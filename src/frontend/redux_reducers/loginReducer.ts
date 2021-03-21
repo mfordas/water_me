@@ -1,3 +1,5 @@
+import jwt from 'jwt-decode';
+
 import {
   loginExternalType,
   logoutType,
@@ -5,13 +7,15 @@ import {
   LoginState,
 } from '../redux_actions/loginTypes';
 
+const token = localStorage.getItem('token');
+
 export const initialState: LoginState = {
   loginData: {
-    name: '',
-    googleId: '',
+    name: token ? jwt<{ name: string }>(token).name : '',
+    googleId: token ? jwt<{ googleId: string }>(token).googleId : '',
     invalidData: false,
   },
-  isLogged: localStorage.getItem('token') ? true : false,
+  isLogged: token ? true : false,
 };
 
 const loginReducer = function (

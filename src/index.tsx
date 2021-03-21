@@ -13,6 +13,7 @@ import { store } from './frontend/redux_store/reduxStore';
 import HomePage from './frontend/Views/HomePage';
 import PlantsLists from './frontend/Views/PlantsLists';
 import PlantsList from './frontend/Views/PlantsList';
+import DeleteAccount from './frontend/Components/DeleteAccount/DeleteAccount';
 
 import './frontend/scss/main_styling.scss';
 
@@ -26,6 +27,7 @@ const App = () => {
           <PublicRoute exact path='/' component={HomePage} />
           <PrivateRoute exact path='/plantsLists' component={PlantsLists} />
           <PrivateRoute path='/plantsLists/' component={PlantsList} />
+          <PrivateRoute path='/userData/' component={DeleteAccount} />
           <Route render={() => <Redirect to='/' />} />
         </Switch>
       </div>

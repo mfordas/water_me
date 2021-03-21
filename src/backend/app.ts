@@ -45,14 +45,6 @@ const runApp = async () => {
     })
   );
 
-  // const activeDbConnection = await connectToDB();
-
-  // if (process.env.NODE_ENV === 'test') {
-  //   activeDbConnection.drop();
-  //   await createDatabase();
-  //   await createTables(dbConnection);
-  // }
-
   await dbInitialization(app, models);
 
   const dirname = path.resolve();

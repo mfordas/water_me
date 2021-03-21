@@ -5,7 +5,8 @@ import { loginExternalType, logoutType } from './loginTypes';
 import generateAuthTokenForExternalUser, {
   AuthObject,
 } from '../Utils/generateAuthTokenForExternalUser';
-import { AppThunk } from '../redux_store/reduxStore';
+import { AppThunk, AppThunkWithReturn } from '../redux_store/reduxStore';
+import setHeaders from '../Utils/setHeaders';
 
 export const loginExternal = (authObject: AuthObject): AppThunk => async (
   dispatch
@@ -53,9 +54,7 @@ export const loginExternal = (authObject: AuthObject): AppThunk => async (
 };
 
 export const logout = (): AppThunk => async (dispatch) => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('id');
-  localStorage.removeItem('name');
+  localStorage.clear();
   window.location.reload();
 
   dispatch({
@@ -67,4 +66,36 @@ export const logout = (): AppThunk => async (dispatch) => {
     },
     isLogged: false,
   });
+};
+
+export const deleteAccount = (): AppThunkWithReturn => async (dispatch) => {
+  try {
+    const res = await axios({
+      method: 'delete',
+      url: '/api/users/deleteAccount',
+      headers: setHeaders(),
+      data: {
+        id: localStorage.getItem('id'),
+      },
+    });
+
+    if (res.status === 200) {
+      localStorage.clear();
+      dispatch({
+        type: logoutType,
+        loginData: {
+          name: '',
+          googleId: '',
+          invalidData: false,
+        },
+        isLogged: false,
+      });
+      return `Konto usunięte.`;
+    } else {
+      throw Error(`Coś poszło nie tak: ${res.status}`);
+    }
+  } catch (error) {
+    console.error(error);
+    return `Nie mogliśmy usunać Twojego konta. Spróbuj ponownie.`;
+  }
 };

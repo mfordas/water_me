@@ -4,6 +4,13 @@ import verify from '../Utils/googleAuth.js';
 import generateAuthToken from '../Utils/generateAuthToken.js';
 import auth from '../middleware/authorization.js';
 import { User } from '../models/User.js';
+import {
+  findPlants,
+  findPlantsLists,
+  deletePlants,
+  deletePlantsLists,
+  deletePlantPicture,
+} from './utils/deleteAccountUtils.js';
 
 const router = express.Router();
 
@@ -75,5 +82,40 @@ const registerNewGoogleUser = async (
 };
 
 router.post('/googleUser', registerNewGoogleUser);
+
+const deleteAccount = async (
+  req: Request,
+  res: Response
+): Promise<Response | undefined> => {
+  const user = await User.findOne({ where: { id: req.body.id } });
+
+  if (!user) return res.status(404).send(new Error('User not found'));
+
+  const plantsLists = await findPlantsLists(user.id);
+
+  const deletedPlantsRows = await Promise.all(
+    plantsLists.map(async (plantsList) => {
+      const plants = await findPlants(plantsList.id);
+      plants.map((plant) => deletePlantPicture(plant));
+      return await deletePlants(plants);
+    })
+  );
+
+  const deletedPlantsListsRows = await deletePlantsLists(plantsLists);
+
+  const deletedUsers = await User.destroy({
+    where: { googleId: user.googleId },
+  });
+
+  console.info(
+    `Deleted: ${deletedPlantsRows.reduce(
+      (prevValue, currentValue) => prevValue + currentValue
+    )} plants, ${deletedPlantsListsRows} plants lists, ${deletedUsers} user`
+  );
+
+  return res.status(200).send('Account deleted');
+};
+
+router.delete('/deleteAccount', deleteAccount);
 
 export default router;

@@ -1,5 +1,6 @@
 export const loginExternalType = 'loginExternal';
 export const logoutType = 'logout';
+export const getMyDataType = 'getMyData';
 
 export interface LoginState {
   loginData: {

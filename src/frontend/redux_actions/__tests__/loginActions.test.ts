@@ -26,6 +26,7 @@ describe('Logout action', () => {
       invalidData: false,
     },
     isLogged: true,
+    errorMessage: '',
   });
 
   afterEach(() => {
@@ -57,6 +58,7 @@ describe('Login actions', () => {
         invalidData: false,
       },
       isLogged: false,
+      errorMessage: '',
     });
 
     const expectedPayload = {
@@ -102,6 +104,7 @@ describe('Login actions', () => {
         invalidData: false,
       },
       isLogged: false,
+      errorMessage: '',
     });
 
     const expectedPayload = {
@@ -136,6 +139,7 @@ describe('Login actions', () => {
         invalidData: false,
       },
       isLogged: false,
+      errorMessage: '',
     });
 
     const expectedPayload = {
@@ -175,6 +179,7 @@ describe('Delete account actions', () => {
         invalidData: false,
       },
       isLogged: true,
+      errorMessage: '',
     });
 
     const expectedPayload = {
@@ -204,6 +209,7 @@ describe('Delete account actions', () => {
         invalidData: false,
       },
       isLogged: true,
+      errorMessage: '',
     });
 
     const expectedPayload = {
@@ -213,6 +219,7 @@ describe('Delete account actions', () => {
         invalidData: false,
       },
       isLogged: true,
+      errorMessage: '',
     };
 
     nock(`http://localhost/api`).delete(`/users/deleteAccount`).reply(400);

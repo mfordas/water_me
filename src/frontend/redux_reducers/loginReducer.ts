@@ -16,6 +16,7 @@ export const initialState: LoginState = {
     invalidData: false,
   },
   isLogged: token ? true : false,
+  errorMessage: '',
 };
 
 const loginReducer = function (
@@ -28,6 +29,7 @@ const loginReducer = function (
         ...state,
         loginData: action.loginData,
         isLogged: action.isLogged,
+        errorMessage: action.errorMessage,
       };
     case logoutType:
       return {

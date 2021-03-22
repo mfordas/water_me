@@ -35,6 +35,7 @@ describe('Google auth component', () => {
       invalidData: false,
     },
     isLogged: true,
+    errorMessage: '',
   };
 
   wrapper = setUp(initialState);
@@ -55,6 +56,7 @@ describe('Should handle submit button', () => {
       invalidData: false,
     },
     isLogged: true,
+    errorMessage: '',
   };
 
   const component = setUpMount(initialState);
@@ -78,6 +80,7 @@ describe('When account is deleted', () => {
         invalidData: false,
       },
       isLogged: false,
+      errorMessage: '',
     };
 
     const wrapper = setUp(initialState);

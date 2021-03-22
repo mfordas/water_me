@@ -9,6 +9,7 @@ export interface LoginState {
     invalidData: boolean;
   };
   isLogged: boolean;
+  errorMessage: string;
 }
 
 export interface LoginExternalAction extends LoginState {

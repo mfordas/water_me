@@ -5,6 +5,7 @@ import {
   addPlantsList,
   getPlantsListsForUser,
 } from '../../redux_actions/plantsListsActions';
+import ErrorMessage from '../ErrorMessage/errorMessage';
 import { RootState } from '../../redux_reducers/';
 import './scss/plantsLists.scss';
 
@@ -16,7 +17,9 @@ export const AddPlantsList = ({
   const [submitPlantsList, setSubmitPlantsList] = useState(false);
 
   const verifyPlantsListName = () =>
-    !plantsListName && submitPlantsList ? 'Najpierw wpisz nazwę listy!' : null;
+    !plantsListName && submitPlantsList ? (
+      <ErrorMessage errorText='Najpierw wpisz nazwę listy!' />
+    ) : null;
 
   const addNewPlantsList = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

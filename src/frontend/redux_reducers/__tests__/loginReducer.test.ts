@@ -18,6 +18,7 @@ describe('Login Reducer', () => {
         invalidData: false,
       },
       isLogged: false,
+      errorMessage: '',
     });
   });
 
@@ -29,12 +30,14 @@ describe('Login Reducer', () => {
         invalidData: false,
       },
       isLogged: true,
+      errorMessage: '',
     };
 
     const newState = loginReducer(undefined, {
       type: loginExternalType,
       loginData: newLoginData.loginData,
       isLogged: newLoginData.isLogged,
+      errorMessage: newLoginData.errorMessage,
     });
 
     expect(newLoginData).toEqual(newState);
@@ -48,12 +51,14 @@ describe('Login Reducer', () => {
         invalidData: false,
       },
       isLogged: false,
+      errorMessage: '',
     };
 
     const newState = loginReducer(undefined, {
       type: logoutType,
       loginData: newLoginData.loginData,
       isLogged: newLoginData.isLogged,
+      errorMessage: newLoginData.errorMessage,
     });
 
     expect(newLoginData).toEqual(newState);

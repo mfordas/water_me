@@ -49,6 +49,7 @@ export const loginExternal = (authObject: AuthObject): AppThunk => async (
       loginData: {
         invalidData: true,
       },
+      errorMessage: `${error.response.data}`,
     });
   }
 };

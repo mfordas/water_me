@@ -93,13 +93,20 @@ const deleteAccount = async (
 
   const plantsLists = await findPlantsLists(user.id);
 
-  const deletedPlantsRows = await Promise.all(
+  const deletedPlantsRowsArray = await Promise.all(
     plantsLists.map(async (plantsList) => {
       const plants = await findPlants(plantsList.id);
       plants.map((plant) => deletePlantPicture(plant));
       return await deletePlants(plants);
     })
   );
+
+  const numberOfDeletedPlants =
+    deletedPlantsRowsArray.length > 0
+      ? deletedPlantsRowsArray.reduce(
+          (prevValue, currentValue) => prevValue + currentValue
+        )
+      : 0;
 
   const deletedPlantsListsRows = await deletePlantsLists(plantsLists);
 
@@ -108,9 +115,7 @@ const deleteAccount = async (
   });
 
   console.info(
-    `Deleted: ${deletedPlantsRows.reduce(
-      (prevValue, currentValue) => prevValue + currentValue
-    )} plants, ${deletedPlantsListsRows} plants lists, ${deletedUsers} user`
+    `Deleted: ${numberOfDeletedPlants} plants, ${deletedPlantsListsRows} plants lists, ${deletedUsers} user`
   );
 
   return res.status(200).send('Account deleted');

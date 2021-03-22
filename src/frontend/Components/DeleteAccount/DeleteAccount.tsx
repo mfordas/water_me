@@ -10,7 +10,7 @@ export const DeleteAccount = ({
   loginData,
 }: PropsFromRedux): JSX.Element => {
   return loginData.isLogged ? (
-    <div className='deleteAccount'>
+    <div className='deleteAccount' data-test='deleteAccountContainer'>
       <div className='personalDataContainer'>
         <p>Dane, które przechowujemy:</p>
         <p>

@@ -1,5 +1,8 @@
 import { loginExternalType, logoutType } from '../../redux_actions/loginTypes';
+
 import loginReducer, { initialState } from '../loginReducer';
+
+jest.mock('jwt-decode', () => () => 'testReturnValue');
 
 describe('Login Reducer', () => {
   it('Should return default state', () => {

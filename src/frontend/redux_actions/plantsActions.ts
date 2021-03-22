@@ -118,10 +118,10 @@ export const uploadPlantImage = (
       return res.data;
     }
   } catch (error) {
-    console.error('Error:', error.response.data);
     dispatch({
       type: uploadImageType,
       imageName: '',
     });
+    console.error('Error:', error.response.data);
   }
 };

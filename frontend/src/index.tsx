@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import Logo from './frontend/Components/Logo/logo';
-import FooterComponent from './frontend/Components/Footer';
-import Menu from './frontend/Components/Menu';
-import PublicRoute from './frontend/Components/PublicRoute';
-import PrivateRoute from './frontend/Components/PrivateRoute';
-import { store } from './frontend/redux_store/reduxStore';
+import Logo from './Components/Logo/logo';
+import FooterComponent from './Components/Footer';
+import Menu from './Components/Menu';
+import PublicRoute from './Components/PublicRoute';
+import PrivateRoute from './Components/PrivateRoute';
+import { store } from './redux_store/reduxStore';
 
-import HomePage from './frontend/Views/HomePage';
-import PlantsLists from './frontend/Views/PlantsLists';
-import PlantsList from './frontend/Views/PlantsList';
-import DeleteAccount from './frontend/Components/DeleteAccount/DeleteAccount';
+import HomePage from './Views/HomePage';
+import PlantsLists from './Views/PlantsLists';
+import PlantsList from './Views/PlantsList';
+import DeleteAccount from './Components/DeleteAccount/DeleteAccount';
 
-import './frontend/scss/main_styling.scss';
+import './scss/main_styling.scss';
 
 const App = () => {
   return (

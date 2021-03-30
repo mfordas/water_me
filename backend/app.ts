@@ -49,8 +49,8 @@ const runApp = async () => {
 
   const dirname = path.resolve();
 
-  if (!fs.existsSync(path.join(dirname, '/./build/images'))) {
-    fs.mkdir(path.join(dirname, '/./build/images'), () => {
+  if (!fs.existsSync(path.join(dirname, '/..frontend/build/images'))) {
+    fs.mkdir(path.join(dirname, '/../frontend/build/images'), () => {
       console.log('Images folder created');
     });
   }

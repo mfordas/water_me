@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fbf53b1b.chunk.css",
+    "main.js": "/static/js/main.cfbbc1f0.chunk.js",
+    "main.js.map": "/static/js/main.cfbbc1f0.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.8299e4cd.js",
+    "runtime-main.js.map": "/static/js/runtime-main.8299e4cd.js.map",
+    "static/js/2.0d8afec8.chunk.js": "/static/js/2.0d8afec8.chunk.js",
+    "static/js/2.0d8afec8.chunk.js.map": "/static/js/2.0d8afec8.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.fbf53b1b.chunk.css.map": "/static/css/main.fbf53b1b.chunk.css.map",
+    "static/js/2.0d8afec8.chunk.js.LICENSE.txt": "/static/js/2.0d8afec8.chunk.js.LICENSE.txt",
+    "static/media/main_styling.scss": "/static/media/KellySlab-Regular.5d65ab2b.ttf",
+    "static/media/logo.0f11214a.svg": "/static/media/logo.0f11214a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8299e4cd.js",
+    "static/js/2.0d8afec8.chunk.js",
+    "static/css/main.fbf53b1b.chunk.css",
+    "static/js/main.cfbbc1f0.chunk.js"
+  ]
+}

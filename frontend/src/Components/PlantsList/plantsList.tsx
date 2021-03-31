@@ -40,7 +40,7 @@ export const PlantsList = ({
         return (
           <div key={index} className='plantContainer'>
             <div>{plant.name}</div>
-            <img src={`../../images/${plant.pictureUrl}.png`} alt='Plant' />
+            <img src={`../../../images/${plant.pictureUrl}.png`} alt='Plant' />
             <div>Podlewanie co: {plant.wateringCycle}</div>
             <Watering
               lastWateringDate={plant.lastTimeWatered}

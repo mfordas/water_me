@@ -49,8 +49,10 @@ const runApp = async () => {
 
   const dirname = path.resolve();
 
-  if (!fs.existsSync(path.join(dirname, '/..frontend/build/images'))) {
-    fs.mkdir(path.join(dirname, '/../frontend/build/images'), () => {
+  console.log(path.join(dirname, '../frontend/build/images'));
+
+  if (!fs.existsSync(path.join(dirname, '../frontend/build/images'))) {
+    fs.mkdir(path.join(dirname, '../frontend/build/images'), () => {
       console.log('Images folder created');
     });
   }
@@ -60,7 +62,7 @@ const runApp = async () => {
       contentSecurityPolicy: false,
     })
   );
-  app.use(express.static(path.join(dirname, '/build/')));
+  app.use(express.static(path.join(dirname, '../frontend/build/')));
   app.use('/', mainPage);
   app.use('/api/users', users);
   app.use('/api/plants', plants);
@@ -68,7 +70,7 @@ const runApp = async () => {
   app.use('/api/authexternal', authExternal);
 
   app.get('*', function (req, res) {
-    res.sendFile(path.join(dirname + '/build/', 'index.html'));
+    res.sendFile(path.join(dirname + '../frontend/build/', 'index.html'));
   });
 
   const port = process.env.PORT || 8080;

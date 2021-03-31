@@ -45,6 +45,8 @@ const plantImageUpload = async (
 
   const imagePath = path.join(__dirname, uploadFolder);
 
+  console.log(path.join(__dirname, uploadFolder));
+
   if (!req.file) {
     return res.status(401).json({ error: 'Please provide an image' });
   }

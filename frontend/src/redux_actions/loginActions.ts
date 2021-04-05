@@ -20,6 +20,8 @@ export const loginExternal = (authObject: AuthObject): AppThunk => async (
       },
     });
 
+    console.log(res);
+
     if (res.status === 200) {
       const token: string = res.headers['x-auth-token'];
       const id: string = jwt<{ id: string }>(token).id;

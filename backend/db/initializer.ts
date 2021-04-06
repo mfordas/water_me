@@ -12,7 +12,7 @@ export const createDatabase = async (): Promise<Sequelize> => {
   const dbName = getByMode(
     process.env.DB_NAME,
     process.env.DB_NAME_DEV,
-    process.env.DB_HOST_DOCKER,
+    process.env.DB_NAME_DOCKER,
     process.env.DB_NAME_TEST
   );
 

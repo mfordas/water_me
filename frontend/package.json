@@ -58,7 +58,7 @@
     "node": "^12.16.0"
   },
   "type": "module",
-  "proxy": "http://localhost:8080/",
+  "proxy": "http://node-server:8080/",
   "devDependencies": {
     "@types/enzyme": "^3.10.8",
     "@types/jsonwebtoken": "^8.5.0",

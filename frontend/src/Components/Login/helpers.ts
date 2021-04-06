@@ -8,11 +8,8 @@ export const makeAuth = async (
   if (authObject) {
     try {
       await authObject.signIn();
-      console.log(authObject);
       await googleAction(authObject);
-      console.log('works2');
     } catch (err) {
-      console.log('works3');
       console.log(err);
       return err;
     }

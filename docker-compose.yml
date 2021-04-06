@@ -41,6 +41,8 @@ services:
       - MYSQL_USER=DockerUser
       - MYSQL_PASSWORD=DockerUserTestpassword
       - MYSQL_ROOT_PASSWORD=DockerUserTestpassword
+    ports:
+      - '3306:3306'
     networks:
       - water_me_app
     volumes:

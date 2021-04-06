@@ -26,6 +26,7 @@ const dbInitialization = async (app: express.Express, models: any) => {
     activeDbConnection = await connectToDB(mainSeqelizeInstation);
 
     if (activeDbConnection instanceof Sequelize) {
+      await createTables(mainSeqelizeInstation);
       register(app, activeDbConnection, models);
     } else if (activeDbConnection instanceof Error) {
       await createDatabase();

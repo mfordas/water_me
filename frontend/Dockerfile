@@ -5,15 +5,15 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . ./
-RUN npm run build
+# RUN npm run build
 
-FROM node:14-slim AS final
+# FROM node:14-slim AS final
 
-WORKDIR /app/frontend
+# WORKDIR /app/frontend
 
-RUN npm install -g serve
-COPY --from=builder /app/build ./build
+# RUN npm install -g serve
+# COPY --from=builder /app/build ./build
 
 EXPOSE "3000"
-CMD ["serve", "-s", "build", "-l", "3000"]
-# CMD ["npm", "run", "startReact"]
+# CMD ["serve", "-s", "build", "-l", "3000"]
+CMD [ "npm", "run", "startReact" ]

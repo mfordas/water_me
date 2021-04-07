@@ -8,6 +8,7 @@ import {
 } from './plantsListsTypes';
 import { AppThunk } from '../redux_store/reduxStore';
 import setHeaders from '../Utils/setHeaders';
+import { apiUrl } from '../Utils/apiUrl';
 
 export const addPlantsList = (plantsListName: string): AppThunk => async (
   dispatch
@@ -15,7 +16,7 @@ export const addPlantsList = (plantsListName: string): AppThunk => async (
   try {
     const res = await axios({
       method: 'post',
-      url: '/api/plantsLists',
+      url: `${apiUrl()}api/plantsLists`,
       headers: setHeaders(),
       data: {
         userId: localStorage.getItem('id'),
@@ -45,7 +46,7 @@ export const getPlantsListsForUser = (): AppThunk => async (
   try {
     const res = await axios({
       method: 'get',
-      url: `/api/plantsLists/${id}`,
+      url: `${apiUrl()}api/plantsLists/${id}`,
       headers: setHeaders(),
     });
 
@@ -71,7 +72,7 @@ export const deletePlantsList = (plantsListId: number): AppThunk => async (
   try {
     const res = await axios({
       method: 'delete',
-      url: `/api/plantsLists/${id}/${plantsListId}`,
+      url: `${apiUrl()}api/plantsLists/${id}/${plantsListId}`,
       headers: setHeaders(),
       data: {
         userId: id,
@@ -100,7 +101,7 @@ export const showPlantsList = (plantsListId: number): AppThunk => async (
   try {
     const res = await axios({
       method: 'get',
-      url: `/api/plants/${id}/${plantsListId}`,
+      url: `${apiUrl()}api/plants/${id}/${plantsListId}`,
       headers: setHeaders(),
     });
 

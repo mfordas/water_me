@@ -29,8 +29,7 @@ export const GoogleAuth = ({
       <ErrorMessage errorText={loginData.errorMessage} />
     </>
   ) : (
-    // <Redirect to='/plants' />
-    <></>
+    <Redirect to='/plants' />
   );
 };
 

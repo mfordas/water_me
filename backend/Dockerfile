@@ -1,14 +1,14 @@
 FROM node:14-slim
 
-WORKDIR /app/backend
+WORKDIR /backend
 
-COPY package.json package-lock.json ./
+COPY package.json /backend
 
 RUN npm install
 
 RUN npm install typescript -g
 
-COPY . ./
+COPY . /backend
 
 EXPOSE 8080
 

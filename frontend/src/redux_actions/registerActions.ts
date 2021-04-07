@@ -5,6 +5,7 @@ import { AppThunk } from '../redux_store/reduxStore';
 import generateAuthTokenForExternalUser, {
   AuthObject,
 } from '../Utils/generateAuthTokenForExternalUser';
+import { apiUrl } from '../Utils/apiUrl';
 
 export const postGoogleUser = (authObject: AuthObject): AppThunk => async (
   dispatch
@@ -12,7 +13,7 @@ export const postGoogleUser = (authObject: AuthObject): AppThunk => async (
   try {
     const res = await axios({
       method: 'post',
-      url: '/api/users/googleUser',
+      url: `${apiUrl()}api/users/googleUser`,
       data: { token: await generateAuthTokenForExternalUser(authObject) },
     });
 

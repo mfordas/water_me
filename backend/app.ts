@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import helmet from 'helmet';
 import fs from 'fs';
+import cors from 'cors';
 
 import {
   connectToDB,
@@ -39,6 +40,13 @@ const dbInitialization = async (app: express.Express, models: any) => {
 };
 
 const runApp = async () => {
+  app.use(
+    cors({
+      origin: 'http://localhost:3000',
+      allowedHeaders: ['x-auth-token', 'content-type'],
+      exposedHeaders: ['x-auth-token', 'content-type'],
+    })
+  );
   app.use(express.json());
   app.use(
     express.urlencoded({

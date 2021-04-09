@@ -1,13 +1,13 @@
 FROM node:14-slim
 
-WORKDIR /frontend
+WORKDIR /water_me_frontend
 
-COPY package.json /frontend
+COPY package.json .
 
 RUN npm install
 
-COPY . /frontend
+COPY . .
 
-EXPOSE "3000"
+EXPOSE 3000
 
 CMD [ "npm", "run", "startReact" ]

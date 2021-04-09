@@ -1,14 +1,14 @@
 FROM node:14-slim
 
-WORKDIR /backend
+WORKDIR /water_me_backend
 
-COPY package.json /backend
+COPY package.json .
 
 RUN npm install
 
 RUN npm install typescript -g
 
-COPY . /backend
+COPY . .
 
 EXPOSE 8080
 

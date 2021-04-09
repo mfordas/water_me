@@ -3,17 +3,19 @@ services:
   react-app:
     build:
       context: ./frontend
+      dockerfile: Dockerfile
     container_name: water_me_frontend
     environment:
       - NODE_ENV=docker
+      - CHOKIDAR_USEPOLLING=true
     restart: always
     ports:
       - '3000:3000'
     networks:
       - water_me_app
     volumes:
-      - ./frontend/:/frontend/
-      - node_modules_frontend:/frontend/node_modules
+      - ./frontend/:/water_me_frontend
+      - node_modules_frontend:/water_me_frontend/node_modules
     stdin_open: true
     depends_on:
       - node-server
@@ -21,17 +23,19 @@ services:
   node-server:
     build:
       context: ./backend
+      dockerfile: Dockerfile
     container_name: water_me_backend
     restart: always
     environment:
       - NODE_ENV=docker
+      - CHOKIDAR_USEPOLLING=true
     ports:
       - '8080:8080'
     networks:
       - water_me_app
     volumes:
-      - ./backend/:/backend/
-      - node_modules_backend:/backend/node_modules
+      - ./backend/:/water_me_backend
+      - node_modules_backend:/water_me_backend/node_modules
     stdin_open: true
     depends_on:
       - mysql
@@ -58,4 +62,6 @@ volumes:
   mysql-data:
     driver: local
   node_modules_frontend:
+    driver: local
   node_modules_backend:
+    driver: local

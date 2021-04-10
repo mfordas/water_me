@@ -8,6 +8,8 @@ import Watering from './watering';
 import { RootState } from '../../redux_reducers/';
 import { Plant } from '../../redux_actions/plantsTypes';
 import { useCreatePlantsList } from './hooks';
+import { apiUrl } from '../../Utils/apiUrl';
+
 import './scss/plantsList.scss';
 
 export type DeletePlantProps = {
@@ -40,7 +42,10 @@ export const PlantsList = ({
         return (
           <div key={index} className='plantContainer'>
             <div>{plant.name}</div>
-            <img src={`../../../images/${plant.pictureUrl}.png`} alt='Plant' />
+            <img
+              src={`${apiUrl()}static/images/${plant.pictureUrl}.png`}
+              alt='Plant'
+            />
             <div>Podlewanie co: {plant.wateringCycle}</div>
             <Watering
               lastWateringDate={plant.lastTimeWatered}

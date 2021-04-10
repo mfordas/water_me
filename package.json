@@ -6,6 +6,10 @@
   "private": true,
   "dependencies": {},
   "scripts": {
+    "startFrontend": "cd frontend && npm run startReact",
+    "startBackend": "cd backend && npm run mon",
+    "testFrontend": "set REACT_APP_NODE_ENV=test && cd frontend && npm run test",
+    "testFrontend-coverage": "set REACT_APP_NODE_ENV=test && cd frontend && npm run test-coverage",
     "dev": "concurrently -n express,startReact -k \"cd backend && npm run mon\" \"cd frontend && npm run startReact\""
   },
   "eslintConfig": {

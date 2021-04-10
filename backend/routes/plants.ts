@@ -13,8 +13,6 @@ interface IUserBodyForPlantsRoutes extends Request {
   };
 }
 
-const __dirname = path.resolve();
-
 const router = express.Router();
 
 export const uploadFolder =
@@ -43,9 +41,7 @@ const plantImageUpload = async (
 ): Promise<Response> => {
   if (!uploadFolder) return res.status(404).send('Picture folder not found');
 
-  const imagePath = path.join(__dirname, uploadFolder);
-
-  console.log(path.join(__dirname, uploadFolder));
+  const imagePath = path.join(uploadFolder);
 
   if (!req.file) {
     return res.status(401).json({ error: 'Please provide an image' });
@@ -66,7 +62,6 @@ const addPlantToDB = async (req: Request, res: Response): Promise<Response> => {
 
   try {
     const plant = await Plant.create(plantData);
-
     return res.status(200).send(plant);
   } catch (err) {
     console.log(err);

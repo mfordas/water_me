@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import helmet from 'helmet';
 import fs from 'fs';
+import cors from 'cors';
 
 import {
   connectToDB,
@@ -26,6 +27,7 @@ const dbInitialization = async (app: express.Express, models: any) => {
     activeDbConnection = await connectToDB(mainSeqelizeInstation);
 
     if (activeDbConnection instanceof Sequelize) {
+      await createTables(mainSeqelizeInstation);
       register(app, activeDbConnection, models);
     } else if (activeDbConnection instanceof Error) {
       await createDatabase();
@@ -38,6 +40,13 @@ const dbInitialization = async (app: express.Express, models: any) => {
 };
 
 const runApp = async () => {
+  app.use(
+    cors({
+      origin: 'http://localhost:3000',
+      allowedHeaders: ['x-auth-token', 'content-type'],
+      exposedHeaders: ['x-auth-token', 'content-type'],
+    })
+  );
   app.use(express.json());
   app.use(
     express.urlencoded({
@@ -49,10 +58,8 @@ const runApp = async () => {
 
   const dirname = path.resolve();
 
-  console.log(path.join(dirname, '../frontend/build/images'));
-
-  if (!fs.existsSync(path.join(dirname, '../frontend/build/images'))) {
-    fs.mkdir(path.join(dirname, '../frontend/build/images'), () => {
+  if (!fs.existsSync(path.join(dirname, '/images'))) {
+    fs.mkdir(path.join(dirname, '/images'), () => {
       console.log('Images folder created');
     });
   }
@@ -62,7 +69,7 @@ const runApp = async () => {
       contentSecurityPolicy: false,
     })
   );
-  app.use(express.static(path.join(dirname, '../frontend/build/')));
+  app.use(express.static('images'));
   app.use('/', mainPage);
   app.use('/api/users', users);
   app.use('/api/plants', plants);
@@ -70,7 +77,7 @@ const runApp = async () => {
   app.use('/api/authexternal', authExternal);
 
   app.get('*', function (req, res) {
-    res.sendFile(path.join(dirname + '../frontend/build/', 'index.html'));
+    res.sendFile(path.join(dirname + '/images/' + `${req.path.split('/')[3]}`));
   });
 
   const port = process.env.PORT || 8080;

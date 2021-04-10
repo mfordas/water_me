@@ -5,8 +5,9 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: water_me_frontend
+    env_file:
+      - ./frontend/.env
     environment:
-      - NODE_ENV=docker
       - CHOKIDAR_USEPOLLING=true
     restart: unless-stopped
     ports:
@@ -26,6 +27,8 @@ services:
       dockerfile: Dockerfile
     container_name: water_me_backend
     restart: unless-stopped
+    env_file:
+      - ./backend/.env
     environment:
       - NODE_ENV=docker
       - CHOKIDAR_USEPOLLING=true

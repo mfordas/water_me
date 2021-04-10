@@ -3,6 +3,7 @@ FROM node:14-slim
 WORKDIR /water_me_backend
 
 COPY package.json .
+COPY .env .
 
 RUN npm install
 

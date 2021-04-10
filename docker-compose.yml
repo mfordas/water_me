@@ -8,7 +8,7 @@ services:
     environment:
       - NODE_ENV=docker
       - CHOKIDAR_USEPOLLING=true
-    restart: always
+    restart: unless-stopped
     ports:
       - '3000:3000'
     networks:
@@ -25,7 +25,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: water_me_backend
-    restart: always
+    restart: unless-stopped
     environment:
       - NODE_ENV=docker
       - CHOKIDAR_USEPOLLING=true

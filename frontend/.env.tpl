@@ -1,0 +1,3 @@
+# Type your google auth api clientid here
+REACT_APP_GOOGLE_AUTH_API_CLIENTID=[ YOUR_GOOGLE_AUTH_API_CLIENTID_HERE ]
+REACT_APP_NODE_ENV=development

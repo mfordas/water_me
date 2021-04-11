@@ -14,9 +14,7 @@ export const loginExternal = (authObject: AuthObject): AppThunk => async (
 ) => {
   try {
     const res = await axios.post(`${apiUrl()}api/authexternal`, {
-      data: {
-        token: await generateAuthTokenForExternalUser(authObject),
-      },
+      token: await generateAuthTokenForExternalUser(authObject),
     });
 
     if (res.status === 200) {

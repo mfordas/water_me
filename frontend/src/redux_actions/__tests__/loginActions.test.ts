@@ -1,6 +1,7 @@
-import nock from 'nock';
 import configureStore from 'redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
+import axios from 'axios';
+
 import {
   deleteAccount,
   loginExternal,
@@ -17,6 +18,8 @@ const mockStore = configureStore<
 >(middlewares);
 
 jest.mock('jwt-decode', () => () => ({}));
+
+jest.mock('axios');
 
 describe('Logout action', () => {
   const store = mockStore({
@@ -51,6 +54,14 @@ describe('Logout action', () => {
 
 describe('Login actions', () => {
   test('Successful login action is sended with correct payload', async () => {
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+        data: { name: 'User 2', googleId: '12345' },
+        headers: { 'x-auth-token': '123456' },
+      })
+    );
+
     const store = mockStore({
       loginData: {
         name: '',
@@ -69,14 +80,6 @@ describe('Login actions', () => {
       },
       isLogged: true,
     };
-
-    nock(`http://localhost/api`)
-      .post(`/authexternal`)
-      .reply(
-        200,
-        { name: 'User 2', googleId: '12345' },
-        { 'x-auth-token': '123456' }
-      );
 
     const authTestObject: AuthObject = {
       currentUser: {
@@ -97,6 +100,12 @@ describe('Login actions', () => {
   });
 
   test('Action is sended with correct payload', async () => {
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 202,
+      })
+    );
+
     const store = mockStore({
       loginData: {
         name: '',
@@ -110,8 +119,6 @@ describe('Login actions', () => {
     const expectedPayload = {
       isLogged: false,
     };
-
-    nock(`http://localhost/api`).post(`/authexternal`).reply(202);
 
     const authTestObject: AuthObject = {
       currentUser: {
@@ -132,6 +139,13 @@ describe('Login actions', () => {
   });
 
   test('Error is sended with correct payload', async () => {
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.reject({
+        status: 404,
+        message: 'Error',
+      })
+    );
+
     const store = mockStore({
       loginData: {
         name: '',
@@ -148,8 +162,6 @@ describe('Login actions', () => {
       },
     };
 
-    nock(`http://localhost/api`).post(`/authexternal`).reply(404);
-
     const authTestObject: AuthObject = {
       currentUser: {
         get: () => {
@@ -161,6 +173,7 @@ describe('Login actions', () => {
         },
       },
     };
+
     await store.dispatch(loginExternal(authTestObject));
 
     expect(store.getActions()[0].type).toBe(loginExternalType);
@@ -171,7 +184,14 @@ describe('Login actions', () => {
 
 describe('Delete account actions', () => {
   test('Successful delete action is sended with correct payload', async () => {
+    (axios.delete as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+      })
+    );
+
     localStorage.setItem('id', '12');
+
     const store = mockStore({
       loginData: {
         name: 'TestName',
@@ -191,8 +211,6 @@ describe('Delete account actions', () => {
       isLogged: false,
     };
 
-    nock(`http://localhost/api`).delete(`/users/deleteAccount`).reply(200);
-
     const message = await store.dispatch(deleteAccount());
 
     expect(store.getActions()[0].type).toBe(logoutType);
@@ -202,6 +220,13 @@ describe('Delete account actions', () => {
   });
 
   test('Error is sended with correct payload', async () => {
+    (axios.delete as jest.Mock).mockReturnValue(
+      Promise.reject({
+        status: 400,
+        message: 'Error message',
+      })
+    );
+
     const store = mockStore({
       loginData: {
         name: 'TestName',
@@ -222,12 +247,44 @@ describe('Delete account actions', () => {
       errorMessage: '',
     };
 
-    nock(`http://localhost/api`).delete(`/users/deleteAccount`).reply(400);
-
     const message = await store.dispatch(deleteAccount());
 
-    console.log(message);
-    console.log();
+    expect(store.getActions()[0]).toBe(undefined);
+    expect(store.getState().loginData).toEqual(expectedPayload.loginData);
+    expect(store.getState().isLogged).toEqual(expectedPayload.isLogged);
+    expect(message).toBe(
+      `Nie mogliśmy usunać Twojego konta. Spróbuj ponownie.`
+    );
+  });
+
+  test('Error shoud be thronw and correct payload sended', async () => {
+    (axios.delete as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 202,
+      })
+    );
+
+    const store = mockStore({
+      loginData: {
+        name: 'TestName',
+        googleId: '123456789',
+        invalidData: false,
+      },
+      isLogged: true,
+      errorMessage: '',
+    });
+
+    const expectedPayload = {
+      loginData: {
+        name: 'TestName',
+        googleId: '123456789',
+        invalidData: false,
+      },
+      isLogged: true,
+      errorMessage: '',
+    };
+
+    const message = await store.dispatch(deleteAccount());
 
     expect(store.getActions()[0]).toBe(undefined);
     expect(store.getState().loginData).toEqual(expectedPayload.loginData);

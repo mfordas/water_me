@@ -11,9 +11,7 @@ export const postGoogleUser = (authObject: AuthObject): AppThunk => async (
   dispatch
 ) => {
   try {
-    const res = await axios({
-      method: 'post',
-      url: `${apiUrl()}api/users/googleUser`,
+    const res = await axios.post(`${apiUrl()}api/users/googleUser`, {
       data: { token: await generateAuthTokenForExternalUser(authObject) },
     });
 
@@ -39,7 +37,7 @@ export const postGoogleUser = (authObject: AuthObject): AppThunk => async (
       confirm: false,
       googleUser: true,
     });
-    console.error('Error Registration:', error);
+    console.error('Error Registration:', error.message);
   }
 };
 

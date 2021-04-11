@@ -1,6 +1,7 @@
-import nock from 'nock';
 import configureStore from 'redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
+import axios from 'axios';
+
 import {
   resetRegisterState,
   postGoogleUser,
@@ -19,6 +20,7 @@ const mockStore = configureStore<
 >(middlewares);
 
 jest.mock('jwt-decode', () => () => ({}));
+jest.mock('axios');
 
 describe('Reset register state action', () => {
   const store = mockStore({
@@ -51,6 +53,12 @@ describe('Reset register state action', () => {
 
 describe('Register actions', () => {
   test('Successful login action is sended with correct payload', async () => {
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+      })
+    );
+
     const store = mockStore({
       invalidData: true,
       confirm: false,
@@ -62,8 +70,6 @@ describe('Register actions', () => {
       confirm: true,
       googleUser: true,
     };
-
-    nock(`http://localhost/api`).post(`/users/googleUser`).reply(200);
 
     const authTestObject: AuthObject = {
       currentUser: {
@@ -89,6 +95,12 @@ describe('Register actions', () => {
   });
 
   test('Action is sended with correct payload', async () => {
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 202,
+      })
+    );
+
     const store = mockStore({
       invalidData: false,
       confirm: true,
@@ -100,8 +112,6 @@ describe('Register actions', () => {
       confirm: false,
       googleUser: true,
     };
-
-    nock(`http://localhost/api`).post(`/users/googleUser`).reply(202);
 
     const authTestObject: AuthObject = {
       currentUser: {
@@ -127,6 +137,13 @@ describe('Register actions', () => {
   });
 
   test('Error is sended with correct payload', async () => {
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.reject({
+        status: 400,
+        message: 'Error',
+      })
+    );
+
     const store = mockStore({
       invalidData: false,
       confirm: true,
@@ -138,8 +155,6 @@ describe('Register actions', () => {
       confirm: false,
       googleUser: true,
     };
-
-    nock(`http://localhost/api`).post(`/users/googleUser`).reply(400);
 
     const authTestObject: AuthObject = {
       currentUser: {

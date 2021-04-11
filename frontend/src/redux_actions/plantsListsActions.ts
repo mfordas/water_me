@@ -14,9 +14,7 @@ export const addPlantsList = (plantsListName: string): AppThunk => async (
   dispatch
 ) => {
   try {
-    const res = await axios({
-      method: 'post',
-      url: `${apiUrl()}api/plantsLists`,
+    const res = await axios.post(`${apiUrl()}api/plantsLists`, {
       headers: setHeaders(),
       data: {
         userId: localStorage.getItem('id'),
@@ -31,7 +29,7 @@ export const addPlantsList = (plantsListName: string): AppThunk => async (
       });
     }
   } catch (error) {
-    console.error('Error:', error.response.data);
+    console.error('Error:', error.message);
     dispatch({
       type: addPlantsListType,
       plantsListName: '',
@@ -44,9 +42,7 @@ export const getPlantsListsForUser = (): AppThunk => async (
 ): Promise<void> => {
   const id = localStorage.getItem('id');
   try {
-    const res = await axios({
-      method: 'get',
-      url: `${apiUrl()}api/plantsLists/${id}`,
+    const res = await axios.get(`${apiUrl()}api/plantsLists/${id}`, {
       headers: setHeaders(),
     });
 
@@ -57,7 +53,7 @@ export const getPlantsListsForUser = (): AppThunk => async (
       });
     }
   } catch (error) {
-    console.error('Error:', error.response.data);
+    console.error('Error:', error.message);
     dispatch({
       type: getPlantsListsType,
       plantsLists: [],
@@ -70,14 +66,15 @@ export const deletePlantsList = (plantsListId: number): AppThunk => async (
 ) => {
   const id = localStorage.getItem('id');
   try {
-    const res = await axios({
-      method: 'delete',
-      url: `${apiUrl()}api/plantsLists/${id}/${plantsListId}`,
-      headers: setHeaders(),
-      data: {
-        userId: id,
-      },
-    });
+    const res = await axios.delete(
+      `${apiUrl()}api/plantsLists/${id}/${plantsListId}`,
+      {
+        headers: setHeaders(),
+        data: {
+          userId: id,
+        },
+      }
+    );
 
     if (res.status === 200) {
       dispatch({
@@ -86,7 +83,7 @@ export const deletePlantsList = (plantsListId: number): AppThunk => async (
       });
     }
   } catch (error) {
-    console.error('Error:', error.response.data);
+    console.error('Error:', error.message);
     dispatch({
       type: deletePlantsListType,
       plantsListDeleted: false,
@@ -99,9 +96,7 @@ export const showPlantsList = (plantsListId: number): AppThunk => async (
 ) => {
   const id = localStorage.getItem('id');
   try {
-    const res = await axios({
-      method: 'get',
-      url: `${apiUrl()}api/plants/${id}/${plantsListId}`,
+    const res = await axios.get(`${apiUrl()}api/plants/${id}/${plantsListId}`, {
       headers: setHeaders(),
     });
 
@@ -112,7 +107,7 @@ export const showPlantsList = (plantsListId: number): AppThunk => async (
       });
     }
   } catch (error) {
-    console.error('Error:', error.response.data);
+    console.error('Error:', error.message);
     dispatch({
       type: showPlantsListType,
       plants: [],

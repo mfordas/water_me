@@ -13,15 +13,11 @@ export const loginExternal = (authObject: AuthObject): AppThunk => async (
   dispatch
 ) => {
   try {
-    const res = await axios({
-      method: 'post',
-      url: `${apiUrl()}api/authexternal`,
+    const res = await axios.post(`${apiUrl()}api/authexternal`, {
       data: {
         token: await generateAuthTokenForExternalUser(authObject),
       },
     });
-
-    console.log(res);
 
     if (res.status === 200) {
       const token: string = res.headers['x-auth-token'];
@@ -46,13 +42,13 @@ export const loginExternal = (authObject: AuthObject): AppThunk => async (
       });
     }
   } catch (error) {
-    console.error('Error Login:', error.response.data);
+    console.error('Error Login:', error.message);
     dispatch({
       type: loginExternalType,
       loginData: {
         invalidData: true,
       },
-      errorMessage: `${error.response.data}`,
+      errorMessage: `${error.message}`,
     });
   }
 };
@@ -74,9 +70,7 @@ export const logout = (): AppThunk => async (dispatch) => {
 
 export const deleteAccount = (): AppThunkWithReturn => async (dispatch) => {
   try {
-    const res = await axios({
-      method: 'delete',
-      url: `${apiUrl()}api/users/deleteAccount`,
+    const res = await axios.delete(`${apiUrl()}api/users/deleteAccount`, {
       headers: setHeaders(),
       data: {
         id: localStorage.getItem('id'),
@@ -99,7 +93,7 @@ export const deleteAccount = (): AppThunkWithReturn => async (dispatch) => {
       throw Error(`Coś poszło nie tak: ${res.status}`);
     }
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     return `Nie mogliśmy usunać Twojego konta. Spróbuj ponownie.`;
   }
 };

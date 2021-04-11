@@ -23,9 +23,7 @@ export const addPlantToList = (
   plantsListId: number
 ): AppThunk => async (dispatch) => {
   try {
-    const res = await axios({
-      method: 'post',
-      url: `${apiUrl()}api/plants/${plantsListId}`,
+    const res = await axios.post(`${apiUrl()}api/plants/${plantsListId}`, {
       headers: setHeaders(),
       data: plantDataFromUser,
     });
@@ -37,7 +35,7 @@ export const addPlantToList = (
       });
     }
   } catch (error) {
-    console.error('Error:', error.response.data);
+    console.error('Error:', error.message);
     dispatch({
       type: addPlantType,
       plantData: {},
@@ -48,11 +46,12 @@ export const addPlantToList = (
 export const deletePlant = (plantId: number): AppThunk => async (dispatch) => {
   const userId = localStorage.getItem('id');
   try {
-    const res = await axios({
-      method: 'delete',
-      url: `${apiUrl()}api/plants/${userId}/${plantId}`,
-      headers: setHeaders(),
-    });
+    const res = await axios.delete(
+      `${apiUrl()}api/plants/${userId}/${plantId}`,
+      {
+        headers: setHeaders(),
+      }
+    );
 
     if (res.status === 200) {
       dispatch({
@@ -61,7 +60,7 @@ export const deletePlant = (plantId: number): AppThunk => async (dispatch) => {
       });
     }
   } catch (error) {
-    console.error('Error:', error.response.data);
+    console.error('Error:', error.message);
     dispatch({
       type: deletePlantType,
       plantDeleted: false,
@@ -75,14 +74,15 @@ export const updateLastWateringDate = (
 ): AppThunk => async (dispatch) => {
   const userId = localStorage.getItem('id');
   try {
-    const res = await axios({
-      method: 'patch',
-      url: `${apiUrl()}api/plants/${userId}/${plantId}`,
-      headers: setHeaders(),
-      data: {
-        lastTimeWatered: lastWateringDate,
-      },
-    });
+    const res = await axios.patch(
+      `${apiUrl()}api/plants/${userId}/${plantId}`,
+      {
+        headers: setHeaders(),
+        data: {
+          lastTimeWatered: lastWateringDate,
+        },
+      }
+    );
 
     if (res.status === 200) {
       dispatch({
@@ -91,7 +91,7 @@ export const updateLastWateringDate = (
       });
     }
   } catch (error) {
-    console.error('Error:', error.response.data);
+    console.error('Error:', error.message);
     dispatch({
       type: updateLastWateringDateType,
       wateringDateUpdated: false,
@@ -103,9 +103,7 @@ export const uploadPlantImage = (
   fileObject: FormData
 ): AppThunkWithReturn => async (dispatch) => {
   try {
-    const res = await axios({
-      method: 'post',
-      url: `${apiUrl()}api/plants/image`,
+    const res = await axios.post(`${apiUrl()}api/plants/image`, {
       headers: setHeaders(),
       data: fileObject,
     });
@@ -123,6 +121,6 @@ export const uploadPlantImage = (
       type: uploadImageType,
       imageName: '',
     });
-    console.error('Error:', error.response.data);
+    console.error('Error:', error.message);
   }
 };

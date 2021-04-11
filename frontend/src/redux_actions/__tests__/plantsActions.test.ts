@@ -1,6 +1,7 @@
-import nock from 'nock';
+import axios from 'axios';
 import configureStore from 'redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
+
 import {
   addPlantToList,
   deletePlant,
@@ -22,6 +23,7 @@ const mockStore = configureStore<
 >(middlewares);
 
 jest.mock('jwt-decode', () => () => ({}));
+jest.mock('axios');
 
 describe('Add plant action', () => {
   const store = mockStore({
@@ -34,10 +36,18 @@ describe('Add plant action', () => {
   afterEach(() => {
     store.clearActions();
   });
+
   it('Action is sended with correct payload', async () => {
     const expectedPayload = {
       test: 'testData',
     };
+
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+        data: { ...expectedPayload },
+      })
+    );
 
     const testPlantListId = 1;
 
@@ -49,10 +59,6 @@ describe('Add plant action', () => {
       lastTimeWatered: '2022-01-01',
     };
 
-    nock(`http://localhost/api`).post(`/plants/${testPlantListId}`).reply(200, {
-      test: 'testData',
-    });
-
     await store.dispatch(addPlantToList(plantDataFromUser, testPlantListId));
 
     expect(store.getActions()[0].type).toBe(addPlantType);
@@ -60,6 +66,13 @@ describe('Add plant action', () => {
   });
 
   it('Action is sended with correct payload when there is an error', async () => {
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.reject({
+        status: 400,
+        message: 'Error message',
+      })
+    );
+
     const expectedPayload = {};
 
     const testPlantListId = 1;
@@ -71,8 +84,6 @@ describe('Add plant action', () => {
       wateringCycleBeginingData: '2022-01-01',
       lastTimeWatered: '2022-01-01',
     };
-
-    nock(`http://localhost/api`).post(`/plants/${testPlantListId}`).reply(400);
 
     await store.dispatch(addPlantToList(plantDataFromUser, testPlantListId));
 
@@ -103,11 +114,12 @@ describe('Delete plant action', () => {
       plantDeleted: true,
     };
 
-    nock(`http://localhost/api`)
-      .delete(`/plants/${testUserId}/${testPlantId}`)
-      .reply(200, {
-        test: 'testData',
-      });
+    (axios.delete as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+        data: { ...expectedPayload },
+      })
+    );
 
     await store.dispatch(deletePlant(testPlantId));
 
@@ -122,9 +134,12 @@ describe('Delete plant action', () => {
       plantDeleted: false,
     };
 
-    nock(`http://localhost/api`)
-      .delete(`/plants/${testUserId}/${testPlantId}`)
-      .reply(400);
+    (axios.delete as jest.Mock).mockReturnValue(
+      Promise.reject({
+        status: 400,
+        message: 'Error',
+      })
+    );
 
     await store.dispatch(deletePlant(testPlantId));
 
@@ -154,13 +169,15 @@ describe('Update watering action', () => {
   });
 
   it('Action is sended with correct payload', async () => {
+    (axios.patch as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+      })
+    );
+
     const expectedPayload = {
       wateringDateUpdated: true,
     };
-
-    nock(`http://localhost/api`)
-      .patch(`/plants/${testUserId}/${testPlantId}`)
-      .reply(200);
 
     await store.dispatch(
       updateLastWateringDate(testPlantId, testLastWateringDate)
@@ -173,13 +190,16 @@ describe('Update watering action', () => {
   });
 
   it('Action is sended with correct payload when error occures', async () => {
+    (axios.patch as jest.Mock).mockReturnValue(
+      Promise.reject({
+        status: 400,
+        message: 'Error',
+      })
+    );
+
     const expectedPayload = {
       wateringDateUpdated: false,
     };
-
-    nock(`http://localhost/api`)
-      .patch(`/plants/${testUserId}/${testPlantId}`)
-      .reply(400);
 
     await store.dispatch(
       updateLastWateringDate(testPlantId, testLastWateringDate)
@@ -215,13 +235,16 @@ describe('Upload image action', () => {
   });
 
   it('Action is sended with correct payload', async () => {
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+        data: testImageName,
+      })
+    );
+
     const expectedPayload = {
       imageName: testImageName,
     };
-
-    nock(`http://localhost/api`)
-      .post(`/plants/image`)
-      .reply(200, testImageName);
 
     await store.dispatch(uploadPlantImage(photoData));
 
@@ -230,11 +253,16 @@ describe('Upload image action', () => {
   });
 
   it('Action is sended with correct payload when error occures', async () => {
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.reject({
+        status: 400,
+        message: 'Error',
+      })
+    );
+
     const expectedPayload = {
       imageName: '',
     };
-
-    nock(`http://localhost/api`).post(`/plants/image`).reply(400);
 
     await store.dispatch(uploadPlantImage(photoData));
 

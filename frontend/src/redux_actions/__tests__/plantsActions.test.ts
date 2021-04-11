@@ -1,6 +1,7 @@
 import axios from 'axios';
 import configureStore from 'redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
+
 import {
   addPlantToList,
   deletePlant,

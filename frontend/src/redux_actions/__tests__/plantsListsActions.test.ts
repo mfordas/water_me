@@ -1,6 +1,7 @@
-import nock from 'nock';
+import axios from 'axios';
 import configureStore from 'redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
+
 import {
   addPlantsList,
   deletePlantsList,
@@ -24,6 +25,7 @@ const mockStore = configureStore<
 >(middlewares);
 
 jest.mock('jwt-decode', () => () => ({}));
+jest.mock('axios');
 
 const store = mockStore({
   plantsListName: '',
@@ -55,9 +57,13 @@ describe('Get plants lists action', () => {
         userId: 2,
       },
     ];
-    nock(`http://localhost/api`)
-      .get(`/plantsLists/${testUserId}`)
-      .reply(200, expectedPayload);
+
+    (axios.get as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+        data: expectedPayload,
+      })
+    );
 
     await store.dispatch(getPlantsListsForUser());
 
@@ -66,9 +72,14 @@ describe('Get plants lists action', () => {
   });
 
   it('Action is sended with correct payload when there is an error', async () => {
-    const expectedPayload: PlantsList[] = [];
+    (axios.get as jest.Mock).mockReturnValue(
+      Promise.reject({
+        status: 404,
+        message: 'Error',
+      })
+    );
 
-    nock(`http://localhost/api`).get(`/plantsLists/${testUserId}`).reply(404);
+    const expectedPayload: PlantsList[] = [];
 
     await store.dispatch(getPlantsListsForUser());
 
@@ -83,9 +94,13 @@ describe('Add plants lists action', () => {
   });
   it('Action is sended with correct payload', async () => {
     const testPlantListName = 'TestName';
-    nock(`http://localhost/api`)
-      .post(`/plantsLists`)
-      .reply(200, { name: testPlantListName });
+
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+        data: { name: testPlantListName },
+      })
+    );
 
     await store.dispatch(addPlantsList(testPlantListName));
 
@@ -96,7 +111,13 @@ describe('Add plants lists action', () => {
   it('Action is sended with correct payload when there is an error', async () => {
     const testPlantListName = 'TestName';
     const expectedPayload = '';
-    nock(`http://localhost/api`).post(`/plantsLists`).reply(404);
+
+    (axios.post as jest.Mock).mockReturnValue(
+      Promise.reject({
+        status: 404,
+        message: 'Error',
+      })
+    );
 
     await store.dispatch(addPlantsList(testPlantListName));
 
@@ -111,9 +132,12 @@ describe('Delete plants lists action', () => {
   });
   it('Action is sended with correct payload', async () => {
     const expectedPayload = true;
-    nock(`http://localhost/api`)
-      .delete(`/plantsLists/${testUserId}/${testPlantsListId}`)
-      .reply(200);
+
+    (axios.delete as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+      })
+    );
 
     await store.dispatch(deletePlantsList(testPlantsListId));
 
@@ -123,9 +147,13 @@ describe('Delete plants lists action', () => {
 
   it('Action is sended with correct payload when there is an error', async () => {
     const expectedPayload = false;
-    nock(`http://localhost/api`)
-      .delete(`/plantsLists/${testUserId}/${testPlantsListId}`)
-      .reply(400);
+
+    (axios.delete as jest.Mock).mockReturnValue(
+      Promise.reject({
+        status: 400,
+        message: 'Error',
+      })
+    );
 
     await store.dispatch(deletePlantsList(testPlantsListId));
 
@@ -151,9 +179,12 @@ describe('Show plants list action', () => {
       },
     ];
 
-    nock(`http://localhost/api`)
-      .get(`/plants/${testUserId}/${testPlantsListId}`)
-      .reply(200, expectedPayload);
+    (axios.get as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 200,
+        data: expectedPayload,
+      })
+    );
 
     await store.dispatch(showPlantsList(testPlantsListId));
 
@@ -164,9 +195,12 @@ describe('Show plants list action', () => {
   it('Action is sended with correct payload when there is an error', async () => {
     const expectedPayload: Plant[] = [];
 
-    nock(`http://localhost/api`)
-      .get(`/plants/${testUserId}/${testPlantsListId}`)
-      .reply(404);
+    (axios.get as jest.Mock).mockReturnValue(
+      Promise.reject({
+        status: 404,
+        message: 'Error',
+      })
+    );
 
     await store.dispatch(showPlantsList(testPlantsListId));
 

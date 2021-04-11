@@ -18,7 +18,7 @@ export const ShowPlantsLists = ({
     };
 
     getPlantsLists();
-  }, [getPlantsListsForUser]);
+  }, []);
 
   const generatePlantsLists = (plantsListsArray: PlantsList[]) => {
     return (

@@ -14,13 +14,16 @@ export const addPlantsList = (plantsListName: string): AppThunk => async (
   dispatch
 ) => {
   try {
-    const res = await axios.post(`${apiUrl()}api/plantsLists`, {
-      headers: setHeaders(),
-      data: {
+    const res = await axios.post(
+      `${apiUrl()}api/plantsLists`,
+      {
         userId: localStorage.getItem('id'),
         name: plantsListName,
       },
-    });
+      {
+        headers: setHeaders(),
+      }
+    );
 
     if (res.status === 200) {
       dispatch({

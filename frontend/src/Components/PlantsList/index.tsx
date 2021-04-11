@@ -17,7 +17,7 @@ export const PlantsListComponent = ({
     };
 
     getPlantsLists();
-  }, [getPlantsListsForUser]);
+  }, []);
 
   return (
     <Switch>

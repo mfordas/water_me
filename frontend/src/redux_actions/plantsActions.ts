@@ -23,10 +23,13 @@ export const addPlantToList = (
   plantsListId: number
 ): AppThunk => async (dispatch) => {
   try {
-    const res = await axios.post(`${apiUrl()}api/plants/${plantsListId}`, {
-      headers: setHeaders(),
-      data: plantDataFromUser,
-    });
+    const res = await axios.post(
+      `${apiUrl()}api/plants/${plantsListId}`,
+      plantDataFromUser,
+      {
+        headers: setHeaders(),
+      }
+    );
 
     if (res.status === 200) {
       dispatch({
@@ -77,11 +80,9 @@ export const updateLastWateringDate = (
     const res = await axios.patch(
       `${apiUrl()}api/plants/${userId}/${plantId}`,
       {
-        headers: setHeaders(),
-        data: {
-          lastTimeWatered: lastWateringDate,
-        },
-      }
+        lastTimeWatered: lastWateringDate,
+      },
+      { headers: setHeaders() }
     );
 
     if (res.status === 200) {
@@ -103,9 +104,8 @@ export const uploadPlantImage = (
   fileObject: FormData
 ): AppThunkWithReturn => async (dispatch) => {
   try {
-    const res = await axios.post(`${apiUrl()}api/plants/image`, {
+    const res = await axios.post(`${apiUrl()}api/plants/image`, fileObject, {
       headers: setHeaders(),
-      data: fileObject,
     });
 
     if (res.status === 200) {

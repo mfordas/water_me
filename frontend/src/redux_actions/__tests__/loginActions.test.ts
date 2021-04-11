@@ -256,4 +256,41 @@ describe('Delete account actions', () => {
       `Nie mogliśmy usunać Twojego konta. Spróbuj ponownie.`
     );
   });
+
+  test('Error shoud be thronw and correct payload sended', async () => {
+    (axios.delete as jest.Mock).mockReturnValue(
+      Promise.resolve({
+        status: 202,
+      })
+    );
+
+    const store = mockStore({
+      loginData: {
+        name: 'TestName',
+        googleId: '123456789',
+        invalidData: false,
+      },
+      isLogged: true,
+      errorMessage: '',
+    });
+
+    const expectedPayload = {
+      loginData: {
+        name: 'TestName',
+        googleId: '123456789',
+        invalidData: false,
+      },
+      isLogged: true,
+      errorMessage: '',
+    };
+
+    const message = await store.dispatch(deleteAccount());
+
+    expect(store.getActions()[0]).toBe(undefined);
+    expect(store.getState().loginData).toEqual(expectedPayload.loginData);
+    expect(store.getState().isLogged).toEqual(expectedPayload.isLogged);
+    expect(message).toBe(
+      `Nie mogliśmy usunać Twojego konta. Spróbuj ponownie.`
+    );
+  });
 });

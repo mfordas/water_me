@@ -1,6 +1,8 @@
 import express, { Request, Response } from 'express';
+
 import auth from '../middleware/authorization.js';
 import { PlantsList } from '../models/PlantsList.js';
+import { removePlantsListWithAllPlants } from './utils/deleteAccountUtils.js';
 
 const router = express.Router();
 
@@ -74,7 +76,9 @@ const deletePlantsList = async (
         },
       });
 
-      return res.status(200).send('Plants list deleted');
+      await removePlantsListWithAllPlants(parseInt(req.params.plantsListId));
+
+      return res.status(200).send('Plants list with all plants deleted');
     } catch (err) {
       console.log(new Error(err));
       return res.send(err);

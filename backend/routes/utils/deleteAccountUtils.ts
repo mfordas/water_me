@@ -47,3 +47,11 @@ export const deletePlantPicture = (plant: PlantInstance) => {
     console.log(`File ${plant.pictureUrl}.png removed`)
   );
 };
+
+export const removePlantsListWithAllPlants = async (
+  plantsListId: number
+): Promise<number> => {
+  const plants = await findPlants(plantsListId);
+  plants.map((plant) => deletePlantPicture(plant));
+  return await deletePlants(plants);
+};

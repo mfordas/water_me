@@ -5,11 +5,9 @@ import generateAuthToken from '../Utils/generateAuthToken.js';
 import auth from '../middleware/authorization.js';
 import { User } from '../models/User.js';
 import {
-  findPlants,
   findPlantsLists,
-  deletePlants,
   deletePlantsLists,
-  deletePlantPicture,
+  removePlantsListWithAllPlants,
 } from './utils/deleteAccountUtils.js';
 
 const router = express.Router();
@@ -95,9 +93,7 @@ const deleteAccount = async (
 
   const deletedPlantsRowsArray = await Promise.all(
     plantsLists.map(async (plantsList) => {
-      const plants = await findPlants(plantsList.id);
-      plants.map((plant) => deletePlantPicture(plant));
-      return await deletePlants(plants);
+      return await removePlantsListWithAllPlants(plantsList.id);
     })
   );
 

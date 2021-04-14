@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { RootState } from '../../redux_reducers/';
+import { LoginState } from '../../redux_actions/loginTypes';
 
 import './scss/footer.scss';
 
-const Footer = () => {
+export const Footer = ({ loginData }: { loginData: LoginState }) => {
   return (
     <footer>
       <div className='footerItem' data-test='footerComponent'>
@@ -13,9 +17,15 @@ const Footer = () => {
         </a>{' '}
         {new Date().getFullYear()}
       </div>
-      <Link to='/userData/'>| Moje dane</Link>
+      {loginData.isLogged && <Link to='/userData/'>| Moje dane</Link>}
     </footer>
   );
 };
 
-export default Footer;
+const mapStateToProps = (state: RootState) => ({
+  loginData: state.loginData,
+});
+
+const connector = connect(mapStateToProps);
+
+export const FooterConnected = connector(Footer);

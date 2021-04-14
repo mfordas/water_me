@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import ErrorMessage from '../ErrorMessage/errorMessage';
 import { RootState } from '../../redux_reducers/';
 import { createFileToUpload } from './helpers';
+
 import './scss/plantsList.scss';
 
 export const ImageInput = ({
@@ -11,10 +12,17 @@ export const ImageInput = ({
   pictureFile,
   setPictureFile,
 }: PropsFromRedux) => {
+  const [pictureUrl, setPictureUrl] = useState('');
+
   const validatePicture = () => {
     if (formSubmitted && !pictureFile) {
       return <ErrorMessage errorText='Dodaj zdjęcie' />;
     }
+  };
+
+  const generatePicturePreview = (pictureFile: File) => {
+    const generatedUrl = window.URL.createObjectURL(pictureFile);
+    setPictureUrl(generatedUrl);
   };
 
   return (
@@ -27,10 +35,14 @@ export const ImageInput = ({
           onChange={async (event) => {
             const file = createFileToUpload(event);
             setPictureFile(file);
+            generatePicturePreview(file);
           }}
         />
       </label>
       {validatePicture()}
+      {pictureUrl && (
+        <img className='picturePreview' src={pictureUrl} alt='Plant' />
+      )}
     </>
   );
 };

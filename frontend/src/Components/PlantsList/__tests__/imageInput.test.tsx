@@ -18,7 +18,11 @@ jest.mock('../helpers', () => {
 
 const mockSetPictureFile = jest.fn();
 
-const setUp = (formSubmitted: boolean, pictureFile: File) => {
+window.URL.createObjectURL = () => 'TestUrlForPicture';
+
+const testFile = new File([JSON.stringify('TestFile')], 'testFile.json');
+
+const setUp = (formSubmitted: boolean, pictureFile: File | null) => {
   const wrapper = shallow(
     <ImageInput
       formSubmitted={formSubmitted}
@@ -30,7 +34,10 @@ const setUp = (formSubmitted: boolean, pictureFile: File) => {
   return wrapper;
 };
 
-const setUpMount = (formSubmitted: boolean, picture: File): ReactWrapper => {
+const setUpMount = (
+  formSubmitted: boolean,
+  picture: File | null
+): ReactWrapper => {
   const wrapper = mount(
     <ImageInput
       formSubmitted={formSubmitted}
@@ -44,13 +51,13 @@ const setUpMount = (formSubmitted: boolean, picture: File): ReactWrapper => {
 
 describe('Image input component', () => {
   it('Should render without error', () => {
-    const wrapper: ShallowWrapper = setUp(false, '12345');
+    const wrapper: ShallowWrapper = setUp(false, testFile);
     const component = findByDataTestAtrr(wrapper, 'ImageInput');
     expect(component.length).toBe(1);
   });
 
   it('Should show error message', async () => {
-    const wrapper: ShallowWrapper = setUp(true, '');
+    const wrapper: ShallowWrapper = setUp(true, null);
 
     const errorMessage = wrapper.find(ErrorMessage);
 
@@ -60,14 +67,22 @@ describe('Image input component', () => {
 });
 
 describe('Should handle input change', () => {
-  const component = setUpMount(true, 'testImagePath');
+  const component = setUpMount(true, testFile);
 
   it('Should emit callback on change event', async () => {
-    (createFileToUpload as jest.Mock).mockImplementation(() => {});
+    (createFileToUpload as jest.Mock).mockImplementation(() => testFile);
     const inputElement = component.find('input').at(0);
 
-    await act(async () => inputElement.prop('onChange')(undefined));
+    await act(async () =>
+      inputElement.prop('onChange')({
+        target: { files: [testFile] },
+        preventDefault: () => jest.fn(),
+      })
+    );
+
+    component.update();
 
     expect(createFileToUpload).toHaveBeenCalledTimes(1);
+    expect(component.find('.picturePreview').length).toBe(1);
   });
 });

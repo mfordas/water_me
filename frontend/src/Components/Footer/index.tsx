@@ -1,10 +1,8 @@
 import React from 'react';
-import Footer from './footer';
+import { FooterConnected } from './footer';
 
 const FooterComponent = () => {
-        return (
-            <Footer />
-        );
-}
+  return <FooterConnected />;
+};
 
 export default FooterComponent;

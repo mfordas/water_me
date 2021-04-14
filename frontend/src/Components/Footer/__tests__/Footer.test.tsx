@@ -1,28 +1,64 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { shallow, ShallowWrapper } from 'enzyme';
-import FooterComponent from '../index';
+
+import { Footer } from '../footer';
+import { LoginState } from '../../../redux_actions/loginTypes';
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 
-const setUp = () => {
-  const component = shallow(<FooterComponent />);
+const testLoginDataWhenLogged: LoginState = {
+  loginData: {
+    name: 'TestName',
+    googleId: '123456789',
+    invalidData: false,
+  },
+  isLogged: true,
+  errorMessage: '',
+};
+
+const testLoginDataWhenNotLogged: LoginState = {
+  loginData: {
+    name: 'TestName',
+    googleId: '123456789',
+    invalidData: false,
+  },
+  isLogged: false,
+  errorMessage: '',
+};
+
+const setUp = (loginData: LoginState) => {
+  const component = shallow(<Footer loginData={loginData} />);
   return component;
 };
 
-describe('FooterComponent component', () => {
+describe('Footer', () => {
   let component: ShallowWrapper;
-  beforeEach(() => {
-    component = setUp();
+  afterEach(() => {
+    component.unmount();
   });
 
   it('should render without errors', () => {
-    const wrapper = findByDataTestAtrr(component.dive(), 'footerComponent');
+    component = setUp(testLoginDataWhenNotLogged);
+    const wrapper = findByDataTestAtrr(component, 'footerComponent');
+    const linkToWebsite = findByDataTestAtrr(component, 'linkInFooter');
 
+    const personalDataLink = component.find(Link);
+
+    expect(linkToWebsite.length).toBe(1);
+    expect(linkToWebsite.text()).toContain('Mateusz Fordas');
     expect(wrapper.length).toBe(1);
+    expect(personalDataLink.length).toBe(0);
   });
 
-  it('Should render a link', () => {
-    const wrapper = findByDataTestAtrr(component.dive(), 'linkInFooter');
+  it('should render link to personal data screen when user is logged in', () => {
+    component = setUp(testLoginDataWhenLogged);
+    const linkToWebsite = findByDataTestAtrr(component, 'linkInFooter');
 
-    expect(wrapper.length).toBe(1);
+    const personalDataLink = component.find(Link);
+
+    expect(linkToWebsite.length).toBe(1);
+    expect(linkToWebsite.text()).toContain('Mateusz Fordas');
+    expect(personalDataLink.length).toBe(1);
+    expect(personalDataLink.text()).toContain('Moje dane');
   });
 });

@@ -1,10 +1,10 @@
 import express, { Request, Response } from 'express';
 
-import auth from '../middleware/authorization.js';
+import { auth } from '../middleware/authorization.js';
 import { PlantsList } from '../models/PlantsList.js';
 import { removePlantsListWithAllPlants } from './utils/deleteAccountUtils.js';
 
-const router = express.Router();
+export const router = express.Router();
 
 const getAllPlantsListsFromDB = async (
   req: Request,
@@ -116,5 +116,3 @@ const showPlantsList = async (
 };
 
 router.get('/:userId/:plantsListId', auth, showPlantsList);
-
-export default router;

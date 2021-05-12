@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
 
-import auth from '../middleware/authorization.js';
-import fileUpload from '../middleware/fileUpload.js';
-import resizeImage from '../Utils/resizeImage.js';
+import { auth } from '../middleware/authorization.js';
+import { fileUpload } from '../middleware/fileUpload.js';
+import { resizeImage } from '../Utils/resizeImage.js';
 import { Plant } from '../models/Plant.js';
 import { deletePlantPicture } from './utils/deleteAccountUtils.js';
 
@@ -13,7 +13,7 @@ interface IUserBodyForPlantsRoutes extends Request {
   };
 }
 
-const router = express.Router();
+export const router = express.Router();
 
 export const uploadFolder =
   process.env.NODE_ENV === 'production'
@@ -169,5 +169,3 @@ const updateLastWateringDate = async (
 };
 
 router.patch('/:userId/:plantId', auth, updateLastWateringDate);
-
-export default router;

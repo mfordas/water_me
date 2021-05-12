@@ -11,11 +11,11 @@ import {
   models,
 } from './db/index.js';
 import { createDatabase, createTables } from './db/initializer.js';
-import users from './routes/users.js';
-import mainPage from './routes/mainPage.js';
-import plants from './routes/plants.js';
-import plantsLists from './routes/plantsLists.js';
-import authExternal from './routes/authExternal.js';
+import { router as users } from './routes/users.js';
+import { router as mainPage } from './routes/mainPage.js';
+import { router as plants } from './routes/plants.js';
+import { router as plantsLists } from './routes/plantsLists.js';
+import { router as authExternal } from './routes/authExternal.js';
 import { Sequelize } from 'sequelize';
 
 const app = express();

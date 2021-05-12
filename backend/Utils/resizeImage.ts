@@ -2,7 +2,7 @@ import sharp from 'sharp';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
-const resizeImage = async (fileBuffer: Buffer, imagesFolder: string) => {
+export const resizeImage = async (fileBuffer: Buffer, imagesFolder: string) => {
   const fileName = uuidv4();
   const filePath = path.resolve(`${imagesFolder}/${fileName}.png`);
 
@@ -15,5 +15,3 @@ const resizeImage = async (fileBuffer: Buffer, imagesFolder: string) => {
 
   return fileName;
 };
-
-export default resizeImage;

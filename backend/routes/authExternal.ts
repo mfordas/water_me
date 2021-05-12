@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import express, { Response, Request } from 'express';
-import verify from '../Utils/googleAuth.js';
+import { verify } from '../Utils/googleAuth.js';
 import { TokenPayload } from 'google-auth-library';
 import { TypeUser, User } from '../models/User.js';
 
@@ -8,7 +8,7 @@ type GooglePayload = {
   dataValues: TypeUser;
 };
 
-const router = express.Router();
+export const router = express.Router();
 
 const verifyExternalUser = async (
   req: Request
@@ -78,5 +78,3 @@ const authorizeExternalUser = async (
 };
 
 router.post('/', authorizeExternalUser);
-
-export default router;

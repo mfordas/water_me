@@ -10,7 +10,7 @@ type Models = {
   PlantsList: sequelize.ModelCtor<PlantsListInstance>;
 };
 
-const register = (
+export const register = (
   app: express.Express,
   db: sequelize.Sequelize,
   models: Models
@@ -23,5 +23,3 @@ const register = (
   });
   return app;
 };
-
-export default register;

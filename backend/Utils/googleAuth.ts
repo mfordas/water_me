@@ -5,7 +5,7 @@ interface IBodyRequestForGoogleAuth extends Request {
   token: string;
 }
 
-export default async function verify(
+export async function verify(
   req: Request
 ): Promise<GoogleAuth.TokenPayload | Error> {
   const client = new GoogleAuth.OAuth2Client(
@@ -30,4 +30,4 @@ export default async function verify(
   } catch (error) {
     return error;
   }
-}
+};

@@ -5,7 +5,7 @@ interface IBodyRequestForAuthComp extends Request {
   user: Object;
 }
 
-const auth = (req: Request, res: Response, next: NextFunction): void => {
+export const auth = (req: Request, res: Response, next: NextFunction): void => {
   const requestWithType = req as IBodyRequestForAuthComp;
   const token = req.header('x-auth-token');
 
@@ -21,5 +21,3 @@ const auth = (req: Request, res: Response, next: NextFunction): void => {
     }
   }
 };
-
-export default auth;

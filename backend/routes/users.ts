@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 
-import verify from '../Utils/googleAuth.js';
-import generateAuthToken from '../Utils/generateAuthToken.js';
-import auth from '../middleware/authorization.js';
+import { verify } from '../Utils/googleAuth.js';
+import { generateAuthToken } from '../Utils/generateAuthToken.js';
+import { auth } from '../middleware/authorization.js';
 import { User } from '../models/User.js';
 import {
   findPlantsLists,
@@ -10,7 +10,7 @@ import {
   removePlantsListWithAllPlants,
 } from './utils/deleteAccountUtils.js';
 
-const router = express.Router();
+export const router = express.Router();
 
 const getAllUsersFromDB = async (
   req: Request,
@@ -118,5 +118,3 @@ const deleteAccount = async (
 };
 
 router.delete('/deleteAccount', deleteAccount);
-
-export default router;

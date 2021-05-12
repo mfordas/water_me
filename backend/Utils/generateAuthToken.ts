@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { TypeUser } from '../models/User';
 
-const generateAuthToken = (user: TypeUser): void | string => {
+export const generateAuthToken = (user: TypeUser): void | string => {
   if (process.env.JWTPRIVATEKEY) {
     const token = jwt.sign(
       {
@@ -14,5 +14,3 @@ const generateAuthToken = (user: TypeUser): void | string => {
     console.error('No private token provided in env variables');
   }
 };
-
-export default generateAuthToken;

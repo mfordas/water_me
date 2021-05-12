@@ -7,7 +7,7 @@ import { GoogleRegister } from '../googleRegister';
 import { initialState } from '../../../redux_reducers/registerReducer';
 import { RegisterState } from '../../../redux_actions/registerTypes';
 import { makeAuth } from '../../Login/helpers';
-import ConfirmGoogle from '../confirmGoogle';
+import { ConfirmGoogleConnected } from '../confirmGoogle';
 
 jest.mock('../../Login/helpers', () => {
   const helpers = jest.requireActual('../../Login/helpers');
@@ -89,6 +89,6 @@ describe('When registered', () => {
 
     const wrapper = setUp(initialState);
 
-    expect(wrapper.find(ConfirmGoogle).length).toBe(1);
+    expect(wrapper.find(ConfirmGoogleConnected).length).toBe(1);
   });
 });

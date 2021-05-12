@@ -19,7 +19,7 @@ export const initialState: LoginState = {
   errorMessage: '',
 };
 
-const loginReducer = function (
+export const loginReducer = function (
   state = initialState,
   action: LoginActionsType
 ): LoginState {
@@ -41,5 +41,3 @@ const loginReducer = function (
       return state;
   }
 };
-
-export default loginReducer;

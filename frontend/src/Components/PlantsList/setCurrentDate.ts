@@ -1,4 +1,4 @@
-const setCurrentDate = (date: Date): string => {
+export const setCurrentDate = (date: Date): string => {
   const year = date.getUTCFullYear();
   const month =
     date.getUTCMonth() < 9
@@ -9,5 +9,3 @@ const setCurrentDate = (date: Date): string => {
 
   return `${year}-${month}-${day}`;
 };
-
-export default setCurrentDate;

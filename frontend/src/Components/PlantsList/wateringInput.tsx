@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ErrorMessage from '../ErrorMessage/errorMessage';
+import { ErrorMessage } from '../ErrorMessage/errorMessage';
 
 import './scss/plantsList.scss';
 
@@ -39,5 +39,3 @@ export const WateringInput = ({
     </>
   );
 };
-
-export default WateringInput;

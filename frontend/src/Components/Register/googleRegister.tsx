@@ -1,6 +1,6 @@
 import { connect, ConnectedProps } from 'react-redux';
 
-import ConfirmGoogle from './confirmGoogle';
+import { ConfirmGoogleConnected } from './confirmGoogle';
 import { postGoogleUser } from '../../redux_actions/registerActions';
 import { RootState } from '../../redux_reducers/';
 import { useHandleGoogleApi } from '../Login/hooks';
@@ -31,7 +31,7 @@ export const GoogleRegister = ({
           <div className='googleButtonText'>Zarejestruj przez Google</div>
         </button>
       ) : (
-        <ConfirmGoogle />
+        <ConfirmGoogleConnected />
       )}
     </div>
   );
@@ -49,4 +49,4 @@ const connector = connect(mapStateToProps, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(GoogleRegister);
+export const GoogleRegisterConnected = connector(GoogleRegister);

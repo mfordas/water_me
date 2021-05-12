@@ -52,4 +52,4 @@ const connector = connect(mapStateToProps, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(DeleteAccount);
+export const DeleteAccountConnected = connector(DeleteAccount);

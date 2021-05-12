@@ -4,11 +4,11 @@ import {
   getPlantsListsType,
   showPlantsListType,
 } from '../../redux_actions/plantsListsTypes';
-import plantsListsReducer, { initialState } from '../plantsListsReducer';
+import  { plantsListReducer, initialState } from '../plantsListsReducer';
 
 describe('Register Reducer', () => {
   it('Should return default state', () => {
-    const newState = plantsListsReducer(undefined, {
+    const newState = plantsListReducer(undefined, {
       type: addPlantsListType,
       ...initialState,
     });
@@ -31,7 +31,7 @@ describe('Register Reducer', () => {
       plants: [],
     };
 
-    const newState = plantsListsReducer(undefined, {
+    const newState = plantsListReducer(undefined, {
       type: addPlantsListType,
       ...newPlantData,
     });
@@ -59,7 +59,7 @@ describe('Register Reducer', () => {
       plants: [],
     };
 
-    const newState = plantsListsReducer(undefined, {
+    const newState = plantsListReducer(undefined, {
       type: getPlantsListsType,
       ...newPlantData,
     });
@@ -76,7 +76,7 @@ describe('Register Reducer', () => {
       plants: [],
     };
 
-    const newState = plantsListsReducer(undefined, {
+    const newState = plantsListReducer(undefined, {
       type: deletePlantsListType,
       ...newPlantData,
     });
@@ -121,7 +121,7 @@ describe('Register Reducer', () => {
       ],
     };
 
-    const newState = plantsListsReducer(undefined, {
+    const newState = plantsListReducer(undefined, {
       type: showPlantsListType,
       ...newPlantData,
     });

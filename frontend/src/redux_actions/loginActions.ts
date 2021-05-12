@@ -2,11 +2,11 @@ import axios from 'axios';
 import jwt from 'jwt-decode';
 
 import { loginExternalType, logoutType } from './loginTypes';
-import generateAuthTokenForExternalUser, {
+import { generateAuthTokenForExternalUser, 
   AuthObject,
 } from '../Utils/generateAuthTokenForExternalUser';
 import { AppThunk, AppThunkWithReturn } from '../redux_store/reduxStore';
-import setHeaders from '../Utils/setHeaders';
+import { setHeaders } from '../Utils/setHeaders';
 import { apiUrl } from '../Utils/apiUrl';
 
 export const loginExternal = (authObject: AuthObject): AppThunk => async (

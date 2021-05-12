@@ -4,7 +4,7 @@ import {
   updateLastWateringDateType,
   uploadImageType,
 } from '../../redux_actions/plantsTypes';
-import plantsReducer, { initialState } from '../plantsReducer';
+import { plantsReducer, initialState } from '../plantsReducer';
 
 describe('Register Reducer', () => {
   it('Should return default state', () => {

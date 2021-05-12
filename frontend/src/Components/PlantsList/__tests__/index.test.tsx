@@ -2,7 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
-import PrivateRoute from '../../PrivateRoute';
+import { PrivateRouteConnected as PrivateRoute } from '../../PrivateRoute';
 import { PlantsListComponent } from '../index';
 
 const mockGetPlantsListForUser = jest.fn(() =>

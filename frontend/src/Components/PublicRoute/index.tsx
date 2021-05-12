@@ -27,4 +27,4 @@ const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(PublicRoute);
+export const PublicRouteConnected = connector(PublicRoute);

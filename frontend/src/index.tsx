@@ -3,16 +3,16 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 
-import Logo from './Components/Logo/logo';
-import FooterComponent from './Components/Footer';
-import Menu from './Components/Menu';
-import PublicRoute from './Components/PublicRoute';
-import PrivateRoute from './Components/PrivateRoute';
-import DeleteAccount from './Components/DeleteAccount/DeleteAccount';
+import { Logo } from './Components/Logo/logo';
+import { FooterComponent } from './Components/Footer';
+import { MenuConnected } from './Components/Menu';
+import { PublicRouteConnected as PublicRoute } from './Components/PublicRoute';
+import { PrivateRouteConnected as PrivateRoute } from './Components/PrivateRoute';
+import { DeleteAccountConnected } from './Components/DeleteAccount/DeleteAccount';
 
-import HomePage from './Views/HomePage';
-import PlantsLists from './Views/PlantsLists';
-import PlantsList from './Views/PlantsList';
+import { HomePage } from './Views/HomePage';
+import { PlantsLists } from './Views/PlantsLists';
+import { PlantsList } from './Views/PlantsList';
 
 import { store } from './redux_store/reduxStore';
 
@@ -23,12 +23,12 @@ const App = () => {
     <BrowserRouter>
       <div className='contentContainer'>
         <Logo />
-        <Menu />
+        <MenuConnected />
         <Switch>
           <PublicRoute exact path='/' component={HomePage} />
           <PrivateRoute exact path='/plantsLists' component={PlantsLists} />
           <PrivateRoute path='/plantsLists/' component={PlantsList} />
-          <PrivateRoute path='/userData/' component={DeleteAccount} />
+          <PrivateRoute path='/userData/' component={DeleteAccountConnected} />
           <Route render={() => <Redirect to='/' />} />
         </Switch>
       </div>

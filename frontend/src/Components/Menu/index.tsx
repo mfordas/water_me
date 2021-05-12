@@ -37,4 +37,4 @@ const connector = connect(mapStateToProps, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(Menu);
+export const MenuConnected = connector(Menu);

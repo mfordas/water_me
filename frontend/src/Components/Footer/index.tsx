@@ -1,7 +1,5 @@
 import { FooterConnected } from './footer';
 
-const FooterComponent = () => {
+export const FooterComponent = () => {
   return <FooterConnected />;
 };
-
-export default FooterComponent;

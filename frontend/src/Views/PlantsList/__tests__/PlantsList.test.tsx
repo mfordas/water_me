@@ -1,7 +1,7 @@
-import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import PlantsList from '../index';
-import PlantsListComponent from '../../../Components/PlantsList/index';
+
+import { PlantsList } from '../index';
+import { PlantsListComponentConnected } from '../../../Components/PlantsList/index';
 
 const setUp = () => {
   const component = shallow(<PlantsList />);
@@ -15,6 +15,6 @@ describe('HomePage component', () => {
   });
 
   it('Should render without error', () => {
-    expect(component.find(PlantsListComponent).length).toBe(1);
+    expect(component.find(PlantsListComponentConnected).length).toBe(1);
   });
 });

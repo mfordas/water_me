@@ -1,13 +1,11 @@
-import AddPlantsList from './addPlantsList';
-import ShowPlantsLists from './showPlantsLists';
+import { AddPlantsListConnected } from './addPlantsList';
+import { ShowPlantsListsConnected } from './showPlantsLists';
 
-const PlantsListsComponent = () => {
+export const PlantsListsComponent = () => {
   return (
     <>
-      <AddPlantsList />
-      <ShowPlantsLists />
+      <AddPlantsListConnected />
+      <ShowPlantsListsConnected />
     </>
   );
 };
-
-export default PlantsListsComponent;

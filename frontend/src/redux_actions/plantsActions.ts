@@ -7,7 +7,7 @@ import {
   uploadImageType,
 } from '../redux_actions/plantsTypes';
 import { AppThunk, AppThunkWithReturn } from '../redux_store/reduxStore';
-import setHeaders from '../Utils/setHeaders';
+import { setHeaders } from '../Utils/setHeaders';
 import { apiUrl } from '../Utils/apiUrl';
 
 export type PlantData = {

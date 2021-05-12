@@ -32,4 +32,4 @@ const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(PrivateRoute);
+export const PrivateRouteConnected = connector(PrivateRoute);

@@ -11,7 +11,7 @@ import { NameInput } from '../nameInput';
 import { DateInput } from '../dateInput';
 import { ImageInput } from '../imageInput';
 import { WateringInput } from '../wateringInput';
-import setCurrentDate from '../setCurrentDate';
+import { setCurrentDate } from '../setCurrentDate';
 
 jest.mock('../helpers', () => {
   const helpers = jest.requireActual('../helpers');

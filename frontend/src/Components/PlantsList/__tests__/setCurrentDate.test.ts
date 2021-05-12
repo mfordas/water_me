@@ -1,4 +1,4 @@
-import setCurrentDate from '../setCurrentDate';
+import { setCurrentDate } from '../setCurrentDate';
 
 describe('It should return date string', () => {
   it('Should return date string without adding 0 if day and month > 9', () => {

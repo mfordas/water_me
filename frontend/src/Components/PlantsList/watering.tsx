@@ -70,4 +70,4 @@ const connector = connect(mapStateToProps, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(Watering);
+export const WateringConnected = connector(Watering);

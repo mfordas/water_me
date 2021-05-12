@@ -15,7 +15,7 @@ export const initialState: PlantsListsState = {
   plants: [],
 };
 
-const plantsListReducer = function (
+export const plantsListReducer = function (
   state = initialState,
   action: PlantsListsActionType
 ): PlantsListsState {
@@ -44,5 +44,3 @@ const plantsListReducer = function (
       return state;
   }
 };
-
-export default plantsListReducer;

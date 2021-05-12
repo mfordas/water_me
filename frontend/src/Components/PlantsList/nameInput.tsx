@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ErrorMessage from '../ErrorMessage/errorMessage';
+import { ErrorMessage } from '../ErrorMessage/errorMessage';
 
 import './scss/plantsList.scss';
 
@@ -35,5 +35,3 @@ export const NameInput = ({ formSubmitted, name, setName }: Input) => {
     </>
   );
 };
-
-export default NameInput;

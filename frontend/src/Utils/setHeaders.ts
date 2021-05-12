@@ -4,10 +4,8 @@ export type Headers = {
   'x-auth-token': string | null;
 };
 
-const setHeaders = (): Headers => ({
+export const setHeaders = (): Headers => ({
   Accept: 'application/json',
   'Content-Type': 'application/json',
   'x-auth-token': localStorage.getItem('token'),
 });
-
-export default setHeaders;

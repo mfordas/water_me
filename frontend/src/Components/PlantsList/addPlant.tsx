@@ -6,12 +6,12 @@ import { addPlantToList } from '../../redux_actions/plantsActions';
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
 import { uploadPlantImage } from '../../redux_actions/plantsActions';
 import { handleUploadingFile } from './helpers';
-import setCurrentDate from './setCurrentDate';
+import { setCurrentDate } from './setCurrentDate';
 import { RootState } from '../../redux_reducers/';
-import NameInput from './nameInput';
-import WateringInput from './wateringInput';
-import ImageInput from './imageInput';
-import DateInput from './dateInput';
+import { NameInput } from './nameInput';
+import { WateringInput } from './wateringInput';
+import { ImageInputConnected } from './imageInput';
+import { DateInput } from './dateInput';
 
 import './scss/plantsList.scss';
 
@@ -78,7 +78,7 @@ export const AddPlant = ({
           setWateringCycle={setWateringCycle}
         />
         <DateInput startDate={startDate} setStartDate={setStartDate} />
-        <ImageInput
+        <ImageInputConnected
           formSubmitted={formSubmitted}
           pictureFile={pictureFile}
           setPictureFile={setPictureFile}
@@ -106,4 +106,4 @@ const connector = connect(mapStateToProps, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(AddPlant);
+export const AddPlantConnected = connector(AddPlant);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import setCurrentDate from './setCurrentDate';
+import { setCurrentDate } from './setCurrentDate';
 import { PlantsListsState } from '../../redux_actions/plantsListsTypes';
 import { Plant } from '../../redux_actions/plantsTypes';
 

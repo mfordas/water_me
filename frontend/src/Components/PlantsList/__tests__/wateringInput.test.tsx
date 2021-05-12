@@ -3,7 +3,7 @@ import { act } from 'react-dom/test-utils';
 
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { WateringInput } from '../wateringInput';
-import ErrorMessage from '../../ErrorMessage/errorMessage';
+import { ErrorMessage } from '../../ErrorMessage/errorMessage';
 
 const mockSetWateringCycle = jest.fn(() => console.log('Changing watering...'));
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { connect, ConnectedProps } from 'react-redux';
 
-import ErrorMessage from '../ErrorMessage/errorMessage';
+import { ErrorMessage } from '../ErrorMessage/errorMessage';
 import { RootState } from '../../redux_reducers/';
 import { createFileToUpload } from './helpers';
 
@@ -66,4 +66,4 @@ const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(ImageInput);
+export const ImageInputConnected = connector(ImageInput);

@@ -2,9 +2,7 @@ import axios from 'axios';
 
 import { registerExternal, resetRegState } from './registerTypes';
 import { AppThunk } from '../redux_store/reduxStore';
-import generateAuthTokenForExternalUser, {
-  AuthObject,
-} from '../Utils/generateAuthTokenForExternalUser';
+import { generateAuthTokenForExternalUser, AuthObject } from '../Utils/generateAuthTokenForExternalUser';
 import { apiUrl } from '../Utils/apiUrl';
 
 export const postGoogleUser = (authObject: AuthObject): AppThunk => async (

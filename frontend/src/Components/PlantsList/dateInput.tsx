@@ -22,5 +22,3 @@ export const DateInput = ({ startDate, setStartDate }: Input) => {
     </>
   );
 };
-
-export default DateInput;

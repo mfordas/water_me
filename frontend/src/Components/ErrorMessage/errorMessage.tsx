@@ -4,12 +4,10 @@ type PropsType = {
   errorText: string;
 };
 
-const ErrorMessage = ({ errorText }: PropsType) => {
+export const ErrorMessage = ({ errorText }: PropsType) => {
   return errorText ? (
     <div className='errorMessageContainer' data-test='errorMessageComponent'>
       {errorText}
     </div>
   ) : null;
 };
-
-export default ErrorMessage;

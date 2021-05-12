@@ -1,6 +1,6 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import ErrorMessage from '../errorMessage';
+import { ErrorMessage } from '../errorMessage';
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 
 const setUp = (props: { errorText: string } = { errorText: '' }) => {

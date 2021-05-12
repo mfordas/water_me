@@ -1,9 +1,7 @@
-import React from 'react';
+import { GoogleRegisterConnected } from '../../Components/Register/googleRegister';
+import { GoogleAuthConnected } from '../../Components/Login/googleAuth';
 
-import Register from '../../Components/Register/googleRegister';
-import GoogleAuth from '../../Components/Login/googleAuth';
-
-const HomePage = () => {
+export const HomePage = () => {
   return (
     <div className='viewContainer' data-test='homePage'>
       <p>
@@ -13,10 +11,8 @@ const HomePage = () => {
         znać, że potrzebują wody. Jeśli zapomnisz o podlewaniu będziesz
         otrzymywał kolejne przypomnienia, które uratują Twoje rośliny.{' '}
       </p>
-      <Register />
-      <GoogleAuth />
+      <GoogleRegisterConnected />
+      <GoogleAuthConnected />
     </div>
   );
 };
-
-export default HomePage;

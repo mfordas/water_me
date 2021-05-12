@@ -1,15 +1,11 @@
-import React from 'react';
+import { PlantsListsComponent } from '../../Components/PlantsLists';
+import { PlantsListComponentConnected } from '../../Components/PlantsList';
 
-import PlantsListsComponent from '../../Components/PlantsLists';
-import PlantsListComponent from '../../Components/PlantsList';
-
-const PlantsLists = () => {
+export const PlantsLists = () => {
   return (
     <div className='viewContainer'>
       <PlantsListsComponent />
-      <PlantsListComponent />
+      <PlantsListComponentConnected />
     </div>
   );
 };
-
-export default PlantsLists;

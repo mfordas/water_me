@@ -11,7 +11,7 @@ export const initialState: RegisterState = {
   googleUser: false,
 };
 
-const registerReducer = function (
+export const registerReducer = function (
   state = initialState,
   action: RegisterActionsType
 ): RegisterState {
@@ -34,5 +34,3 @@ const registerReducer = function (
       return state;
   }
 };
-
-export default registerReducer;

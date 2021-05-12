@@ -6,7 +6,7 @@ import { loginExternal } from '../../redux_actions/loginActions';
 import { RootState } from '../../redux_reducers/';
 import { useHandleGoogleApi } from './hooks';
 import { makeAuth } from './helpers';
-import ErrorMessage from '../ErrorMessage/errorMessage';
+import { ErrorMessage } from '../ErrorMessage/errorMessage';
 
 import googlelogo from '../../img/g-logo.png';
 import '../Register/scss/google.scss';
@@ -46,4 +46,4 @@ const connector = connect(mapStateToProps, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(GoogleAuth);
+export const GoogleAuthConnected = connector(GoogleAuth);

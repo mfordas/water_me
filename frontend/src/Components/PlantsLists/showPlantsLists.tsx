@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { getPlantsListsForUser } from '../../redux_actions/plantsListsActions';
-import DeletePlantsList from './deletePlantsList';
+import { DeletePlantsListConnected } from './deletePlantsList';
 import { RootState } from '../../redux_reducers/';
 import { PlantsList } from '../../redux_actions/plantsListsTypes';
 
@@ -37,7 +37,7 @@ export const ShowPlantsLists = ({
             >
               <div>{plantsList.name}</div>
               <Link to={`/plantsLists/${plantsList.name}`}>Przejdź</Link>
-              <DeletePlantsList plantsListId={plantsList.id} />
+              <DeletePlantsListConnected plantsListId={plantsList.id} />
             </div>
           );
         })}
@@ -60,4 +60,4 @@ const connector = connect(mapStateToProps, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(ShowPlantsLists);
+export const ShowPlantsListsConnected = connector(ShowPlantsLists);

@@ -3,7 +3,7 @@ import { act } from 'react-dom/test-utils';
 
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { NameInput } from '../nameInput';
-import ErrorMessage from '../../ErrorMessage/errorMessage';
+import { ErrorMessage } from '../../ErrorMessage/errorMessage';
 
 const mockSetName = jest.fn(() => console.log('Changing name...'));
 

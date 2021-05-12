@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 
 import { connect, ConnectedProps } from 'react-redux';
 
-import PlantsList from './plantsList';
+import { PlantsListConnected } from './plantsList';
 import { getPlantsListsForUser } from '../../redux_actions/plantsListsActions';
 import { Switch } from 'react-router-dom';
-import PrivateRoute from '../PrivateRoute';
+import { PrivateRouteConnected as PrivateRoute } from '../PrivateRoute';
 import { RootState } from '../../redux_reducers/';
 
 export const PlantsListComponent = ({
@@ -27,7 +27,7 @@ export const PlantsListComponent = ({
           key={index}
           exact
           path={`/plantsLists/${list.name}`}
-          component={PlantsList}
+          component={PlantsListConnected}
           listIndex={index}
         />
       ))}
@@ -47,4 +47,4 @@ const connector = connect(mapStateToProps, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(PlantsListComponent);
+export const PlantsListComponentConnected = connector(PlantsListComponent);

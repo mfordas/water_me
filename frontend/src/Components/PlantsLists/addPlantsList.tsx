@@ -6,7 +6,7 @@ import {
   addPlantsList,
   getPlantsListsForUser,
 } from '../../redux_actions/plantsListsActions';
-import ErrorMessage from '../ErrorMessage/errorMessage';
+import { ErrorMessage } from '../ErrorMessage/errorMessage';
 import { RootState } from '../../redux_reducers/';
 
 import './scss/plantsLists.scss';
@@ -69,4 +69,4 @@ const connector = connect(mapStateToProps, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(AddPlantsList);
+export const AddPlantsListConnected = connector(AddPlantsList);

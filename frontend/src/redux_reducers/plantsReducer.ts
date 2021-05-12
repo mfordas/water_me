@@ -14,7 +14,7 @@ export const initialState: PlantsState = {
   imageName: '',
 };
 
-const plantsReducer = function (
+export const plantsReducer = function (
   state = initialState,
   action: PlantsActionsType
 ): PlantsState {
@@ -43,5 +43,3 @@ const plantsReducer = function (
       return state;
   }
 };
-
-export default plantsReducer;

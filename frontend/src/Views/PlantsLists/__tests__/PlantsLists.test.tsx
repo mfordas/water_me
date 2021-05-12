@@ -1,7 +1,7 @@
-import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import PlantsLists from '../index';
-import PlantsListsComponent from '../../../Components/PlantsLists/index';
+
+import { PlantsLists } from '../index';
+import { PlantsListsComponent } from '../../../Components/PlantsLists/index';
 
 const setUp = () => {
   const component = shallow(<PlantsLists />);

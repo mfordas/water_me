@@ -5,7 +5,7 @@ import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { ImageInput } from '../imageInput';
 import { initialState } from '../../../redux_reducers/plantsReducer';
 import { createFileToUpload } from '../helpers';
-import ErrorMessage from '../../ErrorMessage/errorMessage';
+import { ErrorMessage } from '../../ErrorMessage/errorMessage';
 
 jest.mock('../helpers', () => {
   const helpers = jest.requireActual('../helpers');

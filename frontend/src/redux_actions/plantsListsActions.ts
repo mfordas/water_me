@@ -7,7 +7,7 @@ import {
   showPlantsListType,
 } from './plantsListsTypes';
 import { AppThunk } from '../redux_store/reduxStore';
-import setHeaders from '../Utils/setHeaders';
+import { setHeaders } from '../Utils/setHeaders';
 import { apiUrl } from '../Utils/apiUrl';
 
 export const addPlantsList = (plantsListName: string): AppThunk => async (

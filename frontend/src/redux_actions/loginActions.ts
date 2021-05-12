@@ -86,12 +86,12 @@ export const deleteAccount = (): AppThunkWithReturn => async (dispatch) => {
         },
         isLogged: false,
       });
-      return `Konto usunięte.`;
+      return 'Konto usunięte.';
     } else {
       throw Error(`Coś poszło nie tak: ${res.status}`);
     }
   } catch (error) {
     console.error(error.message);
-    return `Nie mogliśmy usunać Twojego konta. Spróbuj ponownie.`;
+    return 'Nie mogliśmy usunać Twojego konta. Spróbuj ponownie.';
   }
 };

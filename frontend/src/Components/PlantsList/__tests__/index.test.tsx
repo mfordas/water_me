@@ -24,8 +24,8 @@ const initialState = {
 const setUp = () => {
   const wrapper = shallow(
     <PlantsListComponent
-      getPlantsListsForUser={() => mockGetPlantsListForUser()}
-      plantsListsData={initialState}
+        getPlantsListsForUser={() => mockGetPlantsListForUser()}
+        plantsListsData={initialState}
     />
   );
   return wrapper;
@@ -35,8 +35,8 @@ const setUpMount = (): ReactWrapper => {
   const wrapper = mount(
     <BrowserRouter>
       <PlantsListComponent
-        getPlantsListsForUser={() => mockGetPlantsListForUser()}
-        plantsListsData={initialState}
+          getPlantsListsForUser={() => mockGetPlantsListForUser()}
+          plantsListsData={initialState}
       />
     </BrowserRouter>
   );

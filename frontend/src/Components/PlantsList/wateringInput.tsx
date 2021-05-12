@@ -26,14 +26,14 @@ export const WateringInput = ({
       <label data-test='WateringInput'>
         Podlewanie co:
         <input
-          type='number'
-          min={0}
-          value={wateringCycle}
-          onChange={(e) => {
+            type='number'
+            min={0}
+            value={wateringCycle}
+            onChange={(e) => {
             setWateringCycle(e.target.valueAsNumber);
           }}
         />
-        {wateringCycle === 1 ? `dzień` : 'dni'}
+        {wateringCycle === 1 ? 'dzień' : 'dni'}
       </label>
       {validateWateringCycle()}
     </>

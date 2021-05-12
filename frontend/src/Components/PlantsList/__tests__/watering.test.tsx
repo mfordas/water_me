@@ -22,12 +22,12 @@ const mockShowPlantsList = jest.fn(() => Promise.resolve('Plant list loaded'));
 const setUp = (lastWateringDate: Date, wateringCycle: number) => {
   const wrapper = shallow(
     <Watering
-      lastWateringDate={lastWateringDate}
-      wateringCycle={wateringCycle}
-      plantId={1}
-      listId={1}
-      updateLastWateringDate={mockUpdateLastWateringDate}
-      showPlantsList={mockShowPlantsList}
+        lastWateringDate={lastWateringDate}
+        wateringCycle={wateringCycle}
+        plantId={1}
+        listId={1}
+        updateLastWateringDate={mockUpdateLastWateringDate}
+        showPlantsList={mockShowPlantsList}
     />
   );
   return wrapper;
@@ -43,12 +43,12 @@ const setUpMount = (
 
   const wrapper = mount(
     <Watering
-      lastWateringDate={lastWateringDate}
-      wateringCycle={wateringCycle}
-      plantId={1}
-      listId={1}
-      updateLastWateringDate={mockUpdateLastWateringDate}
-      showPlantsList={mockShowPlantsList}
+        lastWateringDate={lastWateringDate}
+        wateringCycle={wateringCycle}
+        plantId={1}
+        listId={1}
+        updateLastWateringDate={mockUpdateLastWateringDate}
+        showPlantsList={mockShowPlantsList}
     />
   );
   return wrapper;

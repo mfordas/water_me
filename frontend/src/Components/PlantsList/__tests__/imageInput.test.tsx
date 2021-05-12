@@ -25,10 +25,10 @@ const testFile = new File([JSON.stringify('TestFile')], 'testFile.json');
 const setUp = (formSubmitted: boolean, pictureFile: File | null) => {
   const wrapper = shallow(
     <ImageInput
-      formSubmitted={formSubmitted}
-      pictureFile={pictureFile}
-      setPictureFile={mockSetPictureFile}
-      plantsData={initialState}
+        formSubmitted={formSubmitted}
+        pictureFile={pictureFile}
+        setPictureFile={mockSetPictureFile}
+        plantsData={initialState}
     />
   );
   return wrapper;
@@ -40,10 +40,10 @@ const setUpMount = (
 ): ReactWrapper => {
   const wrapper = mount(
     <ImageInput
-      formSubmitted={formSubmitted}
-      pictureFile={picture}
-      setPictureFile={mockSetPictureFile}
-      plantsData={initialState}
+        formSubmitted={formSubmitted}
+        pictureFile={picture}
+        setPictureFile={mockSetPictureFile}
+        plantsData={initialState}
     />
   );
   return wrapper;

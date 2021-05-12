@@ -44,19 +44,19 @@ export const PlantsList = ({
           <div key={index} className='plantContainer'>
             <div>{plant.name}</div>
             <img
-              src={`${apiUrl()}static/images/${plant.pictureUrl}.png`}
-              alt='Plant'
+                src={`${apiUrl()}static/images/${plant.pictureUrl}.png`}
+                alt='Plant'
             />
             <div>Podlewanie co: {plant.wateringCycle}</div>
             <WateringConnected
-              lastWateringDate={plant.lastTimeWatered}
-              plantId={plant.id}
-              wateringCycle={plant.wateringCycle}
-              listId={plantsListsData.plantsLists[listIndex].id}
+                lastWateringDate={plant.lastTimeWatered}
+                plantId={plant.id}
+                wateringCycle={plant.wateringCycle}
+                listId={plantsListsData.plantsLists[listIndex].id}
             />
             <DeletePlantConnected
-              plantId={plant.id}
-              listId={plantsListsData.plantsLists[listIndex].id}
+                plantId={plant.id}
+                listId={plantsListsData.plantsLists[listIndex].id}
             />
           </div>
         );
@@ -71,8 +71,8 @@ export const PlantsList = ({
   return (
     <>
       <button
-        className='addPlantButton'
-        onClick={() => setShowAddPlantForm(!showAddPlantForm)}
+          className='addPlantButton'
+          onClick={() => setShowAddPlantForm(!showAddPlantForm)}
       >
         Dodaj roślinę
       </button>

@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import express, { Response, Request } from 'express';
-import { verify } from '../Utils/googleAuth.js';
+import { verify } from '../Utils/googleAuth';
 import { TokenPayload } from 'google-auth-library';
-import { TypeUser, User } from '../models/User.js';
+import { TypeUser, User } from '../models/User';
 
 type GooglePayload = {
   dataValues: TypeUser;

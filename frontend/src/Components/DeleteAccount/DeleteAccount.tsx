@@ -28,9 +28,9 @@ export const DeleteAccount = ({
         usunięte.
       </p>
       <button
-        className='deleteAccountButton'
-        data-test='deleteAccountButton'
-        onClick={deleteAccount}
+          className='deleteAccountButton'
+          data-test='deleteAccountButton'
+          onClick={deleteAccount}
       >
         Usuń konto
       </button>

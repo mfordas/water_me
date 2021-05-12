@@ -1,10 +1,10 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 
-import { User } from '../models/User.js';
-import { Plant } from '../models/Plant.js';
-import { PlantsList } from '../models/PlantsList.js';
-import { getByMode, config } from './connection.js';
+import { User } from '../models/User';
+import { Plant } from '../models/Plant';
+import { PlantsList } from '../models/PlantsList';
+import { getByMode, config } from './connection';
 
 dotenv.config();
 

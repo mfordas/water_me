@@ -24,6 +24,7 @@ export const loginReducer = function (
   action: LoginActionsType
 ): LoginState {
   switch (action.type) {
+
     case loginExternalType:
       return {
         ...state,
@@ -39,5 +40,6 @@ export const loginReducer = function (
       };
     default:
       return state;
-  }
+  
+}
 };

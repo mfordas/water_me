@@ -19,6 +19,7 @@ export const plantsReducer = function (
   action: PlantsActionsType
 ): PlantsState {
   switch (action.type) {
+
     case addPlantType:
       return {
         ...state,
@@ -41,5 +42,6 @@ export const plantsReducer = function (
       };
     default:
       return state;
-  }
+  
+}
 };

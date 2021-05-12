@@ -1,14 +1,14 @@
 import express, { Request, Response } from 'express';
 
-import { verify } from '../Utils/googleAuth.js';
-import { generateAuthToken } from '../Utils/generateAuthToken.js';
-import { auth } from '../middleware/authorization.js';
-import { User } from '../models/User.js';
+import { verify } from '../Utils/googleAuth';
+import { generateAuthToken } from '../Utils/generateAuthToken';
+import { auth } from '../middleware/authorization';
+import { User } from '../models/User';
 import {
   findPlantsLists,
   deletePlantsLists,
   removePlantsListWithAllPlants,
-} from './utils/deleteAccountUtils.js';
+} from './utils/deleteAccountUtils';
 
 export const router = express.Router();
 
@@ -66,7 +66,7 @@ const registerNewGoogleUser = async (
     plantsTable: null,
   };
 
-  if (!newUser) return res.status(400).send(new Error("Wrong user's data"));
+  if (!newUser) return res.status(400).send(new Error('Wrong user\'s data'));
 
   user = await User.create(newUser);
 

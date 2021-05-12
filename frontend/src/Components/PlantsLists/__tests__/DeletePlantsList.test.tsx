@@ -10,10 +10,10 @@ const mockFunc = jest.fn();
 const setUp = (initialState: PlantsListsState) => {
   const wrapper = shallow(
     <DeletePlantsList
-      plantsListsData={initialState}
-      getPlantsListsForUser={mockFunc}
-      deletePlantsList={mockFunc}
-      plantsListId={1}
+        plantsListsData={initialState}
+        getPlantsListsForUser={mockFunc}
+        deletePlantsList={mockFunc}
+        plantsListId={1}
     />
   );
   return wrapper;

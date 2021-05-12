@@ -16,7 +16,7 @@ export type AppThunkWithReturn<ReturnType = Promise<string>> = ThunkAction<
   unknown,
   Action<string>
 >;
-
+    
 const initialState = {};
 
 export const middleware = [thunk];

@@ -12,9 +12,9 @@ export const DateInput = ({ startDate, setStartDate }: Input) => {
       <label data-test='DateInput'>
         Data startu:
         <input
-          type='date'
-          value={startDate}
-          onChange={(e) => {
+            type='date'
+            value={startDate}
+            onChange={(e) => {
             setStartDate(e.target.value);
           }}
         />

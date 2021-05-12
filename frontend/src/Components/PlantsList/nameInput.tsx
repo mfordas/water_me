@@ -24,9 +24,9 @@ export const NameInput = ({ formSubmitted, name, setName }: Input) => {
       <label data-test='nameInput'>
         Imię
         <input
-          type='text'
-          value={name}
-          onChange={(e) => {
+            type='text'
+            value={name}
+            onChange={(e) => {
             setName(e.target.value);
           }}
         />

@@ -9,22 +9,20 @@ import {
   mainSeqelizeInstation,
   register,
   models,
-} from './db/index.js';
-import { createDatabase, createTables } from './db/initializer.js';
-import { router as users } from './routes/users.js';
-import { router as mainPage } from './routes/mainPage.js';
-import { router as plants } from './routes/plants.js';
-import { router as plantsLists } from './routes/plantsLists.js';
-import { router as authExternal } from './routes/authExternal.js';
+} from './db/index';
+import { createDatabase, createTables } from './db/initializer';
+import { router as users } from './routes/users';
+import { router as mainPage } from './routes/mainPage';
+import { router as plants } from './routes/plants';
+import { router as plantsLists } from './routes/plantsLists';
+import { router as authExternal } from './routes/authExternal';
 import { Sequelize } from 'sequelize';
 
 const app = express();
 
 const dbInitialization = async (app: express.Express, models: any) => {
   if (mainSeqelizeInstation instanceof Sequelize) {
-    let activeDbConnection: Sequelize | Error;
-
-    activeDbConnection = await connectToDB(mainSeqelizeInstation);
+    const activeDbConnection: Sequelize | Error = await connectToDB(mainSeqelizeInstation);
 
     if (activeDbConnection instanceof Sequelize) {
       await createTables(mainSeqelizeInstation);

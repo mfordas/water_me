@@ -7,8 +7,8 @@ import {
   loginExternal,
   logout,
 } from '../../redux_actions/loginActions';
-import { logoutType, loginExternalType } from '../loginTypes';
-import { LoginState } from '../../redux_actions/loginTypes';
+import { logoutType, loginExternalType , LoginState } from '../loginTypes';
+
 import { AuthObject } from '../../Utils/generateAuthTokenForExternalUser';
 
 const middlewares = [thunk];
@@ -253,7 +253,7 @@ describe('Delete account actions', () => {
     expect(store.getState().loginData).toEqual(expectedPayload.loginData);
     expect(store.getState().isLogged).toEqual(expectedPayload.isLogged);
     expect(message).toBe(
-      `Nie mogliśmy usunać Twojego konta. Spróbuj ponownie.`
+      'Nie mogliśmy usunać Twojego konta. Spróbuj ponownie.'
     );
   });
 
@@ -290,7 +290,7 @@ describe('Delete account actions', () => {
     expect(store.getState().loginData).toEqual(expectedPayload.loginData);
     expect(store.getState().isLogged).toEqual(expectedPayload.isLogged);
     expect(message).toBe(
-      `Nie mogliśmy usunać Twojego konta. Spróbuj ponownie.`
+      'Nie mogliśmy usunać Twojego konta. Spróbuj ponownie.'
     );
   });
 });

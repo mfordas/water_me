@@ -25,8 +25,8 @@ const App = () => {
         <Logo />
         <MenuConnected />
         <Switch>
-          <PublicRoute exact path='/' component={HomePage} />
-          <PrivateRoute exact path='/plantsLists' component={PlantsLists} />
+          <PublicRoute exact={true} path='/' component={HomePage} />
+          <PrivateRoute exact={true} path='/plantsLists' component={PlantsLists} />
           <PrivateRoute path='/plantsLists/' component={PlantsList} />
           <PrivateRoute path='/userData/' component={DeleteAccountConnected} />
           <Route render={() => <Redirect to='/' />} />

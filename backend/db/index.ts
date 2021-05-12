@@ -1,5 +1,5 @@
-import { connectToDB, mainSeqelizeInstation } from './connection.js';
-import { register } from './register.js';
-import { models } from './models.js';
+import { connectToDB, mainSeqelizeInstation } from './connection';
+import { register } from './register';
+import { models } from './models';
 
 export { connectToDB, mainSeqelizeInstation, register, models };

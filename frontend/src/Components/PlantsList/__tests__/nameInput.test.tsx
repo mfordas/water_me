@@ -10,9 +10,9 @@ const mockSetName = jest.fn(() => console.log('Changing name...'));
 const setUp = (formSubmitted: boolean, name: string) => {
   const wrapper = shallow(
     <NameInput
-      formSubmitted={formSubmitted}
-      name={name}
-      setName={mockSetName}
+        formSubmitted={formSubmitted}
+        name={name}
+        setName={mockSetName}
     />
   );
   return wrapper;
@@ -21,9 +21,9 @@ const setUp = (formSubmitted: boolean, name: string) => {
 const setUpMount = (formSubmitted: boolean, name: string): ReactWrapper => {
   const wrapper = mount(
     <NameInput
-      formSubmitted={formSubmitted}
-      name={name}
-      setName={mockSetName}
+        formSubmitted={formSubmitted}
+        name={name}
+        setName={mockSetName}
     />
   );
   return wrapper;

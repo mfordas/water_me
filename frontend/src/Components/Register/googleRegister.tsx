@@ -20,13 +20,13 @@ export const GoogleRegister = ({
       {' '}
       {!registerData.confirm ? (
         <button
-          className='googleButton'
-          onClick={() => makeAuth(authObject, postGoogleUser)}
+            className='googleButton'
+            onClick={() => makeAuth(authObject, postGoogleUser)}
         >
           <img
-            className='googleButtonLogo'
-            src={googlelogo}
-            alt='google logo'
+              className='googleButtonLogo'
+              src={googlelogo}
+              alt='google logo'
           />
           <div className='googleButtonText'>Zarejestruj przez Google</div>
         </button>

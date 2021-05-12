@@ -20,9 +20,9 @@ export const DeletePlant = ({
 
   return (
     <button
-      className='deleteButton'
-      data-test='deletePlantButton'
-      onClick={handleDeletePlant}
+        className='deleteButton'
+        data-test='deletePlantButton'
+        onClick={handleDeletePlant}
     >
       Usuń
     </button>

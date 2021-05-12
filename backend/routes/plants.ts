@@ -1,11 +1,11 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
 
-import { auth } from '../middleware/authorization.js';
-import { fileUpload } from '../middleware/fileUpload.js';
-import { resizeImage } from '../Utils/resizeImage.js';
-import { Plant } from '../models/Plant.js';
-import { deletePlantPicture } from './utils/deleteAccountUtils.js';
+import { auth } from '../middleware/authorization';
+import { fileUpload } from '../middleware/fileUpload';
+import { resizeImage } from '../Utils/resizeImage';
+import { Plant } from '../models/Plant';
+import { deletePlantPicture } from './utils/deleteAccountUtils';
 
 interface IUserBodyForPlantsRoutes extends Request {
   user: {

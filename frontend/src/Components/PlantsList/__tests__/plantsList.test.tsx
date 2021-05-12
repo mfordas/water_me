@@ -105,9 +105,9 @@ const initialStateEmpty = {
 const setUp = (listIndex: number) => {
   const wrapper = shallow(
     <PlantsList
-      showPlantsList={mockShowPlantsList}
-      plantsListsData={initialState}
-      listIndex={listIndex}
+        showPlantsList={mockShowPlantsList}
+        plantsListsData={initialState}
+        listIndex={listIndex}
     />
   );
   return wrapper;
@@ -121,9 +121,9 @@ const setUpMount = (
     <Provider store={store}>
       <BrowserRouter>
         <PlantsList
-          showPlantsList={mockShowPlantsList}
-          plantsListsData={testData}
-          listIndex={listIndex}
+            showPlantsList={mockShowPlantsList}
+            plantsListsData={testData}
+            listIndex={listIndex}
         />
       </BrowserRouter>
     </Provider>

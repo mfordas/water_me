@@ -41,12 +41,12 @@ export const AddPlantsList = ({
     <div className='addPlantsListContainer' data-test='addPlantListComponent'>
       <form className='addPlantsListForm'>
         <input
-          data-test='inputAddPlantsList'
-          onChange={(e) => setPlantsListName(e.target.value)}
+            data-test='inputAddPlantsList'
+            onChange={(e) => setPlantsListName(e.target.value)}
         ></input>
         <button
-          data-test='addPlantsListButton'
-          onClick={(e) => addNewPlantsList(e)}
+            data-test='addPlantsListButton'
+            onClick={(e) => addNewPlantsList(e)}
         >
           Dodaj listę roślin
         </button>

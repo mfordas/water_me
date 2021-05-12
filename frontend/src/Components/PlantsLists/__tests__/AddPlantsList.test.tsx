@@ -10,9 +10,9 @@ const mockFunc = jest.fn();
 const setUp = (initialState: PlantsListsState) => {
   const wrapper = mount(
     <AddPlantsList
-      plantsListsData={initialState}
-      addPlantsList={mockFunc}
-      getPlantsListsForUser={mockFunc}
+        plantsListsData={initialState}
+        addPlantsList={mockFunc}
+        getPlantsListsForUser={mockFunc}
     />
   );
   return wrapper;

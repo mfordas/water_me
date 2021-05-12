@@ -12,8 +12,8 @@ const PrivateRoute = ({
 }: PropsFromRedux | any) => {
   return (
     <Route
-      {...rest}
-      render={(props) =>
+        {...rest}
+        render={(props) =>
         loginData.isLogged ? (
           <Component {...props} {...rest} />
         ) : (

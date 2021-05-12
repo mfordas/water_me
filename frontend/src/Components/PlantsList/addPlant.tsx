@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import { connect, ConnectedProps } from 'react-redux';
 
-import { addPlantToList } from '../../redux_actions/plantsActions';
+import { addPlantToList , uploadPlantImage } from '../../redux_actions/plantsActions';
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
-import { uploadPlantImage } from '../../redux_actions/plantsActions';
+
 import { handleUploadingFile } from './helpers';
 import { setCurrentDate } from './setCurrentDate';
 import { RootState } from '../../redux_reducers/';
@@ -68,20 +68,20 @@ export const AddPlant = ({
     <div className='addPlantContainer' data-test='addPlantComponent'>
       <form encType='multipart/form-data'>
         <NameInput
-          formSubmitted={formSubmitted}
-          name={name}
-          setName={setName}
+            formSubmitted={formSubmitted}
+            name={name}
+            setName={setName}
         />
         <WateringInput
-          formSubmitted={formSubmitted}
-          wateringCycle={wateringCycle}
-          setWateringCycle={setWateringCycle}
+            formSubmitted={formSubmitted}
+            wateringCycle={wateringCycle}
+            setWateringCycle={setWateringCycle}
         />
         <DateInput startDate={startDate} setStartDate={setStartDate} />
         <ImageInputConnected
-          formSubmitted={formSubmitted}
-          pictureFile={pictureFile}
-          setPictureFile={setPictureFile}
+            formSubmitted={formSubmitted}
+            pictureFile={pictureFile}
+            setPictureFile={setPictureFile}
         />
         <button onClick={(event) => handleAddingPlantToList(event)}>
           Dodaj

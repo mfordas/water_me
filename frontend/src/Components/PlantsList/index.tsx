@@ -24,11 +24,11 @@ export const PlantsListComponent = ({
     <Switch>
       {plantsListsData.plantsLists.map((list, index) => (
         <PrivateRoute
-          key={index}
-          exact
-          path={`/plantsLists/${list.name}`}
-          component={PlantsListConnected}
-          listIndex={index}
+            key={index}
+            exact={true}
+            path={`/plantsLists/${list.name}`}
+            component={PlantsListConnected}
+            listIndex={index}
         />
       ))}
     </Switch>

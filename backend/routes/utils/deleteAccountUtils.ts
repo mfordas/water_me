@@ -1,8 +1,8 @@
 import fs from 'fs';
 
-import { PlantInstance, Plant } from '../../models/Plant.js';
-import { PlantsListInstance, PlantsList } from '../../models/PlantsList.js';
-import { uploadFolder } from '../plants.js';
+import { PlantInstance, Plant } from '../../models/Plant';
+import { PlantsListInstance, PlantsList } from '../../models/PlantsList';
+import { uploadFolder } from '../plants';
 
 export const findPlantsLists = async (
   userId: number

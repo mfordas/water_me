@@ -1,5 +1,5 @@
 import sequelize, { Optional, Model } from 'sequelize';
-import { mainSeqelizeInstation } from '../db/connection.js';
+import { mainSeqelizeInstation } from '../db/connection';
 
 export type TypeUser = {
   id: number;

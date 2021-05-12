@@ -11,8 +11,8 @@ const PublicRoute = ({
 }: PropsFromRedux | any) => {
   return (
     <Route
-      {...rest}
-      render={(props) =>
+        {...rest}
+        render={(props) =>
         loginData.isLogged ? <Redirect to='/' /> : <Component {...props} />
       }
     />

@@ -31,9 +31,9 @@ export const ImageInput = ({
       <label data-test='ImageInput'>
         Zdjęcie
         <input
-          type='file'
-          name='image'
-          onChange={async (event) => {
+            type='file'
+            name='image'
+            onChange={async (event) => {
             const file = createFileToUpload(event);
             setPictureFile(file);
             generatePicturePreview(file);

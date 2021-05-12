@@ -12,8 +12,8 @@ const mockFunc = jest.fn();
 const setUp = (initialState: PlantsListsState) => {
   const wrapper = shallow(
     <ShowPlantsLists
-      plantsListsData={initialState}
-      getPlantsListsForUser={mockFunc}
+        plantsListsData={initialState}
+        getPlantsListsForUser={mockFunc}
     />
   );
   return wrapper;
@@ -26,8 +26,8 @@ const setUpMount = (initialState: PlantsListsState) => {
     <Provider store={store}>
       <BrowserRouter>
         <ShowPlantsLists
-          plantsListsData={initialState}
-          getPlantsListsForUser={mockFuncMount}
+            plantsListsData={initialState}
+            getPlantsListsForUser={mockFuncMount}
         />
       </BrowserRouter>
     </Provider>

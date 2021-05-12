@@ -10,7 +10,7 @@ export const makeAuth = async (
       await authObject.signIn();
       await googleAction(authObject);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return err;
     }
   } else {

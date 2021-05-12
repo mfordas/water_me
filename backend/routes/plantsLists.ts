@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 
-import { auth } from '../middleware/authorization.js';
-import { PlantsList } from '../models/PlantsList.js';
-import { removePlantsListWithAllPlants } from './utils/deleteAccountUtils.js';
+import { auth } from '../middleware/authorization';
+import { PlantsList } from '../models/PlantsList';
+import { removePlantsListWithAllPlants } from './utils/deleteAccountUtils';
 
 export const router = express.Router();
 

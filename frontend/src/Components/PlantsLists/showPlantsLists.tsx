@@ -25,15 +25,15 @@ export const ShowPlantsLists = ({
   const generatePlantsLists = (plantsListsArray: PlantsList[]) => {
     return (
       <div
-        className='plantsListsContainer'
-        data-test='showPlantsListsComponent'
+          className='plantsListsContainer'
+          data-test='showPlantsListsComponent'
       >
         {plantsListsArray.map((plantsList) => {
           return (
             <div
-              className='plantsListContainer'
-              key={plantsList.id}
-              data-test='plantsListContainer'
+                className='plantsListContainer'
+                key={plantsList.id}
+                data-test='plantsListContainer'
             >
               <div>{plantsList.name}</div>
               <Link to={`/plantsLists/${plantsList.name}`}>Przejdź</Link>

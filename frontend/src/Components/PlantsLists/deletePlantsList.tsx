@@ -26,9 +26,9 @@ export const DeletePlantsList = ({
 
   return (
     <button
-      className='deleteButton'
-      onClick={(e) => handlerDeletePlantsList(e)}
-      data-test='deletePlantListComponent'
+        className='deleteButton'
+        onClick={(e) => handlerDeletePlantsList(e)}
+        data-test='deletePlantListComponent'
     >
       Usuń
     </button>

@@ -20,6 +20,7 @@ export const plantsListReducer = function (
   action: PlantsListsActionType
 ): PlantsListsState {
   switch (action.type) {
+
     case addPlantsListType:
       return {
         ...state,
@@ -42,5 +43,6 @@ export const plantsListReducer = function (
       };
     default:
       return state;
-  }
+  
+}
 };

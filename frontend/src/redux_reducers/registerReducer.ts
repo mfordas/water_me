@@ -16,6 +16,7 @@ export const registerReducer = function (
   action: RegisterActionsType
 ): RegisterState {
   switch (action.type) {
+
     case registerExternal:
       return {
         ...state,
@@ -32,5 +33,6 @@ export const registerReducer = function (
       };
     default:
       return state;
-  }
+  
+}
 };

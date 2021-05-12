@@ -15,11 +15,11 @@ const mockShowPlantsListFunc = jest.fn(() =>
 const setUp = (startState: PlantsState = initialState) => {
   const wrapper = shallow(
     <DeletePlant
-      plantsData={startState}
-      plantId={1}
-      listId={1}
-      deletePlant={mockDeletePlantFunc}
-      showPlantsList={mockShowPlantsListFunc}
+        plantsData={startState}
+        plantId={1}
+        listId={1}
+        deletePlant={mockDeletePlantFunc}
+        showPlantsList={mockShowPlantsListFunc}
     />
   );
   return wrapper;
@@ -28,11 +28,11 @@ const setUp = (startState: PlantsState = initialState) => {
 const setUpMount = (startState: PlantsState = initialState) => {
   const wrapper = mount(
     <DeletePlant
-      plantsData={startState}
-      plantId={1}
-      listId={1}
-      deletePlant={mockDeletePlantFunc}
-      showPlantsList={mockShowPlantsListFunc}
+        plantsData={startState}
+        plantId={1}
+        listId={1}
+        deletePlant={mockDeletePlantFunc}
+        showPlantsList={mockShowPlantsListFunc}
     />
   );
   return wrapper;

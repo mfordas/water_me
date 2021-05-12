@@ -10,9 +10,9 @@ const mockSetWateringCycle = jest.fn(() => console.log('Changing watering...'));
 const setUp = (formSubmitted: boolean, wateringCycle: number) => {
   const wrapper = shallow(
     <WateringInput
-      formSubmitted={formSubmitted}
-      wateringCycle={wateringCycle}
-      setWateringCycle={mockSetWateringCycle}
+        formSubmitted={formSubmitted}
+        wateringCycle={wateringCycle}
+        setWateringCycle={mockSetWateringCycle}
     />
   );
   return wrapper;
@@ -24,9 +24,9 @@ const setUpMount = (
 ): ReactWrapper => {
   const wrapper = mount(
     <WateringInput
-      formSubmitted={formSubmitted}
-      wateringCycle={wateringCycle}
-      setWateringCycle={mockSetWateringCycle}
+        formSubmitted={formSubmitted}
+        wateringCycle={wateringCycle}
+        setWateringCycle={mockSetWateringCycle}
     />
   );
   return wrapper;

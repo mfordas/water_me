@@ -31,11 +31,11 @@ const setUp = (initialState: PlantsState) => {
     <Provider store={store}>
       <BrowserRouter>
         <AddPlant
-          listId={1}
-          addPlantToList={mockAddPlantToList}
-          plantsData={initialState}
-          showPlantsList={mockShowPlantsList}
-          uploadPlantImage={mockUploadPlantImage}
+            listId={1}
+            addPlantToList={mockAddPlantToList}
+            plantsData={initialState}
+            showPlantsList={mockShowPlantsList}
+            uploadPlantImage={mockUploadPlantImage}
         />
       </BrowserRouter>
     </Provider>

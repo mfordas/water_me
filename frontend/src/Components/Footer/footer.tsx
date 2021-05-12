@@ -17,8 +17,9 @@ export const Footer = ({ loginData }: { loginData: LoginState }) => {
         </a>{' '}
         {new Date().getFullYear()}
       </div>
-      <div className='footerItem'>| Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a>
-        from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+      <div className='footerItem'>
+        | Icons made by <a href='https://www.flaticon.com/authors/pixel-perfect' title='Pixel perfect'>Pixel perfect</a>
+        from <a href='https://www.flaticon.com/' title='Flaticon'>www.flaticon.com</a>
       </div>
       {loginData.isLogged && <Link to='/userData/'>| Moje dane</Link>}
     </footer>

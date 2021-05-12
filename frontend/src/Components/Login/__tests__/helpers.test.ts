@@ -1,4 +1,3 @@
-import { auth } from 'google-auth-library';
 import { makeAuth } from '../helpers';
 
 const mockedFunction = jest.fn();

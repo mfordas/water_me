@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { connect, ConnectedProps } from 'react-redux';
 
 import {
@@ -6,6 +7,7 @@ import {
   getPlantsListsForUser,
 } from '../../redux_actions/plantsListsActions';
 import { RootState } from '../../redux_reducers/';
+
 import './scss/plantsLists.scss';
 
 export const DeletePlantsList = ({

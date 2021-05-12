@@ -1,5 +1,4 @@
 import { loginExternalType, logoutType } from '../../redux_actions/loginTypes';
-
 import loginReducer, { initialState } from '../loginReducer';
 
 jest.mock('jwt-decode', () => () => 'testReturnValue');

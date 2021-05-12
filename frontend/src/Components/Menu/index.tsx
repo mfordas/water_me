@@ -1,5 +1,5 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
+
 import { connect, ConnectedProps } from 'react-redux';
 
 import { logout } from '../../redux_actions/loginActions';

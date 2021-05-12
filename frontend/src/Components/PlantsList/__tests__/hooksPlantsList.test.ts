@@ -1,6 +1,7 @@
+import { renderHook } from '@testing-library/react-hooks';
+
 import { useCountWatering, useCreatePlantsList } from '../hooks';
 import setCurrentDate from '../setCurrentDate';
-import { renderHook } from '@testing-library/react-hooks';
 
 describe('useCountWatering hook', () => {
   it('Should return number of days to next watering and current date', () => {

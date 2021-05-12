@@ -1,5 +1,5 @@
-import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+
 import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../../redux_reducers/';

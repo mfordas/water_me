@@ -1,6 +1,7 @@
-import React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
 import { BrowserRouter } from 'react-router-dom';
+import { mount, ReactWrapper } from 'enzyme';
+import { act } from 'react-dom/test-utils';
+
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { AddPlant } from '../addPlant';
 import { PlantsState } from '../../../redux_actions/plantsTypes';
@@ -10,7 +11,6 @@ import { NameInput } from '../nameInput';
 import { DateInput } from '../dateInput';
 import { ImageInput } from '../imageInput';
 import { WateringInput } from '../wateringInput';
-import { act } from 'react-dom/test-utils';
 import setCurrentDate from '../setCurrentDate';
 
 jest.mock('../helpers', () => {

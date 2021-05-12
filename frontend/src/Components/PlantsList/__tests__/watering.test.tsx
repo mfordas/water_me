@@ -1,8 +1,8 @@
-import React from 'react';
-import { Watering } from '../watering';
 import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
-import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { act } from 'react-dom/test-utils';
+
+import { Watering } from '../watering';
+import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { useCountWatering } from '../hooks';
 
 jest.mock('../hooks', () => {

@@ -1,9 +1,9 @@
-import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
+import { act } from 'react-dom/test-utils';
+
 import PrivateRoute from '../../PrivateRoute';
 import { PlantsListComponent } from '../index';
-import { BrowserRouter } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 
 const mockGetPlantsListForUser = jest.fn(() =>
   console.log('Downloading plants lists...')

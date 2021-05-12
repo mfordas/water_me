@@ -1,9 +1,11 @@
 import { connect, ConnectedProps } from 'react-redux';
+
 import { updateLastWateringDate } from '../../redux_actions/plantsActions';
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
 import { useCountWatering } from './hooks';
 import { WateringProps } from './plantsList';
 import { RootState } from '../../redux_reducers/';
+
 import './scss/plantsList.scss';
 
 export const Watering = ({

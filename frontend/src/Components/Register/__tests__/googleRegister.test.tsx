@@ -1,11 +1,11 @@
-import React from 'react';
 import { shallow, mount, ShallowWrapper } from 'enzyme';
+import { BrowserRouter } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
+
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { GoogleRegister } from '../googleRegister';
 import { initialState } from '../../../redux_reducers/registerReducer';
 import { RegisterState } from '../../../redux_actions/registerTypes';
-import { BrowserRouter } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { makeAuth } from '../../Login/helpers';
 import ConfirmGoogle from '../confirmGoogle';
 

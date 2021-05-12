@@ -1,10 +1,10 @@
-import React from 'react';
-import { ConfirmGoogle } from '../confirmGoogle';
-import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
-import { initialState } from '../../../redux_reducers/registerReducer';
-import { RegisterState } from '../../../redux_actions/registerTypes';
+import { shallow, mount } from 'enzyme';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
+
+import { ConfirmGoogle } from '../confirmGoogle';
+import { initialState } from '../../../redux_reducers/registerReducer';
+import { RegisterState } from '../../../redux_actions/registerTypes';
 
 const mockFunc = jest.fn();
 

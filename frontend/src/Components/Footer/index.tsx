@@ -1,4 +1,3 @@
-import React from 'react';
 import { FooterConnected } from './footer';
 
 const FooterComponent = () => {

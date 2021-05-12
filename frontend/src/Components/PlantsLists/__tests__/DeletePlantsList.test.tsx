@@ -1,9 +1,9 @@
-import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
+import { act } from 'react-dom/test-utils';
+
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { DeletePlantsList } from '../deletePlantsList';
 import { PlantsListsState } from '../../../redux_actions/plantsListsTypes';
-import { act } from 'react-dom/test-utils';
 
 const mockFunc = jest.fn();
 

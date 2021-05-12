@@ -1,9 +1,11 @@
 import { Redirect } from 'react-router-dom';
+
 import { connect, ConnectedProps } from 'react-redux';
 
-import './scss/deleteAccount.scss';
 import { deleteAccount } from '../../redux_actions/loginActions';
 import { RootState } from '../../redux_reducers/';
+
+import './scss/deleteAccount.scss';
 
 export const DeleteAccount = ({
   deleteAccount,

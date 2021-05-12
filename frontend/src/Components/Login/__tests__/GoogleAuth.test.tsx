@@ -1,11 +1,11 @@
-import React from 'react';
 import { shallow, mount, ShallowWrapper } from 'enzyme';
+import { act } from 'react-dom/test-utils';
+
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { GoogleAuth } from '../googleAuth';
 import { initialState } from '../../../redux_reducers/loginReducer';
 import { LoginState } from '../../../redux_actions/loginTypes';
 import { BrowserRouter, Redirect } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { makeAuth } from '../helpers';
 
 jest.mock('../helpers', () => {

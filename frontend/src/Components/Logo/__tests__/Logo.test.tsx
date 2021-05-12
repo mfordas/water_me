@@ -1,5 +1,5 @@
-import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
+
 import Logo from '../logo';
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 

@@ -1,11 +1,12 @@
-import React from 'react';
+import { BrowserRouter, Redirect } from 'react-router-dom';
+
 import { shallow, mount, ShallowWrapper } from 'enzyme';
+import { act } from 'react-dom/test-utils';
+
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { DeleteAccount } from '../DeleteAccount';
 import { initialState } from '../../../redux_reducers/loginReducer';
 import { LoginState } from '../../../redux_actions/loginTypes';
-import { BrowserRouter, Redirect } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 
 const mockFunc = jest.fn();
 

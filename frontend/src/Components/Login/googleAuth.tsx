@@ -1,14 +1,15 @@
-import React from 'react';
 import { Redirect } from 'react-router-dom';
+
 import { connect, ConnectedProps } from 'react-redux';
 
-import '../Register/scss/google.scss';
-import googlelogo from '../../img/g-logo.png';
 import { loginExternal } from '../../redux_actions/loginActions';
 import { RootState } from '../../redux_reducers/';
 import { useHandleGoogleApi } from './hooks';
 import { makeAuth } from './helpers';
 import ErrorMessage from '../ErrorMessage/errorMessage';
+
+import googlelogo from '../../img/g-logo.png';
+import '../Register/scss/google.scss';
 
 export const GoogleAuth = ({
   loginExternal,

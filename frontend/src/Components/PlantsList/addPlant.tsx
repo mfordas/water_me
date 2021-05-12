@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { connect, ConnectedProps } from 'react-redux';
 
 import { addPlantToList } from '../../redux_actions/plantsActions';
@@ -11,6 +12,7 @@ import NameInput from './nameInput';
 import WateringInput from './wateringInput';
 import ImageInput from './imageInput';
 import DateInput from './dateInput';
+
 import './scss/plantsList.scss';
 
 export const AddPlant = ({

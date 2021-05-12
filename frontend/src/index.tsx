@@ -1,6 +1,6 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+
 import { Provider } from 'react-redux';
 
 import Logo from './Components/Logo/logo';
@@ -8,12 +8,13 @@ import FooterComponent from './Components/Footer';
 import Menu from './Components/Menu';
 import PublicRoute from './Components/PublicRoute';
 import PrivateRoute from './Components/PrivateRoute';
-import { store } from './redux_store/reduxStore';
+import DeleteAccount from './Components/DeleteAccount/DeleteAccount';
 
 import HomePage from './Views/HomePage';
 import PlantsLists from './Views/PlantsLists';
 import PlantsList from './Views/PlantsList';
-import DeleteAccount from './Components/DeleteAccount/DeleteAccount';
+
+import { store } from './redux_store/reduxStore';
 
 import './scss/main_styling.scss';
 

@@ -1,9 +1,9 @@
+import { BrowserRouter } from 'react-router-dom';
 import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
-import React from 'react';
+import { act } from 'react-dom/test-utils';
+
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { Menu } from '../index';
-import { act } from 'react-dom/test-utils';
-import { BrowserRouter } from 'react-router-dom';
 
 describe('Menu Component', () => {
   it('Renders menu container without buttons', () => {

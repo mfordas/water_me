@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ErrorMessage from '../ErrorMessage/errorMessage';
+
 import './scss/plantsList.scss';
 
 type Input = {

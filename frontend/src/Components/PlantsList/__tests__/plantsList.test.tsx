@@ -1,15 +1,14 @@
-import React from 'react';
-import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
+import { BrowserRouter } from 'react-router-dom';
+import { shallow, mount, ReactWrapper } from 'enzyme';
+import { act } from 'react-dom/test-utils';
+
 import { PlantsList } from '../plantsList';
 import { Watering } from '../watering';
 import { DeletePlant } from '../deletePlant';
 import { AddPlant } from '../addPlant';
-import { BrowserRouter } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
 import { store } from '../../../redux_store/reduxStore';
 import { PlantsListsState } from '../../../redux_actions/plantsListsTypes';
-import { AddPlantsList } from '../../PlantsLists/addPlantsList';
 
 const mockShowPlantsList = jest.fn(() =>
   console.log('Downloading plants lists...')

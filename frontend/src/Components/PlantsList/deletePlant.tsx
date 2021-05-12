@@ -1,11 +1,11 @@
-import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { deletePlant } from '../../redux_actions/plantsActions';
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
 import { RootState } from '../../redux_reducers/';
-import './scss/plantsList.scss';
 import { DeletePlantProps } from './plantsList';
+
+import './scss/plantsList.scss';
 
 export const DeletePlant = ({
   deletePlant,

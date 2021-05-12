@@ -1,7 +1,7 @@
-import React from 'react';
 import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
-import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { act } from 'react-dom/test-utils';
+
+import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { NameInput } from '../nameInput';
 import ErrorMessage from '../../ErrorMessage/errorMessage';
 

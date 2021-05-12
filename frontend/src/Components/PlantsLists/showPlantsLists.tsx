@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { connect, ConnectedProps } from 'react-redux';
 
 import { getPlantsListsForUser } from '../../redux_actions/plantsListsActions';
 import DeletePlantsList from './deletePlantsList';
 import { RootState } from '../../redux_reducers/';
 import { PlantsList } from '../../redux_actions/plantsListsTypes';
+
 import './scss/plantsLists.scss';
 
 export const ShowPlantsLists = ({

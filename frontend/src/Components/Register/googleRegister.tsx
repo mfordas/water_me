@@ -1,13 +1,13 @@
-import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import './scss/google.scss';
-import googlelogo from '../../img/g-logo.png';
 import ConfirmGoogle from './confirmGoogle';
 import { postGoogleUser } from '../../redux_actions/registerActions';
 import { RootState } from '../../redux_reducers/';
 import { useHandleGoogleApi } from '../Login/hooks';
 import { makeAuth } from '../Login/helpers';
+
+import googlelogo from '../../img/g-logo.png';
+import './scss/google.scss';
 
 export const GoogleRegister = ({
   postGoogleUser,

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { connect, ConnectedProps } from 'react-redux';
 
 import {
@@ -7,6 +8,7 @@ import {
 } from '../../redux_actions/plantsListsActions';
 import ErrorMessage from '../ErrorMessage/errorMessage';
 import { RootState } from '../../redux_reducers/';
+
 import './scss/plantsLists.scss';
 
 export const AddPlantsList = ({

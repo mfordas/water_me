@@ -1,10 +1,10 @@
-import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
+import { Provider } from 'react-redux';
+
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { ShowPlantsLists } from '../showPlantsLists';
 import { PlantsListsState } from '../../../redux_actions/plantsListsTypes';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { store } from '../../../redux_store/reduxStore';
 
 const mockFunc = jest.fn();

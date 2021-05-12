@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
+
 import { AuthObject } from '../../Utils/generateAuthTokenForExternalUser';
 
 export interface GoogleApi extends AuthObject {
   signIn: () => Promise<void>;
-}
+};
 
 declare const gapi: any;
 

@@ -1,7 +1,7 @@
-import React from 'react';
 import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
-import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { act } from 'react-dom/test-utils';
+
+import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { ImageInput } from '../imageInput';
 import { initialState } from '../../../redux_reducers/plantsReducer';
 import { createFileToUpload } from '../helpers';

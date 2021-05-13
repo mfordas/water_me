@@ -1,19 +1,19 @@
 .deleteAccount {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
 
-  button {
-    width: 200px;
-    background-color: #f24949;
-    color: white;
-  }
-
-  p {
-    span {
-      font-weight: 600;
+    button {
+        width: 200px;
+        background-color: #f24949;
+        color: white;
     }
-  }
+
+    p {
+        span {
+            font-weight: 600;
+        }
+    }
 }

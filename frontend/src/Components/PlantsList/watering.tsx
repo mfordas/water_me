@@ -41,7 +41,7 @@ export const Watering = ({
             return (
                 <div className='wateringStatusContainer'>
                     <div className='statusNok'>Potrzebuję wody!</div>
-                    <button onClick={handleUpdateLastWateringDate}>Podlej</button>
+                    <button className='updateWatering' onClick={handleUpdateLastWateringDate}>Podlej</button>
                 </div>
             );
         }

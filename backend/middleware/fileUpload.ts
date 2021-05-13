@@ -1,9 +1,7 @@
 import multer from 'multer';
 
-const fileUpload = multer({
+export const fileUpload = multer({
     limits: {
         fileSize: 10000000,
     }
 });
-
-export default fileUpload;

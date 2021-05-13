@@ -7,10 +7,9 @@ export type AuthObject = {
     };
   };
 };
-const generateAuthTokenForExternalUser = async (
-  authObject: AuthObject
-): Promise<string> => {
-  return await authObject.currentUser.get().getAuthResponse().id_token;
-};
 
-export default generateAuthTokenForExternalUser;
+export const generateAuthTokenForExternalUser = async (
+    authObject: AuthObject
+): Promise<string> => {
+    return await authObject.currentUser.get().getAuthResponse().id_token;
+};

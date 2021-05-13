@@ -1,7 +1,5 @@
-import { User } from '../models/User.js';
-import { Plant } from '../models/Plant.js';
-import { PlantsList } from '../models/PlantsList.js';
+import { User } from '../models/User';
+import { Plant } from '../models/Plant';
+import { PlantsList } from '../models/PlantsList';
 
-const models = { User, Plant, PlantsList };
-
-export default models;
+export const models = { User, Plant, PlantsList };

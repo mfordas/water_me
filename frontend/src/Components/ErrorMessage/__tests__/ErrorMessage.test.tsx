@@ -1,33 +1,33 @@
-import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import ErrorMessage from '../errorMessage';
+
+import { ErrorMessage } from '../errorMessage';
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 
 const setUp = (props: { errorText: string } = { errorText: '' }) => {
-  const component = shallow(<ErrorMessage {...props} />);
-  return component;
+    const component = shallow(<ErrorMessage {...props} />);
+    return component;
 };
 
 describe('Footer component', () => {
-  let component: ShallowWrapper;
+    let component: ShallowWrapper;
 
-  const props = {
-    errorText: 'Error',
-  };
+    const props = {
+        errorText: 'Error',
+    };
 
-  it('should render without errors', () => {
-    component = setUp(props);
+    it('should render without errors', () => {
+        component = setUp(props);
 
-    const wrapper = findByDataTestAtrr(component, 'errorMessageComponent');
+        const wrapper = findByDataTestAtrr(component, 'errorMessageComponent');
 
-    expect(wrapper.length).toBe(1);
-  });
+        expect(wrapper.length).toBe(1);
+    });
 
-  it('Should not be render if no props passed', () => {
-    component = setUp();
+    it('Should not be render if no props passed', () => {
+        component = setUp();
 
-    const wrapper = findByDataTestAtrr(component, 'errorMessageComponent');
+        const wrapper = findByDataTestAtrr(component, 'errorMessageComponent');
 
-    expect(wrapper.length).toBe(0);
-  });
+        expect(wrapper.length).toBe(0);
+    });
 });

@@ -1,47 +1,47 @@
 import {
-  addPlantType,
-  deletePlantType,
-  updateLastWateringDateType,
-  uploadImageType,
-  PlantsState,
-  PlantsActionsType,
+    addPlantType,
+    deletePlantType,
+    updateLastWateringDateType,
+    uploadImageType,
+    PlantsState,
+    PlantsActionsType,
 } from '../redux_actions/plantsTypes';
 
 export const initialState: PlantsState = {
-  plantData: {},
-  plantDeleted: false,
-  wateringDateUpdated: false,
-  imageName: '',
+    plantData: {},
+    plantDeleted: false,
+    wateringDateUpdated: false,
+    imageName: '',
 };
 
-const plantsReducer = function (
-  state = initialState,
-  action: PlantsActionsType
+export const plantsReducer = function (
+    state = initialState,
+    action: PlantsActionsType
 ): PlantsState {
-  switch (action.type) {
-    case addPlantType:
-      return {
-        ...state,
-        plantData: action.plantData,
-      };
-    case deletePlantType:
-      return {
-        ...state,
-        plantDeleted: action.plantDeleted,
-      };
-    case updateLastWateringDateType:
-      return {
-        ...state,
-        wateringDateUpdated: action.wateringDateUpdated,
-      };
-    case uploadImageType:
-      return {
-        ...state,
-        imageName: action.imageName,
-      };
-    default:
-      return state;
-  }
-};
+    switch (action.type) {
 
-export default plantsReducer;
+    case addPlantType:
+        return {
+            ...state,
+            plantData: action.plantData,
+        };
+    case deletePlantType:
+        return {
+            ...state,
+            plantDeleted: action.plantDeleted,
+        };
+    case updateLastWateringDateType:
+        return {
+            ...state,
+            wateringDateUpdated: action.wateringDateUpdated,
+        };
+    case uploadImageType:
+        return {
+            ...state,
+            imageName: action.imageName,
+        };
+    default:
+        return state;
+  
+    }
+};

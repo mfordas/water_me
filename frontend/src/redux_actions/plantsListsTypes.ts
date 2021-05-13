@@ -6,30 +6,30 @@ export const deletePlantsListType = 'deletePlantsList';
 export const showPlantsListType = 'showPlantsList';
 
 export type PlantsList = {
-  id: number;
-  userId: number;
-  name: string;
+  	id: number;
+  	userId: number;
+  	name: string;
 };
 
 export interface PlantsListsState {
-  plantsListName: string;
-  plantsLists: PlantsList[];
-  userId: string | null;
-  plantsListDeleted: boolean;
-  plants: Plant[];
+  	plantsListName: string;
+  	plantsLists: PlantsList[];
+  	userId: string | null;
+	plantsListDeleted: boolean;
+  	plants: Plant[];
 }
 
 interface AddPlantsListAction extends PlantsListsState {
-  type: typeof addPlantsListType;
+	type: typeof addPlantsListType;
 }
 interface GetPlantsListAction extends PlantsListsState {
-  type: typeof getPlantsListsType;
+	type: typeof getPlantsListsType;
 }
 interface DeletePlantsListAction extends PlantsListsState {
-  type: typeof deletePlantsListType;
+	type: typeof deletePlantsListType;
 }
 interface ShowPlantsListAction extends PlantsListsState {
-  type: typeof showPlantsListType;
+	type: typeof showPlantsListType;
 }
 
 export type PlantsListsActionType =

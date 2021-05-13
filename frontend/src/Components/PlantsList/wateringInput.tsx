@@ -1,6 +1,7 @@
 import React from 'react';
 
-import ErrorMessage from '../ErrorMessage/errorMessage';
+import { ErrorMessage } from '../ErrorMessage/errorMessage';
+
 import './scss/plantsList.scss';
 
 type Input = {
@@ -10,33 +11,31 @@ type Input = {
 };
 
 export const WateringInput = ({
-  formSubmitted,
-  wateringCycle,
-  setWateringCycle,
+    formSubmitted,
+    wateringCycle,
+    setWateringCycle,
 }: Input) => {
-  const validateWateringCycle = () => {
-    if (formSubmitted && wateringCycle === 0) {
-      return <ErrorMessage errorText='Wpisz częstotliwość podlewania' />;
-    }
-  };
+    const validateWateringCycle = () => {
+        if (formSubmitted && wateringCycle === 0) {
+            return <ErrorMessage errorText='Wpisz częstotliwość podlewania' />;
+        }
+    };
 
-  return (
-    <>
-      <label data-test='WateringInput'>
+    return (
+        <>
+            <label data-test='WateringInput'>
         Podlewanie co:
-        <input
-          type='number'
-          min={0}
-          value={wateringCycle}
-          onChange={(e) => {
-            setWateringCycle(e.target.valueAsNumber);
-          }}
-        />
-        {wateringCycle === 1 ? `dzień` : 'dni'}
-      </label>
-      {validateWateringCycle()}
-    </>
-  );
+                <input
+                    type='number'
+                    min={0}
+                    value={wateringCycle}
+                    onChange={(e) => {
+                        setWateringCycle(e.target.valueAsNumber);
+                    }}
+                />
+                {wateringCycle === 1 ? 'dzień' : 'dni'}
+            </label>
+            {validateWateringCycle()}
+        </>
+    );
 };
-
-export default WateringInput;

@@ -7,20 +7,18 @@ type Input = {
 };
 
 export const DateInput = ({ startDate, setStartDate }: Input) => {
-  return (
-    <>
-      <label data-test='DateInput'>
+    return (
+        <>
+            <label data-test='DateInput'>
         Data startu:
-        <input
-          type='date'
-          value={startDate}
-          onChange={(e) => {
-            setStartDate(e.target.value);
-          }}
-        />
-      </label>
-    </>
-  );
+                <input
+                    type='date'
+                    value={startDate}
+                    onChange={(e) => {
+                        setStartDate(e.target.value);
+                    }}
+                />
+            </label>
+        </>
+    );
 };
-
-export default DateInput;

@@ -1,128 +1,132 @@
 .plantsContainer {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  .plantsContainerHeader {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: column;
     width: 100%;
-    padding: 1vh 0.5vh;
-    border-bottom: 2px solid black;
 
-    div {
-      display: flex;
-      justify-content: center;
-      flex: 1 1 0;
-    }
-  }
+    .plantsContainerHeader {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        padding: 1vh 0.5vh;
+        border-bottom: 2px solid black;
 
-  .plantContainer {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1vh;
-
-    div {
-      display: flex;
-      justify-content: center;
-      flex: 1 1 0;
-      margin: 0.5em;
+        div {
+            display: flex;
+            justify-content: center;
+            flex: 1 1 0;
+        }
     }
 
-    img {
-      margin: 0.5em;
+    .plantContainer {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        padding: 1vh;
+
+        div {
+            display: flex;
+            justify-content: center;
+            flex: 1 1 0;
+            margin: 0.5em;
+        }
+
+        img {
+            margin: 0.5em;
+        }
     }
-  }
 }
 
 .addPlantContainer {
-  width: 75%;
-  justify-content: center;
-  align-items: center;
-
-  form {
-    display: flex;
-    flex-direction: column;
+    width: 75%;
+    justify-content: center;
     align-items: center;
 
-    label {
-      display: flex;
-      width: 100%;
-      justify-content: center;
-      flex: 1 1 0;
-      padding: 1vh 0.5vh;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-      input {
-        border: none;
-        border-bottom: 2px solid black;
-      }
-    }
+        label {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            flex: 1 1 0;
+            padding: 1vh 0.5vh;
 
-    .picturePreview {
-      max-width: 50%;
-      padding: 15px;
+            input {
+                border: none;
+                border-bottom: 2px solid black;
+            }
+        }
+
+        .picturePreview {
+            max-width: 50%;
+            padding: 15px;
+        }
     }
-  }
 }
 
 button {
-  background-color: white;
-  border: 2px solid black;
-  border-radius: 10px;
-  font-size: 1em;
-  padding: 0.2rem 2rem;
-  max-width: 50%;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 1em;
+    padding: 0.2rem 2rem;
+    max-width: 50%;
 }
 
 .addPlantButton {
-  background-color: #f5d453;
+    background-color: #f5d453;
 }
 
 .deleteButton {
-  background-color: #f24949;
-  color: white;
+    background-color: #f24949;
+    color: white;
 }
 
 .wateringStatusContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-  div {
-    padding: 0.3em;
-    margin: 0.3em 0.3em;
-    text-align: center;
-    border-radius: 10px;
-    border: 2px solid black;
-  }
+    .updateWatering,
+    .statusOk,
+    .statusNok,
+    .nextWateringContainer {
+        text-align: center;
+        padding: 0.3em 1em;
+        margin: 0.3em 0.3em;
+        border-radius: 10px;
+        border: 2px solid black;
+    }
 
-  .statusOk {
-    background-color: #4caf50;
-  }
+    .statusOk {
+        background-color: #4caf50;
+    }
 
-  .statusNok {
-    background-color: #f24949;
-  }
+    .statusNok {
+        background-color: #f24949;
+    }
 
-  button {
-    background-color: skyblue;
-  }
+    .updateWatering {
+        background-color: skyblue;
+        width: 150px;
+    }
 }
 
 @media screen and (max-width: 768px) {
-  .plantContainer {
-    flex-direction: column;
-    border-bottom: 2px solid black;
-    padding: 3em 0;
-    margin: 1em 0;
-  }
+    .plantContainer {
+        flex-direction: column;
+        border-bottom: 2px solid black;
+        padding: 3em 0;
+        margin: 1em 0;
+    }
 
-  .addPlantContainer {
-    width: 100%;
-    margin: 1em;
-  }
+    .addPlantContainer {
+        width: 100%;
+        margin: 1em;
+    }
 }

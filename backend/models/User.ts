@@ -1,5 +1,5 @@
 import sequelize, { Optional, Model } from 'sequelize';
-import { mainSeqelizeInstation } from '../db/connection.js';
+import { mainSeqelizeInstation } from '../db/connection';
 
 export type TypeUser = {
   id: number;
@@ -14,23 +14,23 @@ export interface UserInstance
     TypeUser {}
 
 const User = mainSeqelizeInstation.define<UserInstance>(
-  'User',
-  {
-    id: {
-      type: sequelize.DataTypes.INTEGER.UNSIGNED,
-      primaryKey: true,
-      autoIncrement: true,
+    'User',
+    {
+        id: {
+            type: sequelize.DataTypes.INTEGER.UNSIGNED,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        googleId: {
+            type: sequelize.DataTypes.STRING,
+            allowNull: false,
+        },
+        name: {
+            type: sequelize.DataTypes.STRING,
+            allowNull: false,
+        },
     },
-    googleId: {
-      type: sequelize.DataTypes.STRING,
-      allowNull: false,
-    },
-    name: {
-      type: sequelize.DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {}
+    {}
 );
 
 export { User };

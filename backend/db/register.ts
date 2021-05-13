@@ -10,18 +10,16 @@ type Models = {
   PlantsList: sequelize.ModelCtor<PlantsListInstance>;
 };
 
-const register = (
-  app: express.Express,
-  db: sequelize.Sequelize,
-  models: Models
+export const register = (
+    app: express.Express,
+    db: sequelize.Sequelize,
+    models: Models
 ): express.Express => {
-  console.log('[MySQL] models registered in database');
-  app.use((req, res, next) => {
-    res.locals.models = models;
-    res.locals.db = db;
-    next();
-  });
-  return app;
+    console.log('[MySQL] models registered in database');
+    app.use((req, res, next) => {
+        res.locals.models = models;
+        res.locals.db = db;
+        next();
+    });
+    return app;
 };
-
-export default register;

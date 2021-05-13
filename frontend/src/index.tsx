@@ -19,27 +19,27 @@ import { store } from './redux_store/reduxStore';
 import './scss/main_styling.scss';
 
 const App = () => {
-  return (
-    <BrowserRouter>
-      <div className='contentContainer'>
-        <Logo />
-        <MenuConnected />
-        <Switch>
-          <PublicRoute exact={true} path='/' component={HomePage} />
-          <PrivateRoute exact={true} path='/plantsLists' component={PlantsLists} />
-          <PrivateRoute path='/plantsLists/' component={PlantsList} />
-          <PrivateRoute path='/userData/' component={DeleteAccountConnected} />
-          <Route render={() => <Redirect to='/' />} />
-        </Switch>
-      </div>
-      <FooterComponent />
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <div className='contentContainer'>
+                <Logo />
+                <MenuConnected />
+                <Switch>
+                    <PublicRoute exact={true} path='/' component={HomePage} />
+                    <PrivateRoute exact={true} path='/plantsLists' component={PlantsLists} />
+                    <PrivateRoute path='/plantsLists/' component={PlantsList} />
+                    <PrivateRoute path='/userData/' component={DeleteAccountConnected} />
+                    <Route render={() => <Redirect to='/' />} />
+                </Switch>
+            </div>
+            <FooterComponent />
+        </BrowserRouter>
+    );
 };
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.querySelector('#root')
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.querySelector('#root')
 );

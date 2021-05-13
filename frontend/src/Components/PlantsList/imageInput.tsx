@@ -9,57 +9,57 @@ import { createFileToUpload } from './helpers';
 import './scss/plantsList.scss';
 
 export const ImageInput = ({
-  formSubmitted,
-  pictureFile,
-  setPictureFile,
+    formSubmitted,
+    pictureFile,
+    setPictureFile,
 }: PropsFromRedux) => {
-  const [pictureUrl, setPictureUrl] = useState('');
+    const [pictureUrl, setPictureUrl] = useState('');
 
-  const validatePicture = () => {
-    if (formSubmitted && !pictureFile) {
-      return <ErrorMessage errorText='Dodaj zdjęcie' />;
-    }
-  };
+    const validatePicture = () => {
+        if (formSubmitted && !pictureFile) {
+            return <ErrorMessage errorText='Dodaj zdjęcie' />;
+        }
+    };
 
-  const generatePicturePreview = (pictureFile: File) => {
-    const generatedUrl = window.URL.createObjectURL(pictureFile);
-    setPictureUrl(generatedUrl);
-  };
+    const generatePicturePreview = (pictureFile: File) => {
+        const generatedUrl = window.URL.createObjectURL(pictureFile);
+        setPictureUrl(generatedUrl);
+    };
 
-  return (
-    <>
-      <label data-test='ImageInput'>
+    return (
+        <>
+            <label data-test='ImageInput'>
         Zdjęcie
-        <input
-            type='file'
-            name='image'
-            onChange={async (event) => {
-            const file = createFileToUpload(event);
-            setPictureFile(file);
-            generatePicturePreview(file);
-          }}
-        />
-      </label>
-      {validatePicture()}
-      {pictureUrl && (
-        <img className='picturePreview' src={pictureUrl} alt='Plant' />
-      )}
-    </>
-  );
+                <input
+                    type='file'
+                    name='image'
+                    onChange={async (event) => {
+                        const file = createFileToUpload(event);
+                        setPictureFile(file);
+                        generatePicturePreview(file);
+                    }}
+                />
+            </label>
+            {validatePicture()}
+            {pictureUrl && (
+                <img className='picturePreview' src={pictureUrl} alt='Plant' />
+            )}
+        </>
+    );
 };
 
 const mapStateToProps = (
-  state: RootState,
-  ownProps: {
+    state: RootState,
+    ownProps: {
     formSubmitted: boolean;
     pictureFile: File | null;
     setPictureFile: React.Dispatch<React.SetStateAction<File | null>>;
   }
 ) => ({
-  plantsData: state.plantsData,
-  formSubmitted: ownProps.formSubmitted,
-  pictureFile: ownProps.pictureFile,
-  setPictureFile: ownProps.setPictureFile,
+    plantsData: state.plantsData,
+    formSubmitted: ownProps.formSubmitted,
+    pictureFile: ownProps.pictureFile,
+    setPictureFile: ownProps.setPictureFile,
 });
 
 const connector = connect(mapStateToProps);

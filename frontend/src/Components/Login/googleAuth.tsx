@@ -12,34 +12,34 @@ import googlelogo from '../../img/g-logo.png';
 import '../Register/scss/google.scss';
 
 export const GoogleAuth = ({
-  loginExternal,
-  loginData,
+    loginExternal,
+    loginData,
 }: PropsFromRedux): JSX.Element => {
-  const authObject = useHandleGoogleApi();
+    const authObject = useHandleGoogleApi();
 
-  return !loginData.isLogged ? (
-    <>
-      <div
-          className='googleButton'
-          data-test='googleAuthComponent'
-          onClick={() => makeAuth(authObject, loginExternal)}
-      >
-        <img className='googleButtonLogo' src={googlelogo} alt='google logo' />
-        <div className='googleButtonText'>Zaloguj przez Google</div>
-      </div>
-      <ErrorMessage errorText={loginData.errorMessage} />
-    </>
-  ) : (
-    <Redirect to='/plants' />
-  );
+    return !loginData.isLogged ? (
+        <>
+            <div
+                className='googleButton'
+                data-test='googleAuthComponent'
+                onClick={() => makeAuth(authObject, loginExternal)}
+            >
+                <img className='googleButtonLogo' src={googlelogo} alt='google logo' />
+                <div className='googleButtonText'>Zaloguj przez Google</div>
+            </div>
+            <ErrorMessage errorText={loginData.errorMessage} />
+        </>
+    ) : (
+        <Redirect to='/plants' />
+    );
 };
 
 const mapStateToProps = (state: RootState) => ({
-  loginData: state.loginData,
+    loginData: state.loginData,
 });
 
 const mapDispatch = {
-  loginExternal: loginExternal,
+    loginExternal: loginExternal,
 };
 
 const connector = connect(mapStateToProps, mapDispatch);

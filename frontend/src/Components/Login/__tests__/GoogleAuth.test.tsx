@@ -9,92 +9,92 @@ import { BrowserRouter, Redirect } from 'react-router-dom';
 import { makeAuth } from '../helpers';
 
 jest.mock('../helpers', () => {
-  const helpers = jest.requireActual('../helpers');
+    const helpers = jest.requireActual('../helpers');
 
-  return {
-    ...helpers,
-    makeAuth: jest.fn(),
-  };
+    return {
+        ...helpers,
+        makeAuth: jest.fn(),
+    };
 });
 
 jest.mock('../hooks', () => {
-  const hooks = jest.requireActual('../hooks');
+    const hooks = jest.requireActual('../hooks');
 
-  return {
-    ...hooks,
-    useHandleGoogleApi: jest.fn(),
-  };
+    return {
+        ...hooks,
+        useHandleGoogleApi: jest.fn(),
+    };
 });
 
 const mockFunc = jest.fn();
 
 const setUp = (startState: LoginState = initialState) => {
-  const wrapper = shallow(
-    <GoogleAuth loginData={startState} loginExternal={mockFunc} />
-  );
-  return wrapper;
+    const wrapper = shallow(
+        <GoogleAuth loginData={startState} loginExternal={mockFunc} />
+    );
+    return wrapper;
 };
 
 const setUpMount = (startState: LoginState = initialState) => {
-  const wrapper = mount(
-    <BrowserRouter>
-      <GoogleAuth loginData={startState} loginExternal={mockFunc} />
-    </BrowserRouter>
-  );
-  return wrapper;
+    const wrapper = mount(
+        <BrowserRouter>
+            <GoogleAuth loginData={startState} loginExternal={mockFunc} />
+        </BrowserRouter>
+    );
+    return wrapper;
 };
 
 describe('Google auth component', () => {
-  let wrapper: ShallowWrapper;
+    let wrapper: ShallowWrapper;
 
-  beforeEach(() => {
-    const initialState = {
-      loginData: {
-        name: '',
-        googleId: '',
-        invalidData: false,
-      },
-      isLogged: false,
-    };
+    beforeEach(() => {
+        const initialState = {
+            loginData: {
+                name: '',
+                googleId: '',
+                invalidData: false,
+            },
+            isLogged: false,
+        };
 
-    wrapper = setUp(initialState);
-  });
+        wrapper = setUp(initialState);
+    });
 
-  it('Should render without error', () => {
-    const component = findByDataTestAtrr(wrapper, 'googleAuthComponent');
-    expect(component.length).toBe(1);
-  });
+    it('Should render without error', () => {
+        const component = findByDataTestAtrr(wrapper, 'googleAuthComponent');
+        expect(component.length).toBe(1);
+    });
 });
 
 describe('Should handle submit Google login button', () => {
-  const component = setUpMount(initialState);
+    const component = setUpMount(initialState);
 
-  it('Should emit callback on click event', async () => {
-    (makeAuth as jest.Mock).mockImplementation(() =>
-      console.log('Making auth')
-    );
-    await act(async () => {
-      component.simulate('click');
+    it('Should emit callback on click event', async () => {
+        (makeAuth as jest.Mock).mockImplementation(() =>
+            console.log('Making auth')
+        );
+        await act(async () => {
+            component.simulate('click');
+        });
+
+        expect(makeAuth).toHaveBeenCalled();
     });
-
-    expect(makeAuth).toHaveBeenCalled();
-  });
 });
 
 describe('When logged in', () => {
-  it('Should redirect to plants lists', () => {
-    const initialState = {
-      loginData: {
-        name: '',
-        googleId: '',
-        invalidData: false,
-      },
-      isLogged: true,
-    };
+    it('Should redirect to plants lists', () => {
+        const initialState = {
+            loginData: {
+                name: '',
+                googleId: '',
+                invalidData: false,
+            },
+            isLogged: true,
+        };
 
-    const wrapper = setUp(initialState);
+        const wrapper = setUp(initialState);
 
-    expect(wrapper.find(Redirect).length).toBe(1);
-    expect(wrapper.debug()).toContain('/plants');
-  });
+        expect(wrapper.find(Redirect).length).toBe(1);
+        expect(wrapper.debug()).toContain('/plants');
+    });
 });

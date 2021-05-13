@@ -33,6 +33,7 @@
         "error",
         "single"
       ],
+      "indent": ["error", 4],
       "jsx-quotes": [
         "error",
         "prefer-single"

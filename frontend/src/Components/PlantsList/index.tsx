@@ -9,38 +9,38 @@ import { PrivateRouteConnected as PrivateRoute } from '../PrivateRoute';
 import { RootState } from '../../redux_reducers/';
 
 export const PlantsListComponent = ({
-  getPlantsListsForUser,
-  plantsListsData,
+    getPlantsListsForUser,
+    plantsListsData,
 }: PropsFromRedux) => {
-  useEffect(() => {
-    const getPlantsLists = async () => {
-      await getPlantsListsForUser();
-    };
+    useEffect(() => {
+        const getPlantsLists = async () => {
+            await getPlantsListsForUser();
+        };
 
-    getPlantsLists();
-  }, []);
+        getPlantsLists();
+    }, []);
 
-  return (
-    <Switch>
-      {plantsListsData.plantsLists.map((list, index) => (
-        <PrivateRoute
-            key={index}
-            exact={true}
-            path={`/plantsLists/${list.name}`}
-            component={PlantsListConnected}
-            listIndex={index}
-        />
-      ))}
-    </Switch>
-  );
+    return (
+        <Switch>
+            {plantsListsData.plantsLists.map((list, index) => (
+                <PrivateRoute
+                    key={index}
+                    exact={true}
+                    path={`/plantsLists/${list.name}`}
+                    component={PlantsListConnected}
+                    listIndex={index}
+                />
+            ))}
+        </Switch>
+    );
 };
 
 const mapStateToProps = (state: RootState) => ({
-  plantsListsData: state.plantsListsData,
+    plantsListsData: state.plantsListsData,
 });
 
 const mapDispatch = {
-  getPlantsListsForUser: getPlantsListsForUser,
+    getPlantsListsForUser: getPlantsListsForUser,
 };
 
 const connector = connect(mapStateToProps, mapDispatch);

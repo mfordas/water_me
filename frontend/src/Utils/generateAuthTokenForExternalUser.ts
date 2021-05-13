@@ -9,7 +9,7 @@ export type AuthObject = {
 };
 
 export const generateAuthTokenForExternalUser = async (
-  authObject: AuthObject
+    authObject: AuthObject
 ): Promise<string> => {
-  return await authObject.currentUser.get().getAuthResponse().id_token;
+    return await authObject.currentUser.get().getAuthResponse().id_token;
 };

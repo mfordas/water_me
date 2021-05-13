@@ -9,24 +9,24 @@ export interface GoogleApi extends AuthObject {
 declare const gapi: any;
 
 export const useHandleGoogleApi = () => {
-  const [authObject, setAuthObject] = useState<GoogleApi | null>(null);
+    const [authObject, setAuthObject] = useState<GoogleApi | null>(null);
 
-  useEffect(() => {
-    try {
-      gapi.load('client:auth2', () => {
-        gapi.client
-          .init({
-            clientId: process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID,
-            scope: 'email',
-          })
-          .then(async () => {
-            setAuthObject(await gapi.auth2.getAuthInstance());
-          });
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
+    useEffect(() => {
+        try {
+            gapi.load('client:auth2', () => {
+                gapi.client
+                    .init({
+                        clientId: process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID,
+                        scope: 'email',
+                    })
+                    .then(async () => {
+                        setAuthObject(await gapi.auth2.getAuthInstance());
+                    });
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
 
-  return authObject;
+    return authObject;
 };

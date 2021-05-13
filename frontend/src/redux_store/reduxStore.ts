@@ -22,7 +22,7 @@ const initialState = {};
 export const middleware = [thunk];
 
 export const store = createStore(
-  rootReducer,
-  initialState,
-  applyMiddleware(...middleware)
+    rootReducer,
+    initialState,
+    applyMiddleware(...middleware)
 );

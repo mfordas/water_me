@@ -8,23 +8,23 @@ import { RootState } from '../../redux_reducers/';
 import './scss/google.scss';
 
 export const ConfirmGoogle = ({ resetRegisterState }: PropsFromRedux) => {
-  return (
-    <>
-      <p>Konto założone!</p>
-      <p>Możesz teraz się zalogować.</p>
-      <Link className='button' to='/home' onClick={resetRegisterState}>
+    return (
+        <>
+            <p>Konto założone!</p>
+            <p>Możesz teraz się zalogować.</p>
+            <Link className='button' to='/home' onClick={resetRegisterState}>
         Strona główna
-      </Link>
-    </>
-  );
+            </Link>
+        </>
+    );
 };
 
 const mapStateToProps = (state: RootState) => ({
-  registerData: state.registerData,
+    registerData: state.registerData,
 });
 
 const mapDispatch = {
-  resetRegisterState: resetRegisterState,
+    resetRegisterState: resetRegisterState,
 };
 
 const connector = connect(mapStateToProps, mapDispatch);

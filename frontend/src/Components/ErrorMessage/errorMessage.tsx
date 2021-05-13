@@ -5,9 +5,9 @@ type PropsType = {
 };
 
 export const ErrorMessage = ({ errorText }: PropsType) => {
-  return errorText ? (
-    <div className='errorMessageContainer' data-test='errorMessageComponent'>
-      {errorText}
-    </div>
-  ) : null;
+    return errorText ? (
+        <div className='errorMessageContainer' data-test='errorMessageComponent'>
+            {errorText}
+        </div>
+    ) : null;
 };

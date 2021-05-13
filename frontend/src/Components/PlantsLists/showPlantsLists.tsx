@@ -11,49 +11,49 @@ import { PlantsList } from '../../redux_actions/plantsListsTypes';
 import './scss/plantsLists.scss';
 
 export const ShowPlantsLists = ({
-  getPlantsListsForUser,
-  plantsListsData,
+    getPlantsListsForUser,
+    plantsListsData,
 }: PropsFromRedux) => {
-  useEffect(() => {
-    const getPlantsLists = async () => {
-      await getPlantsListsForUser();
+    useEffect(() => {
+        const getPlantsLists = async () => {
+            await getPlantsListsForUser();
+        };
+
+        getPlantsLists();
+    }, []);
+
+    const generatePlantsLists = (plantsListsArray: PlantsList[]) => {
+        return (
+            <div
+                className='plantsListsContainer'
+                data-test='showPlantsListsComponent'
+            >
+                {plantsListsArray.map((plantsList) => {
+                    return (
+                        <div
+                            className='plantsListContainer'
+                            key={plantsList.id}
+                            data-test='plantsListContainer'
+                        >
+                            <div>{plantsList.name}</div>
+                            <Link to={`/plantsLists/${plantsList.name}`}>Przejdź</Link>
+                            <DeletePlantsListConnected plantsListId={plantsList.id} />
+                        </div>
+                    );
+                })}
+            </div>
+        );
     };
 
-    getPlantsLists();
-  }, []);
-
-  const generatePlantsLists = (plantsListsArray: PlantsList[]) => {
-    return (
-      <div
-          className='plantsListsContainer'
-          data-test='showPlantsListsComponent'
-      >
-        {plantsListsArray.map((plantsList) => {
-          return (
-            <div
-                className='plantsListContainer'
-                key={plantsList.id}
-                data-test='plantsListContainer'
-            >
-              <div>{plantsList.name}</div>
-              <Link to={`/plantsLists/${plantsList.name}`}>Przejdź</Link>
-              <DeletePlantsListConnected plantsListId={plantsList.id} />
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
-
-  return <>{generatePlantsLists(plantsListsData.plantsLists)}</>;
+    return <>{generatePlantsLists(plantsListsData.plantsLists)}</>;
 };
 
 const mapStateToProps = (state: RootState) => ({
-  plantsListsData: state.plantsListsData,
+    plantsListsData: state.plantsListsData,
 });
 
 const mapDispatch = {
-  getPlantsListsForUser: getPlantsListsForUser,
+    getPlantsListsForUser: getPlantsListsForUser,
 };
 
 const connector = connect(mapStateToProps, mapDispatch);

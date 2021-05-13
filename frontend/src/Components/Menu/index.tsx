@@ -8,29 +8,29 @@ import { RootState } from '../../redux_reducers/';
 import './scss/menu.scss';
 
 export const Menu = ({ loginData, logout }: PropsFromRedux) => {
-  return (
-    <div className='containerMenu' data-test='menuComponent'>
-      {!loginData.isLogged && <div data-test='noElementsInMenuComponent'></div>}
-      {loginData.isLogged && (
-        <div data-test='menuComponentVisible'>
-          <NavLink className='buttonMenu' to='/plantsLists'>
+    return (
+        <div className='containerMenu' data-test='menuComponent'>
+            {!loginData.isLogged && <div data-test='noElementsInMenuComponent'></div>}
+            {loginData.isLogged && (
+                <div data-test='menuComponentVisible'>
+                    <NavLink className='buttonMenu' to='/plantsLists'>
             Moje listy rośliny
-          </NavLink>
-          <button className='buttonMenu' onClick={() => logout()}>
+                    </NavLink>
+                    <button className='buttonMenu' onClick={() => logout()}>
             Wyloguj
-          </button>
+                    </button>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 const mapStateToProps = (state: RootState) => ({
-  loginData: state.loginData,
+    loginData: state.loginData,
 });
 
 const mapDispatch = {
-  logout: logout,
+    logout: logout,
 };
 
 const connector = connect(mapStateToProps, mapDispatch);

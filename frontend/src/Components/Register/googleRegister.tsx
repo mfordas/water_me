@@ -10,39 +10,39 @@ import googlelogo from '../../img/g-logo.png';
 import './scss/google.scss';
 
 export const GoogleRegister = ({
-  postGoogleUser,
-  registerData,
+    postGoogleUser,
+    registerData,
 }: PropsFromRedux) => {
-  const authObject = useHandleGoogleApi();
+    const authObject = useHandleGoogleApi();
 
-  return (
-    <div className='registerCard' data-test='registerComponent'>
-      {' '}
-      {!registerData.confirm ? (
-        <button
-            className='googleButton'
-            onClick={() => makeAuth(authObject, postGoogleUser)}
-        >
-          <img
-              className='googleButtonLogo'
-              src={googlelogo}
-              alt='google logo'
-          />
-          <div className='googleButtonText'>Zarejestruj przez Google</div>
-        </button>
-      ) : (
-        <ConfirmGoogleConnected />
-      )}
-    </div>
-  );
+    return (
+        <div className='registerCard' data-test='registerComponent'>
+            {' '}
+            {!registerData.confirm ? (
+                <button
+                    className='googleButton'
+                    onClick={() => makeAuth(authObject, postGoogleUser)}
+                >
+                    <img
+                        className='googleButtonLogo'
+                        src={googlelogo}
+                        alt='google logo'
+                    />
+                    <div className='googleButtonText'>Zarejestruj przez Google</div>
+                </button>
+            ) : (
+                <ConfirmGoogleConnected />
+            )}
+        </div>
+    );
 };
 
 const mapStateToProps = (state: RootState) => ({
-  registerData: state.registerData,
+    registerData: state.registerData,
 });
 
 const mapDispatch = {
-  postGoogleUser: postGoogleUser,
+    postGoogleUser: postGoogleUser,
 };
 
 const connector = connect(mapStateToProps, mapDispatch);

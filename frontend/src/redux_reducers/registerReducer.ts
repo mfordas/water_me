@@ -1,38 +1,38 @@
 import {
-  registerExternal,
-  resetRegState,
-  RegisterActionsType,
-  RegisterState,
+    registerExternal,
+    resetRegState,
+    RegisterActionsType,
+    RegisterState,
 } from '../redux_actions/registerTypes';
 
 export const initialState: RegisterState = {
-  invalidData: false,
-  confirm: false,
-  googleUser: false,
+    invalidData: false,
+    confirm: false,
+    googleUser: false,
 };
 
 export const registerReducer = function (
-  state = initialState,
-  action: RegisterActionsType
+    state = initialState,
+    action: RegisterActionsType
 ): RegisterState {
-  switch (action.type) {
+    switch (action.type) {
 
     case registerExternal:
-      return {
-        ...state,
-        confirm: action.confirm,
-        invalidData: action.invalidData,
-        googleUser: action.googleUser,
-      };
+        return {
+            ...state,
+            confirm: action.confirm,
+            invalidData: action.invalidData,
+            googleUser: action.googleUser,
+        };
     case resetRegState:
-      return {
-        ...state,
-        confirm: action.confirm,
-        invalidData: action.invalidData,
-        googleUser: action.googleUser,
-      };
+        return {
+            ...state,
+            confirm: action.confirm,
+            invalidData: action.invalidData,
+            googleUser: action.googleUser,
+        };
     default:
-      return state;
+        return state;
   
-}
+    }
 };

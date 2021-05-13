@@ -26,74 +26,74 @@ export type WateringProps = {
 };
 
 export const PlantsList = ({
-  showPlantsList,
-  plantsListsData,
-  listIndex,
-}: PropsFromRedux) => {
-  const [showAddPlantForm, setShowAddPlantForm] = useState(false);
-  const plants = useCreatePlantsList(
-    plantsListsData,
     showPlantsList,
-    listIndex
-  );
+    plantsListsData,
+    listIndex,
+}: PropsFromRedux) => {
+    const [showAddPlantForm, setShowAddPlantForm] = useState(false);
+    const plants = useCreatePlantsList(
+        plantsListsData,
+        showPlantsList,
+        listIndex
+    );
 
-  const generatePlantsList = (plantsArray: Plant[]) => {
-    if (plantsArray.length > 0) {
-      const plantsList = plantsArray.map((plant, index) => {
-        return (
-          <div key={index} className='plantContainer'>
-            <div>{plant.name}</div>
-            <img
-                src={`${apiUrl()}static/images/${plant.pictureUrl}.png`}
-                alt='Plant'
-            />
-            <div>Podlewanie co: {plant.wateringCycle}</div>
-            <WateringConnected
-                lastWateringDate={plant.lastTimeWatered}
-                plantId={plant.id}
-                wateringCycle={plant.wateringCycle}
-                listId={plantsListsData.plantsLists[listIndex].id}
-            />
-            <DeletePlantConnected
-                plantId={plant.id}
-                listId={plantsListsData.plantsLists[listIndex].id}
-            />
-          </div>
-        );
-      });
+    const generatePlantsList = (plantsArray: Plant[]) => {
+        if (plantsArray.length > 0) {
+            const plantsList = plantsArray.map((plant, index) => {
+                return (
+                    <div key={index} className='plantContainer'>
+                        <div>{plant.name}</div>
+                        <img
+                            src={`${apiUrl()}static/images/${plant.pictureUrl}.png`}
+                            alt='Plant'
+                        />
+                        <div>Podlewanie co: {plant.wateringCycle}</div>
+                        <WateringConnected
+                            lastWateringDate={plant.lastTimeWatered}
+                            plantId={plant.id}
+                            wateringCycle={plant.wateringCycle}
+                            listId={plantsListsData.plantsLists[listIndex].id}
+                        />
+                        <DeletePlantConnected
+                            plantId={plant.id}
+                            listId={plantsListsData.plantsLists[listIndex].id}
+                        />
+                    </div>
+                );
+            });
 
-      return plantsList;
-    } else {
-      return <></>;
-    }
-  };
+            return plantsList;
+        } else {
+            return <></>;
+        }
+    };
 
-  return (
-    <>
-      <button
-          className='addPlantButton'
-          onClick={() => setShowAddPlantForm(!showAddPlantForm)}
-      >
+    return (
+        <>
+            <button
+                className='addPlantButton'
+                onClick={() => setShowAddPlantForm(!showAddPlantForm)}
+            >
         Dodaj roślinę
-      </button>
-      {showAddPlantForm ? (
-        <AddPlantConnected listId={plantsListsData.plantsLists[listIndex].id} />
-      ) : null}
-      <div className='plantsContainer'>{generatePlantsList(plants)}</div>
-    </>
-  );
+            </button>
+            {showAddPlantForm ? (
+                <AddPlantConnected listId={plantsListsData.plantsLists[listIndex].id} />
+            ) : null}
+            <div className='plantsContainer'>{generatePlantsList(plants)}</div>
+        </>
+    );
 };
 
 const mapStateToProps = (
-  state: RootState,
-  ownProps: { listIndex: number }
+    state: RootState,
+    ownProps: { listIndex: number }
 ) => ({
-  plantsListsData: state.plantsListsData,
-  listIndex: ownProps.listIndex,
+    plantsListsData: state.plantsListsData,
+    listIndex: ownProps.listIndex,
 });
 
 const mapDispatch = {
-  showPlantsList: showPlantsList,
+    showPlantsList: showPlantsList,
 };
 
 const connector = connect(mapStateToProps, mapDispatch);

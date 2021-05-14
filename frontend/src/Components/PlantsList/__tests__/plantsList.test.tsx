@@ -102,17 +102,6 @@ const initialStateEmpty = {
     ],
 };
 
-const setUp = (listIndex: number) => {
-    const wrapper = shallow(
-        <PlantsList
-            showPlantsList={mockShowPlantsList}
-            plantsListsData={initialState}
-            listIndex={listIndex}
-        />
-    );
-    return wrapper;
-};
-
 const setUpMount = (
     listIndex: number,
     testData: PlantsListsState
@@ -158,14 +147,5 @@ describe('PlantsList component', () => {
         wrapper.update();
 
         expect(wrapper.find(AddPlant).length).toBe(1);
-
-        // const wateringContainers = wrapper.find(Watering);
-        // const deletePlantContainers = wrapper.find(DeletePlant);
-
-    // expect(wateringContainers.length).toBe(3);
-    // expect(deletePlantContainers.length).toBe(3);
-    // expect(wateringContainers.at(0).prop('listId')).toBe(2);
-    // expect(wateringContainers.at(1).prop('listId')).toBe(2);
-    // expect(wateringContainers.at(2).prop('listId')).toBe(2);
     });
 });

@@ -20,7 +20,7 @@ describe('Logo component', () => {
         expect(wrapper.length).toBe(1);
     });
 
-    it('Should render a logo', () => {
+    it('should render a logo', () => {
         const wrapper = findByDataTestAtrr(component, 'logoSVG');
 
         expect(wrapper.length).toBe(1);

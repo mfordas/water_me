@@ -4,7 +4,7 @@ import { useCountWatering, useCreatePlantsList } from '../hooks';
 import { setCurrentDate } from '../setCurrentDate';
 
 describe('useCountWatering hook', () => {
-    it('Should return number of days to next watering and current date', () => {
+    it('should return number of days to next watering and current date', () => {
         const currentTestDate = setCurrentDate(new Date());
         const twoDaysInMiliseconds = 2 * 24 * 60 * 60 * 1000;
         const lastWatering = new Date(
@@ -71,7 +71,7 @@ describe('useCreatePlantsList hook', () => {
         ],
     };
 
-    it('Should return array of plants', async () => {
+    it('should return array of plants', async () => {
         const hook = renderHook(() => useCreatePlantsList(testData, jest.fn(), 3));
 
         expect(hook.result.current.length).toBe(3);

@@ -4,13 +4,11 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { deleteAccount } from '../../redux_actions/loginActions';
 import { RootState } from '../../redux_reducers/';
+import { HOME_ROUTE } from '../../routesAddresses';
 
 import './scss/deleteAccount.scss';
 
-export const DeleteAccount = ({
-    deleteAccount,
-    loginData,
-}: PropsFromRedux): JSX.Element => {
+export const DeleteAccount = ({ deleteAccount, loginData }: PropsFromRedux): JSX.Element => {
     return loginData.isLogged ? (
         <div className='deleteAccount' data-test='deleteAccountContainer'>
             <div className='personalDataContainer'>
@@ -36,7 +34,7 @@ export const DeleteAccount = ({
             </button>
         </div>
     ) : (
-        <Redirect to='/' />
+        <Redirect to={HOME_ROUTE} />
     );
 };
 

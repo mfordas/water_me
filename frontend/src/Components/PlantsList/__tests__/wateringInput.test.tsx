@@ -36,6 +36,7 @@ describe('DateInput component', () => {
     it('Should render without error', () => {
         const wrapper: ShallowWrapper = setUp(false, 0);
         const component = findByDataTestAtrr(wrapper, 'WateringInput');
+        
         expect(component.length).toBe(1);
     });
 });

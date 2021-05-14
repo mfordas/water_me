@@ -4,8 +4,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { Logo } from './Components/Logo/logo';
-import { FooterComponent } from './Components/Footer';
-import { MenuConnected } from './Components/Menu';
+import { FooterConnected as Footer } from './Components/Footer/footer';
+import { MenuConnected as Menu } from './Components/Menu/menu';
 
 import { RoutesConnected as Routes } from './routes';
 
@@ -18,10 +18,10 @@ const App = () => {
         <Router>
             <div className='contentContainer'>
                 <Logo />
-                <MenuConnected />
+                <Menu />
                 <Routes />
             </div>
-            <FooterComponent />
+            <Footer />
         </Router>
     );
 };

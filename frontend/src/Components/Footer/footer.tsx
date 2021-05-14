@@ -11,9 +11,9 @@ export const Footer = ({ loginData }: { loginData: LoginState }) => {
     return (
         <footer>
             <div className='footerItem' data-test='footerComponent'>
-        Copyright ©{' '}
+                    Copyright ©{' '}
                 <a href='https://www.fordas.pl' data-test='linkInFooter'>
-          Mateusz Fordas
+                    Mateusz Fordas
                 </a>{' '}
                 {new Date().getFullYear()}
             </div>

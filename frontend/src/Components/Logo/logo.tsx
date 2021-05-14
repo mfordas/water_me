@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { ReactComponent as LogoPic } from '../../img/logo.svg';
+
 import './scss/logo.scss';
 
 export const Logo = () => {
@@ -9,4 +10,4 @@ export const Logo = () => {
             <Link to='/'><LogoPic data-test='logoSVG'/></Link>
         </div>
     );
-}
+};

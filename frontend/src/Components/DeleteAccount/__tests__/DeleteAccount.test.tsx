@@ -1,6 +1,6 @@
 import { BrowserRouter, Redirect } from 'react-router-dom';
 
-import { shallow, mount, ShallowWrapper } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
@@ -27,8 +27,6 @@ const setUpMount = (startState: LoginState = initialState) => {
 };
 
 describe('Google auth component', () => {
-    let wrapper: ShallowWrapper;
-
     const initialState = {
         loginData: {
             name: 'TestName',
@@ -39,9 +37,9 @@ describe('Google auth component', () => {
         errorMessage: '',
     };
 
-    wrapper = setUp(initialState);
+    const wrapper = setUp(initialState);
 
-    it('Should render without error', () => {
+    it('should render without error', () => {
         const component = findByDataTestAtrr(wrapper, 'deleteAccountContainer');
         expect(component.length).toBe(1);
         expect(component.text()).toContain(initialState.loginData.name);
@@ -62,7 +60,7 @@ describe('Should handle submit button', () => {
 
     const component = setUpMount(initialState);
 
-    it('Should emit callback on click event', async () => {
+    it('and should emit callback on click event', async () => {
         const deleteButton = findByDataTestAtrr(component, 'deleteAccountButton');
         await act(async () => {
             deleteButton.simulate('click');
@@ -73,7 +71,7 @@ describe('Should handle submit button', () => {
 });
 
 describe('When account is deleted', () => {
-    it('Should redirect to main screen', () => {
+    it('should redirect to main screen', () => {
         const initialState = {
             loginData: {
                 name: '',

@@ -34,5 +34,5 @@ export const registerReducer = function (
     default:
         return state;
   
-    }
+    };
 };

@@ -9,7 +9,10 @@ import { HOME_ROUTE } from '../../routesAddresses';
 import './scss/deleteAccount.scss';
 
 export const DeleteAccount = ({ deleteAccount, loginData }: PropsFromRedux): JSX.Element => {
-    return loginData.isLogged ? (
+
+    if (!loginData.isLogged) return <Redirect to={HOME_ROUTE} />
+    
+    return  (
         <div className='deleteAccount' data-test='deleteAccountContainer'>
             <div className='personalDataContainer'>
                 <p>Dane, które przechowujemy:</p>
@@ -33,8 +36,6 @@ export const DeleteAccount = ({ deleteAccount, loginData }: PropsFromRedux): JSX
                 Usuń konto
             </button>
         </div>
-    ) : (
-        <Redirect to={HOME_ROUTE} />
     );
 };
 

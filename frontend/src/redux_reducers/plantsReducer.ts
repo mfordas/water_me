@@ -43,5 +43,5 @@ export const plantsReducer = function (
     default:
         return state;
   
-    }
+    };
 };

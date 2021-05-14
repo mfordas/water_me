@@ -18,7 +18,9 @@ export const GoogleAuth = ({
 }: PropsFromRedux): JSX.Element => {
     const authObject = useHandleGoogleApi();
 
-    return !loginData.isLogged ? (
+    if(loginData.isLogged) return <Redirect to='/plants' />
+
+    return (
         <>
             <div
                 className='googleButton'
@@ -30,9 +32,7 @@ export const GoogleAuth = ({
             </div>
             <ErrorMessage errorText={loginData.errorMessage} />
         </>
-    ) : (
-        <Redirect to='/plants' />
-    );
+    )
 };
 
 const mapStateToProps = (state: RootState) => ({

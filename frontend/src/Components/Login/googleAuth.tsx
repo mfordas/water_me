@@ -9,6 +9,7 @@ import { makeAuth } from './helpers';
 import { ErrorMessage } from '../ErrorMessage/errorMessage';
 
 import googlelogo from '../../img/g-logo.png';
+
 import '../Register/scss/google.scss';
 
 export const GoogleAuth = ({

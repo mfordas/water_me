@@ -6,7 +6,6 @@ import { connect, ConnectedProps } from 'react-redux';
 import { getPlantsListsForUser } from '../../redux_actions/plantsListsActions';
 import { DeletePlantsListConnected } from './deletePlantsList';
 import { RootState } from '../../redux_reducers/';
-import { PlantsList } from '../../redux_actions/plantsListsTypes';
 
 import './scss/plantsLists.scss';
 
@@ -22,30 +21,32 @@ export const ShowPlantsLists = ({
         getPlantsLists();
     }, []);
 
-    const generatePlantsLists = (plantsListsArray: PlantsList[]) => {
-        return (
-            <div
-                className='plantsListsContainer'
-                data-test='showPlantsListsComponent'
-            >
-                {plantsListsArray.map((plantsList) => {
-                    return (
-                        <div
-                            className='plantsListContainer'
-                            key={plantsList.id}
-                            data-test='plantsListContainer'
-                        >
-                            <div>{plantsList.name}</div>
-                            <Link to={`/plantsLists/${plantsList.name}`}>Przejdź</Link>
-                            <DeletePlantsListConnected plantsListId={plantsList.id} />
-                        </div>
-                    );
-                })}
-            </div>
-        );
-    };
+    const plantsLists = (
+        plantsListsData.plantsLists.map((plantsList) => {
+            return (
+                <div
+                    className='plantsListContainer'
+                    key={plantsList.id}
+                    data-test='plantsListContainer'
+                >
+                    <div>{plantsList.name}</div>
+                    <Link to={`/plantsLists/${plantsList.name}`}>
+                        Przejdź
+                    </Link>
+                    <DeletePlantsListConnected plantsListId={plantsList.id} />
+                </div>
+            );
+        })
+    );
 
-    return <>{generatePlantsLists(plantsListsData.plantsLists)}</>;
+    return (
+        <div
+            className='plantsListsContainer'
+            data-test='showPlantsListsComponent'
+        >
+            {plantsLists}
+        </div>
+    );
 };
 
 const mapStateToProps = (state: RootState) => ({

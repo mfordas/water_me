@@ -29,7 +29,7 @@ export const ImageInput = ({
     return (
         <>
             <label data-test='ImageInput'>
-        Zdjęcie
+                Zdjęcie
                 <input
                     type='file'
                     name='image'

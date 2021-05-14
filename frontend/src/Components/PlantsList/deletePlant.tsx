@@ -24,7 +24,7 @@ export const DeletePlant = ({
             data-test='deletePlantButton'
             onClick={handleDeletePlant}
         >
-      Usuń
+            Usuń
         </button>
     );
 };

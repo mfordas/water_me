@@ -26,9 +26,7 @@ export const AddPlantsList = ({
     const addNewPlantsList = async (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ): Promise<void> => {
-        if (e) {
-            e.preventDefault();
-        }
+        e.preventDefault();
         setSubmitPlantsList(true);
         if (plantsListName) {
             await addPlantsList(plantsListName);
@@ -48,10 +46,10 @@ export const AddPlantsList = ({
                     data-test='addPlantsListButton'
                     onClick={(e) => addNewPlantsList(e)}
                 >
-          Dodaj listę roślin
+                    Dodaj listę roślin
                 </button>
             </form>
-            <div>{verifyPlantsListName()}</div>
+            {verifyPlantsListName()}
         </div>
     );
 };

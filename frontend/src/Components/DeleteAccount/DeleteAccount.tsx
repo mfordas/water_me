@@ -21,16 +21,16 @@ export const DeleteAccount = ({ deleteAccount, loginData }: PropsFromRedux): JSX
                 </p>
             </div>
             <p>
-        W każdej chwili możesz usunąć swoje konto. Pamiętaj, że nie będzie można
-        cofnąć tej operacji a wszystkie listy roślin oraz rośliny zostaną
-        usunięte.
+                W każdej chwili możesz usunąć swoje konto. Pamiętaj, że nie będzie można
+                cofnąć tej operacji a wszystkie listy roślin oraz rośliny zostaną
+                usunięte.
             </p>
             <button
                 className='deleteAccountButton'
                 data-test='deleteAccountButton'
                 onClick={deleteAccount}
             >
-        Usuń konto
+                Usuń konto
             </button>
         </div>
     ) : (

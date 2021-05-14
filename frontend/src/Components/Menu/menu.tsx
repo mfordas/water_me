@@ -17,7 +17,7 @@ export const Menu = ({ loginData, logout }: PropsFromRedux) => {
                 <button className='buttonMenu' onClick={() => logout()}>
                     Wyloguj
                 </button>
-            </div>}
+            </div> }
         </div>
     );
 };

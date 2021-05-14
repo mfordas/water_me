@@ -13,7 +13,7 @@ export const ConfirmGoogle = ({ resetRegisterState }: PropsFromRedux) => {
             <p>Konto założone!</p>
             <p>Możesz teraz się zalogować.</p>
             <Link className='button' to='/home' onClick={resetRegisterState}>
-        Strona główna
+                Strona główna
             </Link>
         </>
     );

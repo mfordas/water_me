@@ -30,9 +30,11 @@ export const Watering = ({
         if (nextWateringIn > 0) {
             return (
                 <div className='wateringStatusContainer'>
-                    <div className='statusOk'>U mnie w porządku!</div>
+                    <div className='statusOk'>
+                        U mnie w porządku!
+                    </div>
                     <div className='nextWateringContainer'>
-            Kolejne podlewanie za: {nextWateringIn}
+                        Kolejne podlewanie za: {nextWateringIn}
                         {nextWateringIn === 1 ? ' dzień' : ' dni'}
                     </div>
                 </div>
@@ -40,11 +42,17 @@ export const Watering = ({
         } else {
             return (
                 <div className='wateringStatusContainer'>
-                    <div className='statusNok'>Potrzebuję wody!</div>
-                    <button className='updateWatering' onClick={handleUpdateLastWateringDate}>Podlej</button>
+                    <div className='statusNok'>
+                        Potrzebuję wody!
+                    </div>
+                    <button 
+                        className='updateWatering' 
+                        onClick={handleUpdateLastWateringDate}>
+                            Podlej
+                    </button>
                 </div>
             );
-        }
+        };
     };
 
     return (

@@ -65,7 +65,7 @@ export const PlantsList = ({
             return plantsList;
         } else {
             return <></>;
-        }
+        };
     };
 
     return (
@@ -74,11 +74,9 @@ export const PlantsList = ({
                 className='addPlantButton'
                 onClick={() => setShowAddPlantForm(!showAddPlantForm)}
             >
-        Dodaj roślinę
+                Dodaj roślinę
             </button>
-            {showAddPlantForm ? (
-                <AddPlantConnected listId={plantsListsData.plantsLists[listIndex].id} />
-            ) : null}
+            { showAddPlantForm && <AddPlantConnected listId={plantsListsData.plantsLists[listIndex].id} /> }
             <div className='plantsContainer'>{generatePlantsList(plants)}</div>
         </>
     );

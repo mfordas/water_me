@@ -1,4 +1,4 @@
-import GoogleAuth from 'google-auth-library';
+import GoogleAuth, { OAuth2Client } from 'google-auth-library';
 import { Request } from 'express';
 
 interface IBodyRequestForGoogleAuth extends Request {
@@ -8,7 +8,7 @@ interface IBodyRequestForGoogleAuth extends Request {
 export async function verify(
     req: Request
 ): Promise<GoogleAuth.TokenPayload | Error> {
-    const client = new GoogleAuth.OAuth2Client(
+    const client = new OAuth2Client(
         process.env.REACT_APP_GOOGLE_AUTH_API_CLIENTID
     );
 

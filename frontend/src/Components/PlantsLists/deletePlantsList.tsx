@@ -30,7 +30,7 @@ export const DeletePlantsList = ({
             onClick={(e) => handlerDeletePlantsList(e)}
             data-test='deletePlantListComponent'
         >
-      Usuń
+            Usuń
         </button>
     );
 };

@@ -8,12 +8,13 @@ import { generateAuthTokenForExternalUser,
 import { AppThunk, AppThunkWithReturn } from '../redux_store/reduxStore';
 import { setHeaders } from '../Utils/setHeaders';
 import { apiUrl } from '../Utils/apiUrl';
+import { LOGIN_API_ADDRESS, DELETE_ACCOUNT_API_ADDRESS } from './apiAddresses';
 
 export const loginExternal = (authObject: AuthObject): AppThunk => async (
     dispatch
 ) => {
     try {
-        const res = await axios.post(`${apiUrl()}api/authexternal`, {
+        const res = await axios.post(`${apiUrl()}${LOGIN_API_ADDRESS}`, {
             token: await generateAuthTokenForExternalUser(authObject),
         });
 
@@ -68,7 +69,7 @@ export const logout = (): AppThunk => async (dispatch) => {
 
 export const deleteAccount = (): AppThunkWithReturn => async (dispatch) => {
     try {
-        const res = await axios.delete(`${apiUrl()}api/users/deleteAccount`, {
+        const res = await axios.delete(`${apiUrl()}${DELETE_ACCOUNT_API_ADDRESS}`, {
             headers: setHeaders(),
             data: {
                 id: localStorage.getItem('id'),

@@ -23,7 +23,7 @@ describe('Footer component', () => {
         expect(wrapper.length).toBe(1);
     });
 
-    it('Should not be render if no props passed', () => {
+    it('should not be render if no props passed', () => {
         component = setUp();
 
         const wrapper = findByDataTestAtrr(component, 'errorMessageComponent');

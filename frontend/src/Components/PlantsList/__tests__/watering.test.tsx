@@ -63,6 +63,7 @@ describe('Watering component', () => {
         const component = findByDataTestAtrr(wrapper, 'WateringComponent');
         const status = component.find('.statusOk');
         const watering = component.find('.nextWateringContainer');
+
         expect(component.length).toBe(1);
         expect(status.text()).toBe('U mnie w porządku!');
         expect(watering.text()).toContain('dni');
@@ -77,6 +78,7 @@ describe('Watering component', () => {
         const component = findByDataTestAtrr(wrapper, 'WateringComponent');
         const status = component.find('.statusOk');
         const watering = component.find('.nextWateringContainer');
+
         expect(component.length).toBe(1);
         expect(status.text()).toBe('U mnie w porządku!');
         expect(watering.text()).toContain('dzień');
@@ -90,6 +92,7 @@ describe('Watering component', () => {
         const wrapper: ShallowWrapper = setUp(new Date('2021-10-09'), 3);
         const component = findByDataTestAtrr(wrapper, 'WateringComponent');
         const status = component.find('.statusNok');
+        
         expect(component.length).toBe(1);
         expect(status.text()).toBe('Potrzebuję wody!');
         expect(component.find('button').length).toBe(1);

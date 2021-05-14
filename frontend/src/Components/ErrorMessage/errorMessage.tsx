@@ -9,5 +9,5 @@ export const ErrorMessage = ({ errorText }: PropsType) => {
         <div className='errorMessageContainer' data-test='errorMessageComponent'>
             {errorText}
         </div>
-    ) : null;
+    ) : <></>;
 };

@@ -9,6 +9,7 @@ import { makeAuth } from './helpers';
 import { ErrorMessage } from '../ErrorMessage/errorMessage';
 
 import googlelogo from '../../img/g-logo.png';
+
 import '../Register/scss/google.scss';
 
 export const GoogleAuth = ({
@@ -17,7 +18,9 @@ export const GoogleAuth = ({
 }: PropsFromRedux): JSX.Element => {
     const authObject = useHandleGoogleApi();
 
-    return !loginData.isLogged ? (
+    if(loginData.isLogged) return <Redirect to='/plants' />
+
+    return (
         <>
             <div
                 className='googleButton'
@@ -29,9 +32,7 @@ export const GoogleAuth = ({
             </div>
             <ErrorMessage errorText={loginData.errorMessage} />
         </>
-    ) : (
-        <Redirect to='/plants' />
-    );
+    )
 };
 
 const mapStateToProps = (state: RootState) => ({

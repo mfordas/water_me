@@ -3,10 +3,12 @@ import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
-import { Menu } from '../index';
+import { Menu } from '../menu';
+
+const mockFunc = jest.fn();
 
 describe('Menu Component', () => {
-    it('Renders menu container without buttons', () => {
+    it('renders without buttons', () => {
         const loginData = {
             loginData: {
                 name: '',
@@ -14,20 +16,21 @@ describe('Menu Component', () => {
                 invalidData: false,
             },
             isLogged: false,
+            errorMessage: '',
         };
 
         const wrapper: ShallowWrapper = shallow(
-            <Menu loginData={loginData} logout={() => jest.fn()} />
+            <Menu loginData={loginData} logout={() => mockFunc()} />
         );
 
         const menu = findByDataTestAtrr(wrapper, 'menuComponent');
-        const menuHidden = findByDataTestAtrr(wrapper, 'noElementsInMenuComponent');
+        const menuHidden = findByDataTestAtrr(wrapper, 'menuComponentVisible');
 
         expect(menu.length).toBe(1);
-        expect(menuHidden.length).toBe(1);
+        expect(menuHidden.length).toBe(0);
     });
 
-    it('Renders menu container with buttons', () => {
+    it('renders with buttons', () => {
         const loginData = {
             loginData: {
                 name: '',
@@ -35,9 +38,10 @@ describe('Menu Component', () => {
                 invalidData: false,
             },
             isLogged: true,
+            errorMessage: '',
         };
         const wrapper: ShallowWrapper = shallow(
-            <Menu loginData={loginData} logout={() => jest.fn()} />
+            <Menu loginData={loginData} logout={() => mockFunc()} />
         );
 
         const menu = findByDataTestAtrr(wrapper, 'menuComponent');
@@ -47,7 +51,7 @@ describe('Menu Component', () => {
         expect(menuButtons.length).toBe(1);
     });
 
-    it('Triggers logout action when button is clicked', async () => {
+    it('triggers logout action when button is clicked', async () => {
         const loginData = {
             loginData: {
                 name: '',
@@ -55,9 +59,9 @@ describe('Menu Component', () => {
                 invalidData: false,
             },
             isLogged: true,
+            errorMessage: '',
         };
-
-        const mockFunc = jest.fn();
+        
         const wrapper: ReactWrapper = mount(
             <BrowserRouter>
                 <Menu loginData={loginData} logout={() => mockFunc()} />

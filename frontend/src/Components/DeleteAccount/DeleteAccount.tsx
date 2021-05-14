@@ -4,14 +4,15 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { deleteAccount } from '../../redux_actions/loginActions';
 import { RootState } from '../../redux_reducers/';
+import { HOME_ROUTE } from '../../routesAddresses';
 
 import './scss/deleteAccount.scss';
 
-export const DeleteAccount = ({
-    deleteAccount,
-    loginData,
-}: PropsFromRedux): JSX.Element => {
-    return loginData.isLogged ? (
+export const DeleteAccount = ({ deleteAccount, loginData }: PropsFromRedux): JSX.Element => {
+
+    if (!loginData.isLogged) return <Redirect to={HOME_ROUTE} />
+    
+    return  (
         <div className='deleteAccount' data-test='deleteAccountContainer'>
             <div className='personalDataContainer'>
                 <p>Dane, które przechowujemy:</p>
@@ -23,20 +24,18 @@ export const DeleteAccount = ({
                 </p>
             </div>
             <p>
-        W każdej chwili możesz usunąć swoje konto. Pamiętaj, że nie będzie można
-        cofnąć tej operacji a wszystkie listy roślin oraz rośliny zostaną
-        usunięte.
+                W każdej chwili możesz usunąć swoje konto. Pamiętaj, że nie będzie można
+                cofnąć tej operacji a wszystkie listy roślin oraz rośliny zostaną
+                usunięte.
             </p>
             <button
                 className='deleteAccountButton'
                 data-test='deleteAccountButton'
                 onClick={deleteAccount}
             >
-        Usuń konto
+                Usuń konto
             </button>
         </div>
-    ) : (
-        <Redirect to='/' />
     );
 };
 

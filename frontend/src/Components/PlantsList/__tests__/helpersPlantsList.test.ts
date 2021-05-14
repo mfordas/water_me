@@ -1,31 +1,9 @@
 import { handleUploadingFile } from '../helpers';
 
-const fileData = {
-    target: {
-        files: [
-            {
-                lastModified: 1611570711084,
-                name: 'Display_products_component_design.png',
-                size: 11122,
-                type: 'image/png',
-                webkitRelativePath: '',
-            },
-        ],
-    },
-    preventDefault: () => {},
-};
-
-const emptyFileData = {
-    target: {
-        files: [],
-    },
-    preventDefault: () => {},
-};
-
 const testPicture = new File([''], 'test');
 const testEmptyPicture = undefined;
 
-const mockUploadPlantImage = jest.fn(() => 'Image name');
+const mockUploadPlantImage = jest.fn(() => Promise.resolve('Image name'));
 
 describe('Uploading plant picture', () => {
     it('should upload plant picture with success', async () => {

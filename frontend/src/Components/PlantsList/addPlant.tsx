@@ -4,7 +4,6 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { addPlantToList , uploadPlantImage } from '../../redux_actions/plantsActions';
 import { showPlantsList } from '../../redux_actions/plantsListsActions';
-
 import { handleUploadingFile } from './helpers';
 import { setCurrentDate } from './setCurrentDate';
 import { RootState } from '../../redux_reducers/';
@@ -60,8 +59,8 @@ export const AddPlant = ({
                 await addPlantToList(plantData, listId);
 
                 setFormSubmitted(false);
-            }
-        }
+            };
+        };
     };
 
     return (
@@ -77,14 +76,17 @@ export const AddPlant = ({
                     wateringCycle={wateringCycle}
                     setWateringCycle={setWateringCycle}
                 />
-                <DateInput startDate={startDate} setStartDate={setStartDate} />
+                <DateInput 
+                    startDate={startDate} 
+                    setStartDate={setStartDate}
+                />
                 <ImageInputConnected
                     formSubmitted={formSubmitted}
                     pictureFile={pictureFile}
                     setPictureFile={setPictureFile}
                 />
                 <button onClick={(event) => handleAddingPlantToList(event)}>
-          Dodaj
+                    Dodaj
                 </button>
             </form>
         </div>

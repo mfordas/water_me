@@ -41,5 +41,5 @@ export const loginReducer = function (
     default:
         return state;
   
-    }
+    };
 };

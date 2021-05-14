@@ -22,7 +22,7 @@ export const NameInput = ({ formSubmitted, name, setName }: Input) => {
     return (
         <>
             <label data-test='nameInput'>
-        Imię
+                Imię
                 <input
                     type='text'
                     value={name}

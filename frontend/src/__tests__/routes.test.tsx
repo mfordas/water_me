@@ -1,9 +1,12 @@
 import { BrowserRouter } from 'react-router-dom';
 import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
 import { act } from 'react-dom/test-utils';
+import { Provider } from 'react-redux';
 
-import { PrivateRouteConnected as PrivateRoute } from '../../PrivateRoute';
-import { PlantsListComponent } from '../index';
+
+import { PrivateRouteConnected as PrivateRoute } from '../Components/PrivateRoute';
+import { Routes } from '../routes';
+import { store } from '../redux_store/reduxStore';
 
 const mockGetPlantsListForUser = jest.fn(() =>
     console.log('Downloading plants lists...')
@@ -23,7 +26,7 @@ const initialState = {
 
 const setUp = () => {
     const wrapper = shallow(
-        <PlantsListComponent
+        <Routes
             getPlantsListsForUser={() => mockGetPlantsListForUser()}
             plantsListsData={initialState}
         />
@@ -33,12 +36,14 @@ const setUp = () => {
 
 const setUpMount = (): ReactWrapper => {
     const wrapper = mount(
-        <BrowserRouter>
-            <PlantsListComponent
-                getPlantsListsForUser={() => mockGetPlantsListForUser()}
-                plantsListsData={initialState}
-            />
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <Routes
+                    getPlantsListsForUser={() => mockGetPlantsListForUser()}
+                    plantsListsData={initialState}
+                />
+            </BrowserRouter>
+        </Provider>
     );
     return wrapper;
 };
@@ -47,10 +52,10 @@ describe('PlantsList component', () => {
     it('Should render without error', () => {
         const wrapper: ShallowWrapper = setUp();
         const privateRoutes = wrapper.find(PrivateRoute);
-        expect(privateRoutes.length).toBe(3);
-        expect(privateRoutes.at(0).prop('listIndex')).toBe(0);
-        expect(privateRoutes.at(1).prop('listIndex')).toBe(1);
-        expect(privateRoutes.at(2).prop('listIndex')).toBe(2);
+        expect(privateRoutes.length).toBe(5);
+        expect(privateRoutes.at(1).prop('listIndex')).toBe(0);
+        expect(privateRoutes.at(2).prop('listIndex')).toBe(1);
+        expect(privateRoutes.at(3).prop('listIndex')).toBe(2);
     });
 });
 

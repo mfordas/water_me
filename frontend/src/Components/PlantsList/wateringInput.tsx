@@ -24,7 +24,7 @@ export const WateringInput = ({
     return (
         <>
             <label data-test='WateringInput'>
-        Podlewanie co:
+                Podlewanie co:
                 <input
                     type='number'
                     min={0}

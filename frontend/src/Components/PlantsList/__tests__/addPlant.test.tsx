@@ -1,11 +1,11 @@
 import { BrowserRouter } from 'react-router-dom';
 import { mount, ReactWrapper } from 'enzyme';
 import { act } from 'react-dom/test-utils';
+import { Provider } from 'react-redux';
 
 import { findByDataTestAtrr } from '../../../Utils/findByDataTestAtrr';
 import { AddPlant } from '../addPlant';
 import { PlantsState } from '../../../redux_actions/plantsTypes';
-import { Provider } from 'react-redux';
 import { store } from '../../../redux_store/reduxStore';
 import { NameInput } from '../nameInput';
 import { DateInput } from '../dateInput';

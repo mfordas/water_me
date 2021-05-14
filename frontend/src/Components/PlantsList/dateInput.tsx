@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './scss/plantsList.scss';
 
 type Input = {
@@ -10,7 +11,7 @@ export const DateInput = ({ startDate, setStartDate }: Input) => {
     return (
         <>
             <label data-test='DateInput'>
-        Data startu:
+                Data startu:
                 <input
                     type='date'
                     value={startDate}

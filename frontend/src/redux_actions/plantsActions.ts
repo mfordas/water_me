@@ -9,6 +9,7 @@ import {
 import { AppThunk, AppThunkWithReturn } from '../redux_store/reduxStore';
 import { setHeaders } from '../Utils/setHeaders';
 import { apiUrl } from '../Utils/apiUrl';
+import { PLANTS_API_ADDRESS, PLANTS_IMAGE_API_ADDRESS } from './apiAddresses';
 
 export type PlantData = {
   name: string;
@@ -24,7 +25,7 @@ export const addPlantToList = (
 ): AppThunk => async (dispatch) => {
     try {
         const res = await axios.post(
-            `${apiUrl()}api/plants/${plantsListId}`,
+            `${apiUrl()}${PLANTS_API_ADDRESS}${plantsListId}`,
             plantDataFromUser,
             {
                 headers: setHeaders(),
@@ -50,7 +51,7 @@ export const deletePlant = (plantId: number): AppThunk => async (dispatch) => {
     const userId = localStorage.getItem('id');
     try {
         const res = await axios.delete(
-            `${apiUrl()}api/plants/${userId}/${plantId}`,
+            `${apiUrl()}${PLANTS_API_ADDRESS}${userId}/${plantId}`,
             {
                 headers: setHeaders(),
             }
@@ -78,7 +79,7 @@ export const updateLastWateringDate = (
     const userId = localStorage.getItem('id');
     try {
         const res = await axios.patch(
-            `${apiUrl()}api/plants/${userId}/${plantId}`,
+            `${apiUrl()}${PLANTS_API_ADDRESS}${userId}/${plantId}`,
             {
                 lastTimeWatered: lastWateringDate,
             },
@@ -104,7 +105,7 @@ export const uploadPlantImage = (
     fileObject: FormData
 ): AppThunkWithReturn => async (dispatch) => {
     try {
-        const res = await axios.post(`${apiUrl()}api/plants/image`, fileObject, {
+        const res = await axios.post(`${apiUrl()}${PLANTS_IMAGE_API_ADDRESS}`, fileObject, {
             headers: setHeaders(),
         });
 

@@ -12,8 +12,8 @@ export const makeAuth = async (
         } catch (err) {
             console.error(err);
             return err;
-        }
+        };
     } else {
         return 'Google auth object not available';
-    }
+    };
 };

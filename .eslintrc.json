@@ -1,0 +1,144 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:react/recommended",
+      "plugin:jsx-a11y/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript",
+      "prettier"
+    ],
+    "plugins": [
+      "@typescript-eslint",
+      "react",
+      "react-hooks",
+      "import"
+    ],
+    "env": {
+      "browser": true,
+      "jest": true,
+      "node": true
+    },
+    "globals": {
+      "render": true,
+      "shallow": true,
+      "mount": true
+    },
+    "rules": {
+      "arrow-parens": "off",
+      "react/prop-types": "off",
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "indent": ["error", 4],
+      "jsx-quotes": [
+        "error",
+        "prefer-single"
+      ],
+      "max-len": [
+        "error",
+        120,
+        {
+          "ignoreComments": true
+        }
+      ],
+      "no-multiple-empty-lines": [
+        "error",
+        {
+          "max": 2
+        }
+      ],
+      "implicit-arrow-linebreak": "off",
+      "import/prefer-default-export": "off",
+      "no-mixed-operators": [
+        "error",
+        {
+          "allowSamePrecedence": true
+        }
+      ],
+      "no-underscore-dangle": "off",
+      "no-prototype-builtins": "off",
+      "react/jsx-boolean-value": [
+        "error",
+        "always"
+      ],
+      "react-hooks/exhaustive-deps": "warn",
+      "padded-blocks": [
+        "error",
+        {
+          "switches": "always"
+        }
+      ],
+      "eol-last": [
+        "warn",
+        "always"
+      ],
+      "brace-style": [
+        "error",
+        "1tbs"
+      ],
+      "no-var": "error",
+      "no-case-declarations": 0,
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "table",
+            "warn",
+            "error"
+          ]
+        }
+      ],
+      "no-unused-vars": "warn",
+      "react-hooks/rules-of-hooks": "error",
+      "react/jsx-indent-props": [
+        "error",
+        4
+      ],
+      "react/jsx-one-expression-per-line": "off",
+      "react/jsx-props-no-spreading": [
+        "warn",
+        {
+          "html": "ignore",
+          "explicitSpread": "ignore"
+        }
+      ],
+      "react/no-unused-prop-types": "off",
+      "react/destructuring-assignment": "off",
+      "react/react-in-jsx-scope":"off",
+      "jsx-a11y/anchor-is-valid": "off",
+      "jsx-a11y/click-events-have-key-events": "off",
+      "jsx-a11y/control-has-associated-label": "off",
+      "jsx-a11y/no-static-element-interactions": "off",
+      "jsx-a11y/label-has-for": "off",
+      "jsx-a11y/label-has-associated-control": [
+        2,
+        {
+          "controlComponents": [
+            "Input"
+          ],
+          "depth": 3
+        }
+      ],
+      "no-class-assign": "error",
+      "no-const-assign": "error",
+      "no-new-symbol": "error",
+      "no-this-before-super": "error"
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      },
+      "linkComponents": [
+        // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
+        "Hyperlink",
+        {
+          "name": "Link",
+          "linkAttribute": "to"
+        }
+      ]
+    }
+  }

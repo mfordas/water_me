@@ -10,7 +10,9 @@
     "testFrontend": "set REACT_APP_NODE_ENV=test && cd frontend && npm run test",
     "testFrontend-coverage": "set REACT_APP_NODE_ENV=test && cd frontend && npm run test-coverage",
     "dev": "concurrently -n express,startReact -k \"cd backend && npm run mon\" \"cd frontend && npm run startReact\"",
-    "lint": "eslint  --config .eslintrc.json  --ignore-path .eslintignore  --ext .ts,.tsx,.js,.jsx --fix  ./"
+    "lint": "eslint  --config .eslintrc.json  --ignore-path .eslintignore  --ext .ts,.tsx,.js,.jsx --fix  ./",
+    "start": "cd backend && npm run start",
+    "heroku-postbuild": "cd backend && npm install"
   },
   "browserslist": {
     "production": [

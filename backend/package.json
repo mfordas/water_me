@@ -31,7 +31,8 @@
     "test-coverage": "set CI=true && react-scripts test --coverage --silent",
     "start": "node --loader ts-node/esm ./app.ts",
     "mon": "nodemon -e ts --exec \"npm run start\"",
-    "dev": "concurrently -n react,express -k \"npm run startReact\" \"npm run mon\""
+    "dev": "concurrently -n react,express -k \"npm run startReact\" \"npm run mon\"",
+    "tsc": "tsc"
   },
   "browserslist": {
     "production": [

@@ -7,7 +7,7 @@ export const apiUrl = () => {
     ) {
         return 'http://localhost/';
     } else if (process.env.REACT_APP_NODE_ENV === 'production') {
-        return 'http://localhost/';
+        return 'https://watermeapp.herokuapp.com/';
     } else {
         return 'http://node-server:8080/';
     }

@@ -12,7 +12,6 @@ import {
 } from './db/index';
 import { createDatabase, createTables } from './db/initializer';
 import { router as users } from './routes/users';
-import { router as mainPage } from './routes/mainPage';
 import { router as plants } from './routes/plants';
 import { router as plantsLists } from './routes/plantsLists';
 import { router as authExternal } from './routes/authExternal';
@@ -68,14 +67,19 @@ const runApp = async () => {
         })
     );
     app.use(express.static('images'));
-    app.use('/', mainPage);
+    app.use(express.static(path.join(dirname + '/../../frontend/build/')));
+
     app.use('/api/users', users);
     app.use('/api/plants', plants);
     app.use('/api/plantsLists', plantsLists);
     app.use('/api/authexternal', authExternal);
 
+    app.get('/static/images/:name', function (req, res) {
+        res.sendFile(path.join(dirname + '/images/' + `${req.params.name}`));
+    });
+    
     app.get('*', function (req, res) {
-        res.sendFile(path.join(dirname + '/images/' + `${req.path.split('/')[3]}`));
+        res.sendFile(path.join(dirname + '/../../frontend/build/' + 'index.html'));
     });
 
     const port = process.env.PORT || 8080;

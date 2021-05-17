@@ -35,8 +35,12 @@ const getAllPlantsFromDB = async (
 
 router.get('/', auth, getAllPlantsFromDB);
 
+interface RequestWithFile extends Request {
+    file: any,
+};
+
 const plantImageUpload = async (
-    req: Request,
+    req: RequestWithFile,
     res: Response
 ): Promise<Response> => {
     if (!uploadFolder) return res.status(404).send('Picture folder not found');

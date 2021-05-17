@@ -68,7 +68,9 @@ const runApp = async () => {
         })
     );
     app.use(express.static('images'));
-    app.use('/', mainPage);
+    app.use(express.static(path.join(dirname + '/../../frontend/build/')));
+
+    // app.use('/', mainPage);
     app.use('/api/users', users);
     app.use('/api/plants', plants);
     app.use('/api/plantsLists', plantsLists);
@@ -76,6 +78,10 @@ const runApp = async () => {
 
     app.get('*', function (req, res) {
         res.sendFile(path.join(dirname + '/images/' + `${req.path.split('/')[3]}`));
+    });
+    
+    app.get('/', function (req, res) {
+        res.sendFile(path.join(dirname + '/../../frontend/build/' + 'index.html'));
     });
 
     const port = process.env.PORT || 8080;

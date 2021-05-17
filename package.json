@@ -12,7 +12,9 @@
     "dev": "concurrently -n express,startReact -k \"cd backend && npm run mon\" \"cd frontend && npm run startReact\"",
     "lint": "eslint  --config .eslintrc.json  --ignore-path .eslintignore  --ext .ts,.tsx,.js,.jsx --fix  ./",
     "start": "cd ./backend/dist && node app.js",
-    "heroku-postbuild": "cd backend && npm install && npm run tsc --build"
+    "buildBackend": "cd backend && npm install && npm run tsc --build",
+    "buildFrontend": "cd frontend && npm run build",
+    "heroku-postbuild": "npm run buildBackend && npm run buildFrontend"
   },
   "browserslist": {
     "production": [

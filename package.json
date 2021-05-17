@@ -13,7 +13,7 @@
     "lint": "eslint  --config .eslintrc.json  --ignore-path .eslintignore  --ext .ts,.tsx,.js,.jsx --fix  ./",
     "start": "cd ./backend/dist && node app.js",
     "buildBackend": "cd backend && npm install && npm run tsc --build",
-    "buildFrontend": "cd frontend && npm run build",
+    "buildFrontend": "cd frontend && npm install && npm run build",
     "heroku-postbuild": "npm run buildBackend && npm run buildFrontend"
   },
   "browserslist": {

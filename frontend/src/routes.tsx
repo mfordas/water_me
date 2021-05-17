@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { Route, Redirect, Switch, useLocation } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from './redux_reducers/';

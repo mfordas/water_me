@@ -12,7 +12,6 @@ import {
 } from './db/index';
 import { createDatabase, createTables } from './db/initializer';
 import { router as users } from './routes/users';
-import { router as mainPage } from './routes/mainPage';
 import { router as plants } from './routes/plants';
 import { router as plantsLists } from './routes/plantsLists';
 import { router as authExternal } from './routes/authExternal';

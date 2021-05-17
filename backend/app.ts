@@ -70,17 +70,16 @@ const runApp = async () => {
     app.use(express.static('images'));
     app.use(express.static(path.join(dirname + '/../../frontend/build/')));
 
-    // app.use('/', mainPage);
     app.use('/api/users', users);
     app.use('/api/plants', plants);
     app.use('/api/plantsLists', plantsLists);
     app.use('/api/authexternal', authExternal);
 
-    app.get('*', function (req, res) {
-        res.sendFile(path.join(dirname + '/images/' + `${req.path.split('/')[3]}`));
+    app.get('/static/images/:name', function (req, res) {
+        res.sendFile(path.join(dirname + '/images/' + `${req.params.name}`));
     });
     
-    app.get('/', function (req, res) {
+    app.get('*', function (req, res) {
         res.sendFile(path.join(dirname + '/../../frontend/build/' + 'index.html'));
     });
 

@@ -14,7 +14,7 @@
     "start": "cd ./backend/dist && node app.js",
     "buildBackend": "cd backend && npm install && npm run tsc --build",
     "buildFrontend": "cd frontend && npm install && npm run build",
-    "heroku-postbuild": "npm run buildBackend && npm run buildFrontend"
+    "heroku-postbuild": "npm install && npm run buildBackend && npm run buildFrontend"
   },
   "browserslist": {
     "production": [

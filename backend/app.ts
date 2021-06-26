@@ -41,7 +41,8 @@ const dbInitialization = async (app: express.Express, models: any) => {
 const runApp = async () => {
     app.use(
         cors({
-            origin: 'http://localhost:3000',
+            origin: process.env.NODE_ENV === 'production' ? 
+                'https://watermeapp.herokuapp.com/' : 'http://localhost:3000',
             allowedHeaders: ['x-auth-token', 'content-type'],
             exposedHeaders: ['x-auth-token', 'content-type'],
         })

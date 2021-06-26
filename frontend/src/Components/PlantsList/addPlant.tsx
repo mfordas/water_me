@@ -93,7 +93,7 @@ export const AddPlant = ({
     );
 };
 
-const mapStateToProps = (state: RootState, ownProps: { listId: number }) => ({
+const mapStateToProps = (state: RootState, ownProps: { listId: string }) => ({
     plantsData: state.plantsData,
     listId: ownProps.listId,
 });

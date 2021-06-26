@@ -7,7 +7,7 @@ import { Logo } from './Components/Logo/logo';
 import { FooterConnected as Footer } from './Components/Footer/footer';
 import { MenuConnected as Menu } from './Components/Menu/menu';
 
-import { RoutesConnected as Routes } from './routes';
+import { Routes } from './routes';
 
 import { store } from './redux_store/reduxStore';
 

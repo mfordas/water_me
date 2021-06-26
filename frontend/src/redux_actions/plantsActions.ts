@@ -21,7 +21,7 @@ export type PlantData = {
 
 export const addPlantToList = (
     plantDataFromUser: PlantData,
-    plantsListId: number
+    plantsListId: string
 ): AppThunk => async (dispatch) => {
     try {
         const res = await axios.post(

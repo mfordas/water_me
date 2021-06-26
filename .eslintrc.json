@@ -83,7 +83,7 @@
       "no-var": "error",
       "no-case-declarations": 0,
       "no-console": [
-        "error",
+        "warn",
         {
           "allow": [
             "table",

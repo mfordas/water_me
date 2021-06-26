@@ -21,7 +21,9 @@ const app = express();
 
 const dbInitialization = async (app: express.Express, models: any) => {
     if (mainSeqelizeInstation instanceof Sequelize) {
-        const activeDbConnection: Sequelize | Error = await connectToDB(mainSeqelizeInstation);
+        const activeDbConnection: Sequelize | Error = await connectToDB(
+            mainSeqelizeInstation
+        );
 
         if (activeDbConnection instanceof Sequelize) {
             await createTables(mainSeqelizeInstation);
@@ -77,7 +79,7 @@ const runApp = async () => {
     app.get('/static/images/:name', function (req, res) {
         res.sendFile(path.join(dirname + '/images/' + `${req.params.name}`));
     });
-    
+
     app.get('*', function (req, res) {
         res.sendFile(path.join(dirname + '/../../frontend/build/' + 'index.html'));
     });

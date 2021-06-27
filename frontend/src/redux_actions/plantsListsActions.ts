@@ -95,7 +95,7 @@ export const deletePlantsList = (plantsListId: number): AppThunk => async (
     }
 };
 
-export const showPlantsList = (plantsListId: number): AppThunk => async (
+export const showPlantsList = (plantsListId: string): AppThunk => async (
     dispatch
 ) => {
     const id = localStorage.getItem('id');

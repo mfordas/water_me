@@ -14,11 +14,7 @@ export const ShowPlantsLists = ({
     plantsListsData,
 }: PropsFromRedux) => {
     useEffect(() => {
-        const getPlantsLists = async () => {
-            await getPlantsListsForUser();
-        };
-
-        getPlantsLists();
+        getPlantsListsForUser();
     }, []);
 
     const plantsLists = (
@@ -30,7 +26,7 @@ export const ShowPlantsLists = ({
                     data-test='plantsListContainer'
                 >
                     <div>{plantsList.name}</div>
-                    <Link to={`/plantsLists/${plantsList.name}`}>
+                    <Link to={`/plantsLists/${plantsList.id}`}>
                         Przejdź
                     </Link>
                     <DeletePlantsListConnected plantsListId={plantsList.id} />

@@ -12,29 +12,30 @@ import { useCreatePlantsList } from './hooks';
 import { apiUrl } from '../../Utils/apiUrl';
 
 import './scss/plantsList.scss';
+import { useLocation } from 'react-router-dom';
 
 export type DeletePlantProps = {
   plantId: number;
-  listId: number;
+  listId: string;
 };
 
 export type WateringProps = {
   lastWateringDate: Date;
   plantId: number;
   wateringCycle: number;
-  listId: number;
+  listId: string;
 };
 
 export const PlantsList = ({
     showPlantsList,
     plantsListsData,
-    listIndex,
 }: PropsFromRedux) => {
+    const listId = useLocation().pathname.split('/')[2];
     const [showAddPlantForm, setShowAddPlantForm] = useState(false);
     const plants = useCreatePlantsList(
         plantsListsData,
         showPlantsList,
-        listIndex
+        listId
     );
 
     const generatePlantsList = (plantsArray: Plant[]) => {
@@ -52,11 +53,11 @@ export const PlantsList = ({
                             lastWateringDate={plant.lastTimeWatered}
                             plantId={plant.id}
                             wateringCycle={plant.wateringCycle}
-                            listId={plantsListsData.plantsLists[listIndex].id}
+                            listId={listId}
                         />
                         <DeletePlantConnected
                             plantId={plant.id}
-                            listId={plantsListsData.plantsLists[listIndex].id}
+                            listId={listId}
                         />
                     </div>
                 );
@@ -76,7 +77,7 @@ export const PlantsList = ({
             >
                 Dodaj roślinę
             </button>
-            { showAddPlantForm && <AddPlantConnected listId={plantsListsData.plantsLists[listIndex].id} /> }
+            { showAddPlantForm && <AddPlantConnected listId={listId} /> }
             <div className='plantsContainer'>{generatePlantsList(plants)}</div>
         </>
     );
@@ -84,10 +85,8 @@ export const PlantsList = ({
 
 const mapStateToProps = (
     state: RootState,
-    ownProps: { listIndex: number }
 ) => ({
     plantsListsData: state.plantsListsData,
-    listIndex: ownProps.listIndex,
 });
 
 const mapDispatch = {

@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import { shallow, mount, ReactWrapper } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
 import { PlantsList } from '../plantsList';
@@ -9,6 +9,13 @@ import { AddPlant } from '../addPlant';
 import { Provider } from 'react-redux';
 import { store } from '../../../redux_store/reduxStore';
 import { PlantsListsState } from '../../../redux_actions/plantsListsTypes';
+
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useLocation: () => ({
+        pathname: '/plantsLists/2'
+    })
+}));
 
 const mockShowPlantsList = jest.fn(() =>
     console.log('Downloading plants lists...')
@@ -103,16 +110,14 @@ const initialStateEmpty = {
 };
 
 const setUpMount = (
-    listIndex: number,
     testData: PlantsListsState
 ): ReactWrapper => {
     const wrapper = mount(
         <Provider store={store}>
-            <BrowserRouter>
+            <BrowserRouter >
                 <PlantsList
                     showPlantsList={mockShowPlantsList}
                     plantsListsData={testData}
-                    listIndex={listIndex}
                 />
             </BrowserRouter>
         </Provider>
@@ -122,19 +127,19 @@ const setUpMount = (
 
 describe('PlantsList component', () => {
     it('Should render without error', () => {
-        const wrapper: ReactWrapper = setUpMount(1, initialState);
+        const wrapper: ReactWrapper = setUpMount(initialState);
         const wateringContainers = wrapper.find(Watering);
         const deletePlantContainers = wrapper.find(DeletePlant);
 
         expect(wateringContainers.length).toBe(3);
         expect(deletePlantContainers.length).toBe(3);
-        expect(wateringContainers.at(0).prop('listId')).toBe(2);
-        expect(wateringContainers.at(1).prop('listId')).toBe(2);
-        expect(wateringContainers.at(2).prop('listId')).toBe(2);
+        expect(wateringContainers.at(0).prop('listId')).toBe('2');
+        expect(wateringContainers.at(1).prop('listId')).toBe('2');
+        expect(wateringContainers.at(2).prop('listId')).toBe('2');
     });
 
     it('Should not render if plants list array is empty', () => {
-        const wrapper: ReactWrapper = setUpMount(1, initialState);
+        const wrapper: ReactWrapper = setUpMount(initialState);
 
         const addComponent = wrapper.find('button').at(0);
 

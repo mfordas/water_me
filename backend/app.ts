@@ -41,9 +41,9 @@ const dbInitialization = async (app: express.Express, models: any) => {
 const runApp = async () => {
     app.use(
         cors({
-            origin: 'http://localhost:3000',
+            origin: process.env.NODE_ENV === 'production' ? 
+                'https://watermeapp.herokuapp.com/' : 'http://localhost:3000',
             allowedHeaders: ['x-auth-token', 'content-type'],
-            exposedHeaders: ['x-auth-token', 'content-type'],
         })
     );
     app.use(express.json());
@@ -57,6 +57,8 @@ const runApp = async () => {
 
     const dirname = path.resolve();
 
+    const frontendBuildAddress = '/../../frontend/build/';
+    
     if (!fs.existsSync(path.join(dirname, '/images'))) {
         fs.mkdir(path.join(dirname, '/images'), () => {
             console.log('Images folder created');
@@ -69,7 +71,7 @@ const runApp = async () => {
         })
     );
     app.use(express.static('images'));
-    app.use(express.static(path.join(dirname + '/../../frontend/build/')));
+    app.use(express.static(path.join(dirname + frontendBuildAddress)));
 
     app.use('/api/users', users);
     app.use('/api/plants', plants);
@@ -81,7 +83,7 @@ const runApp = async () => {
     });
 
     app.get('*', function (req, res) {
-        res.sendFile(path.join(dirname + '/../../frontend/build/' + 'index.html'));
+        res.sendFile(path.join(dirname + frontendBuildAddress + 'index.html'));
     });
 
     const port = process.env.PORT || 8080;

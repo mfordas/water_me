@@ -28,15 +28,15 @@ export const useCountWatering = (
 
 export const useCreatePlantsList = (
     plantsListsData: PlantsListsState,
-    showPlantsList: (plantsListId: number) => void,
-    listIndex: number
+    showPlantsList: (plantsListId: string) => void,
+    listId: string
 ) => {
     const [plants, setPlants] = useState<Plant[]>([]);
 
     useEffect(() => {
         const getPlantsFromList = async () => {
             if (plantsListsData.userId) {
-                await showPlantsList(plantsListsData.plantsLists[listIndex].id);
+                await showPlantsList(listId);
 
                 setPlants(plantsListsData.plants);
             } else {
